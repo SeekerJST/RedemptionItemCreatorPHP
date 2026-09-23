@@ -3,6 +3,52 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-23 (3): React refactor and attribute sub-rows
+
+- **Git:** the project is now a repository. Baseline commit `6da8bda`, refactor `da56c04`,
+  sub-rows `cf6e513`.
+- **Refactor** (behavior kept, verified in Chrome against the old app's numbers).
+  The 1,850-line `App.jsx` was split into:
+  - `domain/`: pure logic. Rules constants, a safe formula evaluator replacing `eval()`
+    (checked against `eval` on every formula in the DB), row costs, a pure `summarizeItem()`,
+    the item reducer, and the API payload.
+  - `components/`: `EditableGrid` (one grid + sidebar editor wrapper instead of three
+    copies), plus the Panel 2 and Panel 3 pieces.
+  - `api/itemCreatorApi.js`, `hooks/useLookups.js`. `App.jsx` is now layout only.
+  - React state owns the rows and the grids display them; totals are derived, not pushed
+    around by grid events. This removed ~40 `useState` calls and the ref/closure workarounds.
+  - ESLint went from 15+ errors to 0. Removed the dead code (the old tag/attribute field UI,
+    `addSystem`, the unused attack state, stub handlers).
+- **Bugs fixed on the way:**
+  - A new attribute row with no System crashed the whole BP calculation, which then
+    silently stopped updating.
+  - Deleting Armor, Body, or Force Field left its old value in the summary.
+  - Power slot "used" concatenated strings (`"0" + 1` = `"01"`).
+  - Limitation counts missed the starter row (number `1` vs string `'1'`).
+  - Modifiers left on the default skill were missing from the export.
+  - Save threw a ReferenceError (`Tasks`). [Save]/[Delete] are now disabled until they're wired to the API.
+  - The CSV export now POSTs the item instead of putting it in the URL.
+- **Attribute sub-rows** (any attribute, any depth; BP counts toward totals):
+  - The [+>] button adds a sub-row under the selected row.
+  - Sub-rows can be edited in the sidebar, collapsed/expanded, dragged to reorder or
+    reparent, and are deleted along with their parent.
+  - The System Breakdown indents them and uses the parent's system when they have none.
+  - The export sends `parentId`. The API doesn't store it yet (next step 1).
+- **Why sub-rows were hard before:** SVAR 2.3's `add-row`/`update-row`/`delete-row` only
+  work on top-level rows. Owning the rows in React state sidesteps that.
+- **SVAR 2.3 bugs found and worked around** (details in the project guide):
+  - Re-init uses `_select` instead of `select`, so clicks stop selecting rows.
+  - A re-init mid-drag destroys the dragged row.
+  - An instant drag can throw inside SVAR's drag code (it doesn't happen with a normal mouse drag).
+- **Dependencies:**
+  - Removed `axios` and `@svar-ui/svelte-core` (unused).
+  - Declared `@svar-ui/react-editor`, which was imported but not listed.
+  - Pinned all SVAR packages to one 2.3.x version: npm had pulled in a 2.7 editor plus
+    three copies of `react-core`.
+- **Docs:** project guide updated (client file map, React notes, current state, decisions,
+  next steps) and a new "Open rules questions" section (formula typo, fractional costs,
+  rank 0, the "Free" tag label, blank rows).
+
 ## 2026-09-23 (2): Note on the data grid for the React rework
 
 - Recorded in the project guide (next step 5): consider a different data grid
