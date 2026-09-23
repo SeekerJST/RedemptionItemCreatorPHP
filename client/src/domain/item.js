@@ -5,7 +5,8 @@ import { ATTRIBUTE_IDS, MAX_MODIFIER_RANK } from './constants.js';
 
 const newRow = {
     tags: (id) => ({ id, TagDesc: '', TagRank: '1', TagFree: false }),
-    attributes: (id) => ({ id, parentId: null, AttributeSystem: null, AttributeName: 1, Scale: '1', Rank: 0 }),
+    // parentId: the attribute row this one sits under (a sub-row), or null for a top-level row.
+    attributes: (id, parentId = null) => ({ id, parentId, AttributeSystem: null, AttributeName: 1, Scale: '1', Rank: 0 }),
     limits: (id) => ({ id, LimitDesc: '', LimitScale: '1' }),
 };
 
@@ -39,9 +40,11 @@ export function itemReducer(item, action) {
             return { ...item, size: action.size };
 
         case 'addRow': {
+            // action.parentId (attributes only): add the new row as a sub-row of that row.
             const rows = item[action.section];
+            const parentId = rows.some((row) => row.id === action.parentId) ? action.parentId : null;
             const id = Math.max(0, ...rows.map((row) => row.id)) + 1;
-            return { ...item, [action.section]: [...rows, newRow[action.section](id)] };
+            return { ...item, [action.section]: [...rows, newRow[action.section](id, parentId)] };
         }
 
         case 'updateRow':
@@ -52,13 +55,23 @@ export function itemReducer(item, action) {
                 ),
             };
 
-        case 'deleteRow':
-            return { ...item, [action.section]: item[action.section].filter((row) => row.id !== action.id) };
+        case 'deleteRow': {
+            // Deleting a row also deletes its sub-rows, and theirs.
+            const doomed = withDescendants(item[action.section], action.id);
+            return { ...item, [action.section]: item[action.section].filter((row) => !doomed.has(row.id)) };
+        }
 
         case 'reorderRows': {
-            // action.order: row ids in their new display order (from the grid after a drag).
+            // action.order: [{ id, parentId }] in the new display order, from the grid after a drag.
+            // A drag in the attribute tree can also move a row under a different parent.
             const byId = new Map(item[action.section].map((row) => [row.id, row]));
-            return { ...item, [action.section]: action.order.map((id) => byId.get(id)).filter(Boolean) };
+            const reordered = action.order
+                .filter(({ id }) => byId.has(id))
+                .map(({ id, parentId }) => {
+                    const row = byId.get(id);
+                    return 'parentId' in row ? { ...row, parentId: parentId ?? null } : row;
+                });
+            return { ...item, [action.section]: reordered };
         }
 
         case 'setModifierSkill':
@@ -70,6 +83,22 @@ export function itemReducer(item, action) {
         default:
             throw new Error(`Unknown item action "${action.type}"`);
     }
+}
+
+/** The id plus the ids of every row below it in the tree. */
+function withDescendants(rows, id) {
+    const ids = new Set([id]);
+    let grew = true;
+    while (grew) {
+        grew = false;
+        for (const row of rows) {
+            if (row.parentId != null && ids.has(row.parentId) && !ids.has(row.id)) {
+                ids.add(row.id);
+                grew = true;
+            }
+        }
+    }
+    return ids;
 }
 
 function pick(values, fields) {
@@ -119,7 +148,8 @@ export function toApiItem(item, summary, defaultSkill) {
         })),
         attributeList: item.attributes.map((row) => ({
             id: row.id,
-            AttributeSystem: row.AttributeSystem,
+            parentId: row.parentId,
+            AttributeSystem: summary.attributeSystems.get(row.id),
             AttributeName: row.AttributeName,
             Scale: row.Scale,
             Rank: row.Rank,

@@ -28,6 +28,7 @@ export function summarizeItem(item, lookups) {
     const baseCR = size?.BaseCR ?? 0;
     const baseBody = size?.BaseBody ?? 0;
 
+    const attributeSystems = effectiveSystems(item.attributes);
     const attributeCosts = new Map(
         item.attributes.map((attribute) => [attribute.id, attributeCost(attribute, lookups.scales)])
     );
@@ -56,7 +57,8 @@ export function summarizeItem(item, lookups) {
         limitCosts,
         ...structure(item.attributes, baseBody),
         powerSlots: powerSlots(item.attributes, attributeCosts),
-        systems: systemBreakdown(item.attributes, attributeCosts, lookups.attributes),
+        attributeSystems,
+        systems: systemBreakdown(item.attributes, attributeCosts, attributeSystems, lookups.attributes),
         modifiers: item.attributes.filter((a) => a.AttributeName === ATTRIBUTE_IDS.MODIFIER),
         tasks: item.attributes.filter((a) => a.AttributeName === ATTRIBUTE_IDS.TASK),
         limitCounts: limitCounts(item.limits),
@@ -117,10 +119,44 @@ function powerSlots(attributes, attributeCosts) {
 }
 
 /**
- * Attributes grouped by system, alphabetically. Attributes already shown
- * elsewhere in the summary (structure, power, modifiers, tasks) are left out.
+ * Each attribute's system. A sub-row with no system of its own belongs to its
+ * parent's system (an Ammo resource under a Main Attack is part of the Main Attack).
+ * @returns {Map<number, string|null>} row id => system name
  */
-function systemBreakdown(attributes, attributeCosts, attributeLookup) {
+function effectiveSystems(attributes) {
+    const byId = new Map(attributes.map((a) => [a.id, a]));
+    const systemOf = (attribute, seen = new Set()) => {
+        if (attribute.AttributeSystem || attribute.parentId == null || seen.has(attribute.id)) {
+            return attribute.AttributeSystem || null;
+        }
+        seen.add(attribute.id);
+        const parent = byId.get(attribute.parentId);
+        return parent ? systemOf(parent, seen) : null;
+    };
+    return new Map(attributes.map((a) => [a.id, systemOf(a)]));
+}
+
+/** How deep each row sits in the attribute tree: 0 for top-level rows. */
+function depths(attributes) {
+    const byId = new Map(attributes.map((a) => [a.id, a]));
+    const depthOf = (attribute, seen = new Set()) => {
+        const parent = byId.get(attribute.parentId);
+        if (!parent || seen.has(attribute.id)) {
+            return 0;
+        }
+        seen.add(attribute.id);
+        return 1 + depthOf(parent, seen);
+    };
+    return new Map(attributes.map((a) => [a.id, depthOf(a)]));
+}
+
+/**
+ * Attributes grouped by system, alphabetically, with sub-rows indented under
+ * their parent. Attributes already shown elsewhere in the summary (structure,
+ * power, modifiers, tasks) are left out.
+ */
+function systemBreakdown(attributes, attributeCosts, systemsById, attributeLookup) {
+    const depthById = depths(attributes);
     const shownElsewhere = new Set([
         ATTRIBUTE_IDS.ARMOR_RATING,
         ATTRIBUTE_IDS.BODY,
@@ -140,10 +176,10 @@ function systemBreakdown(attributes, attributeCosts, attributeLookup) {
         }
         const name = attributeLookup.find((a) => a.AttributeID === attribute.AttributeName)?.AttributeName ?? '?';
         const scale = scaleById(attribute.Scale)?.label ?? '?';
-        const systemName = attribute.AttributeSystem || UNASSIGNED_SYSTEM;
+        const systemName = systemsById.get(attribute.id) || UNASSIGNED_SYSTEM;
 
         const rows = systems.get(systemName) ?? [];
-        rows.push({ id: attribute.id, label: `${name} (${scale})`, rank: attribute.Rank });
+        rows.push({ id: attribute.id, label: `${name} (${scale})`, rank: attribute.Rank, depth: depthById.get(attribute.id) });
         systems.set(systemName, rows);
     }
 
