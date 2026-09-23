@@ -1,0 +1,253 @@
+﻿#root {
+    max-width: 1900px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+
+
+th, td {
+    padding-left: .75rem;
+    padding-right: .75rem;
+}
+
+.small_panel {
+    float: left;
+    position: relative;
+    background-color: rgba(173, 216, 230, 0.5);
+    color: antiquewhite;
+    width: 270px;
+    height: 125vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    clip-path: polygon( 
+                    0 5%, 
+                    25% 0, 
+                    100% 0, 
+                    100% 95%, 
+                    75% 100%, 
+                    0% 100% );
+    margin-right: 20px;
+    padding-top: 20px;
+    /*font-family:'Agency FB'*/
+    font-family: 'Liberation Sans';
+}
+
+.large_panel {
+    float: left;
+    position: relative;
+    background-color: rgba(173, 216, 230, 0.5);
+    color: antiquewhite;
+    width: 700px;
+    height: 125vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    clip-path: polygon( 
+                        0 5%, 
+                        10% 0, 
+                        100% 0, 
+                        100% 95%, 
+                        90% 100%, 
+                        0% 100% );
+    margin-right: 20px;
+    padding-top: 20px;
+    font-family: 'Liberation Sans';
+    display: flex;
+    flex-direction: column;
+}
+
+.top_panel {
+    position: relative;
+    background-color: rgba(173, 216, 230, 0.5);
+    width: 1000px;
+    height: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    clip-path: polygon( 
+        0 25%, 
+        2% 0, /* Left Top corner */
+        98% 0, 
+        100% 25%, /* Right Top Corner */
+        100% 75%, 
+        98% 100%, /* Right Bottom Corner */
+        2% 100%, 
+        0% 75% );
+    font-family: 'Liberation Sans';
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.panel_title {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    color: lightgray;
+    font-size: small;
+    font-family: 'Lucida Console';
+}
+
+.panel_table_left {
+    width: 250px;
+    text-align: left;
+    font-family: 'Liberation Sans';
+}
+
+.panel_table_left_system {
+    width: 450px;
+    text-align: left;
+    font-family: 'Liberation Sans';
+}
+
+.panel_table_right {
+    width: 50px;
+    text-align: right;
+    /*font-family: 'Agency FB' font-size:13px;*/
+    font-family: 'Liberation Sans';
+}
+
+.headerCellLeft { 
+    width: 500px;
+
+}
+
+.headerCellRight {
+    width: 200px;
+    text-align: right;
+}
+
+.panel_header {
+    width:100%;
+    position:relative;
+    margin-top:25px;
+    margin-bottom:25px;
+}
+
+.panel_body {
+    width: 1900px;
+    position: relative;
+    
+}
+
+.limitation_table {
+    width: 150px;
+    text-align: left;
+    font-family: 'Liberation Sans';
+    font-size:smaller;
+}
+
+
+div.item_name_field {
+    float:left;
+    margin-left:50px;
+    position:absolute;
+}
+
+.item_TextField {
+    font-family: 'Agency FB'; 
+    font-size:15px;
+    width:250px;
+}
+
+.item_SelectField {
+    font-family: 'Agency FB';
+    font-size: 15px;
+}
+
+.item_TagText {
+    font-family: 'Agency FB'; 
+    font-size:13px;
+    width:250px;
+}
+
+div.section_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}
+
+div.section {
+    flex: 1;
+    width:500px;
+}
+
+div.item_header {
+    font-size:15px;
+    margin-left:50px;
+    margin-top:50px;
+    width:500px;
+}
+
+div.item_section {
+
+    font-size: 15px;
+    margin-left: 50px;
+    width: 600px;
+    min-height: 250px;
+    position:relative;
+    text-align: left;
+    float:left;
+}
+
+div.item_header_right {
+    float: right;
+}
+
+div.item_header_left {
+    float: left;
+}
+
+div.attribute_row {
+    position:relative;
+}
+
+div.TagRow {
+    clip-path: polygon( 0 25%, 2% 0, /* Left Top corner */
+    98% 0, 100% 25%, /* Right Top Corner */
+    100% 75%, 98% 100%, /* Right Bottom Corner */
+    2% 100%, 0% 75% );
+    background-color: rgba(77, 77, 77, 0.5);
+    padding: 5px;
+    margin-bottom: 3px;
+}
+
+div.limitationBody {
+
+}
+
+div.toolBar {
+    text-align:right;
+    width:100%;
+}
+
+.TagDesc {
+    background-color: rgba(77, 77, 77, 0.5);
+    color: antiquewhite;
+    width: 300px;
+    margin-left:2px;
+}
+
+.TagRemoval {
+    float: right;
+}
+
+td.itemContents {
+    vertical-align: top;
+}
+
+span.system_span {
+    margin-right:25px;
+}
+
+div.breakdown-right {
+    text-align: right;
+    margin-right: 5px;
+}
+
+div.breakdown-left {
+    text-align: left;
+    margin-left: 50px;
+    position: absolute;
+}

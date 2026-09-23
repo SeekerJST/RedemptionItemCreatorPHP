@@ -1,0 +1,20 @@
+# Apache config for the deployed web folder (Dreamhost runs Apache).
+# Works at the domain root or in a subfolder of the Joomla site: a subfolder
+# .htaccess with its own "RewriteEngine On" replaces Joomla's rewrite rules there.
+
+Options -MultiViews -Indexes
+
+# If src/ and config/ live outside the web folder, say where:
+# SetEnv ITEMCREATOR_ROOT /home/your_user/itemcreator
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # API: itemcreator/{action}[/...] -> api/index.php
+    RewriteRule ^itemcreator(/.*)?$ api/index.php [NC,L,QSA]
+
+    # React app: anything that isn't a real file falls back to index.html
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.html [L]
+</IfModule>

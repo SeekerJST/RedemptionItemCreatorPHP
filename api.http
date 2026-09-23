@@ -1,0 +1,68 @@
+# Requests for Visual Studio's HTTP editor (or the VS Code REST Client).
+# Start the API first:  php -S localhost:5135 -t public dev/router.php
+@host = http://localhost:5135/itemcreator
+
+### Item sizes as an ID => name map
+GET {{host}}/getitemsizes
+
+### Lookup tables (raw rows, DB column names)
+GET {{host}}/getitemsizesds
+
+###
+GET {{host}}/getskillsds
+
+###
+GET {{host}}/getitemattributesds
+
+###
+GET {{host}}/getattributescaleds
+
+### Items with IsPublic = 1
+GET {{host}}/getallitems
+
+### One item with all its rows
+GET {{host}}/getitem/82a73ad3-9c7c-470b-a6a5-45a88a5a7a31
+
+### Create (returns 201 and the item with its new itemID)
+POST {{host}}/createitem
+Content-Type: application/json
+
+{
+  "itemName": "Security Gun v3",
+  "itemSize": "SMALL",
+  "CostRating": 1,
+  "modifierList": [{ "modifierID": "Modifier_5", "modifierName": "Firearms" }],
+  "taskList": [],
+  "attributeList": [
+    { "id": 1, "AttributeSystem": "Weapons", "AttributeName": 29, "Scale": "1", "Rank": "4", "BuildPoints": 36, "PowerSlots": 0 },
+    { "id": 5, "AttributeSystem": "Modifiers", "AttributeName": 20, "Scale": "1", "Rank": "2", "BuildPoints": 20, "PowerSlots": 0 }
+  ],
+  "limitList": [{ "id": 1, "LimitDesc": "No Far Range", "LimitScale": "2", "BuildPoints": -20 }],
+  "tagList": [{ "id": 1, "TagDesc": "Shoot To Thrill", "TagRank": "2", "TagFree": false, "BuildPoints": 10 }]
+}
+
+### Update: replaces the item and all its rows (paste an ID from the create response)
+PUT {{host}}/updateitem/PASTE-ITEM-ID
+Content-Type: application/json
+
+{
+  "itemName": "Security Gun v3 (renamed)",
+  "itemSize": "MEDIUM",
+  "attributeList": [],
+  "limitList": [],
+  "tagList": []
+}
+
+### Delete (204)
+DELETE {{host}}/deleteitem/PASTE-ITEM-ID
+
+### CSV export. POST a body; GET ?item=<url-encoded json> also works (what App.jsx does today)
+POST {{host}}/exportitemtocvs/download
+Content-Type: application/json
+
+{
+  "itemName": "Export Test",
+  "itemSize": "SMALL",
+  "attributeList": [{ "id": 1, "AttributeSystem": "Weapons", "AttributeName": 29, "Scale": "1", "Rank": "4", "BuildPoints": 36, "PowerSlots": 0 }],
+  "tagList": [{ "id": 1, "TagDesc": "Harder, Better, Faster, Stronger", "TagRank": 1, "TagFree": false, "BuildPoints": 5 }]
+}
