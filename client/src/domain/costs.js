@@ -6,7 +6,7 @@ import {
     TAG_COST_PER_RANK,
     scaleById,
 } from './constants.js';
-import { evaluateFormula } from './formula.js';
+import { rowCost } from './rules/index.js';
 
 /** A row whose description is still blank is a placeholder and costs nothing. */
 const isBlank = (text) => (text ?? '').trim() === '';
@@ -28,34 +28,24 @@ export function limitCost(limit) {
 }
 
 /**
- * Cost of an attribute row, from its attributescale entry (matched by attribute
- * and scale): AttributeFormula with [N] = rank if there is one, otherwise
- * AttributeCost x rank. Attributes with no entry for that scale cost nothing.
+ * Cost of an attribute row, from the rules engine (domain/rules).
  *
- * @param {{AttributeName: number, Scale: string, Rank: number}} attribute
+ * The Power Slots figure still comes from the row's attributescale entry until the
+ * power rules are wired into the summary (implementation plan, Phase 2).
+ *
+ * @param {object} attribute the attribute row from the item state
+ * @param {{row: object, parent: object|null, children: object[]}} related its rule row (ruleRows.js)
+ * @param {number|null} size item size ordinal
  * @param {Array<object>} scaleRows rows from getattributescaleds
- * @returns {{buildPoints: number, powerSlots: number, error?: string}}
+ * @returns {{buildPoints: number, powerSlots: number}}
  */
-export function attributeCost(attribute, scaleRows) {
+export function attributeCost(attribute, related, size, scaleRows) {
+    // Costs round to the nearest whole number, halves up (2.5 -> 3), like a spreadsheet's ROUND.
+    const buildPoints = Math.round(rowCost(related.row, { size, parent: related.parent, children: related.children }));
+
     const scaleType = scaleById(attribute.Scale)?.label;
     const scaleRow = scaleRows.find(
         (row) => row.AttributeID === Number(attribute.AttributeName) && row.ScaleType === scaleType
     );
-    if (!scaleRow) {
-        return { buildPoints: 0, powerSlots: 0 };
-    }
-
-    const rank = Number(attribute.Rank) || 0;
-    const powerSlots = scaleRow.PowerSlots ?? 0;
-
-    if (!scaleRow.AttributeFormula) {
-        return { buildPoints: scaleRow.AttributeCost * rank, powerSlots };
-    }
-    try {
-        // Some formulas halve (e.g. Regeneration's (5+...)/2), giving x.5 costs.
-        // Costs round to the nearest whole number, halves up (2.5 -> 3), like a spreadsheet's ROUND.
-        return { buildPoints: Math.round(evaluateFormula(scaleRow.AttributeFormula, rank)), powerSlots };
-    } catch (e) {
-        return { buildPoints: 0, powerSlots, error: e.message };
-    }
+    return { buildPoints, powerSlots: scaleRow?.PowerSlots ?? 0 };
 }

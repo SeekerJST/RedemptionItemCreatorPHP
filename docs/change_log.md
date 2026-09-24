@@ -3,6 +3,44 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-23 (8): Phase 1: rules engine and tests
+
+Phase 1 of `implementation_plan.md` is done.
+
+- **Rules engine** in `client/src/domain/rules/`: one entry per attribute from
+  `item_creation_rules.md`, giving cost, grades (grade vs combat scale), what Rank means, power
+  provided/used, and allowed sub-rows. Also the shared cost curves, sizes, Cost Rating (floor both
+  ways, never below -2), and the power budget (a slot powers its own grade or lower).
+  - Includes the new Attack model: Attack (2x, Rank = mounts), Attack (Melee), Attack Multiplier
+    (Energy, Kinetic, Plasma, Flare, Hyperspace, Tse), and Anti-Missile (1x). The database's pre-split
+    attack attributes map to a `legacyAttack` rule until the Phase 3 migration.
+  - Resource types (Ammunition, Fuel, Magazine, Charge, Tangle) plus the plain Resource.
+    Launchers are bought in increments of 4.
+- **Tests (Vitest, `npm test`): 151 passing.**
+  - Every cost table in the spec.
+  - CR: the book's Huge example, under-budget, the -2 floor, and the catalog items.
+  - Power: including the "1/0 Moderate" Force Field case and a Major supply powering it.
+  - The database-name mapping.
+  - **The Redemption-class Frigate**: all 22 attribute rows match the book, 1,471 BP / CR 10,
+    Major 8 of 9 slots.
+  - A planted wrong value (the old Battlefield Armor base) makes the tests fail as it should.
+- **Costs in the app now come from the rules,** not the `attributescale` formula column. Checked
+  against the real database with the app's own summary code. Costs that changed as a result:
+  - Moderate Armor 40 → 50
+  - Regeneration now whole numbers (Minor rank 3 = 20)
+  - Computer Major rank 3: 18 → 60
+  - Hypercomms 30 → 25
+  - Kinetic 4x: 36 → 37
+  - Shrouded Hull rank 2: 240 → 130
+  - Launchers per increment of 4
+  - Area 20 at any grade
+- **Body** is now sized by the item's size (e.g. Huge: +50 Body per purchase), and Body rows add
+  up instead of the last one winning.
+- **Removed** `domain/formula.js` (the DB formula evaluator) and the scale-based Body constant; nothing
+  uses them now.
+- **Four items to rule on,** listed in the plan under "Phase 1 results": melee feed, plain
+  Communication, Gravity Control's power grade, and the starter row now costing 20 BP.
+
 ## 2026-09-23 (7): "Free" tags confirmed
 
 - Decision: "Free" is the RPG's term for a tag that can be used without spending Action

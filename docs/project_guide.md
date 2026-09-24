@@ -48,7 +48,8 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `src/Http/` | `Request`, `Response`, `HttpException`. |
 | `config/config.example.php` | Template for `config.php` (`db`, `allow_writes`, `debug`). |
 | `client/src/App.jsx` | Layout only: loads lookups, holds the item state (`useReducer`), derives the summary, renders the three panels. |
-| `client/src/domain/` | Pure logic, no React. `constants.js` (rules and attribute IDs), `formula.js` (safe evaluator for `AttributeFormula`), `costs.js` (row BP), `summary.js` (everything Panel 3 shows), `item.js` (item reducer and the API payload). |
+| `client/src/domain/` | Pure logic, no React. `constants.js` (UI constants and attribute IDs), `costs.js` (row BP), `summary.js` (everything Panel 3 shows), `item.js` (item reducer and the API payload), `ruleRows.js` (item rows → rules rows). |
+| `client/src/domain/rules/` | **The item creation rules** (docs/item_creation_rules.md) as code: one entry per attribute (cost, grades, rank meaning, power, allowed sub-rows), cost curves, sizes, Cost Rating, power budget. `*.test.js` beside them; the Frigate fixture is `frigate.test.js`. |
 | `client/src/components/EditableGrid.jsx` | SVAR grid + sidebar editor used by all three sections. Displays rows owned by React state; with `tree`, nests attribute sub-rows by `parentId`. Contains the SVAR workarounds. |
 | `client/src/components/` | `ItemEditor` (Panel 2), `ItemHeader`, `Section`, `LimitCounts`, `gridColumns.js`, `summary/*` (Panel 3 pieces). |
 | `client/src/api/`, `client/src/hooks/` | `itemCreatorApi.js` (fetch wrappers), `useLookups.js` (loads reference data once). |
@@ -64,6 +65,7 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 "C:\Program Files\IIS Express\PHP\v8.0\php.exe" -S localhost:5135 -t public dev/router.php
 cd client && npm run dev          # http://localhost:58967, proxies /itemcreator to :5135
 "C:\Program Files\IIS Express\PHP\v8.0\php.exe" tests/smoke.php   # needs allow_writes => true
+cd client && npm test              # rules tests (Vitest)
 ```
 
 ## API

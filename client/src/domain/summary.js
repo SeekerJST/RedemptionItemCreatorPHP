@@ -4,7 +4,6 @@
 import {
     ARMOR_TYPE_BY_SCALE,
     ATTRIBUTE_IDS,
-    BODY_PER_RANK_BY_SCALE,
     FORCE_FIELD_PER_RANK_BY_SCALE,
     LIMIT_CAPS_BY_SCALE,
     POWER_SLOTS_PER_RANK,
@@ -14,6 +13,8 @@ import {
     scaleById,
 } from './constants.js';
 import { attributeCost, limitCost, tagCost } from './costs.js';
+import { relatedRuleRows } from './ruleRows.js';
+import { bodyPurchase, sizeOrdinal } from './rules/sizes.js';
 
 const sum = (values) => values.reduce((total, value) => total + value, 0);
 
@@ -28,9 +29,12 @@ export function summarizeItem(item, lookups) {
     const baseCR = size?.BaseCR ?? 0;
     const baseBody = size?.BaseBody ?? 0;
 
+    const sizeRank = sizeOrdinal(item.size);
+    const related = relatedRuleRows(item.attributes, lookups.attributes);
+
     const attributeSystems = effectiveSystems(item.attributes);
     const attributeCosts = new Map(
-        item.attributes.map((attribute) => [attribute.id, attributeCost(attribute, lookups.scales)])
+        item.attributes.map((attribute, i) => [attribute.id, attributeCost(attribute, related[i], sizeRank, lookups.scales)])
     );
 
     const tagCosts = new Map(item.tags.map((tag) => [tag.id, tagCost(tag)]));
@@ -53,7 +57,7 @@ export function summarizeItem(item, lookups) {
         tagCosts,
         attributeCosts,
         limitCosts,
-        ...structure(item.attributes, baseBody),
+        ...structure(item.attributes, baseBody, sizeRank),
         powerSlots: powerSlots(item.attributes, attributeCosts),
         attributeSystems,
         systems: systemBreakdown(item.attributes, attributeCosts, attributeSystems, lookups.attributes),
@@ -69,8 +73,11 @@ function costRating(baseCR, totalBP, basePoints, incrementPoints) {
     return Number.isFinite(rating) && rating > 0 ? rating : 0;
 }
 
-/** Body, Armor, and Force Fields. If an attribute appears more than once, the last row wins. */
-function structure(attributes, baseBody) {
+/**
+ * Body, Armor, and Force Fields. Body purchases add up across rows, sized by the item's
+ * size (§5.5). For Armor and Force Fields, the last row wins.
+ */
+function structure(attributes, baseBody, sizeRank) {
     let attributeBody = 0;
     let armor = { rank: 0, type: null };
     let forceField = 0;
@@ -79,7 +86,7 @@ function structure(attributes, baseBody) {
         const rank = Number(attribute.Rank) || 0;
         switch (attribute.AttributeName) {
             case ATTRIBUTE_IDS.BODY:
-                attributeBody = rank * (BODY_PER_RANK_BY_SCALE[attribute.Scale] ?? BODY_PER_RANK_BY_SCALE[1]);
+                attributeBody += rank * (bodyPurchase(sizeRank)?.body ?? 0);
                 break;
             case ATTRIBUTE_IDS.ARMOR_RATING:
                 armor = { rank, type: ARMOR_TYPE_BY_SCALE[attribute.Scale] ?? ARMOR_TYPE_BY_SCALE[1] };

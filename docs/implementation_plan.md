@@ -1,6 +1,6 @@
 # Implementation Plan: Attributes, Rules, and Validation
 
-Status: **approved** (2026-09-23). Next: Phase 1.
+Status: **Phase 1 done** (2026-09-23). Next: Phase 2. Phase 1 raised four items to rule on (see "Phase 1 results").
 
 Goal: make the item creator follow `item_creation_rules.md`. That means correct costs,
 correct totals, validation of illegal builds, and a better attribute model (Attack split,
@@ -152,6 +152,32 @@ Attributes not listed as parents take no sub-rows.
      increments of 4: **1,471 BP, CR 10**, Major power slots 8 used of 9
 
 **Done when:** all tests pass and the running app's totals match the tests.
+
+### Phase 1 results (2026-09-23)
+
+- **Rules engine:** `client/src/domain/rules/`. `attacks.js`, `protection.js`, `systems.js` (one entry per
+  attribute), `curves.js`, `sizes.js`, `costRating.js`, `power.js`, `registry.js`, `index.js` (the
+  registry, database-name mapping, `rowCost`, `withRelations`).
+- **Tests:** 151 in total, run with `npm test` in `client/`. They cover every cost table in spec §5, the CR
+  rules, power (including higher grades covering lower), the database-name mapping, and the
+  **Frigate: 1,471 BP, CR 10, Major 8 of 9 slots**, with every row matching the book.
+- **Wired into the app:** grid and summary costs now come from the rules, not the
+  `attributescale` formula column. Body is sized by the item size. Checked against the real
+  database with the app's own summary code.
+- **Until Phase 3,** the database's attack attributes (`Attack`, `Attack (Kinetic)`, ...) use the
+  pre-split meaning (Rank = final multiplier) via a `legacyAttack` rule, costed the same way as
+  Attack + Multiplier. Phase 3 points them at the new rules.
+- **Items to rule on:**
+  1. **Melee feed.** Spec §9 says every Attack needs a feed (ammo or a Power Slot), but a knife
+     has neither. Assumed for now: **melee attacks need no feed**.
+  2. **Plain "Communication".** The book prices comms only by implementation (Radio, Laser Link,
+     Ansible, Hypercomms). The plain Communication row keeps the database's 5 / 15 / 30. Keep it,
+     or drop it in the Phase 3 migration?
+  3. **Gravity Control power.** The book powers it "at the item's scale", which the app doesn't
+     track. It uses the row's own grade for now.
+  4. **The starter row now costs 20 BP.** New items start with an Area row, and Area is a flat 20
+     at any grade (it used to cost 0 because the database only priced Area at Major). Should a new
+     item start with no attribute rows, or with a blank "choose an attribute" row?
 
 ## Phase 2: Totals and validation in the UI
 

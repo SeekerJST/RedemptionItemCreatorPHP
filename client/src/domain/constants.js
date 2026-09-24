@@ -49,7 +49,6 @@ export const POWER_SLOTS_PER_RANK = 3;
 export const MAX_MODIFIER_RANK = 4;
 
 export const ARMOR_TYPE_BY_SCALE = { 1: 'Firefight', 2: 'Battlefield', 3: 'Hull' };
-export const BODY_PER_RANK_BY_SCALE = { 1: 5, 2: 20, 3: 50 };
 export const FORCE_FIELD_PER_RANK_BY_SCALE = { 1: 10, 2: 20, 3: 50 };
 
 /**
