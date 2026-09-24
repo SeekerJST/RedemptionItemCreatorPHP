@@ -52,7 +52,10 @@ export const ARMOR_TYPE_BY_SCALE = { 1: 'Firefight', 2: 'Battlefield', 3: 'Hull'
 export const BODY_PER_RANK_BY_SCALE = { 1: 5, 2: 20, 3: 50 };
 export const FORCE_FIELD_PER_RANK_BY_SCALE = { 1: 10, 2: 20, 3: 50 };
 
-/** Tag cost per rank. A free-form tag ("Free" switch) costs double. */
+/**
+ * Tag cost per rank. A Free tag (the "Free" switch) costs double: in the rules,
+ * using a Free tag doesn't require the player to spend Action Points.
+ */
 export const TAG_COST_PER_RANK = 5;
 export const FREE_TAG_COST_PER_RANK = 10;
 

@@ -3,6 +3,14 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-23 (7): "Free" tags confirmed
+
+- Decision: "Free" is the RPG's term for a tag that can be used without spending Action
+  Points, which is why it costs double (10 BP per rank instead of 5). The label and the
+  cost rule stay as they are.
+- Corrected the code comment in `client/src/domain/constants.js`, which had guessed
+  "free-form". Removed from the open rules questions; recorded under Decisions.
+
 ## 2026-09-23 (6): New attribute rows start at rank 1
 
 - Decision: new attribute rows (the starter row, [+], and [+>] sub-rows) start at rank 1

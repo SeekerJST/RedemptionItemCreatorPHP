@@ -173,12 +173,13 @@ parameter still works.
   Rank 0 can still be entered in the editor, and it's costed by the formula as-is.
 - **Keeping the SVAR grid for now,** with the workarounds above. To revisit if more of its
   bugs turn up, or when upgrading (newer SVAR versions may fix them).
+- **"Free" is the rules term and stays as the tag label** (2026-09-23). A Free tag can be
+  used without the player spending Action Points, so it costs double: 10 BP per rank
+  instead of 5. It does not mean "free of cost".
 
 ## Open rules questions
 
 Behavior kept from the old code, but worth confirming:
-- **Tag "Free" switch** doubles the tag's cost (10/rank instead of 5). This matches the old
-  Normal/Free tag types, so "Free" means free-form, not free of cost. A clearer label?
 - **Blank rows:** a tag or limitation with an empty description costs nothing and isn't
   counted. That's how the starter rows behaved before.
 
