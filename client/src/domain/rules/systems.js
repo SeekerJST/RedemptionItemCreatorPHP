@@ -10,8 +10,8 @@ export const LAUNCHERS_PER_INCREMENT = 4;
 const LAUNCHER_PRICE = { 1: 5, 2: 10, 3: 15 }; // per launcher
 
 export const COMMUNICATION_IMPLEMENTATIONS = {
-    // [Open question] The plain "Communication" row isn't in the book, which prices comms by
-    // implementation. It keeps the database's 5 / 15 / 30 until that's decided.
+    // The plain "Communication" row isn't in the book, which prices comms by implementation.
+    // It stays, at the database's 5 / 15 / 30 (ruling 2026-09-23).
     general: { name: 'Communication', price: { 1: 5, 2: 15, 3: 30 } },
     radio: { name: 'Radio', price: { 1: 3, 2: 13 } },
     laserLink: { name: 'Laser Link', price: { 1: 3, 2: 13 } },
@@ -150,8 +150,8 @@ export const systemRules = {
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.QUANTITY },
         cost: perUnit({ 1: 10, 2: 20, 3: 40 }),
-        // [Approximation] The book powers it at the item's combat scale, which the app
-        // doesn't track yet; the row's own grade is used instead.
+        // Draws power like an Attack at its own scale: a Major Gravity Control needs a
+        // Major Power Slot (ruling 2026-09-23).
         power: oneSlotAtGrade,
         children: [],
     },

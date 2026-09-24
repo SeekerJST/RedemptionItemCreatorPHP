@@ -70,7 +70,7 @@ export const attackRules = {
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.MOUNTS },
         cost: (row) => (priceFor(ATTACK_BASE, row.grade) / 2) * row.rank,
-        // [Assumption, to confirm] Melee attacks need no feed (a knife has no power or ammo).
+        // Melee attacks need no feed: no Power Slot and no ammunition (ruling 2026-09-23; a knife has neither).
         power: () => ({}),
         children: ATTACK_CHILDREN, // never Area [Errata p210]
     },

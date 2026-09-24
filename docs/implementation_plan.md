@@ -1,6 +1,6 @@
 # Implementation Plan: Attributes, Rules, and Validation
 
-Status: **Phase 1 done** (2026-09-23). Next: Phase 2. Phase 1 raised four items to rule on (see "Phase 1 results").
+Status: **Phase 1 done** (2026-09-23). Next: Phase 2.
 
 Goal: make the item creator follow `item_creation_rules.md`. That means correct costs,
 correct totals, validation of illegal builds, and a better attribute model (Attack split,
@@ -167,17 +167,16 @@ Attributes not listed as parents take no sub-rows.
 - **Until Phase 3,** the database's attack attributes (`Attack`, `Attack (Kinetic)`, ...) use the
   pre-split meaning (Rank = final multiplier) via a `legacyAttack` rule, costed the same way as
   Attack + Multiplier. Phase 3 points them at the new rules.
-- **Items to rule on:**
+- **Items raised, and the rulings (2026-09-23):**
   1. **Melee feed.** Spec §9 says every Attack needs a feed (ammo or a Power Slot), but a knife
-     has neither. Assumed for now: **melee attacks need no feed**.
+     has neither. **Ruling: melee attacks need no feed.**
   2. **Plain "Communication".** The book prices comms only by implementation (Radio, Laser Link,
-     Ansible, Hypercomms). The plain Communication row keeps the database's 5 / 15 / 30. Keep it,
-     or drop it in the Phase 3 migration?
-  3. **Gravity Control power.** The book powers it "at the item's scale", which the app doesn't
-     track. It uses the row's own grade for now.
+     Ansible, Hypercomms). **Ruling: keep the plain Communication row at 5 / 15 / 30.**
+  3. **Gravity Control power.** **Ruling: it draws power like an Attack at its own scale:** a Major
+     Gravity Control needs a Major Power Slot. (The book says "the item's scale".)
   4. **The starter row now costs 20 BP.** New items start with an Area row, and Area is a flat 20
-     at any grade (it used to cost 0 because the database only priced Area at Major). Should a new
-     item start with no attribute rows, or with a blank "choose an attribute" row?
+     at any grade (it used to cost 0 because the database only priced Area at Major). **Ruling: fine
+     for now.**
 
 ## Phase 2: Totals and validation in the UI
 
@@ -192,7 +191,7 @@ Attributes not listed as parents take no sub-rows.
    - Attack: 1 slot per mount (the Attack plus each turret); Plasma: 2 per mount
    - Launchers: 1 slot per increment of 4
    - Force Field: 1 slot for the whole track
-   - Gravity Control: 1 slot at the **item's** scale
+   - Gravity Control: 1 slot per unit at its own grade (ruling)
    - Manufacture: 1 slot at its grade
 4. **Validation list in Panel 3:** errors and warnings, each naming the row it's about,
    with those rows highlighted in the grids. It covers the hard rules from spec §9 that

@@ -420,7 +420,8 @@ Artificial gravity. Works poorly or not at all inside strong natural gravity wel
 | Moderate | Large | 20 |
 | Major | Huge | 40 |
 
-- Uses Power Slots equal to an Attack of the **item's** scale.
+- Uses Power Slots equal to an Attack of **its own** scale: a Major Gravity Control needs a
+  Major Power Slot. **[Ruling 2026-09-23]** (The book says "the item's scale".)
 - A Colossal item needs an array of Major Gravity Controls (one Major covers up to Huge).
 
 ### 5.15 Hangar — 15 / 30 / 60 BP
@@ -554,7 +555,7 @@ the lowest higher grade with spare slots.
 | Launcher | `ceil(count / 4)`, grade = launcher scale |
 | Anti-Missile Attack | 1 each (as shown in the example) |
 | Force Field | 1 for the whole Force Field track, grade = Force Field grade |
-| Gravity Control | 1, grade = item's scale |
+| Gravity Control | 1 per unit, grade = its own grade **[Ruling]** |
 | Manufacture | 1, grade = Manufacture grade **[Ruling]** |
 | Psi Link | Psionics draw on it; strain threshold per rank applies |
 
@@ -818,6 +819,9 @@ Listed so the code can make each one a single named constant or function, easy t
 | Antimatter "+1 CR" | Provisioning, not build: antimatter fuel bought in Port costs +1 CR over baseline. No effect on BP or item CR. | §5.22 |
 | Task TN cap | A Task's TN can't exceed the running Computer's TN | §5.26, §9 |
 | Coil discount | Same discount as the Charge Resource (4 / 8 / 12 BP per rank) | §5.22, §5.24 |
+| Melee feed | Melee Attacks need no feed (no Power Slot, no ammunition) | §5.3, §9 |
+| Plain Communication | Kept alongside the book's implementations, at 5 / 15 / 30 | §5.7 |
+| Gravity Control power | One slot at its own grade, like an Attack of that scale | §5.14, §5.22 |
 | Attack model | Attack = 2x at the base cost. Each Attack Multiplier rank adds 1x (rank 1 = 3x) and costs the upgrade above 2x. | §5.3 |
 | Anti-Missile | Its own attribute: the only 1x attack. Cost stays half the Attack base. | §5.3, §9 |
 | Launchers | Bought in increments of 4 (1 Power Slot per increment) | §5.16 |

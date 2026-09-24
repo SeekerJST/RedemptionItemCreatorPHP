@@ -3,6 +3,16 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-23 (9): Rulings on the Phase 1 items
+
+- **Melee attacks need no feed** (no Power Slot, no ammunition).
+- **The plain "Communication" attribute stays,** at 5 / 15 / 30, alongside the book's implementations.
+- **Gravity Control draws power like an Attack at its own scale:** a Major Gravity Control needs a
+  Major Power Slot. The code already did this; its comment and the spec ("the item's scale") are
+  corrected.
+- **The starter Area row (20 BP) is fine for now.**
+- Recorded in the code comments, the rules spec (§5.14, §5.22, and the rulings table), and the plan.
+
 ## 2026-09-23 (8): Phase 1: rules engine and tests
 
 Phase 1 of `implementation_plan.md` is done.
