@@ -1,6 +1,6 @@
 # Implementation Plan: Attributes, Rules, and Validation
 
-Status: **approved; one detail open** (2026-09-23). See "Still open" at the end.
+Status: **approved** (2026-09-23). Next: Phase 1.
 
 Goal: make the item creator follow `item_creation_rules.md`. That means correct costs,
 correct totals, validation of illegal builds, and a better attribute model (Attack split,
@@ -33,9 +33,13 @@ decisions), `change_log.md`.
 ### From the answers to the plan's open questions (2026-09-23)
 
 5. **Attack model:**
-   - Buying an **Attack** gives the ability to attack that way at **1x**. Each rank of
-     **Attack Multiplier** adds 1: rank 1 = 2x, rank 2 = 3x, and so on.
-   - **Anti-Missile** can't take a multiplier, so it stays at 1x.
+   - An **Attack** is **2x** at the book's base cost (10 / 20 / 40 BP). Each rank of
+     **Attack Multiplier** adds 1x: rank 1 = 3x, rank 2 = 4x, and so on. It costs the book's
+     upgrade above 2x, so the book's totals are unchanged (Space 8x = Attack 40 + Multiplier
+     rank 6 at 210 = 250).
+   - **Anti-Missile** is its own attribute: the only **1x** attack, with no multiplier. Its
+     cost stays half the Attack base (5 / 10 / 20).
+   - (An earlier answer put Attack at 1x. That was revised the same day; this is the ruling.)
    - **Turrets** are a **count on the Attack**. Each extra turret lets another player use
      that Attack on their turn (meant for vehicles and spaceships). Per spec §5.3, each
      costs the Attack's base again and needs its own feed.
@@ -82,9 +86,10 @@ decisions), `change_log.md`.
 ## Attack model
 
 ```
-Attack               grade = combat scale; 1x; 1 Power Slot per mount
+Attack               grade = combat scale; 2x; cost = base (10 / 20 / 40); 1 Power Slot per mount
 │                    Turrets: a count on the row (each extra: +base cost, +its own feed)
-└─ Attack Multiplier  rank = +1x per rank (rank 1 = 2x)
+└─ Attack Multiplier  rank = +1x per rank (rank 1 = 3x); cost = the upgrade above 2x:
+                      Curve A total − base = 5·k·(k+1) → +10, +30, +60, +100, +150, +210
                       implementation: Energy | Kinetic | Plasma | Flare | Hyperspace
                       Kinetic: 10% off the multiplier cost, rounded up
                       Plasma: the parent Attack uses 2 Power Slots per mount
@@ -92,11 +97,8 @@ Attack               grade = combat scale; 1x; 1 Power Slot per mount
 Attack (Melee)       everything costs half; can never take Area
 └─ Attack Multiplier  as above, plus Tse (Melee only)
 
-Anti-Missile         1x only; no multiplier
+Anti-Missile         1x only; no multiplier; cost = half the Attack base (5 / 10 / 20)
 ```
-
-The costs for the Attack itself and each Multiplier rank are still to be confirmed
-(see "Still open").
 
 ## Allowed sub-rows (one level deep)
 
@@ -207,28 +209,3 @@ sub-row dropdowns only offer allowed children.
 3. **Client:** enable [Save]/[Delete]. The Inventory panel lists saved items and loads
    them back into the editor.
 
----
-
-## Still open
-
-**Attack costs under the 1x model.** The book prices Attacks by final multiplier:
-
-| Scale | 2x | 3x | 4x | 5x | 6x |
-|---|---:|---:|---:|---:|---:|
-| Firefight | 10 | 20 | 40 | 70 | 110 |
-| Battlefield | 20 | 30 | 50 | 80 | 120 |
-| Space | 40 | 50 | 70 | 100 | 140 |
-
-With the Attack at 1x and Multiplier rank 1 = 2x:
-
-- **What does the Attack itself (1x) cost, and what does each Multiplier rank add?** One
-  possible reading: the Attack costs the 2x price (10 / 20 / 40), Multiplier rank 1 adds 0,
-  and later ranks add +10, +20, +30…, so the book's totals stay the same. But then rank 1
-  would be free, which may not be what you intend.
-- **Is a 1x Attack (no Multiplier) a legal build?** Spec §9 rule 1 says the multiplier is at
-  least 2x.
-- **Anti-Missile:** spec §5.3 says "half of base cost; fixed at 2x". Your answer puts it at
-  1x. Should the spec change to 1x, and is its cost still half the Attack base
-  (5 / 10 / 20)?
-
-Everything in Phase 1 except the Attack module can start before this is answered.

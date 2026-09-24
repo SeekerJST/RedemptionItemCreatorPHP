@@ -191,7 +191,7 @@ Melee and Flare + Melee are unusual but legal.
 | **Energy** | none | Lasers, particle cannons. No special rules. | All |
 | **Kinetic** | Multiplier upgrades cost 10% less, rounded up | Fires solid projectiles; needs an Ammunition Resource bought separately. | All |
 | **Melee** | Everything (base and upgrades) costs half | Attacks are ranged by default; this limits to melee. **Can never take Area. [Errata p210]** | All |
-| **Anti-Missile** | Half of base cost; fixed at 2x | Only targets missiles. Cannot buy extra multiplier. | All |
+| **Anti-Missile** | Half of base cost (5 / 10 / 20); **1x** **[Ruling 2026-09-23]** | Its own attribute: the only 1x attack. Only targets missiles. Cannot take a multiplier. | All |
 | **Plasma** | none to BP | Uses **2× the Power Slots**. Gains **Counter (Shields)** free. Applies a free **Bleed** of `floor(m / 2)` damage/round; its magnitude matches the Attack's scale (Firefight → Minor, Battlefield → Moderate, Space → Major). **[Ruling]** | All (Terran Sphere tech) |
 | **Flare** | none | Energy variant. Cover Tags cannot be condemned against it. | Shohan only |
 | **Tse** | none | Melee only. Gains **Counter (Armor)** free. | Shohan only; cannot be manufactured by the Fourth Population |
@@ -445,6 +445,8 @@ Missiles themselves are separate Kinetic Attack items.
 | Space | 15 |
 
 - **Power:** up to 4 launchers share 1 Power Slot. `slots = ceil(launchers / 4)`.
+- **[Ruling 2026-09-23] Launchers are bought in increments of 4,** matching the power use:
+  one increment = 4 launchers = 1 Power Slot, costing 20 / 40 / 60 BP.
 - **Disposable** (single-shot): no Power or Resource needed; destroyed on use.
 
 ### 5.17 Life Support — 5 / 20 / 40 BP
@@ -681,7 +683,7 @@ costToPay  = max(1, modifiedCR − baseCR)     // in CR terms, resolved via Inco
 
 Hard errors (the rules forbid it):
 
-1. Attack multiplier ≥ 2x. Anti-Missile is exactly 2x.
+1. Attack multiplier ≥ 2x. Anti-Missile is exactly 1x. **[Ruling 2026-09-23]**
 2. Melee Attack + Area. **[Errata p210]** Melee + Anti-Missile. **[Ruling]**
 3. Tse on a non-Melee Attack.
 4. Every Attack has a feed: ammo/clip Resource **or** Power Slot(s). Kinetic needs Ammunition.
@@ -744,6 +746,10 @@ Book pp. 219–221. All numbers below re-checked against the formulas in this sp
 | Limitations | 2 Moderate (Property of the Terran Sphere, Crew Complement) | −40 | **1,441** |
 
 **Final: 1,441 BP → 841 over → floor(841/200) = 4 → CR 10.**
+
+**With launchers in increments of 4 [Ruling 2026-09-23]**, the 6 launchers become 2 increments
+(8 launchers, 120 BP): **1,471 BP → 871 over → CR 10**, with the same power use (2 Major slots).
+The app's test fixture uses these numbers.
 
 Power check: available Major = 3 (Gravitic Drive) + 6 (2 Power Supply ranks) = 9.
 Used Major = 4 (2 Plasma turrets × 2) + 2 (6 Launchers → ceil(6/4)) + 2 (Anti-Missile) = 8. ✔
@@ -812,6 +818,9 @@ Listed so the code can make each one a single named constant or function, easy t
 | Antimatter "+1 CR" | Provisioning, not build: antimatter fuel bought in Port costs +1 CR over baseline. No effect on BP or item CR. | §5.22 |
 | Task TN cap | A Task's TN can't exceed the running Computer's TN | §5.26, §9 |
 | Coil discount | Same discount as the Charge Resource (4 / 8 / 12 BP per rank) | §5.22, §5.24 |
+| Attack model | Attack = 2x at the base cost. Each Attack Multiplier rank adds 1x (rank 1 = 3x) and costs the upgrade above 2x. | §5.3 |
+| Anti-Missile | Its own attribute: the only 1x attack. Cost stays half the Attack base. | §5.3, §9 |
+| Launchers | Bought in increments of 4 (1 Power Slot per increment) | §5.16 |
 
 ### Still open
 
