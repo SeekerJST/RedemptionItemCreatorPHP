@@ -168,14 +168,15 @@ parameter still works.
 - **Fractional costs round to the nearest whole number** (halves up: 2.5 → 3), once per
   row in `attributeCost()`, so the row, the total, and the export agree (2026-09-23). Only
   Regeneration Minor `(5+…)/2` and Major `(15+…)/2` produce fractions today.
+- **New attribute rows start at rank 1** (2026-09-23), not 0. Many formulas give a non-zero
+  cost at rank 0, sometimes more than at rank 1 (Attack Minor: 20 at rank 0, 10 at rank 1).
+  Rank 0 can still be entered in the editor, and it's costed by the formula as-is.
 - **Keeping the SVAR grid for now,** with the workarounds above. To revisit if more of its
   bugs turn up, or when upgrading (newer SVAR versions may fix them).
 
 ## Open rules questions
 
 Behavior kept from the old code, but worth confirming:
-- **Rank 0:** a formula attribute at rank 0 still costs its formula at N=0
-  (e.g. `20+(0-1)*0*5` = 20).
 - **Tag "Free" switch** doubles the tag's cost (10/rank instead of 5). This matches the old
   Normal/Free tag types, so "Free" means free-form, not free of cost. A clearer label?
 - **Blank rows:** a tag or limitation with an empty description costs nothing and isn't

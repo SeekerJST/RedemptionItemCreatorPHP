@@ -3,6 +3,14 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-23 (6): New attribute rows start at rank 1
+
+- Decision: new attribute rows (the starter row, [+], and [+>] sub-rows) start at rank 1
+  instead of 0. At rank 0, formula attributes still cost their formula at N=0, often more
+  than rank 1 (Attack Minor: 20 at rank 0, 10 at rank 1).
+- Changed in `newRow.attributes` (`client/src/domain/item.js`). Removed from the open rules
+  questions; recorded under Decisions.
+
 ## 2026-09-23 (5): Fractional costs round to the nearest whole number
 
 - Decision: a formula cost with a fraction rounds to the nearest whole number, halves up

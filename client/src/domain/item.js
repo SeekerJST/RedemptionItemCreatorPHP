@@ -6,7 +6,8 @@ import { ATTRIBUTE_IDS, MAX_MODIFIER_RANK } from './constants.js';
 const newRow = {
     tags: (id) => ({ id, TagDesc: '', TagRank: '1', TagFree: false }),
     // parentId: the attribute row this one sits under (a sub-row), or null for a top-level row.
-    attributes: (id, parentId = null) => ({ id, parentId, AttributeSystem: null, AttributeName: 1, Scale: '1', Rank: 0 }),
+    // Rank starts at 1: many cost formulas give a non-zero (even higher) cost at rank 0.
+    attributes: (id, parentId = null) => ({ id, parentId, AttributeSystem: null, AttributeName: 1, Scale: '1', Rank: 1 }),
     limits: (id) => ({ id, LimitDesc: '', LimitScale: '1' }),
 };
 
