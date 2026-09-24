@@ -23,7 +23,7 @@ src/               PHP source (namespace SilentSpirits\ItemCreator)
   Repository/      LookupRepository (reference tables), ItemRepository (item CRUD, transactional)
   Export/          ItemCsvExporter
 config/            config.php (gitignored, copy it from config.example.php)
-db/migrations/     Numbered SQL schema changes; run each once, in order, on every DB
+db/migrations/     Numbered SQL schema changes; run each once, in order, on every existing DB
 client/            React source; `npm run build` writes into public/
 dev/router.php     Router for PHP's built-in server (stands in for .htaccess locally)
 tests/smoke.php    End-to-end test against a running server
@@ -100,8 +100,9 @@ yet, so writes are gated by `allow_writes`, and the React client doesn't use the
 
 ## Deploying to Dreamhost
 
-1. Run any `db/migrations/*.sql` not yet applied on the Dreamhost DB, in order.
-   Right now that's `001_itemattribute_rank.sql` and `002_fix_bleed_moderate_formula.sql`.
+1. Create the Dreamhost DB from the committed schema and seed files (not written yet; see
+   next step 2 in `docs/project_guide.md`). They include every migration so far. After that,
+   run any newer `db/migrations/*.sql` on it, in order.
 2. Run `npm run build` in `client/`.
 3. Upload the contents of `public/` to the web folder (e.g. `~/silentspiritsgames.com/itemcreator/`).
 4. Upload `src/` and `config/` somewhere outside the web root (e.g. `~/itemcreator/`), then uncomment and set

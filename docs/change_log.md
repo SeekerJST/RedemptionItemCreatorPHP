@@ -10,8 +10,9 @@ current state, and the reasoning behind recurring patterns.
   of 10, overcharging by 10 BP at every rank. Now `(20+([N]-1)*[N]*5)/2`.
   - Confirmed against the rules spreadsheet: Bleed = base + N(N-1)*5/2, with base 5/10/20
     for Minor/Moderate/Major. All three scales now match it at ranks 1-5 and 10.
-  - Applied to the local DB. It still needs to be run on Dreamhost. It matches on attribute,
-    scale, and the old text (not the row ID), so a second run changes nothing.
+  - Applied to the local DB. Nothing is deployed to Dreamhost yet, so its DB will be created
+    fresh from the schema file, which will include this fix. The migration matches on
+    attribute, scale, and the old text (not the row ID), so a second run changes nothing.
 - **Open rules questions:** the formula typo is resolved. The fractional-cost question is
   narrowed to the two formulas that actually produce fractions (Regeneration Minor and Major).
 - The planned sub-row migration is now 003.

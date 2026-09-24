@@ -54,7 +54,7 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `client/src/api/`, `client/src/hooks/` | `itemCreatorApi.js` (fetch wrappers), `useLookups.js` (loads reference data once). |
 | `dev/router.php` | Router for PHP's built-in server; stands in for `.htaccess` locally. |
 | `index.php` (root) | Only there so Visual Studio's F5 (built-in server, no router) can reach the API. |
-| `db/migrations/` | Numbered SQL scripts. Run each one once, in order, on every database (local and Dreamhost). |
+| `db/migrations/` | Numbered SQL scripts. Run each one once, in order, on every existing database. A new database (e.g. the first Dreamhost one) is created from the schema file instead, which already includes them. |
 | `tests/smoke.php` | End-to-end test (32 checks) against a running server. |
 | `api.http` | Sample requests for Visual Studio's HTTP editor. |
 
@@ -197,8 +197,8 @@ Behavior kept from the old code, but worth confirming:
 4. **Decide on writes before deploying** (see Decisions). If writes stay on, consider a
    stopgap such as a shared-secret header or HTTP basic auth on the write routes.
 5. **Deploy to Dreamhost** following `README.md`: `public/` into the web folder, `src/` +
-   `config/` outside it, `SetEnv ITEMCREATOR_ROOT`. Run the `db/migrations/` scripts on the
-   Dreamhost DB first.
+   `config/` outside it, `SetEnv ITEMCREATOR_ROOT`. Nothing is deployed there yet, so the
+   Dreamhost DB is created fresh from the schema and seed files in step 2.
 6. **Settle the open rules questions** above.
 7. **Attacks summary:** list each attack with its sub-rows (multiplier, ammo) in Panel 3,
    which the old code was working toward.
