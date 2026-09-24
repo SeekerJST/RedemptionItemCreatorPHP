@@ -101,7 +101,7 @@ yet, so writes are gated by `allow_writes`, and the React client doesn't use the
 ## Deploying to Dreamhost
 
 1. Run any `db/migrations/*.sql` not yet applied on the Dreamhost DB, in order.
-   Right now that's `001_itemattribute_rank.sql`.
+   Right now that's `001_itemattribute_rank.sql` and `002_fix_bleed_moderate_formula.sql`.
 2. Run `npm run build` in `client/`.
 3. Upload the contents of `public/` to the web folder (e.g. `~/silentspiritsgames.com/itemcreator/`).
 4. Upload `src/` and `config/` somewhere outside the web root (e.g. `~/itemcreator/`), then uncomment and set

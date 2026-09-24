@@ -171,11 +171,11 @@ parameter still works.
 ## Open rules questions
 
 Behavior kept from the old code, but worth confirming:
-- **Formula typo?** One `attributescale.AttributeFormula` is `(20+([N]-1)*[N]*5/2)`. Its
-  siblings are `(10+([N]-1)*[N]*5)/2` and `(40+([N]-1)*[N]*5)/2`, so the `/2` is probably
-  meant to sit outside the parentheses.
-- **Fractional costs:** formulas with `/2` or `*0.9` can give e.g. 12.5 BP. The row shows
-  12.5, but the total counts 12 (truncated), as before. Round, truncate, or ceil?
+- **Fractional costs:** only Regeneration Minor `(5+([N]-1)*[N]*5)/2` and Major
+  `(15+([N]-1)*[N]*5)/2` give fractions: always x.5, e.g. 2.5 at rank 1 and 12.5 at rank 2
+  (Major). The row shows 12.5, but the total counts 12 (truncated), as before. Round,
+  truncate, or ceil, or should those formulas change? Every other formula, including the
+  `*0.9` ones, always gives whole numbers.
 - **Rank 0:** a formula attribute at rank 0 still costs its formula at N=0
   (e.g. `20+(0-1)*0*5` = 20).
 - **Tag "Free" switch** doubles the tag's cost (10/rank instead of 5). This matches the old
@@ -185,7 +185,7 @@ Behavior kept from the old code, but worth confirming:
 
 ## Next steps
 
-1. **Save sub-rows in the DB.** Migration 002 adds a nullable `ParentAttributeID` to
+1. **Save sub-rows in the DB.** Migration 003 adds a nullable `ParentAttributeID` to
    `itemattribute`. `Item.php`/`ItemRepository` read and write `parentId`, the CSV export
    shows the hierarchy, and the smoke tests are extended.
 2. **Commit the schema to the repo.** There's no schema or seed file yet, so the DB can't

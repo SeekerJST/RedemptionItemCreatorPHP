@@ -3,6 +3,19 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-23 (4): Bleed (Moderate) formula fixed
+
+- **New `db/migrations/002_fix_bleed_moderate_formula.sql`.** Bleed Moderate was
+  `(20+([N]-1)*[N]*5/2)`: the `/2` was inside the parentheses, so its base was 20 instead
+  of 10, overcharging by 10 BP at every rank. Now `(20+([N]-1)*[N]*5)/2`.
+  - Confirmed against the rules spreadsheet: Bleed = base + N(N-1)*5/2, with base 5/10/20
+    for Minor/Moderate/Major. All three scales now match it at ranks 1-5 and 10.
+  - Applied to the local DB. It still needs to be run on Dreamhost. It matches on attribute,
+    scale, and the old text (not the row ID), so a second run changes nothing.
+- **Open rules questions:** the formula typo is resolved. The fractional-cost question is
+  narrowed to the two formulas that actually produce fractions (Regeneration Minor and Major).
+- The planned sub-row migration is now 003.
+
 ## 2026-09-23 (3): React refactor and attribute sub-rows
 
 - **Git:** the project is now a repository. Baseline commit `6da8bda`, refactor `da56c04`,
