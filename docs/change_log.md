@@ -3,6 +3,17 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-23 (5): Fractional costs round to the nearest whole number
+
+- Decision: a formula cost with a fraction rounds to the nearest whole number, halves up
+  (2.5 → 3). Previously the row showed 12.5 while the total truncated it to 12.
+- Rounding happens once, in `attributeCost()` (`client/src/domain/costs.js`), so the grid
+  row, the totals, and the CSV export all use the same number. The separate truncation in
+  `summary.js` and `item.js` is gone.
+- Affects only Regeneration Minor and Major today. For example, Minor ranks 1-4 now cost
+  3/8/18/33 (raw 2.5/7.5/17.5/32.5).
+- Removed from the open rules questions; recorded under Decisions.
+
 ## 2026-09-23 (4): Bleed (Moderate) formula fixed
 
 - **New `db/migrations/002_fix_bleed_moderate_formula.sql`.** Bleed Moderate was

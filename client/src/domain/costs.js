@@ -52,7 +52,9 @@ export function attributeCost(attribute, scaleRows) {
         return { buildPoints: scaleRow.AttributeCost * rank, powerSlots };
     }
     try {
-        return { buildPoints: evaluateFormula(scaleRow.AttributeFormula, rank), powerSlots };
+        // Some formulas halve (e.g. Regeneration's (5+...)/2), giving x.5 costs.
+        // Costs round to the nearest whole number, halves up (2.5 -> 3), like a spreadsheet's ROUND.
+        return { buildPoints: Math.round(evaluateFormula(scaleRow.AttributeFormula, rank)), powerSlots };
     } catch (e) {
         return { buildPoints: 0, powerSlots, error: e.message };
     }

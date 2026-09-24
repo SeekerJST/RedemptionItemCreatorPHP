@@ -153,7 +153,7 @@ export function toApiItem(item, summary, defaultSkill) {
             AttributeName: row.AttributeName,
             Scale: row.Scale,
             Rank: row.Rank,
-            BuildPoints: Math.trunc(summary.attributeCosts.get(row.id).buildPoints),
+            BuildPoints: summary.attributeCosts.get(row.id).buildPoints,
             PowerSlots: summary.attributeCosts.get(row.id).powerSlots,
         })),
         limitList: item.limits.map((row) => ({ ...row, BuildPoints: summary.limitCosts.get(row.id) })),

@@ -165,17 +165,15 @@ parameter still works.
   REST scheme can come later along with the React rework.
 - **Sub-rows:** any attribute can have them, and their BP counts toward the item total
   like any other row (2026-09-23).
+- **Fractional costs round to the nearest whole number** (halves up: 2.5 → 3), once per
+  row in `attributeCost()`, so the row, the total, and the export agree (2026-09-23). Only
+  Regeneration Minor `(5+…)/2` and Major `(15+…)/2` produce fractions today.
 - **Keeping the SVAR grid for now,** with the workarounds above. To revisit if more of its
   bugs turn up, or when upgrading (newer SVAR versions may fix them).
 
 ## Open rules questions
 
 Behavior kept from the old code, but worth confirming:
-- **Fractional costs:** only Regeneration Minor `(5+([N]-1)*[N]*5)/2` and Major
-  `(15+([N]-1)*[N]*5)/2` give fractions: always x.5, e.g. 2.5 at rank 1 and 12.5 at rank 2
-  (Major). The row shows 12.5, but the total counts 12 (truncated), as before. Round,
-  truncate, or ceil, or should those formulas change? Every other formula, including the
-  `*0.9` ones, always gives whole numbers.
 - **Rank 0:** a formula attribute at rank 0 still costs its formula at N=0
   (e.g. `20+(0-1)*0*5` = 20).
 - **Tag "Free" switch** doubles the tag's cost (10/rank instead of 5). This matches the old

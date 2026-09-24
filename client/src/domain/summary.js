@@ -38,9 +38,7 @@ export function summarizeItem(item, lookups) {
 
     const tagBP = sum([...tagCosts.values()]);
     const limitBP = sum([...limitCosts.values()]);
-    // Each row's cost is truncated to a whole number before adding it up. Some
-    // formulas halve (/2) or discount (*0.9), which can give fractions.
-    const attributeBP = sum([...attributeCosts.values()].map((cost) => Math.trunc(cost.buildPoints)));
+    const attributeBP = sum([...attributeCosts.values()].map((cost) => cost.buildPoints));
     const totalBP = tagBP + attributeBP + limitBP;
 
     return {
