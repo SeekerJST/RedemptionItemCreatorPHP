@@ -5,14 +5,23 @@ const newRow = {
     tags: (id) => ({ id, TagDesc: '', TagRank: '1', TagFree: false }),
     // parentId: the attribute row this one sits under (a sub-row), or null for a top-level row.
     // Rank starts at 1: many cost formulas give a non-zero (even higher) cost at rank 0.
-    attributes: (id, parentId = null) => ({ id, parentId, AttributeSystem: null, AttributeName: 1, Scale: '1', Rank: 1 }),
+    // Implementation: e.g. an Attack Multiplier's Kinetic/Plasma, or a Resource's type; null = the rule's default.
+    attributes: (id, parentId = null) => ({
+        id,
+        parentId,
+        AttributeSystem: null,
+        AttributeName: 1,
+        Scale: '1',
+        Rank: 1,
+        Implementation: null,
+    }),
     limits: (id) => ({ id, LimitDesc: '', LimitScale: '1' }),
 };
 
 /** The fields a user can edit in each section; anything else in editor values is ignored. */
 const editableFields = {
     tags: ['TagDesc', 'TagRank', 'TagFree'],
-    attributes: ['AttributeSystem', 'AttributeName', 'Scale', 'Rank'],
+    attributes: ['AttributeSystem', 'AttributeName', 'Scale', 'Rank', 'Implementation'],
     limits: ['LimitDesc', 'LimitScale'],
 };
 
@@ -40,10 +49,13 @@ export function itemReducer(item, action) {
 
         case 'addRow': {
             // action.parentId (attributes only): add the new row as a sub-row of that row.
+            // action.values (optional): starting field values, e.g. a sensible attribute for a sub-row.
             const rows = item[action.section];
             const parentId = rows.some((row) => row.id === action.parentId) ? action.parentId : null;
             const id = Math.max(0, ...rows.map((row) => row.id)) + 1;
-            return { ...item, [action.section]: [...rows, newRow[action.section](id, parentId)] };
+            const row = newRow[action.section](id, parentId);
+            const start = action.values ? normalizeRow(action.section, { ...row, ...pick(action.values, editableFields[action.section]) }) : row;
+            return { ...item, [action.section]: [...rows, start] };
         }
 
         case 'updateRow':
@@ -84,6 +96,16 @@ export function itemReducer(item, action) {
     }
 }
 
+/**
+ * True if an attribute order (from a drag) keeps sub-rows one level deep: every sub-row's
+ * parent is a top-level row.
+ * @param {Array<{id: number, parentId: number|null}>} order
+ */
+export function isOneLevelDeep(order) {
+    const parentOf = new Map(order.map(({ id, parentId }) => [id, parentId ?? null]));
+    return order.every(({ parentId }) => parentId == null || parentOf.get(parentId) == null);
+}
+
 /** The id plus the ids of every row below it in the tree. */
 function withDescendants(rows, id) {
     const ids = new Set([id]);
@@ -118,6 +140,7 @@ function normalizeRow(section, row) {
                 AttributeName: Number(row.AttributeName),
                 Scale: String(row.Scale),
                 Rank: Math.max(0, parseInt(row.Rank, 10) || 0),
+                Implementation: row.Implementation || null,
             };
         default:
             return row;
@@ -152,6 +175,7 @@ export function toApiItem(item, summary, defaultSkill) {
             AttributeName: row.AttributeName,
             Scale: row.Scale,
             Rank: row.Rank,
+            Implementation: row.Implementation,
             BuildPoints: summary.attributeCosts.get(row.id).buildPoints,
             PowerSlots: summary.attributeCosts.get(row.id).power.uses,
         })),

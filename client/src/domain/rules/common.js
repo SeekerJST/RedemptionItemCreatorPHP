@@ -10,6 +10,7 @@
 //   cost(row, ctx)   BP for the row
 //   power(row, ctx)  optional: { provides?: [{grade, slots}], uses?: [{grade, slots, shareKey?}] }
 //   children     keys of the attributes allowed as sub-rows (one level deep)
+//   subRowOnly   optional: true if it can only be a sub-row (e.g. Attack Multiplier)
 //
 // A rule row is { id, key, grade, rank, implementation, parentId }, and ctx is
 // { size, parent, children } (size: 1 = Tiny ... 6 = Colossal; parent/children: rule rows).

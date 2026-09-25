@@ -85,6 +85,7 @@ export const attackRules = {
         rank: { min: 1, meaning: RANK.MULTIPLIER_STEPS },
         implementations: MULTIPLIER_IMPLEMENTATIONS,
         defaultImplementation: 'energy',
+        subRowOnly: true, // only ever under an Attack or Attack (Melee)
         cost: (row, ctx) => multiplierCost(row.rank, row.implementation, ctx.parent?.key === 'attackMelee'),
         children: [],
     },
@@ -99,29 +100,4 @@ export const attackRules = {
         children: [],
     },
 
-    /**
-     * The pre-split attributes still in the database until Phase 3 ("Attack",
-     * "Attack (Kinetic)", ...): Rank is the final Weapon Multiplier (2x, 3x, ...), and the
-     * implementation comes from the name. Costed the same way as Attack + Multiplier.
-     */
-    legacyAttack: {
-        name: 'Attack (legacy)',
-        gradeKind: 'scale',
-        grades: ALL_GRADES,
-        rank: { min: 2, meaning: RANK.RANK },
-        cost: (row) => {
-            const base = priceFor(ATTACK_BASE, row.grade);
-            if (row.implementation === 'antiMissile') {
-                return base / 2;
-            }
-            const melee = row.implementation === 'melee' || row.implementation === 'tse';
-            const steps = Math.max(0, row.rank - 2);
-            return (melee ? base / 2 : base) + multiplierCost(steps, row.implementation, melee);
-        },
-        power: (row) => {
-            const perMount = { kinetic: 0, melee: 0, tse: 0, plasma: 2 }[row.implementation] ?? 1;
-            return perMount ? { uses: [{ grade: row.grade, slots: perMount }] } : {};
-        },
-        children: [...ATTACK_CHILDREN, 'area'],
-    },
 };

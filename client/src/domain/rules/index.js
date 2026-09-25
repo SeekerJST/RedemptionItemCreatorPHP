@@ -34,20 +34,13 @@ const KEYS_BY_NAME = {
     'Resource': 'resource',
     'Shrouded Hull': 'shroudedHull',
     'Task': 'task',
-    // Until Phase 3 splits Attack, the database's attack attributes use the pre-split
-    // meaning (Rank = final multiplier). Phase 3 points these at attack / attackMelee /
-    // attackMultiplier / antiMissile.
-    'Attack': 'legacyAttack',
+    'Attack': 'attack',
+    'Attack (Melee)': 'attackMelee', // a separate attribute, not an implementation of Attack
+    'Attack Multiplier': 'attackMultiplier',
+    'Anti-Missile': 'antiMissile',
 };
 
 const IMPLEMENTATIONS_BY_NAME = {
-    'Anti-Missile': 'antiMissile',
-    'Kinetic': 'kinetic',
-    'Flare': 'flare',
-    'Melee': 'melee',
-    'Plasma': 'plasma',
-    'Tse': 'tse',
-    'Hyperspace': 'hyperspace',
     'Laser Link': 'laserLink',
     'Radio': 'radio',
     'Ansible': 'ansible',
@@ -59,7 +52,11 @@ const IMPLEMENTATIONS_BY_NAME = {
  * @returns {{key: string, implementation: string|null} | null} null for an unknown attribute
  */
 export function resolveAttributeName(name) {
-    const match = /^(.*?)\s*(?:\((.+)\))?$/.exec(String(name ?? '').trim());
+    const trimmed = String(name ?? '').trim();
+    if (KEYS_BY_NAME[trimmed]) {
+        return { key: KEYS_BY_NAME[trimmed], implementation: null }; // e.g. "Attack (Melee)" is its own attribute
+    }
+    const match = /^(.*?)\s*(?:\((.+)\))?$/.exec(trimmed);
     const key = KEYS_BY_NAME[match[1]];
     if (!key) {
         return null;
@@ -68,7 +65,7 @@ export function resolveAttributeName(name) {
     if (match[2] && !implementation) {
         return null;
     }
-    return { key, implementation: implementation ?? (key === 'legacyAttack' ? 'energy' : null) };
+    return { key, implementation };
 }
 
 /**

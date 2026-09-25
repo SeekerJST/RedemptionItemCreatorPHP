@@ -39,6 +39,12 @@ describe('validation (§9)', () => {
         expectError(check([row('computer', MINOR, 7)]), 'above the maximum of 6');
     });
 
+    it('an Attack Multiplier has to be a sub-row', () => {
+        expectError(check([row('attackMultiplier', MINOR, 2)]), 'has to be a sub-row');
+        const attack = row('attack');
+        expect(errors(check([attack, under(attack, 'attackMultiplier', MINOR, 2)])).join()).not.toContain('has to be a sub-row');
+    });
+
     it('checks allowed sub-rows and depth', () => {
         const attack = row('attack', MINOR, 1);
         expectError(check([attack, under(attack, 'body')]), "can't be a sub-row of");
@@ -50,8 +56,6 @@ describe('validation (§9)', () => {
     it('Melee attacks can never take Area', () => {
         const melee = row('attackMelee');
         expectError(check([melee, under(melee, 'area')]), 'never take Area');
-        const legacyMelee = row('legacyAttack', MINOR, 2, { implementation: 'melee' });
-        expectError(check([legacyMelee, under(legacyMelee, 'area')]), 'never take Area');
     });
 
     it('Tse only under Attack (Melee)', () => {

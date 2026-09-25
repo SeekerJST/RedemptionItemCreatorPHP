@@ -1,6 +1,6 @@
 # Implementation Plan: Attributes, Rules, and Validation
 
-Status: **Phases 1-2 done** (2026-09-24). Next: Phase 3.
+Status: **Phases 1-3 done** (2026-09-24). Next: Phase 4.
 
 Goal: make the item creator follow `item_creation_rules.md`. That means correct costs,
 correct totals, validation of illegal builds, and a better attribute model (Attack split,
@@ -250,10 +250,43 @@ rule in scope has a test that trips it.
 **Done when:** the Frigate fixture can be entered in the UI using sub-rows, and the
 sub-row dropdowns only offer allowed children.
 
+### Phase 3 results (2026-09-24)
+
+- **Migration 003** (`db/migrations/003_attack_remodel.sql`), applied locally:
+  - Removes the six `Attack (…)` implementation variants and all old attack cost rows.
+  - Keeps "Attack" and "Attack (Melee)" (new meaning), and adds "Attack Multiplier" and "Anti-Missile".
+  - Deletes the saved test items, **only on its first run**. A re-run changes nothing and can't
+    delete real items (tested with a probe item).
+- **Rules:** the database names map to the new attack rules. The stop-gap `legacyAttack` rule is gone.
+  Attack Multiplier is `subRowOnly`, and validation flags one at the top level.
+- **Implementation / Type field** on attribute rows (`Implementation`), offered where a rule has
+  them: Attack Multiplier (Tse only under Attack (Melee)), Resource (Type), Computer, Drive, Life
+  Support. Communication keeps its implementation in the attribute name. The grid and the breakdown
+  show a non-default one, e.g. "Attack Multiplier (Plasma)".
+- **Filtered Attribute dropdown:** a sub-row lists only its parent's allowed children, and a top-level
+  row lists everything except sub-row-only attributes. A row's current (even invalid) choice stays
+  listed so it can be seen; validation flags it.
+- **[+>]:** only for a top-level row whose attribute takes sub-rows, with a tooltip saying why when
+  it's disabled. The new sub-row starts as the parent's first allowed child at the parent's grade
+  (e.g. Attack → Attack Multiplier, Drive → Maneuver).
+- **One level deep:** a drop that would nest two deep is rejected and the grid snaps back
+  (`isOneLevelDeep` + a data refresh in `EditableGrid`).
+- **Verified:**
+  - The **Frigate built through the app's own reducer and summary** against the migrated database:
+    1,471 BP, CR 10, Body 350, Major 8/9, no issues.
+  - In Chrome: the top-level list has no Multiplier; [+>] on an Attack adds a Multiplier; the
+    sub-row list holds only Attack's children; the Implementation list has no Tse, and Plasma
+    doubles the Attack's slots; [+>] is disabled on a sub-row.
+  - The PHP smoke test passes (updated for the removed ID 29).
+  - 172 tests.
+  - The drag snap-back is unit-tested (`isOneLevelDeep`) but not exercised in the browser.
+- **For Phase 4:** `Implementation` also needs a column in `itemattribute`, alongside
+  `ParentAttributeID`, so saved items keep their Multiplier implementations and Resource types.
+
 ## Phase 4: Save and load
 
-1. **Migration:** nullable `ParentAttributeID` on `itemattribute`.
-2. **API:** `Item.php` / `ItemRepository` read and write `parentId`. The CSV export shows the
+1. **Migration 004:** nullable `ParentAttributeID` and `Implementation` on `itemattribute`.
+2. **API:** `Item.php` / `ItemRepository` read and write `parentId` and `Implementation`. The CSV export shows the
    hierarchy. The smoke tests are extended.
 3. **Client:** enable [Save]/[Delete]. The Inventory panel lists saved items and loads
    them back into the editor.

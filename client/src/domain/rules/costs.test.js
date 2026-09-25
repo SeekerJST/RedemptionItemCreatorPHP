@@ -98,13 +98,6 @@ describe('Attack (§5.3, 2x at base; each Multiplier rank +1x)', () => {
         expect([MINOR, MODERATE, MAJOR].map((g) => cost('antiMissile', g, 1))).toEqual([5, 10, 20]);
         expect(cost('antiMissile', MAJOR, 2)).toBe(40);
     });
-
-    it('pre-split database attacks: Rank = final multiplier', () => {
-        expect(cost('legacyAttack', MAJOR, 8, { implementation: 'energy' })).toBe(250);
-        expect(cost('legacyAttack', MINOR, 4, { implementation: 'kinetic' })).toBe(37);
-        expect(cost('legacyAttack', MINOR, 6, { implementation: 'melee' })).toBe(55);
-        expect(cost('legacyAttack', MAJOR, 2, { implementation: 'antiMissile' })).toBe(20);
-    });
 });
 
 describe('Bleed (§5.4)', () => {

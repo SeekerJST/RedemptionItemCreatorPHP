@@ -68,6 +68,9 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
         if (rule.rank.max != null && row.rank > rule.rank.max) {
             error(`${name(row)}: ${row.rank} is above the maximum of ${rule.rank.max}.`, row.id);
         }
+        if (rule.subRowOnly && !parent) {
+            error(`${name(row)} has to be a sub-row (e.g. of an Attack).`, row.id);
+        }
         if (parent) {
             if (parent.parentId != null) {
                 error(`${name(row)}: sub-rows can only be one level deep.`, row.id);
@@ -77,8 +80,7 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
         }
 
         // ---- attribute-specific rules ------------------------------------------------------
-        if (row.key === 'area' && parent && (parent.key === 'attackMelee' ||
-            (parent.key === 'legacyAttack' && ['melee', 'tse'].includes(parent.implementation)))) {
+        if (row.key === 'area' && parent?.key === 'attackMelee') {
             error('Melee attacks can never take Area.', row.id);
         }
 
@@ -87,8 +89,8 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
         }
 
         const isKinetic =
-            (row.key === 'attack' && children.some((c) => c.key === 'attackMultiplier' && c.implementation === 'kinetic')) ||
-            (row.key === 'legacyAttack' && implementation === 'kinetic');
+            ['attack', 'attackMelee'].includes(row.key) &&
+            children.some((c) => c.key === 'attackMultiplier' && c.implementation === 'kinetic');
         if (isKinetic && !children.some((c) => c.key === 'resource' && ['ammunition', 'general'].includes(c.implementation ?? 'general'))) {
             error(`${name(row)} is Kinetic: it needs an Ammunition Resource as a sub-row.`, row.id);
         }

@@ -6,6 +6,7 @@ import { UNASSIGNED_SYSTEM } from './constants.js';
 import { limitCost, tagCost } from './costs.js';
 import { relatedRuleRows } from './ruleRows.js';
 import {
+    ATTRIBUTE_RULES,
     GRADE_NAMES,
     costRating,
     gradeLabel,
@@ -172,7 +173,7 @@ const SHOWN_ELSEWHERE = new Set(['armorRating', 'body', 'forceField', 'modifier'
 
 /**
  * Attributes grouped by system, alphabetically, with sub-rows indented under their parent.
- * Label: "Attack (Kinetic) (Firefight)" for scale attributes, "Cargo (Minor)" for graded ones.
+ * Label: "Attack (Space)" or "Attack Multiplier (Plasma)" for scale/implementation attributes, "Cargo (Minor)" for graded ones.
  */
 function systemBreakdown(attributes, relatedById, systemsById, nameById) {
     const systems = new Map();
@@ -182,7 +183,14 @@ function systemBreakdown(attributes, relatedById, systemsById, nameById) {
             continue;
         }
         const grade = gradeLabel(row.key, row.grade);
-        const label = grade ? `${nameById.get(attribute.id)} (${grade})` : nameById.get(attribute.id);
+        const rule = ATTRIBUTE_RULES[row.key];
+        // e.g. "Attack Multiplier (Plasma)"; the default implementation isn't spelled out.
+        const implementation =
+            row.implementation && row.implementation !== rule?.defaultImplementation && row.key !== 'communication'
+                ? rule?.implementations?.[row.implementation]?.name
+                : null;
+        const name = implementation ? `${nameById.get(attribute.id)} (${implementation})` : nameById.get(attribute.id);
+        const label = grade ? `${name} (${grade})` : name;
         const systemName = systemsById.get(attribute.id) || UNASSIGNED_SYSTEM;
 
         const rows = systems.get(systemName) ?? [];

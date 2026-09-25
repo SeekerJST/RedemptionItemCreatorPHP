@@ -130,6 +130,14 @@ parameter still works.
 - **Keep all `@svar-ui/*` packages on one version** (currently exact `2.3.x` pins in
   `package.json`). Mixed versions install duplicate copies, and the editor/theme
   registration then isn't shared.
+- **Attack model (migration 003):** Attack (2x, Rank = mounts), Attack (Melee), Attack Multiplier
+  (sub-row only; Rank = +1x steps; carries the implementation), Anti-Missile (1x). The old
+  "Attack (Kinetic)" and similar attributes are gone.
+- **`Implementation` on attribute rows** holds an Attack Multiplier's implementation or a Resource's
+  type (also Computer/Drive/Life Support). null = the rule's default. Communication's comes from
+  the attribute name instead.
+- **Sub-rows are one level deep,** and a sub-row's Attribute list is its parent's allowed children
+  (`children` in each rule).
 - **Sub-rows:** attribute rows have `parentId` (null = top level). They count toward totals
   like any row. With no system of their own, they use their parent's system.
 
@@ -151,8 +159,8 @@ parameter still works.
   Redemption-class Frigate. Panel 3 lists rule problems and highlights the rows involved.
 
 **Not done yet:**
-- **Sub-rows aren't saved.** The export sends `parentId`, but the API ignores it and
-  `itemattribute` has no parent column.
+- **Sub-rows and implementations aren't saved.** The export sends `parentId` and `Implementation`,
+  but the API ignores them and `itemattribute` has no columns for them yet (Phase 4).
 - The React client only uses the lookup endpoints and the CSV export. Save, load, and
   delete aren't wired up; the [Save]/[Delete] buttons are disabled.
 - There's no authentication. Write endpoints are controlled by the `allow_writes` config flag.

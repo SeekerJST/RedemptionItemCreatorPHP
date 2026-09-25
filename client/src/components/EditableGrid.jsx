@@ -35,7 +35,8 @@ const EDITOR_TOP_BAR = {
  * @param {object[]} props.columns SVAR column config; columns with an `editor` appear in the sidebar
  * @param {(id: number, values: object) => void} props.onUpdate
  * @param {(id: number) => void} props.onDelete
- * @param {(order: Array<{id: number, parentId: number|null}>) => void} [props.onReorder] enables drag-to-reorder
+ * @param {(order: Array<{id: number, parentId: number|null}>) => boolean|void} [props.onReorder] enables
+ *        drag-to-reorder; return false to reject a drop (the grid snaps back)
  * @param {(id: number|null) => void} [props.onSelect] called when the selected row changes
  * @param {boolean} [props.tree] show rows nested by parentId
  * @param {(row: object) => string} [props.rowClass] extra CSS class for a row (e.g. to flag errors)
@@ -62,6 +63,8 @@ export default function EditableGrid({
     // Parents the user has collapsed. The grid is re-fed its data on every change,
     // so it can't remember this itself.
     const [collapsed, setCollapsed] = useState(() => new Set());
+    // Bumped when a drop is rejected, to hand the grid fresh data and undo its own move.
+    const [resets, setResets] = useState(0);
 
     // The grid calls init() once, so it reads the latest callbacks through a ref.
     const callbacks = useRef({ onReorder, onSelect });
@@ -80,7 +83,9 @@ export default function EditableGrid({
         api.on('move-item', ({ inProgress }) => {
             if (inProgress === false) {
                 const order = api.getState().flatData.map((row) => ({ id: row.id, parentId: row.$parent || null }));
-                callbacks.current.onReorder?.(order);
+                if (callbacks.current.onReorder?.(order) === false) {
+                    setResets((n) => n + 1);
+                }
             }
         });
         // Workaround for a SVAR 2.3 bug: when the `data` prop changes, the grid
@@ -99,7 +104,9 @@ export default function EditableGrid({
         api.on('close-row', ({ id }) => setCollapsed((ids) => new Set(ids).add(id)));
     }, []);
 
-    const data = useMemo(() => (tree ? nest(rows, collapsed) : rows), [tree, rows, collapsed]);
+    // `resets` isn't read, but changing it builds a fresh copy of the data after a rejected drop.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const data = useMemo(() => (tree ? nest(rows, collapsed) : [...rows]), [tree, rows, collapsed, resets]);
     const editingRow = rows.find((row) => row.id === editingId);
 
     return (

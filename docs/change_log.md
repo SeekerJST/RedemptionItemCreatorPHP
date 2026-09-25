@@ -3,6 +3,27 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-24 (2): Phase 3: Attack remodel, implementations, filtered sub-rows
+
+Phase 3 of `implementation_plan.md` is done. Details are under "Phase 3 results" there.
+
+- **`db/migrations/003_attack_remodel.sql`:**
+  - Removes the `Attack (Kinetic/Plasma/...)` variants and old attack cost rows.
+  - Adds Attack Multiplier and Anti-Missile; Attack and Attack (Melee) keep their IDs with the new meaning.
+  - Deletes the test items on its first run only. Two bugs were caught while testing it: a second
+    run re-created Attack (Melee) with a new ID, and every run would have deleted all items.
+    Both are fixed and re-tested.
+- **Rules:** database attack names map to the new rules. The `legacyAttack` stop-gap is removed. An Attack
+  Multiplier must be a sub-row.
+- **UI:**
+  - An Implementation/Type field (Tse only under Melee), shown in names like "Attack Multiplier (Plasma)".
+  - The sub-row Attribute list is filtered to the parent's allowed children.
+  - [+>] starts a sensible child and is only enabled where a sub-row can go.
+  - Sub-rows are one level deep: a nesting drag snaps back.
+- **Verified:** the Frigate through the app's own code (1,471 BP, CR 10, no issues); the new UI in Chrome;
+  the PHP smoke test (updated for the removed attribute ID 29); 172 tests.
+- **Phase 4 needs** an `Implementation` column as well as `ParentAttributeID`.
+
 ## 2026-09-24: Phase 2: totals and validation in the UI
 
 Phase 2 of `implementation_plan.md` is done. Details are under "Phase 2 results" there.

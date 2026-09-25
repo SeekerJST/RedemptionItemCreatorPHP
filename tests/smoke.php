@@ -56,7 +56,7 @@ $item = [
     'modifierList' => [['modifierID' => 'Modifier_2', 'modifierName' => 'Firearms']],
     'taskList' => [['taskID' => 'Task_3', 'taskName' => 'Hacking']],
     'attributeList' => [
-        ['id' => 1, 'AttributeName' => 29, 'Scale' => '1', 'Rank' => '4', 'BuildPoints' => 36, 'PowerSlots' => '0', '$level' => 0, 'AttributeSystem' => 'Weapons'],
+        ['id' => 1, 'AttributeName' => 3, 'Scale' => '1', 'Rank' => '4', 'BuildPoints' => 36, 'PowerSlots' => '0', '$level' => 0, 'AttributeSystem' => 'Weapons'],
         ['id' => 2, 'AttributeName' => 20, 'Scale' => '2', 'Rank' => '2', 'BuildPoints' => 20, 'PowerSlots' => 0, 'data' => [], 'AttributeSystem' => 'Modifiers'],
         ['id' => 3, 'AttributeName' => 26, 'Scale' => '1', 'Rank' => '18', 'BuildPoints' => 36, 'PowerSlots' => 1, 'AttributeSystem' => 'Tasks'],
     ],
