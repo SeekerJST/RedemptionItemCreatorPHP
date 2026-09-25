@@ -251,3 +251,64 @@ div.breakdown-left {
     margin-left: 50px;
     position: absolute;
 }
+/* ---- Rule checks (Phase 2) ---------------------------------------------------------- */
+
+/* Grid rows with a validation issue: a colored edge plus a light tint. */
+.wx-row.row-error {
+    box-shadow: inset 4px 0 0 #e05a52;
+    background-color: rgba(224, 90, 82, 0.22);
+}
+
+.wx-row.row-warning {
+    box-shadow: inset 4px 0 0 #e0b04a;
+    background-color: rgba(224, 176, 74, 0.18);
+}
+
+div.validation_list {
+    margin: 6px 0 2px 0;
+}
+
+div.validation_list ul {
+    list-style: none;
+    margin: 4px 0 0 0;
+    padding: 0;
+}
+
+div.validation_list li {
+    margin: 3px 0;
+    padding: 3px 6px;
+    border-left: 4px solid transparent;
+    text-align: left;
+}
+
+li.validation_error {
+    border-left-color: #e05a52;
+    background-color: rgba(224, 90, 82, 0.18);
+}
+
+li.validation_warning {
+    border-left-color: #e0b04a;
+    background-color: rgba(224, 176, 74, 0.15);
+}
+
+span.validation_badge {
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+p.validation_ok {
+    color: #9fdf9f;
+    margin: 6px 0;
+}
+
+tr.power_short td {
+    color: #ff8a80;
+    font-weight: bold;
+}
+
+span.power_note {
+    display: block;
+    white-space: nowrap;
+    font-size: 0.85em;
+    opacity: 0.85;
+}

@@ -16,13 +16,12 @@ const getJson = (path, signal) => request(path, { signal }).then((response) => r
 
 /** All the reference data the item creator needs, loaded in parallel. */
 export async function fetchLookups(signal) {
-    const [sizes, attributes, scales, skills] = await Promise.all([
+    const [sizes, attributes, skills] = await Promise.all([
         getJson('getitemsizesds', signal),
         getJson('getitemattributesds', signal),
-        getJson('getattributescaleds', signal),
         getJson('getskillsds', signal),
     ]);
-    return { sizes, attributes, scales, skills };
+    return { sizes, attributes, skills };
 }
 
 /** Asks the API to render the item as CSV and saves it through the browser. */

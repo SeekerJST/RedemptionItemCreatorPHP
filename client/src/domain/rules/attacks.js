@@ -28,9 +28,12 @@ export function attackImplementation(children = []) {
     return children.find((child) => child.key === 'attackMultiplier')?.implementation ?? 'energy';
 }
 
-/** An Attack with an Ammunition Resource under it is fed by ammo instead of Power Slots. */
+/**
+ * An Attack with an Ammunition Resource (or a plain Resource, i.e. a clip) under it is fed
+ * by ammo instead of Power Slots.
+ */
 export function isAmmoFed(children = []) {
-    return children.some((child) => child.key === 'resource' && child.implementation === 'ammunition');
+    return children.some((child) => child.key === 'resource' && ['ammunition', 'general', null, undefined].includes(child.implementation));
 }
 
 /** Power for an Attack: 1 slot per mount at its scale (Plasma: 2), unless it's ammo-fed. */

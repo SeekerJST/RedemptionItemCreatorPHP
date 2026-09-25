@@ -113,6 +113,11 @@ parameter still works.
   touch top-level rows, so they break sub-rows.
 - **Everything in Panel 3 is derived** by `summarizeItem()` from the item and lookups.
   Add new totals there, not as extra state.
+- **Costs, power, Cost Rating, and validation come from `domain/rules`,** keyed by rule name
+  (`resolveAttributeName()` maps database names to keys). Add or change a rule there, with a test.
+  Validation issues carry the rows they're about; `summary.rowStatus` turns them into grid highlights.
+- **The attribute editor is built per row** (`attributeEditorColumns`): the grades offered and the
+  Rank label depend on the attribute, and follow the Attribute field live (`liveFields` in `EditableGrid`).
 - **SVAR 2.3 bugs worked around in `EditableGrid`:**
   - When the `data` prop changes, the grid re-inits its store with `_select` instead of
     `select`, and clicks stop selecting rows. Selection is triggered from `focus-cell` instead.
@@ -125,12 +130,10 @@ parameter still works.
 - **Keep all `@svar-ui/*` packages on one version** (currently exact `2.3.x` pins in
   `package.json`). Mixed versions install duplicate copies, and the editor/theme
   registration then isn't shared.
-- **Attribute IDs are hard-coded** in `domain/constants.js` (Armor 2, Body 5, Force Field 13,
-  Modifier 20, Task 26, power sources Drive 10 and Power Supply 22). They must match the `attribute` table.
 - **Sub-rows:** attribute rows have `parentId` (null = top level). They count toward totals
   like any row. With no system of their own, they use their parent's system.
 
-## Current state (2026-09-23)
+## Current state (2026-09-24)
 
 **Working:**
 - The full API is ported and verified against the running C# API: lookups are
@@ -143,6 +146,9 @@ parameter still works.
   collapse/expand, drag to reorder or reparent, and delete (a row's sub-rows go with it).
   They're shown indented in the System Breakdown.
 - The project is a git repository.
+- **Rules engine and validation** (implementation plan, Phases 1-2): costs, Cost Rating, power
+  slots, and §9 checks come from `client/src/domain/rules`, with 172 tests including the
+  Redemption-class Frigate. Panel 3 lists rule problems and highlights the rows involved.
 
 **Not done yet:**
 - **Sub-rows aren't saved.** The export sends `parentId`, but the API ignores it and

@@ -1,6 +1,6 @@
 # Implementation Plan: Attributes, Rules, and Validation
 
-Status: **Phase 1 done** (2026-09-23). Next: Phase 2.
+Status: **Phases 1-2 done** (2026-09-24). Next: Phase 3.
 
 Goal: make the item creator follow `item_creation_rules.md`. That means correct costs,
 correct totals, validation of illegal builds, and a better attribute model (Attack split,
@@ -202,6 +202,30 @@ Attributes not listed as parents take no sub-rows.
 
 **Done when:** the Phase 1 fixture builds in the UI with the right totals, and each §9
 rule in scope has a test that trips it.
+
+### Phase 2 results (2026-09-24)
+
+- **Validation:** `client/src/domain/rules/validate.js`. Each check in scope has a test that trips it,
+  and the Frigate validates with **no issues**. Each issue lists the grid rows it's about, so one
+  message (e.g. "Modifiers to Gunnery add up to +5") highlights every row involved. A power
+  shortfall highlights the rows drawing that grade.
+- **Panel 3:**
+  - A "Rule checks" list (errors, then warnings) with red/amber row highlights in the grids.
+  - Cost Rating from the rules: floor, down to -2, and "—" until a size is chosen.
+  - Power Slots show used/available per grade, with "(n from higher)" / "(n short)".
+- **Grids and editor:**
+  - "Grade / Scale" shows Firefight/Battlefield/Space or Minor/Moderate/Major, and is blank where
+    the grade doesn't matter.
+  - A "Power" column shows "+3" for a source and the slot count for a user.
+  - The sidebar only offers the grades an attribute comes in, and labels Rank by what it means
+    ("Purchases", "Mounts", "Task TN", ...). Its fields follow the Attribute as you change it,
+    before saving.
+- **Summary** now works from rule keys, not hard-coded AttributeIDs. The `attributescale` table is
+  no longer fetched by the client.
+- **The reducer no longer caps Modifier rank at 4 per row.** Validation checks the actual rule:
+  +4 per skill, summed across rows.
+- **Verified in Chrome** with your Force Field example and others, then shut down. 172 tests.
+- **Carried to Phase 3:** entering the Frigate in the UI. It needs the new Attack attributes.
 
 ## Phase 3: Attribute model and sub-rows
 

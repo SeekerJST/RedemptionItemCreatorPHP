@@ -1,9 +1,10 @@
 // The item creation rules: one entry per attribute, keyed by a stable name.
 // See common.js for the shape of an entry, and docs/item_creation_rules.md for the rules.
 
+import { GRADE_NAMES, SCALE_NAMES } from './common.js';
 import { ATTRIBUTE_RULES } from './registry.js';
 
-export { ATTRIBUTE_RULES };
+export { ATTRIBUTE_RULES, GRADE_NAMES, SCALE_NAMES };
 
 // Database attribute names -> rule key, and the implementation a "Name (Implementation)"
 // name implies. Matching by name, not AttributeID, keeps this independent of row IDs.
@@ -95,4 +96,14 @@ export function withRelations(rows) {
 }
 
 export { costRating } from './costRating.js';
-export { powerBudget } from './power.js';
+export { powerBudget, rowPower } from './power.js';
+export { validateItem } from './validate.js';
+
+/** How an attribute's grade reads: "Battlefield" for scale attributes, "Moderate" for graded ones, "" if none. */
+export function gradeLabel(key, grade) {
+    const kind = ATTRIBUTE_RULES[key]?.gradeKind ?? 'grade';
+    if (kind === 'none') {
+        return '';
+    }
+    return (kind === 'scale' ? SCALE_NAMES : GRADE_NAMES)[grade] ?? '';
+}

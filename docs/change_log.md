@@ -3,6 +3,37 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-24: Phase 2: totals and validation in the UI
+
+Phase 2 of `implementation_plan.md` is done. Details are under "Phase 2 results" there.
+
+- **Validation** (`domain/rules/validate.js`): the §9 checks that don't depend on faction or setting. These cover:
+  - grades and ranks, and allowed one-level sub-rows
+  - Melee + Area, Tse only under Melee, Kinetic needs ammunition
+  - power shortfalls
+  - Body on Tiny items, Force Field/Power Supply/Artificial Ecology size limits
+  - Shrouded Hull on Space Armor, Maneuver needs a Drive (warns if it's not at the largest
+    Drive's grade), Light Sail can't take Maneuver
+  - feeds: Magazine for Launchers, Tangle for an Ansible, Fuel for Drives
+  - Task TN and task limits
+  - Modifiers at most +4 per skill (summed), limitation caps
+  - a warning to choose a size
+- **Panel 3:** a "Rule checks" list with red/amber row highlights. Cost Rating uses the rules (negative
+  to -2, "—" without a size). Power Slots are per grade, with "from higher" / "short".
+- **Grids and editor:** Grade/Scale and Power display columns. The editor offers only the grades an
+  attribute comes in, labels Rank by meaning, and re-shapes live when the Attribute changes.
+- **Cleanups:**
+  - Summary is keyed by rule name instead of AttributeIDs, and the unused constants are removed.
+  - The client no longer fetches `attributescale`.
+  - The per-row Modifier cap is replaced by the per-skill validation.
+- **Tests:** 172, including a validation test per check and the Frigate with zero issues.
+  Mutation-checked.
+- **Verified in Chrome:**
+  - the Moderate Force Field with no power, then with a Major supply ("1 from higher")
+  - the Power Supply size error, which clears at Large
+  - a disallowed sub-row, flagged and highlighted
+  - the live editor re-shaping
+
 ## 2026-09-23 (9): Rulings on the Phase 1 items
 
 - **Melee attacks need no feed** (no Power Slot, no ammunition).

@@ -5,6 +5,7 @@ import PowerSlotList from './PowerSlotList.jsx';
 import StructureList from './StructureList.jsx';
 import SystemBreakdown from './SystemBreakdown.jsx';
 import TaskList from './TaskList.jsx';
+import ValidationList from './ValidationList.jsx';
 
 const Rule = ({ span = 4 }) => (
     <tr>
@@ -48,11 +49,18 @@ export default function BuildSummary({ item, dispatch, summary, skills, onExport
                         <td className="panel_table_left">Base Cost Rating:</td>
                         <td className="panel_table_right">{summary.baseCR}</td>
                         <td className="panel_table_left"><b>Cost Rating: </b></td>
-                        <td className="panel_table_right"><b>{summary.costRating}</b></td>
+                        <td className="panel_table_right" title={summary.costRating == null ? 'Choose an item size' : undefined}>
+                            <b>{summary.costRating ?? '—'}</b>
+                        </td>
                     </tr>
                     <tr>
                         <td className="panel_table_left">Cost Rating Increment: </td>
                         <td className="panel_table_right">{summary.incrementPoints}</td>
+                    </tr>
+                    <tr>
+                        <td colSpan={4}>
+                            <ValidationList issues={summary.issues} />
+                        </td>
                     </tr>
                     <Rule />
                     <tr>

@@ -1,10 +1,17 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Button } from '@svar-ui/react-core';
 import EditableGrid from './EditableGrid.jsx';
 import ItemHeader from './ItemHeader.jsx';
 import LimitCounts from './LimitCounts.jsx';
 import Section from './Section.jsx';
-import { attributeColumns, limitColumns, tagColumns } from './gridColumns.js';
+import { attributeColumns, attributeEditorColumns, limitColumns, tagColumns } from './gridColumns.js';
+import { gradeLabel, resolveAttributeName } from '../domain/rules/index.js';
+
+/** Changing these in the attribute editor re-shapes it right away (grade options, Rank label). */
+const LIVE_ATTRIBUTE_FIELDS = ['AttributeName'];
+
+/** "+3" for a power source, the slot count for a power user, blank otherwise. */
+const powerLabel = ({ provides, uses }) => (provides ? `+${provides}` : uses ? String(uses) : '');
 
 /** Panel 2: the item's name and size, and its Tags, Attributes, and Limitations grids. */
 export default function ItemEditor({ item, dispatch, summary, lookups }) {
@@ -27,9 +34,32 @@ export default function ItemEditor({ item, dispatch, summary, lookups }) {
         () =>
             item.attributes.map((row) => {
                 const cost = summary.attributeCosts.get(row.id);
-                return { ...row, BuildPoints: cost.buildPoints, PowerSlots: cost.powerSlots };
+                return {
+                    ...row,
+                    BuildPoints: cost.buildPoints,
+                    GradeLabel: gradeLabel(summary.ruleKeys.get(row.id), Number(row.Scale)),
+                    PowerLabel: powerLabel(cost.power),
+                };
             }),
-        [item.attributes, summary.attributeCosts]
+        [item.attributes, summary.attributeCosts, summary.ruleKeys]
+    );
+
+    // Rows with a validation error or warning get a highlight class (styles in App.css).
+    const { rowStatus } = summary;
+    const rowClassFor = useCallback(
+        (section) => (row) => {
+            const status = rowStatus.get(`${section}:${row.id}`);
+            return status ? `row-${status}` : '';
+        },
+        [rowStatus]
+    );
+    // The editor's fields follow the Attribute picked in it, even before Save.
+    const editorColumnsForAttribute = useCallback(
+        (row) => {
+            const name = lookups.attributes.find((a) => a.AttributeID === Number(row.AttributeName))?.AttributeName;
+            return attributeEditorColumns(lookups.attributes, resolveAttributeName(name)?.key ?? null);
+        },
+        [lookups.attributes]
     );
 
     // Callbacks shared by the three sections; `section` is the key in the item state.
@@ -52,7 +82,13 @@ export default function ItemEditor({ item, dispatch, summary, lookups }) {
 
             <div className="section_container">
                 <Section title="Tags" ruleWidth="500px" onAdd={add('tags')}>
-                    <EditableGrid rows={tagRows} columns={tagColumns} onReorder={reorder('tags')} {...handlersFor('tags')} />
+                    <EditableGrid
+                        rows={tagRows}
+                        columns={tagColumns}
+                        onReorder={reorder('tags')}
+                        rowClass={rowClassFor('tags')}
+                        {...handlersFor('tags')}
+                    />
                 </Section>
                 <br />
 
@@ -77,6 +113,9 @@ export default function ItemEditor({ item, dispatch, summary, lookups }) {
                         tree
                         onReorder={reorder('attributes')}
                         onSelect={setSelectedAttributeId}
+                        rowClass={rowClassFor('attributes')}
+                        editorColumns={editorColumnsForAttribute}
+                        liveFields={LIVE_ATTRIBUTE_FIELDS}
                         {...handlersFor('attributes')}
                     />
                 </Section>
@@ -84,7 +123,7 @@ export default function ItemEditor({ item, dispatch, summary, lookups }) {
                 <Section title="Limitations" ruleWidth="500px" onAdd={add('limits')}>
                     <div className="limitationBody">
                         <LimitCounts counts={summary.limitCounts} />
-                        <EditableGrid rows={limitRows} columns={limitColumns} {...handlersFor('limits')} />
+                        <EditableGrid rows={limitRows} columns={limitColumns} rowClass={rowClassFor('limits')} {...handlersFor('limits')} />
                     </div>
                 </Section>
             </div>

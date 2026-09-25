@@ -7,6 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { limitCost, tagCost } from '../costs.js';
 import { costRating, powerBudget, rowCost, withRelations } from './index.js';
 import { SIZE } from './sizes.js';
+import { validateItem } from './validate.js';
 
 const MINOR = 1, MODERATE = 2, MAJOR = 3;
 const HUGE = { BasePoints: 600, IncrementPoints: 200, BaseCR: 6 };
@@ -75,5 +76,16 @@ describe('Redemption-class Frigate', () => {
         expect(power.grades.find((g) => g.grade === MAJOR)).toMatchObject({ available: 9, used: 8, short: 0 });
         expect(power.grades.find((g) => g.grade === MODERATE)).toMatchObject({ available: 3, used: 0 });
         expect(power.ok).toBe(true);
+    });
+
+    it('passes validation with no errors or warnings', () => {
+        const issues = validateItem({
+            related,
+            size: SIZE.HUGE,
+            power: powerBudget(related, SIZE.HUGE),
+            limits: LIMITS,
+            modifiers: [{ rowId: 20, skill: 'Gunnery', rank: 2 }, { rowId: 21, skill: 'Detection', rank: 2 }],
+        });
+        expect(issues).toEqual([]);
     });
 });

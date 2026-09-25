@@ -38,9 +38,27 @@ const EDITOR_TOP_BAR = {
  * @param {(order: Array<{id: number, parentId: number|null}>) => void} [props.onReorder] enables drag-to-reorder
  * @param {(id: number|null) => void} [props.onSelect] called when the selected row changes
  * @param {boolean} [props.tree] show rows nested by parentId
+ * @param {(row: object) => string} [props.rowClass] extra CSS class for a row (e.g. to flag errors)
+ * @param {(row: object) => object[]} [props.editorColumns] the columns to edit for a given row;
+ *        defaults to `columns`. Lets the sidebar offer different fields/options per row.
+ * @param {string[]} [props.liveFields] editor fields whose unsaved value should immediately
+ *        re-shape the editor (e.g. picking a different Attribute changes which grades it offers)
  */
-export default function EditableGrid({ rows, columns, onUpdate, onDelete, onReorder, onSelect, tree = false }) {
+export default function EditableGrid({
+    rows,
+    columns,
+    onUpdate,
+    onDelete,
+    onReorder,
+    onSelect,
+    tree = false,
+    rowClass,
+    editorColumns,
+    liveFields = [],
+}) {
     const [editingId, setEditingId] = useState(null);
+    // Unsaved editor values for the liveFields, so the editor can re-shape itself before Save.
+    const [draft, setDraft] = useState({});
     // Parents the user has collapsed. The grid is re-fed its data on every change,
     // so it can't remember this itself.
     const [collapsed, setCollapsed] = useState(() => new Set());
@@ -55,6 +73,7 @@ export default function EditableGrid({ rows, columns, onUpdate, onDelete, onReor
         // Double-click opens the sidebar editor instead of the grid's inline editor.
         api.intercept('open-editor', ({ id }) => {
             setEditingId(id);
+            setDraft({});
             return false;
         });
         // Drags fire move-item repeatedly while in progress; inProgress === false marks the drop.
@@ -85,15 +104,29 @@ export default function EditableGrid({ rows, columns, onUpdate, onDelete, onReor
 
     return (
         <WillowDark>
-            <Grid data={data} columns={columns} init={init} autoRowHeight reorder={Boolean(onReorder)} tree={tree} />
+            <Grid
+                data={data}
+                columns={columns}
+                init={init}
+                autoRowHeight
+                reorder={Boolean(onReorder)}
+                tree={tree}
+                rowStyle={rowClass}
+            />
             {/* Portaled to <body>: inside the scrolling section it would be clipped off-screen. */}
             {editingRow && createPortal(
                 <WillowDark>
                     <Editor
+                        key={editingRow.id}
                         values={editingRow}
-                        items={getEditorConfig(columns)}
+                        items={getEditorConfig(editorColumns ? editorColumns({ ...editingRow, ...draft }) : columns)}
                         topBar={EDITOR_TOP_BAR}
                         placement="sidebar"
+                        onChange={({ key, value }) => {
+                            if (liveFields.includes(key)) {
+                                setDraft((current) => ({ ...current, [key]: value }));
+                            }
+                        }}
                         onSave={({ values }) => onUpdate(editingRow.id, values)}
                         onAction={({ item }) => {
                             if (item.id === 'delete') {
@@ -101,6 +134,7 @@ export default function EditableGrid({ rows, columns, onUpdate, onDelete, onReor
                             }
                             if (item.comp) {
                                 setEditingId(null);
+                                setDraft({});
                             }
                         }}
                     />

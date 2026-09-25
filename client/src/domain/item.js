@@ -1,8 +1,6 @@
 // The item being built, as React state. The grids display this state; they
 // don't own it. Row field names match the API's item JSON (TagDesc, LimitScale, ...).
 
-import { ATTRIBUTE_IDS, MAX_MODIFIER_RANK } from './constants.js';
-
 const newRow = {
     tags: (id) => ({ id, TagDesc: '', TagRank: '1', TagFree: false }),
     // parentId: the attribute row this one sits under (a sub-row), or null for a top-level row.
@@ -113,14 +111,14 @@ function normalizeRow(section, row) {
             return { ...row, TagRank: String(row.TagRank), TagFree: Boolean(row.TagFree) };
         case 'limits':
             return { ...row, LimitScale: String(row.LimitScale) };
-        case 'attributes': {
-            const AttributeName = Number(row.AttributeName);
-            let Rank = Math.max(0, parseInt(row.Rank, 10) || 0);
-            if (AttributeName === ATTRIBUTE_IDS.MODIFIER) {
-                Rank = Math.min(Rank, MAX_MODIFIER_RANK);
-            }
-            return { ...row, AttributeName, Scale: String(row.Scale), Rank };
-        }
+        case 'attributes':
+            // Rank limits (e.g. Modifier at most +4 per skill) are checked by validation, not clamped.
+            return {
+                ...row,
+                AttributeName: Number(row.AttributeName),
+                Scale: String(row.Scale),
+                Rank: Math.max(0, parseInt(row.Rank, 10) || 0),
+            };
         default:
             return row;
     }
@@ -155,7 +153,7 @@ export function toApiItem(item, summary, defaultSkill) {
             Scale: row.Scale,
             Rank: row.Rank,
             BuildPoints: summary.attributeCosts.get(row.id).buildPoints,
-            PowerSlots: summary.attributeCosts.get(row.id).powerSlots,
+            PowerSlots: summary.attributeCosts.get(row.id).power.uses,
         })),
         limitList: item.limits.map((row) => ({ ...row, BuildPoints: summary.limitCosts.get(row.id) })),
         tagList: item.tags.map((row) => ({ ...row, BuildPoints: summary.tagCosts.get(row.id) })),

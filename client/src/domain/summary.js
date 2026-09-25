@@ -1,20 +1,22 @@
 // Everything the Build Point Summary panel shows, derived from the item state.
 // Pure: same item + lookups in, same summary out. Nothing is stored twice.
+// The rules themselves live in domain/rules; this module applies them to the item.
 
-import {
-    ARMOR_TYPE_BY_SCALE,
-    ATTRIBUTE_IDS,
-    FORCE_FIELD_PER_RANK_BY_SCALE,
-    LIMIT_CAPS_BY_SCALE,
-    POWER_SLOTS_PER_RANK,
-    POWER_SOURCE_IDS,
-    SCALES,
-    UNASSIGNED_SYSTEM,
-    scaleById,
-} from './constants.js';
-import { attributeCost, limitCost, tagCost } from './costs.js';
+import { UNASSIGNED_SYSTEM } from './constants.js';
+import { limitCost, tagCost } from './costs.js';
 import { relatedRuleRows } from './ruleRows.js';
+import {
+    GRADE_NAMES,
+    costRating,
+    gradeLabel,
+    powerBudget,
+    rowCost,
+    rowPower,
+    validateItem,
+} from './rules/index.js';
+import { FORCE_FIELD } from './rules/protection.js';
 import { bodyPurchase, sizeOrdinal } from './rules/sizes.js';
+import { LIMIT_CAPS } from './rules/validate.js';
 
 const sum = (values) => values.reduce((total, value) => total + value, 0);
 
@@ -23,20 +25,25 @@ const sum = (values) => values.reduce((total, value) => total + value, 0);
  * @param {object} lookups from useLookups
  */
 export function summarizeItem(item, lookups) {
-    const size = lookups.sizes.find((s) => s.SizeName === item.size);
-    const basePoints = size?.BasePoints ?? 0;
-    const incrementPoints = size?.IncrementPoints ?? 0;
-    const baseCR = size?.BaseCR ?? 0;
-    const baseBody = size?.BaseBody ?? 0;
-
-    const sizeRank = sizeOrdinal(item.size);
+    const sizeRow = lookups.sizes.find((s) => s.SizeName === item.size) ?? null;
+    const size = sizeOrdinal(item.size);
     const related = relatedRuleRows(item.attributes, lookups.attributes);
+    const relatedById = new Map(related.map((entry) => [entry.row.id, entry]));
 
-    const attributeSystems = effectiveSystems(item.attributes);
-    const attributeCosts = new Map(
-        item.attributes.map((attribute, i) => [attribute.id, attributeCost(attribute, related[i], sizeRank, lookups.scales)])
+    const nameById = new Map(
+        item.attributes.map((a) => [a.id, lookups.attributes.find((l) => l.AttributeID === a.AttributeName)?.AttributeName ?? '?'])
     );
 
+    // Per-row cost and power. Costs round to the nearest whole number, halves up.
+    const attributeCosts = new Map(
+        related.map((entry) => [
+            entry.row.id,
+            {
+                buildPoints: Math.round(rowCost(entry.row, { size, parent: entry.parent, children: entry.children })),
+                power: rowPower(entry, size),
+            },
+        ])
+    );
     const tagCosts = new Map(item.tags.map((tag) => [tag.id, tagCost(tag)]));
     const limitCosts = new Map(item.limits.map((limit) => [limit.id, limitCost(limit)]));
 
@@ -45,82 +52,101 @@ export function summarizeItem(item, lookups) {
     const attributeBP = sum([...attributeCosts.values()].map((cost) => cost.buildPoints));
     const totalBP = tagBP + attributeBP + limitBP;
 
+    const power = powerBudget(related, size);
+    const byKey = (key) => item.attributes.filter((a) => relatedById.get(a.id)?.row.key === key);
+    const modifiers = byKey('modifier');
+    const defaultSkill = lookups.skills[0]?.skillName ?? '';
+
+    const issues = validateItem({
+        related,
+        size,
+        power,
+        limits: item.limits,
+        modifiers: modifiers.map((row) => ({
+            rowId: row.id,
+            skill: item.modifierSkills[row.id] ?? defaultSkill,
+            rank: Number(row.Rank) || 0,
+        })),
+        nameOf: (id) => nameById.get(id),
+    });
+
+    const attributeSystems = effectiveSystems(item.attributes);
+
     return {
-        basePoints,
-        incrementPoints,
-        baseCR,
+        basePoints: sizeRow?.BasePoints ?? 0,
+        incrementPoints: sizeRow?.IncrementPoints ?? 0,
+        baseCR: sizeRow?.BaseCR ?? 0,
         tagBP,
         attributeBP,
         limitBP,
         totalBP,
-        costRating: costRating(baseCR, totalBP, basePoints, incrementPoints),
+        costRating: costRating(totalBP, sizeRow), // null until a size is chosen
         tagCosts,
         attributeCosts,
         limitCosts,
-        ...structure(item.attributes, baseBody, sizeRank),
-        powerSlots: powerSlots(item.attributes, attributeCosts),
+        /** Each attribute row's rule key (null if the rules don't know it), e.g. for the editor. */
+        ruleKeys: new Map(related.map(({ row }) => [row.id, row.key])),
+        ...structure(related, sizeRow, size),
+        powerSlots: power.grades
+            .filter((g) => g.available > 0 || g.used > 0)
+            .map((g) => ({ ...g, gradeName: GRADE_NAMES[g.grade] })),
         attributeSystems,
-        systems: systemBreakdown(item.attributes, attributeCosts, attributeSystems, lookups.attributes),
-        modifiers: item.attributes.filter((a) => a.AttributeName === ATTRIBUTE_IDS.MODIFIER),
-        tasks: item.attributes.filter((a) => a.AttributeName === ATTRIBUTE_IDS.TASK),
-        limitCounts: limitCounts(item.limits),
+        systems: systemBreakdown(item.attributes, relatedById, attributeSystems, nameById),
+        modifiers,
+        tasks: byKey('task'),
+        limitCounts: [1, 2, 3].map((grade) => ({
+            scaleName: GRADE_NAMES[grade],
+            count: item.limits.filter((l) => limitCost(l) !== 0 && String(l.LimitScale) === String(grade)).length,
+            cap: LIMIT_CAPS[grade],
+        })),
+        issues,
+        rowStatus: rowStatus(issues),
+        defaultSkill,
     };
 }
 
-/** Base CR plus one per full increment of BP over the size's base points; never below 0. */
-function costRating(baseCR, totalBP, basePoints, incrementPoints) {
-    const rating = baseCR + Math.round((totalBP - basePoints) / incrementPoints);
-    return Number.isFinite(rating) && rating > 0 ? rating : 0;
-}
-
 /**
- * Body, Armor, and Force Fields. Body purchases add up across rows, sized by the item's
- * size (§5.5). For Armor and Force Fields, the last row wins.
+ * Body, Armor, and Force Fields.
+ * Body and Force Field purchases add up across rows; for Armor, the last row wins.
  */
-function structure(attributes, baseBody, sizeRank) {
-    let attributeBody = 0;
+function structure(related, sizeRow, size) {
+    let body = sizeRow?.BaseBody ?? 0;
     let armor = { rank: 0, type: null };
     let forceField = 0;
 
-    for (const attribute of attributes) {
-        const rank = Number(attribute.Rank) || 0;
-        switch (attribute.AttributeName) {
-            case ATTRIBUTE_IDS.BODY:
-                attributeBody += rank * (bodyPurchase(sizeRank)?.body ?? 0);
+    for (const { row } of related) {
+        switch (row.key) {
+            case 'body':
+                body += (bodyPurchase(size)?.body ?? 0) * row.rank;
                 break;
-            case ATTRIBUTE_IDS.ARMOR_RATING:
-                armor = { rank, type: ARMOR_TYPE_BY_SCALE[attribute.Scale] ?? ARMOR_TYPE_BY_SCALE[1] };
+            case 'armorRating':
+                armor = { rank: row.rank, type: gradeLabel('armorRating', row.grade) };
                 break;
-            case ATTRIBUTE_IDS.FORCE_FIELD:
-                forceField = rank * (FORCE_FIELD_PER_RANK_BY_SCALE[attribute.Scale] ?? FORCE_FIELD_PER_RANK_BY_SCALE[1]);
+            case 'shroudedHull':
+                if (row.parentId == null) {
+                    armor = { rank: row.rank, type: 'Space, Shrouded' };
+                }
+                break;
+            case 'forceField':
+                forceField += (FORCE_FIELD.track[row.grade] ?? 0) * row.rank;
                 break;
         }
     }
-
-    return { body: baseBody + attributeBody, armor, forceField };
+    return { body, armor, forceField };
 }
 
-const isPowerSource = (attribute) => POWER_SOURCE_IDS.includes(attribute.AttributeName);
-
-/** Power slots per scale: provided by power sources (3 per rank), used by attributes that need them. */
-function powerSlots(attributes, attributeCosts) {
-    const byScale = new Map();
-    for (const attribute of attributes) {
-        const used = attributeCosts.get(attribute.id).powerSlots;
-        if (!isPowerSource(attribute) && !(used > 0)) {
-            continue;
+/** The most serious issue on each grid row, keyed "section:id" (e.g. "attributes:3"). */
+function rowStatus(issues) {
+    const status = new Map();
+    for (const issue of issues) {
+        for (const { section, id } of issue.rows) {
+            const key = `${section}:${id}`;
+            if (status.get(key) !== 'error') {
+                status.set(key, issue.severity);
+            }
         }
-        const entry = byScale.get(attribute.Scale) ?? { total: 0, used: 0 };
-        if (isPowerSource(attribute)) {
-            entry.total += POWER_SLOTS_PER_RANK * (Number(attribute.Rank) || 0);
-        }
-        entry.used += used;
-        byScale.set(attribute.Scale, entry);
     }
-
-    return SCALES
-        .filter((scale) => byScale.has(scale.id))
-        .map((scale) => ({ scaleId: scale.id, scaleName: scale.name, ...byScale.get(scale.id) }));
+    return status;
 }
 
 /**
@@ -141,63 +167,30 @@ function effectiveSystems(attributes) {
     return new Map(attributes.map((a) => [a.id, systemOf(a)]));
 }
 
-/** How deep each row sits in the attribute tree: 0 for top-level rows. */
-function depths(attributes) {
-    const byId = new Map(attributes.map((a) => [a.id, a]));
-    const depthOf = (attribute, seen = new Set()) => {
-        const parent = byId.get(attribute.parentId);
-        if (!parent || seen.has(attribute.id)) {
-            return 0;
-        }
-        seen.add(attribute.id);
-        return 1 + depthOf(parent, seen);
-    };
-    return new Map(attributes.map((a) => [a.id, depthOf(a)]));
-}
+/** Attributes shown in their own part of the summary rather than under a system. */
+const SHOWN_ELSEWHERE = new Set(['armorRating', 'body', 'forceField', 'modifier', 'task']);
 
 /**
- * Attributes grouped by system, alphabetically, with sub-rows indented under
- * their parent. Attributes already shown elsewhere in the summary (structure,
- * power, modifiers, tasks) are left out.
+ * Attributes grouped by system, alphabetically, with sub-rows indented under their parent.
+ * Label: "Attack (Kinetic) (Firefight)" for scale attributes, "Cargo (Minor)" for graded ones.
  */
-function systemBreakdown(attributes, attributeCosts, systemsById, attributeLookup) {
-    const depthById = depths(attributes);
-    const shownElsewhere = new Set([
-        ATTRIBUTE_IDS.ARMOR_RATING,
-        ATTRIBUTE_IDS.BODY,
-        ATTRIBUTE_IDS.FORCE_FIELD,
-        ATTRIBUTE_IDS.MODIFIER,
-        ATTRIBUTE_IDS.TASK,
-    ]);
-
+function systemBreakdown(attributes, relatedById, systemsById, nameById) {
     const systems = new Map();
     for (const attribute of attributes) {
-        if (
-            shownElsewhere.has(attribute.AttributeName) ||
-            isPowerSource(attribute) ||
-            attributeCosts.get(attribute.id).powerSlots > 0
-        ) {
+        const { row } = relatedById.get(attribute.id);
+        if (SHOWN_ELSEWHERE.has(row.key)) {
             continue;
         }
-        const name = attributeLookup.find((a) => a.AttributeID === attribute.AttributeName)?.AttributeName ?? '?';
-        const scale = scaleById(attribute.Scale)?.label ?? '?';
+        const grade = gradeLabel(row.key, row.grade);
+        const label = grade ? `${nameById.get(attribute.id)} (${grade})` : nameById.get(attribute.id);
         const systemName = systemsById.get(attribute.id) || UNASSIGNED_SYSTEM;
 
         const rows = systems.get(systemName) ?? [];
-        rows.push({ id: attribute.id, label: `${name} (${scale})`, rank: attribute.Rank, depth: depthById.get(attribute.id) });
+        rows.push({ id: attribute.id, label, rank: attribute.Rank, depth: attribute.parentId == null ? 0 : 1 });
         systems.set(systemName, rows);
     }
 
     return [...systems.entries()]
         .map(([name, rows]) => ({ name, attributes: rows }))
         .sort((a, b) => a.name.localeCompare(b.name));
-}
-
-/** Limitations taken at each scale, against the allowed maximum. */
-function limitCounts(limits) {
-    return SCALES.map((scale) => ({
-        scaleName: scale.name,
-        count: limits.filter((limit) => limitCost(limit) !== 0 && String(limit.LimitScale) === scale.id).length,
-        cap: LIMIT_CAPS_BY_SCALE[scale.id],
-    }));
 }
