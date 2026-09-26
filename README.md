@@ -26,6 +26,7 @@ config/            config.php (gitignored, copy it from config.example.php)
 db/migrations/     Numbered SQL schema changes; run each once, in order, on every existing DB
 client/            React source; `npm run build` writes into public/
 dev/router.php     Router for PHP's built-in server (stands in for .htaccess locally)
+dev/start.mjs      Starts the PHP API and the Vite dev server together (`npm run dev`)
 tests/smoke.php    End-to-end test against a running server
 api.http           Sample requests for Visual Studio's HTTP editor
 ```
@@ -36,17 +37,18 @@ PHP 8.0 ships with IIS Express: `C:\Program Files\IIS Express\PHP\v8.0\php.exe`.
 
 1. `copy config\config.example.php config\config.php`, then fill in the DB credentials
    (local dev: set `allow_writes` and `debug` to `true`).
-2. Start the API from the project root:
-   ```
-   php -S localhost:5135 -t public dev/router.php
-   ```
-3. Start the React dev server (proxies `/itemcreator` to port 5135):
-   ```
-   cd client
-   npm install
-   npm run dev
-   ```
-   Then open http://localhost:58967.
+2. Install the client's packages once: `cd client`, then `npm install`.
+3. Start everything:
+   - **Visual Studio:** open `RedemptionItemCreatorPHP.sln` and Run. The client project is the
+     startup project, and its `npm run dev` starts both servers.
+   - **Command line:** `npm run dev` in `client/`.
+
+   Either way, `dev/start.mjs` starts the PHP API on port 5135 (`php -S localhost:5135 -t public dev/router.php`)
+   and the Vite dev server, which proxies `/itemcreator` to it. Open http://localhost:58967.
+   Stopping Vite stops the API too. If something already listens on 5135, it's reused as the API.
+   PHP comes from IIS Express (`C:\Program Files\IIS Express\PHP\v8.0\php.exe`) or `PATH`;
+   set `PHP_BINARY` to use another one, and `PHP_API_URL` for another API address.
+   `npm run dev:ui` starts only Vite.
 4. Run the API tests (needs `allow_writes => true`):
    ```
    php tests/smoke.php
