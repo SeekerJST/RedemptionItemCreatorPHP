@@ -3,6 +3,16 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-25 (3): Run stops if an old dev server holds the UI port
+
+- **Symptom:** "Couldn't load item data: 500 Internal Server Error" on Run. A Vite started the day
+  before (the old `dev: vite` script, no PHP) still held port 58967. The new Vite quietly moved to
+  58968, while Visual Studio opened 58967 (`client/.vscode/launch.json`), so the page came from the
+  old server, whose proxy found no API.
+- **Fix in `dev/start.mjs`:** if the UI port is taken, say so and exit before starting anything.
+  Vite also gets `--strictPort`. The port check tries both `127.0.0.1` and `::1`, because Vite
+  listens on `::1` only.
+
 ## 2026-09-25 (2): One Run starts the API and the UI; GitHub
 
 - **`dev/start.mjs`:** `npm run dev` (and so Run in Visual Studio) starts the PHP API on 5135 and

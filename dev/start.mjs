@@ -21,6 +21,8 @@ const clientDir = join(root, 'client');
 const apiUrl = new URL(process.env.PHP_API_URL || 'http://localhost:5135');
 const apiHost = apiUrl.hostname;
 const apiPort = Number(apiUrl.port || 80);
+// Must match vite.config.js, which reads the same variable.
+const uiPort = Number(process.env.DEV_SERVER_PORT || 58967);
 
 const IIS_EXPRESS_PHP = 'C:\\Program Files\\IIS Express\\PHP\\v8.0\\php.exe';
 const phpBinary = process.env.PHP_BINARY || (existsSync(IIS_EXPRESS_PHP) ? IIS_EXPRESS_PHP : 'php');
@@ -28,7 +30,7 @@ const phpBinary = process.env.PHP_BINARY || (existsSync(IIS_EXPRESS_PHP) ? IIS_E
 const log = (message) => console.log(`[dev] ${message}`);
 
 /** True if something accepts connections on host:port. */
-function isListening(host, port) {
+function acceptsConnections(host, port) {
     return new Promise((done) => {
         const socket = createConnection({ host, port });
         socket.setTimeout(500);
@@ -36,6 +38,16 @@ function isListening(host, port) {
         socket.once('timeout', () => { socket.destroy(); done(false); });
         socket.once('error', () => done(false));
     });
+}
+
+/**
+ * True if something listens on the port. For localhost, both addresses are tried: Vite
+ * listens on ::1 only, and a check that resolves localhost to 127.0.0.1 would miss it.
+ */
+async function isListening(host, port) {
+    const hosts = host === 'localhost' ? ['127.0.0.1', '::1'] : [host];
+    const results = await Promise.all(hosts.map((h) => acceptsConnections(h, port)));
+    return results.includes(true);
 }
 
 let php = null;
@@ -55,6 +67,15 @@ function stop(code) {
 if (!existsSync(join(root, 'config', 'config.php'))) {
     log('config/config.php is missing: copy config/config.example.php and fill in the DB credentials.');
     log('The UI will start, but every API call will fail until then.');
+}
+
+// Visual Studio opens the browser on this port (client/.vscode/launch.json). If an old dev server
+// still holds it, Vite would quietly move to another port and the browser would show the old
+// server, often with no API behind it ("Couldn't load item data: 500"). Stop instead, and say why.
+if (await isListening('localhost', uiPort)) {
+    log(`Port ${uiPort} is already in use, probably by a dev server that's still running from earlier.`);
+    log('Stop it (close that terminal, or end its node.exe in Task Manager), then Run again.');
+    process.exit(1);
 }
 
 if (await isListening(apiHost, apiPort)) {
@@ -79,7 +100,9 @@ if (await isListening(apiHost, apiPort)) {
 
 if (!stopping) {
     // Vite's own entry point, run with this Node: no shell, so stopping it stops it (not just a wrapper).
-    vite = spawn(process.execPath, [join(clientDir, 'node_modules', 'vite', 'bin', 'vite.js'), ...process.argv.slice(2)], {
+    // --strictPort: fail rather than move to another port (see the port check above).
+    const viteArgs = [join(clientDir, 'node_modules', 'vite', 'bin', 'vite.js'), '--strictPort', ...process.argv.slice(2)];
+    vite = spawn(process.execPath, viteArgs, {
         cwd: clientDir,
         stdio: 'inherit',
         env: { ...process.env, PHP_API_URL: apiUrl.origin },
