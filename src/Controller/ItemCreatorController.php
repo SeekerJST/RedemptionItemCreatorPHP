@@ -76,9 +76,14 @@ final class ItemCreatorController
         return Response::json(($this->lookups)()->attributeScales());
     }
 
+    /**
+     * Public items only, unless writes are on: then anyone can already edit or delete any
+     * item, so hiding the private ones protects nothing, and new items (IsPublic = 0) need
+     * to show up in the Inventory panel to be loaded again.
+     */
     public function getAllItems(Request $request): Response
     {
-        return Response::json(($this->items)()->listPublic());
+        return Response::json(($this->items)()->listItems($this->allowWrites));
     }
 
     public function getItem(Request $request, string ...$rest): Response

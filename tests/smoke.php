@@ -59,6 +59,10 @@ $item = [
         ['id' => 1, 'AttributeName' => 3, 'Scale' => '1', 'Rank' => '4', 'BuildPoints' => 36, 'PowerSlots' => '0', '$level' => 0, 'AttributeSystem' => 'Weapons'],
         ['id' => 2, 'AttributeName' => 20, 'Scale' => '2', 'Rank' => '2', 'BuildPoints' => 20, 'PowerSlots' => 0, 'data' => [], 'AttributeSystem' => 'Modifiers'],
         ['id' => 3, 'AttributeName' => 26, 'Scale' => '1', 'Rank' => '18', 'BuildPoints' => 36, 'PowerSlots' => 1, 'AttributeSystem' => 'Tasks'],
+        // Sub-rows of the Attack (row 1), listed after other rows and out of id order, as a
+        // drag leaves them: the order must survive a save, and the export must regroup them.
+        ['id' => 5, 'parentId' => 1, 'AttributeName' => 24, 'Scale' => '1', 'Rank' => 2, 'Implementation' => 'ammunition', 'BuildPoints' => 10, 'PowerSlots' => 0, 'AttributeSystem' => 'Weapons'],
+        ['id' => 4, 'parentId' => 1, 'AttributeName' => 40, 'Scale' => '1', 'Rank' => 2, 'Implementation' => 'kinetic', 'BuildPoints' => 27, 'PowerSlots' => 0, 'AttributeSystem' => 'Weapons'],
     ],
     'limitList' => [
         ['id' => 1, 'LimitDesc' => 'No Far Range', 'LimitScale' => '2', 'BuildPoints' => -20],
@@ -88,10 +92,15 @@ if ($id === null) {
 echo "Read\n";
 [$status, $body] = call('GET', "$base/getitem/$id");
 $read = json_decode($body, true);
-check('getitem returns the item', $status === 200 && ($read['itemName'] ?? null) === 'Smoke Test Blaster', "HTTP $status $body");
+[, $body] = call('GET', "$base/getallitems");
+check('getallitems lists the new private item while writes are on', in_array($id, array_column(json_decode($body, true) ?? [], 'itemID'), true), $body);
+check('getitem returns the item',$status === 200 && ($read['itemName'] ?? null) === 'Smoke Test Blaster', "HTTP $status $body");
 check('size comes back by name', ($read['itemSize'] ?? null) === 'SMALL');
 check('CostRating is saved', ($read['CostRating'] ?? null) === 2);
-check('attributes round-trip, with AttributeSystem', count($read['attributeList'] ?? []) === 3 && $read['attributeList'][0]['AttributeSystem'] === 'Weapons', $body);
+check('attributes round-trip, with AttributeSystem', count($read['attributeList'] ?? []) === 5 && $read['attributeList'][0]['AttributeSystem'] === 'Weapons', $body);
+check('attributes come back in the saved order, not id order', array_column($read['attributeList'] ?? [], 'id') === [1, 2, 3, 5, 4], $body);
+check('parentId round-trips (null for top-level rows)', array_column($read['attributeList'] ?? [], 'parentId') === [null, null, null, 1, 1], $body);
+check('Implementation round-trips (null when not set)', array_column($read['attributeList'] ?? [], 'Implementation') === [null, null, null, 'ammunition', 'kinetic'], $body);
 check('PowerSlots "0" string is stored as a number', ($read['attributeList'][0]['PowerSlots'] ?? null) === 0);
 check('attribute Rank "4" is saved and comes back as the integer 4', ($read['attributeList'][0]['Rank'] ?? null) === 4, $body);
 check('TagFree comes back as a boolean', ($read['tagList'][0]['TagFree'] ?? null) === false, $body);
@@ -120,6 +129,9 @@ echo "Export\n";
 check('POST export returns a CSV attachment', $status === 200 && strpos($headers['content-disposition'] ?? '', 'Smoke Test Blaster.csv') !== false, "HTTP $status $body");
 check('commas in names are quoted', strpos($body, '"Harder, Better, Faster, Stronger",1,False,5') !== false, $body);
 check('Modifier/Task rows are qualified with their names', strpos($body, 'Modifier - Firearms') !== false && strpos($body, 'Task - Hacking') !== false, $body);
+check('attribute header has an Implementation column', strpos($body, "System,Attribute Name,Implementation,Scale,Rank,Build Points,Power Slots\n") !== false, $body);
+check('sub-rows follow their parent, marked and with their implementation',
+    strpos($body, "Weapons,Attack,,Minor,4,36,0\nWeapons,> Resource,Ammunition,Minor,2,10,0\nWeapons,> Attack Multiplier,Kinetic,Minor,2,27,0\nModifiers,") !== false, $body);
 check('blank limit rows are skipped', substr_count($body, 'No Far Range') === 1 && strpos($body, ",Minor,0\n") === false, $body);
 [$status, $getBody] = call('GET', "$base/exportitemtocvs/download?item=" . rawurlencode(json_encode($item)));
 check('GET ?item= export (the C# contract) matches POST', $status === 200 && $getBody === $body);
@@ -141,6 +153,14 @@ check('unknown size is a 400 naming the valid sizes', $status === 400 && strpos(
 check('non-numeric attribute ID is a 400', $status === 400);
 [$status, $body] = call('POST', "$base/createitem", json_encode(['itemName' => 'X', 'itemSize' => 'SMALL', 'attributeList' => [['id' => 1, 'AttributeName' => 5, 'Rank' => 'high']]]));
 check('non-numeric attribute Rank is a 400', $status === 400 && strpos($body, 'attributeList[0].Rank') !== false, $body);
+[$status, $body] = call('POST', "$base/createitem", json_encode(['itemName' => 'X', 'itemSize' => 'SMALL', 'attributeList' => [
+    ['id' => 1, 'AttributeName' => 3], ['id' => 2, 'parentId' => 9, 'AttributeName' => 40],
+]]));
+check('a parentId matching no row is a 400', $status === 400 && strpos($body, 'attributeList[1].parentId') !== false, $body);
+[$status, $body] = call('POST', "$base/createitem", json_encode(['itemName' => 'X', 'itemSize' => 'SMALL', 'attributeList' => [
+    ['id' => 1, 'AttributeName' => 3], ['id' => 2, 'parentId' => 1, 'AttributeName' => 40], ['id' => 3, 'parentId' => 2, 'AttributeName' => 40],
+]]));
+check('sub-rows nested two deep are a 400', $status === 400 && strpos($body, 'two levels deep') !== false, $body);
 [$status, , $headers] = call('GET', "$base/createitem");
 check('wrong method is a 405 with Allow', $status === 405 && ($headers['allow'] ?? '') === 'POST');
 [$status] = call('GET', "$base/nosuchaction");

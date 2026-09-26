@@ -65,7 +65,7 @@ Routes match the C# API (case-insensitive), so the React client didn't need chan
 | GET | `itemcreator/getskillsds` | `skills` rows, by name |
 | GET | `itemcreator/getitemattributesds` | `attribute` rows, by name |
 | GET | `itemcreator/getattributescaleds` | `attributescale` rows |
-| GET | `itemcreator/getallitems` | summaries of items with `IsPublic = 1` |
+| GET | `itemcreator/getallitems` | summaries of items with `IsPublic = 1` (all items while `allow_writes` is on) |
 | GET | `itemcreator/getitem/{id}` | full item; 404 if missing |
 | POST | `itemcreator/createitem` | 201 + item with new `itemID` |
 | PUT | `itemcreator/updateitem/{id}` | 200 + item; replaces all child rows; 404 if missing |

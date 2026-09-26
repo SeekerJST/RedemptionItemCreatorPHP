@@ -312,3 +312,76 @@ span.power_note {
     font-size: 0.85em;
     opacity: 0.85;
 }
+
+/* Panel 1: saved items. Side padding keeps the list clear of the panel's clipped corners. */
+div.inventory {
+    padding: 0 16px;
+}
+
+p.inventory_note {
+    font-size: 0.9em;
+    opacity: 0.85;
+}
+
+ul.inventory_list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+button.inventory_item {
+    display: block;
+    width: 100%;
+    margin: 0 0 4px;
+    padding: 6px 8px;
+    text-align: left;
+    color: antiquewhite;
+    background-color: rgba(77, 77, 77, 0.5);
+    border: none;
+    border-left: 4px solid transparent;
+    cursor: pointer;
+    font: inherit;
+}
+
+button.inventory_item:hover,
+button.inventory_item:focus-visible {
+    background-color: rgba(77, 77, 77, 0.8);
+}
+
+button.inventory_item.current {
+    border-left-color: #9fdf9f;
+    background-color: rgba(77, 77, 77, 0.85);
+}
+
+span.inventory_name {
+    display: block;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+span.inventory_meta {
+    display: block;
+    font-size: 0.85em;
+    opacity: 0.85;
+}
+
+/* The line under the Save/Delete toolbar: a result, an error, or a question. */
+div.toolbar_message {
+    text-align: right;
+    margin: 4px 0;
+}
+
+div.toolbar_message.ok {
+    color: #9fdf9f;
+}
+
+div.toolbar_message.error {
+    color: #ff8a80;
+    font-weight: bold;
+}
+
+div.toolbar_message.confirm {
+    color: #e0b04a;
+}

@@ -23,16 +23,20 @@ final class ItemRepository
     {
     }
 
-    /** @return list<array<string, mixed>> summaries of public items */
-    public function listPublic(): array
+    /**
+     * @param bool $includePrivate also list items with IsPublic = 0
+     * @return list<array<string, mixed>> item summaries, by name
+     */
+    public function listItems(bool $includePrivate): array
     {
         $stmt = $this->db->prepare(
             'SELECT i.ItemID, i.ItemName, s.SizeName, i.CostRating
                FROM item i
                LEFT JOIN itemsize s ON s.ItemSizeID = i.ItemSize
-              WHERE i.IsPublic = 1
+              WHERE i.IsPublic = 1 OR ?
               ORDER BY i.ItemName'
         );
+        $stmt->bindValue(1, (int) $includePrivate, PDO::PARAM_INT);
         $stmt->execute();
 
         return array_map(static fn (array $r): array => [
@@ -63,13 +67,17 @@ final class ItemRepository
         $item->itemSize = (string) $row['SizeName'];
         $item->costRating = $row['CostRating'];
 
-        foreach ($this->children('SELECT * FROM itemattribute WHERE ItemID = ? ORDER BY ItemAttributeID', $itemId) as $r) {
+        // Rows saved before migration 004 have no SortOrder; they keep their id order.
+        $attributeSql = 'SELECT * FROM itemattribute WHERE ItemID = ? ORDER BY SortOrder IS NULL, SortOrder, ItemAttributeID';
+        foreach ($this->children($attributeSql, $itemId) as $r) {
             $item->attributes[] = [
                 'id' => $r['ItemAttributeID'],
+                'parentId' => $r['ParentAttributeID'],
                 'system' => $r['System'],
                 'attributeId' => $r['AttributeID'],
                 'scale' => self::nullableString($r['AttributeScaleID']),
                 'rank' => $r['Rank'], // NULL for rows saved before migration 001
+                'implementation' => $r['Implementation'],
                 'buildPoints' => (int) $r['BuildPoints'],
                 'powerSlots' => (int) $r['PowerSlots'],
             ];
@@ -188,10 +196,11 @@ final class ItemRepository
     {
         $this->insertRows(
             'itemattribute',
-            ['ItemAttributeID', 'ItemID', 'AttributeID', 'AttributeScaleID', 'Rank', 'BuildPoints', 'PowerSlots', 'System'],
-            array_map(static fn (array $a): array => [
-                $a['id'], $itemId, $a['attributeId'], self::nullableInt($a['scale']), $a['rank'], $a['buildPoints'], $a['powerSlots'], $a['system'],
-            ], $item->attributes)
+            ['ItemAttributeID', 'ItemID', 'ParentAttributeID', 'AttributeID', 'AttributeScaleID', 'Rank', 'Implementation', 'BuildPoints', 'PowerSlots', 'System', 'SortOrder'],
+            array_map(static fn (array $a, int $order): array => [
+                $a['id'], $itemId, $a['parentId'], $a['attributeId'], self::nullableInt($a['scale']), $a['rank'],
+                $a['implementation'], $a['buildPoints'], $a['powerSlots'], $a['system'], $order,
+            ], $item->attributes, array_keys($item->attributes))
         );
 
         $this->insertRows(

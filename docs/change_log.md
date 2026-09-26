@@ -3,6 +3,23 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-25: Phase 4: save and load
+
+Phase 4 of `implementation_plan.md` is done. Details are under "Phase 4 results" there.
+
+- **`db/migrations/004_itemattribute_subrows.sql`:** nullable `ParentAttributeID`, `Implementation`, and
+  `SortOrder` on `itemattribute`. Safe to run twice. Applied locally; **still needs running on Dreamhost.**
+  `SortOrder` wasn't in the plan: row ids stop matching the editor's order once rows are dragged.
+- **API:** `Item.php`/`ItemRepository` read and write `parentId`, `Implementation`, and the row order.
+  A `parentId` that matches no row, or a sub-row nested two deep, is a 400.
+- **`getallitems`** lists private items too while `allow_writes` is on (see Decisions in `project_guide.md`).
+- **CSV export:** a new Implementation column; each sub-row follows its parent, marked `> `.
+- **Client:** [New], [Save] (create, then update), and [Delete] work. The Inventory panel lists saved items
+  and loads one on click. Deleting, or leaving an item with unsaved edits, asks first on an inline line
+  (no browser dialog).
+- **Verified:** the smoke test (40 checks, 8 new); 178 client tests (6 new); load, edit, save, new, and
+  delete in Chrome.
+
 ## 2026-09-24 (2): Phase 3: Attack remodel, implementations, filtered sub-rows
 
 Phase 3 of `implementation_plan.md` is done. Details are under "Phase 3 results" there.

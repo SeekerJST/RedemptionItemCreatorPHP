@@ -24,6 +24,25 @@ export async function fetchLookups(signal) {
     return { sizes, attributes, skills };
 }
 
+const sendJson = (path, method, body) =>
+    request(path, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+
+/** Summaries of the saved items: [{ itemID, itemName, itemSize, CostRating }], by name. */
+export const fetchItemList = (signal) => getJson('getallitems', signal);
+
+/** One saved item, in the shape toApiItem produces. */
+export const fetchItem = (itemId) => getJson(`getitem/${encodeURIComponent(itemId)}`);
+
+/** Creates the item (no itemID yet) or replaces the saved one. Resolves to the saved item, with its itemID. */
+export async function saveItem(apiItem) {
+    const response = apiItem.itemID
+        ? await sendJson(`updateitem/${encodeURIComponent(apiItem.itemID)}`, 'PUT', apiItem)
+        : await sendJson('createitem', 'POST', apiItem);
+    return response.json();
+}
+
+export const deleteItem = (itemId) => request(`deleteitem/${encodeURIComponent(itemId)}`, { method: 'DELETE' });
+
 /** Asks the API to render the item as CSV and saves it through the browser. */
 export async function downloadItemCsv(apiItem) {
     const response = await request('exportitemtocvs/download', {

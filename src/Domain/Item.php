@@ -24,7 +24,12 @@ final class Item
     public string $itemSize = '';
     public ?int $costRating = null;
 
-    /** @var list<array{id: int, system: ?string, attributeId: int, scale: ?string, rank: ?int, buildPoints: int, powerSlots: int}> */
+    /**
+     * In editor order. parentId: the id of the row this one sits under (null = top level).
+     * implementation: the client's rule key, e.g. "kinetic" (null = the rule's default).
+     *
+     * @var list<array{id: int, parentId: ?int, system: ?string, attributeId: int, scale: ?string, rank: ?int, implementation: ?string, buildPoints: int, powerSlots: int}>
+     */
     public array $attributes = [];
 
     /** @var list<array{id: int, desc: string, scale: ?string, buildPoints: int}> */
@@ -54,14 +59,18 @@ final class Item
             $where = "attributeList[$i]";
             $item->attributes[] = [
                 'id' => self::requiredInt($row, 'id', "$where.id"),
+                'parentId' => self::int($row, 'parentid', "$where.parentId"),
                 'system' => self::str($row, 'attributesystem', "$where.AttributeSystem"),
                 'attributeId' => self::requiredInt($row, 'attributename', "$where.AttributeName"),
                 'scale' => self::str($row, 'scale', "$where.Scale"),
                 'rank' => self::int($row, 'rank', "$where.Rank"),
+                'implementation' => self::nonEmpty(self::str($row, 'implementation', "$where.Implementation")),
                 'buildPoints' => self::int($row, 'buildpoints', "$where.BuildPoints") ?? 0,
                 'powerSlots' => self::int($row, 'powerslots', "$where.PowerSlots") ?? 0,
             ];
         }
+
+        self::assertOneLevelTree($item->attributes);
 
         foreach (self::list($data, 'limitlist') as $i => $row) {
             $where = "limitList[$i]";
@@ -119,10 +128,12 @@ final class Item
             ], $this->tasks),
             'attributeList' => array_map(static fn (array $a): array => [
                 'id' => $a['id'],
+                'parentId' => $a['parentId'],
                 'AttributeSystem' => $a['system'],
                 'AttributeName' => $a['attributeId'],
                 'Scale' => $a['scale'],
                 'Rank' => $a['rank'],
+                'Implementation' => $a['implementation'],
                 'BuildPoints' => $a['buildPoints'],
                 'PowerSlots' => $a['powerSlots'],
             ], $this->attributes),
@@ -153,7 +164,41 @@ final class Item
         }
     }
 
+    /**
+     * Sub-rows are one level deep (implementation plan, decision 6): every parentId names
+     * another row in the list, and that row is top-level. Ids must be unique for that to hold.
+     *
+     * @param list<array{id: int, parentId: ?int}> $attributes
+     */
+    private static function assertOneLevelTree(array $attributes): void
+    {
+        $parentOf = [];
+        foreach ($attributes as $i => $a) {
+            if (array_key_exists($a['id'], $parentOf)) {
+                throw HttpException::badRequest("attributeList[$i].id {$a['id']} is used by more than one row.");
+            }
+            $parentOf[$a['id']] = $a['parentId'];
+        }
+        foreach ($attributes as $i => $a) {
+            $parent = $a['parentId'];
+            if ($parent === null) {
+                continue;
+            }
+            if ($parent === $a['id'] || !array_key_exists($parent, $parentOf)) {
+                throw HttpException::badRequest("attributeList[$i].parentId $parent doesn't match another row's id.");
+            }
+            if ($parentOf[$parent] !== null) {
+                throw HttpException::badRequest("attributeList[$i] is nested two levels deep; sub-rows can only sit under a top-level row.");
+            }
+        }
+    }
+
     // ---- input coercion helpers -------------------------------------------------
+
+    private static function nonEmpty(?string $value): ?string
+    {
+        return $value === null || trim($value) === '' ? null : trim($value);
+    }
 
     /** @param array<mixed> $a @return array<mixed> */
     private static function lowerKeys(array $a): array

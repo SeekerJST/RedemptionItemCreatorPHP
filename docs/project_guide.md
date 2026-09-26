@@ -76,7 +76,7 @@ Routes match the C# API and are case-insensitive.
 |---|---|---|
 | GET | `itemcreator/getitemsizes` | `{ "1": "TINY", ... }` |
 | GET | `itemcreator/getitemsizesds`, `getskillsds`, `getitemattributesds`, `getattributescaleds` | Raw rows with DB column names. Byte-identical to the C# output. |
-| GET | `itemcreator/getallitems` | Items with `IsPublic = 1` |
+| GET | `itemcreator/getallitems` | Items with `IsPublic = 1`; every item while `allow_writes` is on |
 | GET | `itemcreator/getitem/{id}` | 404 if missing |
 | POST | `itemcreator/createitem` | 201 + item with new `itemID` |
 | PUT | `itemcreator/updateitem/{id}` | Replaces all child rows |
@@ -102,6 +102,10 @@ parameter still works.
   duplicate IDs make the save fail and roll back.
 - **Modifier and Task rows link to attribute rows by grid row ID:** `Modifier_5` names the
   attribute row with `id: 5`.
+- **Attribute sub-rows and order (migration 004):** `ParentAttributeID` holds the parent row's
+  `ItemAttributeID` (NULL = top level), `Implementation` the client's rule key (`kinetic`, `fuel`),
+  and `SortOrder` the editor order. Load by `SortOrder`, not id: ids stop matching the order
+  after a drag. `Item::fromArray` rejects an unknown parent or nesting two deep.
 - **Native prepares** (`ATTR_EMULATE_PREPARES => false`) make INT columns come back as JSON
   numbers, matching the C# output. Don't turn emulation on.
 - The code must run on PHP 8.0 (local interpreter): no enums, readonly properties, or `array_is_list()`.
@@ -140,13 +144,22 @@ parameter still works.
   (`children` in each rule).
 - **Sub-rows:** attribute rows have `parentId` (null = top level). They count toward totals
   like any row. With no system of their own, they use their parent's system.
+- **Saving and loading:** `toApiItem()` and `fromApiItem()` in `domain/item.js` are each other's
+  reverse. Saving writes a sub-row's effective system; loading drops it again when it only repeats
+  the parent's. The item state carries `itemId` (null until first saved) and `dirty`; any edit
+  action sets `dirty`, and `loadItem`/`saved`/`newItem` clear it.
+- **No browser dialogs.** Confirmations (delete, discarding unsaved edits) are an inline line
+  under the toolbar. `window.confirm` would also block browser-automation testing.
 
-## Current state (2026-09-24)
+## Current state (2026-09-25)
 
 **Working:**
 - The full API is ported and verified against the running C# API: lookups are
   byte-identical, CSV output matches apart from fixes, and items saved by the C# version load correctly.
-- The smoke test passes all 32 checks.
+- The smoke test passes all 40 checks.
+- **Save, load, and delete** (Phase 4): [New]/[Save]/[Delete] in Panel 2, and the Inventory panel
+  lists saved items and loads one on click. Sub-rows, implementations, and row order are saved
+  (migration 004, applied to the local DB).
 - Attribute `Rank` is saved (migration 001, applied to the local DB).
 - **React client refactored** into domain logic, components, API wrapper, and hooks.
   Verified in Chrome to reproduce the old app's numbers; ESLint is clean; no `eval`.
@@ -155,17 +168,15 @@ parameter still works.
   They're shown indented in the System Breakdown.
 - The project is a git repository.
 - **Rules engine and validation** (implementation plan, Phases 1-2): costs, Cost Rating, power
-  slots, and §9 checks come from `client/src/domain/rules`, with 172 tests including the
+  slots, and §9 checks come from `client/src/domain/rules`, with 178 client tests including the
   Redemption-class Frigate. Panel 3 lists rule problems and highlights the rows involved.
 
 **Not done yet:**
-- **Sub-rows and implementations aren't saved.** The export sends `parentId` and `Implementation`,
-  but the API ignores them and `itemattribute` has no columns for them yet (Phase 4).
-- The React client only uses the lookup endpoints and the CSV export. Save, load, and
-  delete aren't wired up; the [Save]/[Delete] buttons are disabled.
 - There's no authentication. Write endpoints are controlled by the `allow_writes` config flag.
-- `getallitems` returns nothing: every existing item has `IsPublic = 0`. They were
-  disabled on purpose during testing and interview demos.
+- Nothing in the UI sets `IsPublic`: new items are private (0), so with writes off they
+  don't appear in `getallitems`.
+- Power Supply has no implementation (Fusion, Coil, ...) in the rules, so a Coil supply's
+  cheaper Charge can't be chosen yet, and exports can't say which kind a supply is.
 - The Attacks summary (each attack with its sub-rows, and a name field) from the old code
   was never displayed there and hasn't been rebuilt.
 - Not deployed to Dreamhost yet.
@@ -176,6 +187,10 @@ parameter still works.
   Until then, item entries still have to get into the DB, either by keeping
   `allow_writes` on in production or by writing rows directly. Not settled yet.
   Leaving writes on means anyone can create, edit, or delete items.
+- **`getallitems` lists private items while writes are on** (2026-09-25). With writes on,
+  anyone can already load, edit, or delete any item by ID, so hiding private items protects
+  nothing, and new items (`IsPublic = 0`) have to show up in the Inventory to be reopened.
+  With writes off it's public items only, as before. Revisit with login.
 - **Rank goes into the DB as a nullable INT.** Rank will never be non-numeric. Done in migration 001.
 - **Same URL surface as the C# API,** so the React ports over unchanged. A cleaner
   REST scheme can come later along with the React rework.
@@ -201,24 +216,20 @@ Behavior kept from the old code, but worth confirming:
 
 ## Next steps
 
-1. **Save sub-rows in the DB.** Migration 003 adds a nullable `ParentAttributeID` to
-   `itemattribute`. `Item.php`/`ItemRepository` read and write `parentId`, the CSV export
-   shows the hierarchy, and the smoke tests are extended.
-2. **Commit the schema to the repo.** There's no schema or seed file yet, so the DB can't
-   be rebuilt from source. Add a schema dump plus the lookup-table seed data
-   (`itemsize`, `attribute`, `attributescale`, `skills`, ...).
-3. **React: wire up save, load, and delete.** Enable [Save]/[Delete], add an item picker in
-   the Inventory panel, and load items back into state. `getitem` returns attribute
-   `Rank` as a number, and the reducer already normalizes it.
-4. **Decide on writes before deploying** (see Decisions). If writes stay on, consider a
+1. **Commit the schema to the repo.** There's no schema or seed file yet, so the DB can't
+   be rebuilt from source. Add a schema dump (after migration 004) plus the lookup-table
+   seed data (`itemsize`, `attribute`, `attributescale`, `skills`, ...).
+2. **Decide on writes before deploying** (see Decisions). If writes stay on, consider a
    stopgap such as a shared-secret header or HTTP basic auth on the write routes.
-5. **Deploy to Dreamhost** following `README.md`: `public/` into the web folder, `src/` +
+3. **Deploy to Dreamhost** following `README.md`: `public/` into the web folder, `src/` +
    `config/` outside it, `SetEnv ITEMCREATOR_ROOT`. Nothing is deployed there yet, so the
-   Dreamhost DB is created fresh from the schema and seed files in step 2.
-6. **Settle the open rules questions** above.
-7. **Attacks summary:** list each attack with its sub-rows (multiplier, ammo) in Panel 3,
+   Dreamhost DB is created fresh from the schema and seed files in step 1.
+4. **Settle the open rules questions** above.
+5. **Attacks summary:** list each attack with its sub-rows (multiplier, ammo) in Panel 3,
    which the old code was working toward.
-8. **Login / authentication** as part of the SilentSpirits revamp, shared with SystemGeneratorLive.
-9. **Merge planning with SystemGeneratorLive.** Shared layout and styling, a shared DB
+6. **Power Supply implementations** (Fusion, Antimatter, Coil, Environmental, Hyperspace Tap),
+   so a Coil supply can take the cheaper Charge Resource.
+7. **Login / authentication** as part of the SilentSpirits revamp, shared with SystemGeneratorLive.
+8. **Merge planning with SystemGeneratorLive.** Shared layout and styling, a shared DB
    config approach (SystemGeneratorLive uses `db_config.php` variables; this project
    uses `config/config.php` returning an array), and a common site shell.

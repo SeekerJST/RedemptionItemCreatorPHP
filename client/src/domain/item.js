@@ -27,6 +27,10 @@ const editableFields = {
 
 export function createInitialItem() {
     return {
+        /** The saved item's ID; null until the item is first saved. */
+        itemId: null,
+        /** True when there are edits since the item was created, loaded, or saved. */
+        dirty: false,
         name: '',
         size: '',
         tags: [newRow.tags(1)],
@@ -40,6 +44,24 @@ export function createInitialItem() {
 }
 
 export function itemReducer(item, action) {
+    switch (action.type) {
+        case 'newItem':
+            return createInitialItem();
+
+        case 'loadItem':
+            return fromApiItem(action.apiItem);
+
+        case 'saved':
+            // action.itemId: the ID the API gave a newly created item (or the existing one).
+            return { ...item, itemId: action.itemId, dirty: false };
+
+        default:
+            return { ...editItem(item, action), dirty: true };
+    }
+}
+
+/** The actions that change the item's content. */
+function editItem(item, action) {
     switch (action.type) {
         case 'setName':
             return { ...item, name: action.name };
@@ -148,6 +170,48 @@ function normalizeRow(section, row) {
 }
 
 /**
+ * Editor state from a saved item (the API's getitem JSON): the reverse of toApiItem.
+ * Costs aren't loaded; the rules engine recomputes them.
+ */
+export function fromApiItem(apiItem) {
+    const savedAttributes = apiItem.attributeList ?? [];
+    const savedSystem = new Map(savedAttributes.map((row) => [row.id, row.AttributeSystem ?? null]));
+    // "Modifier_5" -> 5: the attribute row the name belongs to.
+    const byRowId = (list, idKey, nameKey, prefix) =>
+        Object.fromEntries((list ?? []).map((entry) => [Number(String(entry[idKey]).replace(prefix, '')), entry[nameKey] ?? '']));
+
+    return {
+        ...createInitialItem(),
+        itemId: apiItem.itemID ?? null,
+        name: apiItem.itemName ?? '',
+        size: apiItem.itemSize ?? '',
+        tags: (apiItem.tagList ?? []).map((row) =>
+            normalizeRow('tags', { id: row.id, TagDesc: row.TagDesc ?? '', TagRank: row.TagRank ?? '1', TagFree: row.TagFree ?? false })
+        ),
+        attributes: savedAttributes.map((row) => {
+            const parentId = row.parentId ?? null;
+            // Saving writes a sub-row's effective system, which is usually its parent's. Keep it only
+            // if it differs, so a sub-row dragged to another parent still follows its new parent.
+            const inherited = parentId != null && row.AttributeSystem === savedSystem.get(parentId);
+            return normalizeRow('attributes', {
+                id: row.id,
+                parentId,
+                AttributeSystem: inherited ? null : (row.AttributeSystem ?? null),
+                AttributeName: row.AttributeName,
+                Scale: row.Scale ?? '1',
+                Rank: row.Rank ?? 0,
+                Implementation: row.Implementation ?? null,
+            });
+        }),
+        limits: (apiItem.limitList ?? []).map((row) =>
+            normalizeRow('limits', { id: row.id, LimitDesc: row.LimitDesc ?? '', LimitScale: row.LimitScale ?? '1' })
+        ),
+        modifierSkills: byRowId(apiItem.modifierList, 'modifierID', 'modifierName', 'Modifier_'),
+        taskNames: byRowId(apiItem.taskList, 'taskID', 'taskName', 'Task_'),
+    };
+}
+
+/**
  * The item as the API's createitem/updateitem/export endpoints expect it.
  *
  * @param {object} item
@@ -156,7 +220,7 @@ function normalizeRow(section, row) {
  */
 export function toApiItem(item, summary, defaultSkill) {
     return {
-        itemID: null,
+        itemID: item.itemId,
         itemName: item.name,
         itemSize: item.size,
         CostRating: summary.costRating,

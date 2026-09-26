@@ -1,6 +1,6 @@
 # Implementation Plan: Attributes, Rules, and Validation
 
-Status: **Phases 1-3 done** (2026-09-24). Next: Phase 4.
+Status: **Phases 1-4 done** (2026-09-25). Remaining work is in `project_guide.md`, "Next steps".
 
 Goal: make the item creator follow `item_creation_rules.md`. That means correct costs,
 correct totals, validation of illegal builds, and a better attribute model (Attack split,
@@ -291,3 +291,31 @@ sub-row dropdowns only offer allowed children.
 3. **Client:** enable [Save]/[Delete]. The Inventory panel lists saved items and loads
    them back into the editor.
 
+
+### Phase 4 results (2026-09-25)
+
+- **Migration 004** (`db/migrations/004_itemattribute_subrows.sql`), applied locally: nullable
+  `ParentAttributeID`, `Implementation`, and **`SortOrder`** on `itemattribute`. `SortOrder` wasn't
+  planned: after a drag, row ids no longer match the editor's order, so loading by id scrambled it.
+  Safe to run twice (each column is added only if missing); tested by running it twice.
+- **API:**
+  - `Item.php` reads and writes `parentId` and `Implementation`. It rejects (400) a duplicate row id,
+    a `parentId` that matches no row, and a sub-row nested two deep.
+  - `ItemRepository` saves the list position as `SortOrder` and loads by it (rows saved before 004 fall
+    back to id order).
+- **`getallitems`** lists every item while `allow_writes` is on, public items only otherwise. New items
+  are private, so without this the Inventory would never show them (decision in `project_guide.md`).
+- **CSV export:** an Implementation column (rule keys spelled out: `laserLink` → "Laser Link"), and each
+  sub-row follows its parent with a `> ` mark, even when the client lists it elsewhere.
+- **Client:**
+  - `fromApiItem()` is the reverse of `toApiItem()`. The item state carries `itemId` and a `dirty` flag.
+  - [New], [Save] (POST the first time, PUT after), and [Delete] (only for a saved item). The Inventory
+    panel lists saved items (name, size, CR), highlights the open one, and loads one on click.
+  - Deleting, or leaving an item with unsaved edits, asks on an inline line under the toolbar.
+- **Verified:**
+  - Smoke test: 40 checks, 8 new (order, `parentId`, `Implementation`, the CSV layout, the list, bad nesting).
+  - 178 client tests, 6 new (load, round trip, sub-row system, dirty/saved, New); ESLint clean.
+  - In Chrome, against a seeded Kinetic Attack with Multiplier and Ammunition sub-rows: load shows the
+    tree and "No rule problems found"; edit, then [New], asks and Cancel keeps the edit; [Save] updates
+    in place (still one item, new name in the Inventory); [Delete] asks, then deletes and resets the
+    editor; a new item saves as a create and becomes the current Inventory entry. Test items were removed.

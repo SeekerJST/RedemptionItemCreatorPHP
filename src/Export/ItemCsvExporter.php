@@ -14,6 +14,7 @@ use SilentSpirits\ItemCreator\Http\HttpException;
 final class ItemCsvExporter
 {
     private const SCALE_NAMES = ['1' => 'Minor', '2' => 'Moderate', '3' => 'Major'];
+    private const SUB_ROW_MARK = '> ';
 
     /** @param array<int, string> $attributeNames AttributeID => AttributeName */
     public function export(Item $item, array $attributeNames): string
@@ -29,8 +30,8 @@ final class ItemCsvExporter
             $modifierNames = array_column($item->modifiers, 'name', 'id');
             $taskNames = array_column($item->tasks, 'name', 'id');
 
-            $this->row($out, ['System', 'Attribute Name', 'Scale', 'Rank', 'Build Points', 'Power Slots']);
-            foreach ($item->attributes as $row) {
+            $this->row($out, ['System', 'Attribute Name', 'Implementation', 'Scale', 'Rank', 'Build Points', 'Power Slots']);
+            foreach (self::treeOrder($item->attributes) as $row) {
                 $name = $attributeNames[$row['attributeId']] ?? null;
                 if ($name === null) {
                     throw HttpException::badRequest("attributeList contains unknown AttributeName {$row['attributeId']}.");
@@ -43,9 +44,15 @@ final class ItemCsvExporter
                     $name .= ' - ' . $taskNames[$row['id']];
                 }
 
+                // A sub-row follows its parent, marked with "> ".
+                if ($row['parentId'] !== null) {
+                    $name = self::SUB_ROW_MARK . $name;
+                }
+
                 $this->row($out, [
                     $row['system'],
                     $name,
+                    self::implementationLabel($row['implementation']),
                     self::SCALE_NAMES[$row['scale'] ?? ''] ?? '',
                     $row['rank'],
                     $row['buildPoints'],
@@ -83,6 +90,41 @@ final class ItemCsvExporter
         $csv = (string) stream_get_contents($out);
         fclose($out);
         return $csv;
+    }
+
+    /**
+     * Top-level rows in their order, each followed by its sub-rows. The client appends a new
+     * sub-row at the end of the list, so list order alone doesn't keep it under its parent.
+     *
+     * @param list<array{id: int, parentId: ?int}> $attributes
+     * @return list<array<string, mixed>>
+     */
+    private static function treeOrder(array $attributes): array
+    {
+        $children = [];
+        foreach ($attributes as $row) {
+            if ($row['parentId'] !== null) {
+                $children[$row['parentId']][] = $row;
+            }
+        }
+
+        $ordered = [];
+        foreach ($attributes as $row) {
+            if ($row['parentId'] === null) {
+                $ordered[] = $row;
+                array_push($ordered, ...($children[$row['id']] ?? []));
+            }
+        }
+        return $ordered;
+    }
+
+    /**
+     * The client stores implementations as rule keys ("kinetic", "laserLink"); the rule
+     * names live in the client, so spell the key out: "Kinetic", "Laser Link".
+     */
+    private static function implementationLabel(?string $key): string
+    {
+        return $key === null ? '' : ucwords(trim((string) preg_replace('/(?<=[a-z])(?=[A-Z])/', ' ', $key)));
     }
 
     /**

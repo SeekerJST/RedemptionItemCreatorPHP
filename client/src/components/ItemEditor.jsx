@@ -15,7 +15,7 @@ const LIVE_ATTRIBUTE_FIELDS = ['AttributeName'];
 const powerLabel = ({ provides, uses }) => (provides ? `+${provides}` : uses ? String(uses) : '');
 
 /** Panel 2: the item's name and size, and its Tags, Attributes, and Limitations grids. */
-export default function ItemEditor({ item, dispatch, summary, lookups }) {
+export default function ItemEditor({ item, dispatch, summary, lookups, toolbar, status, confirm, onCancelConfirm }) {
     const columnsForAttributes = useMemo(() => attributeColumns(), []);
     const [selectedAttributeId, setSelectedAttributeId] = useState(null);
     const selectedAttribute = item.attributes.find((row) => row.id === selectedAttributeId);
@@ -128,6 +128,10 @@ export default function ItemEditor({ item, dispatch, summary, lookups }) {
                 sizes={lookups.sizes}
                 onNameChange={(name) => dispatch({ type: 'setName', name })}
                 onSizeChange={(size) => dispatch({ type: 'setSize', size })}
+                toolbar={toolbar}
+                status={status}
+                confirm={confirm}
+                onCancelConfirm={onCancelConfirm}
             />
 
             <div className="section_container">
