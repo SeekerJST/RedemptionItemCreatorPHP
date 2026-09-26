@@ -1,0 +1,23 @@
+# Secrets — never commit real DB credentials
+config/config.php
+
+# React build output (generated into the PHP web root by `npm run build`)
+public/assets/
+public/index.html
+public/vite.svg
+
+# Node
+node_modules/
+client/dist/
+
+# IDE / editor
+.vs/
+bin/
+obj/
+*.user
+.claude/settings.local.json
+
+# OS / logs
+desktop.ini
+Thumbs.db
+*.log

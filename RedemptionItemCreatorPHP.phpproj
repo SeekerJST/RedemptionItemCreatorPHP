@@ -1,0 +1,8 @@
+<Project Sdk="Devsense.Php.Sdk">
+  <PropertyGroup>
+    <EnvName>PHPDev</EnvName>
+    <RuntimeVersion>8.0</RuntimeVersion>
+    <!-- The React client is its own project (client\RedemptionItemCreator.client.esproj). -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);client\**;node_modules\**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

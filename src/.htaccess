@@ -1,0 +1,2 @@
+# Safety net in case this folder ever ends up inside the web root.
+Require all denied
