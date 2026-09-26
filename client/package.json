@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node ../dev/start.mjs",
+    "dev:ui": "vite",
     "prebuild": "node -e \"const fs=require('fs');fs.rmSync('../public/assets',{recursive:true,force:true});fs.rmSync('../public/index.html',{force:true})\"",
     "build": "vite build",
     "lint": "eslint .",

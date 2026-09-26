@@ -3,6 +3,16 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-25 (2): One Run starts the API and the UI; GitHub
+
+- **`dev/start.mjs`:** `npm run dev` (and so Run in Visual Studio) starts the PHP API on 5135 and
+  Vite together. Stopping Vite stops PHP; an API already listening on 5135 is reused. `npm run dev:ui`
+  starts only Vite. Verified: the API answers through Vite's proxy, and killing Vite stops PHP.
+- **`RedemptionItemCreatorPHP.sln`:** both projects, with the client first so it's the default
+  startup project. Before, the projects were opened directly, with no solution file.
+- **GitHub:** `origin` is https://github.com/SeekerJST/RedemptionItemCreatorPHP. Its initial commit
+  (GPL-3.0 `LICENSE`) was merged in.
+
 ## 2026-09-25: Phase 4: save and load
 
 Phase 4 of `implementation_plan.md` is done. Details are under "Phase 4 results" there.
