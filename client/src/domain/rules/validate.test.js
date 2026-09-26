@@ -22,7 +22,24 @@ const expectError = (issues, text) => expect(errors(issues).join('\n')).toContai
 describe('validation (§9)', () => {
     it('a clean build has no errors', () => {
         const ps = row('powerSupply', MINOR, 1);
-        expect(errors(check([ps, row('forceField', MINOR, 2), row('armorRating', MINOR, 3)]))).toEqual([]);
+        const fuel = under(ps, 'resource', MINOR, 2, { implementation: 'fuel' });
+        expect(errors(check([ps, fuel, row('forceField', MINOR, 2), row('armorRating', MINOR, 3)]))).toEqual([]);
+    });
+
+    it('Power Supplies need their feed: Fuel for Fusion (the default) and Antimatter, Charge for Coil', () => {
+        expectError(check([row('powerSupply')]), 'A Fusion Power Supply needs a Fuel Resource');
+        expectError(check([row('powerSupply', MINOR, 1, { implementation: 'antimatter' })]), 'Antimatter Power Supply needs a Fuel');
+        const coil = row('powerSupply', MINOR, 1, { implementation: 'coil' });
+        expectError(check([coil, under(coil, 'resource', MINOR, 1, { implementation: 'fuel' })]), 'Coil Power Supply needs a Charge');
+        expect(errors(check([coil, under(coil, 'resource', MINOR, 1, { implementation: 'charge' })]))).toEqual([]);
+        // A plain Resource counts as any feed, as it does for Drives and Launchers.
+        const fusion = row('powerSupply');
+        expect(errors(check([fusion, under(fusion, 'resource')]))).toEqual([]);
+    });
+
+    it('Environmental and Hyperspace Tap Power Supplies need no Resource', () => {
+        expect(errors(check([row('powerSupply', MINOR, 1, { implementation: 'environmental' })]))).toEqual([]);
+        expect(errors(check([row('powerSupply', MINOR, 1, { implementation: 'hyperspaceTap' })]))).toEqual([]);
     });
 
     it('warns until a size is chosen', () => {

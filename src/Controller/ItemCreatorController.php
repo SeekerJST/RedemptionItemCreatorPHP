@@ -29,6 +29,7 @@ final class ItemCreatorController
         'getskillsds' => ['GET', 'getSkillsDS'],
         'getitemattributesds' => ['GET', 'getItemAttributesDS'],
         'getattributescaleds' => ['GET', 'getAttributeScaleDS'],
+        'getitemtypesds' => ['GET', 'getItemTypesDS'],
         'getallitems' => ['GET', 'getAllItems'],
         'getitem' => ['GET', 'getItem'],
         'createitem' => ['POST', 'createItem'],
@@ -74,6 +75,12 @@ final class ItemCreatorController
     public function getAttributeScaleDS(Request $request): Response
     {
         return Response::json(($this->lookups)()->attributeScales());
+    }
+
+    /** Item categories (itemtype rows). New ones are added by saving an item with a new category. */
+    public function getItemTypesDS(Request $request): Response
+    {
+        return Response::json(($this->lookups)()->itemTypes());
     }
 
     /**

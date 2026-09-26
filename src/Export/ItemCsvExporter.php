@@ -24,6 +24,9 @@ final class ItemCsvExporter
         $this->row($out, ['Item Name', $item->itemName]);
         $this->row($out, ['Item Size', $item->itemSize]);
         $this->row($out, ['Cost Rating', $item->costRating]);
+        if ($item->itemType !== null) {
+            $this->row($out, ['Category', $item->itemType]);
+        }
         fwrite($out, "\n");
 
         if ($item->attributes !== []) {

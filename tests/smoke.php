@@ -53,6 +53,8 @@ $item = [
     'itemName' => 'Smoke Test Blaster',
     'itemSize' => 'SMALL',
     'CostRating' => 2,
+    'itemType' => 'Smoke Test Gear',
+    'IsPublic' => true,
     'modifierList' => [['modifierID' => 'Modifier_2', 'modifierName' => 'Firearms']],
     'taskList' => [['taskID' => 'Task_3', 'taskName' => 'Hacking']],
     'attributeList' => [
@@ -75,7 +77,7 @@ echo "Lookups\n";
 [$status, $body] = call('GET', "$base/getitemsizes/");
 $sizes = json_decode($body, true);
 check('getitemsizes returns an ID => name map', $status === 200 && is_array($sizes) && in_array('SMALL', $sizes, true), $body);
-foreach (['getitemsizesds', 'getskillsds', 'getitemattributesds', 'getattributescaleds', 'getallitems'] as $action) {
+foreach (['getitemsizesds', 'getskillsds', 'getitemattributesds', 'getattributescaleds', 'getitemtypesds', 'getallitems'] as $action) {
     [$status, $body] = call('GET', "$base/$action/");
     check("$action returns a JSON array", $status === 200 && is_array(json_decode($body, true)), "HTTP $status $body");
 }
@@ -97,6 +99,12 @@ check('getallitems lists the new private item while writes are on', in_array($id
 check('getitem returns the item',$status === 200 && ($read['itemName'] ?? null) === 'Smoke Test Blaster', "HTTP $status $body");
 check('size comes back by name', ($read['itemSize'] ?? null) === 'SMALL');
 check('CostRating is saved', ($read['CostRating'] ?? null) === 2);
+check('the category and IsPublic are saved', ($read['itemType'] ?? null) === 'Smoke Test Gear' && ($read['IsPublic'] ?? null) === true, $body);
+[, $body] = call('GET', "$base/getitemtypesds");
+check('a new category is added to the category list', in_array('Smoke Test Gear', array_column(json_decode($body, true) ?? [], 'ItemTypeName'), true), $body);
+[, $body] = call('GET', "$base/getallitems");
+$listed = array_values(array_filter(json_decode($body, true) ?? [], static fn ($s) => $s['itemID'] === $id));
+check('the item list includes the category and IsPublic', ($listed[0]['itemType'] ?? null) === 'Smoke Test Gear' && ($listed[0]['IsPublic'] ?? null) === true, $body);
 check('attributes round-trip, with AttributeSystem', count($read['attributeList'] ?? []) === 5 && $read['attributeList'][0]['AttributeSystem'] === 'Weapons', $body);
 check('attributes come back in the saved order, not id order', array_column($read['attributeList'] ?? [], 'id') === [1, 2, 3, 5, 4], $body);
 check('parentId round-trips (null for top-level rows)', array_column($read['attributeList'] ?? [], 'parentId') === [null, null, null, 1, 1], $body);
@@ -112,6 +120,8 @@ $update['itemName'] = 'Smoke Test Blaster Mk II';
 $update['itemSize'] = 'medium'; // size names match case-insensitively
 $update['tagList'] = [];
 $update['attributeList'] = array_slice($update['attributeList'], 0, 1);
+unset($update['IsPublic']); // as the editor saves: without IsPublic
+$update['itemType'] = 'smoke test gear'; // an existing category, in another case
 [$status, $body] = call('PUT', "$base/updateitem/$id", json_encode($update));
 check('updateitem returns 200', $status === 200, "HTTP $status $body");
 [, $body] = call('GET', "$base/getitem/$id");
@@ -121,6 +131,8 @@ check('update replaced name, size, and child rows',
     && ($reread['itemSize'] ?? null) === 'MEDIUM'
     && count($reread['attributeList']) === 1
     && $reread['tagList'] === [], $body);
+check('an update without IsPublic keeps it, and a category matches regardless of case',
+    ($reread['IsPublic'] ?? null) === true && ($reread['itemType'] ?? null) === 'Smoke Test Gear', $body);
 [$status] = call('PUT', "$base/updateitem/not-$id", json_encode($update));
 check('updateitem rejects a URL ID that differs from the body', $status === 400);
 
@@ -129,6 +141,7 @@ echo "Export\n";
 check('POST export returns a CSV attachment', $status === 200 && strpos($headers['content-disposition'] ?? '', 'Smoke Test Blaster.csv') !== false, "HTTP $status $body");
 check('commas in names are quoted', strpos($body, '"Harder, Better, Faster, Stronger",1,False,5') !== false, $body);
 check('Modifier/Task rows are qualified with their names', strpos($body, 'Modifier - Firearms') !== false && strpos($body, 'Task - Hacking') !== false, $body);
+check('the category is exported', strpos($body, "Cost Rating,2\nCategory,Smoke Test Gear\n") !== false, $body);
 check('attribute header has an Implementation column', strpos($body, "System,Attribute Name,Implementation,Scale,Rank,Build Points,Power Slots\n") !== false, $body);
 check('sub-rows follow their parent, marked and with their implementation',
     strpos($body, "Weapons,Attack,,Minor,4,36,0\nWeapons,> Resource,Ammunition,Minor,2,10,0\nWeapons,> Attack Multiplier,Kinetic,Minor,2,27,0\nModifiers,") !== false, $body);
@@ -143,6 +156,8 @@ check('deleteitem returns 204', $status === 204);
 check('deleted item is gone (404)', $status === 404);
 [$status] = call('DELETE', "$base/deleteitem/$id");
 check('deleting again is a 404', $status === 404);
+[, $body] = call('GET', "$base/getitemtypesds");
+check('a category with no items left is removed', !in_array('Smoke Test Gear', array_column(json_decode($body, true) ?? [], 'ItemTypeName'), true), $body);
 
 echo "Validation\n";
 [$status] = call('POST', "$base/createitem", '{not json');

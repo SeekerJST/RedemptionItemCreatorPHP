@@ -23,6 +23,10 @@ final class Item
     public string $itemName = '';
     public string $itemSize = '';
     public ?int $costRating = null;
+    /** Category name (an itemtype row, created on save if new); null = uncategorized. */
+    public ?string $itemType = null;
+    /** Listed publicly; null = not sent, so an update keeps the saved value (and a create makes it private). */
+    public ?bool $isPublic = null;
 
     /**
      * In editor order. parentId: the id of the row this one sits under (null = top level).
@@ -54,6 +58,8 @@ final class Item
         $item->itemName = trim(self::str($data, 'itemname', 'itemName') ?? '');
         $item->itemSize = trim(self::str($data, 'itemsize', 'itemSize') ?? '');
         $item->costRating = self::int($data, 'costrating', 'CostRating');
+        $item->itemType = self::nonEmpty(self::str($data, 'itemtype', 'itemType'));
+        $item->isPublic = self::bool($data, 'ispublic', 'IsPublic');
 
         foreach (self::list($data, 'attributelist') as $i => $row) {
             $where = "attributeList[$i]";
@@ -118,6 +124,8 @@ final class Item
             'itemName' => $this->itemName,
             'itemSize' => $this->itemSize,
             'CostRating' => $this->costRating,
+            'itemType' => $this->itemType,
+            'IsPublic' => $this->isPublic,
             'modifierList' => array_map(static fn (array $m): array => [
                 'modifierID' => self::MODIFIER_PREFIX . $m['id'],
                 'modifierName' => $m['name'],

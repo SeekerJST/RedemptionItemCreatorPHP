@@ -30,9 +30,10 @@ final class ItemRepository
     public function listItems(bool $includePrivate): array
     {
         $stmt = $this->db->prepare(
-            'SELECT i.ItemID, i.ItemName, s.SizeName, i.CostRating
+            'SELECT i.ItemID, i.ItemName, s.SizeName, i.CostRating, t.ItemTypeName, i.IsPublic
                FROM item i
                LEFT JOIN itemsize s ON s.ItemSizeID = i.ItemSize
+               LEFT JOIN itemtype t ON t.ItemTypeID = i.ItemTypeID
               WHERE i.IsPublic = 1 OR ?
               ORDER BY i.ItemName'
         );
@@ -44,15 +45,18 @@ final class ItemRepository
             'itemName' => $r['ItemName'],
             'itemSize' => $r['SizeName'],
             'CostRating' => $r['CostRating'],
+            'itemType' => $r['ItemTypeName'],
+            'IsPublic' => (bool) $r['IsPublic'],
         ], $stmt->fetchAll());
     }
 
     public function find(string $itemId): ?Item
     {
         $stmt = $this->db->prepare(
-            'SELECT i.ItemID, i.ItemName, s.SizeName, i.CostRating
+            'SELECT i.ItemID, i.ItemName, s.SizeName, i.CostRating, t.ItemTypeName, i.IsPublic
                FROM item i
                LEFT JOIN itemsize s ON s.ItemSizeID = i.ItemSize
+               LEFT JOIN itemtype t ON t.ItemTypeID = i.ItemTypeID
               WHERE i.ItemID = ?'
         );
         $stmt->execute([$itemId]);
@@ -66,6 +70,8 @@ final class ItemRepository
         $item->itemName = (string) $row['ItemName'];
         $item->itemSize = (string) $row['SizeName'];
         $item->costRating = $row['CostRating'];
+        $item->itemType = $row['ItemTypeName'];
+        $item->isPublic = (bool) $row['IsPublic'];
 
         // Rows saved before migration 004 have no SortOrder; they keep their id order.
         $attributeSql = 'SELECT * FROM itemattribute WHERE ItemID = ? ORDER BY SortOrder IS NULL, SortOrder, ItemAttributeID';
@@ -121,8 +127,8 @@ final class ItemRepository
         $itemId = self::uuid4();
 
         $this->transaction(function () use ($item, $itemId, $sizeId): void {
-            $this->db->prepare('INSERT INTO item (ItemID, ItemName, ItemSize, CostRating) VALUES (?, ?, ?, ?)')
-                ->execute([$itemId, $item->itemName, $sizeId, $item->costRating]);
+            $this->db->prepare('INSERT INTO item (ItemID, ItemName, ItemSize, ItemTypeID, CostRating, IsPublic) VALUES (?, ?, ?, ?, ?, ?)')
+                ->execute([$itemId, $item->itemName, $sizeId, $this->itemTypeId($item->itemType), $item->costRating, (int) ($item->isPublic ?? false)]);
             $this->insertChildren($itemId, $item);
         });
 
@@ -139,10 +145,14 @@ final class ItemRepository
             if (!$this->exists($itemId)) {
                 return false;
             }
-            $this->db->prepare('UPDATE item SET ItemName = ?, ItemSize = ?, CostRating = ? WHERE ItemID = ?')
-                ->execute([$item->itemName, $sizeId, $item->costRating, $itemId]);
+            // IsPublic only changes when it's sent: the editor doesn't send it, so saving a
+            // catalog item from the editor keeps it public.
+            $this->db->prepare('UPDATE item SET ItemName = ?, ItemSize = ?, ItemTypeID = ?, CostRating = ?, IsPublic = COALESCE(?, IsPublic) WHERE ItemID = ?')
+                ->execute([$item->itemName, $sizeId, $this->itemTypeId($item->itemType), $item->costRating,
+                    $item->isPublic === null ? null : (int) $item->isPublic, $itemId]);
             $this->deleteChildren($itemId);
             $this->insertChildren($itemId, $item);
+            $this->deleteUnusedItemTypes();
             return true;
         });
     }
@@ -156,11 +166,37 @@ final class ItemRepository
             }
             $this->deleteChildren($itemId);
             $this->db->prepare('DELETE FROM item WHERE ItemID = ?')->execute([$itemId]);
+            $this->deleteUnusedItemTypes();
             return true;
         });
     }
 
     // ---- internals --------------------------------------------------------------
+
+    /**
+     * The itemtype row for a category name, matched case-insensitively, and added if it's new
+     * (categories aren't a fixed list). Runs inside the save's transaction. null = uncategorized.
+     */
+    private function itemTypeId(?string $name): ?int
+    {
+        if ($name === null) {
+            return null;
+        }
+        $stmt = $this->db->prepare('SELECT ItemTypeID FROM itemtype WHERE ItemTypeName = ? ORDER BY ItemTypeID LIMIT 1');
+        $stmt->execute([$name]);
+        $id = $stmt->fetchColumn();
+        if ($id !== false) {
+            return (int) $id;
+        }
+        $this->db->prepare('INSERT INTO itemtype (ItemTypeName) VALUES (?)')->execute([$name]);
+        return (int) $this->db->lastInsertId();
+    }
+
+    /** Categories come and go with their items, so the list only offers categories in use. */
+    private function deleteUnusedItemTypes(): void
+    {
+        $this->db->exec('DELETE t FROM itemtype t LEFT JOIN item i ON i.ItemTypeID = t.ItemTypeID WHERE i.ItemID IS NULL');
+    }
 
     /**
      * Looks the size name up in itemsize instead of hard-coding TINY=1..COLOSSAL=6.

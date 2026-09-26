@@ -156,10 +156,18 @@ parameter still works.
 **Working:**
 - The full API is ported and verified against the running C# API: lookups are
   byte-identical, CSV output matches apart from fixes, and items saved by the C# version load correctly.
-- The smoke test passes all 40 checks.
+- The smoke test passes all 47 checks.
 - **Save, load, and delete** (Phase 4): [New]/[Save]/[Delete] in Panel 2, and the Inventory panel
   lists saved items and loads one on click. Sub-rows, implementations, and row order are saved
   (migration 004, applied to the local DB).
+- **Ready for the book catalog** (2026-09-25):
+  - `db/schema.sql` + `db/seed.sql` rebuild the database from the repo (verified table by table).
+  - Item categories (migration 005, applied locally). The Inventory groups by category, with a search.
+  - `dev/import-catalog.mjs` imports `db/catalog/*.json` through the same rules engine as the UI and
+    reports BP, CR, rule issues, and CR mismatches with the book. The format is in `db/catalog/README.md`.
+  - Power Supply types with their feeds, and types for Drive, Counter, Link, Manufacture, and
+    Regeneration, so book gear can say what kind each part is.
+  - The Attacks summary in Panel 3. Panel 3 scrolls inside its frame.
 - Attribute `Rank` is saved (migration 001, applied to the local DB).
 - **React client refactored** into domain logic, components, API wrapper, and hooks.
   Verified in Chrome to reproduce the old app's numbers; ESLint is clean; no `eval`.
@@ -168,17 +176,15 @@ parameter still works.
   They're shown indented in the System Breakdown.
 - The project is a git repository.
 - **Rules engine and validation** (implementation plan, Phases 1-2): costs, Cost Rating, power
-  slots, and §9 checks come from `client/src/domain/rules`, with 178 client tests including the
+  slots, and §9 checks come from `client/src/domain/rules`, with 192 client tests including the
   Redemption-class Frigate. Panel 3 lists rule problems and highlights the rows involved.
 
 **Not done yet:**
 - There's no authentication. Write endpoints are controlled by the `allow_writes` config flag.
-- Nothing in the UI sets `IsPublic`: new items are private (0), so with writes off they
-  don't appear in `getallitems`.
-- Power Supply has no implementation (Fusion, Coil, ...) in the rules, so a Coil supply's
-  cheaper Charge can't be chosen yet, and exports can't say which kind a supply is.
-- The Attacks summary (each attack with its sub-rows, and a name field) from the old code
-  was never displayed there and hasn't been rebuilt.
+- Only the catalog importer sets `IsPublic`: items made in the editor are private, so with writes
+  off they don't appear in `getallitems`.
+- **Modifiers can only target skills.** The rules allow "a Skill or Ability", but the `skills` table
+  has no abilities (the Frigate's +2 Detection can't be entered), and it holds a stray `'Skills '` row.
 - Not deployed to Dreamhost yet.
 
 ## Decisions
@@ -191,6 +197,15 @@ parameter still works.
   anyone can already load, edit, or delete any item by ID, so hiding private items protects
   nothing, and new items (`IsPublic = 0`) have to show up in the Inventory to be reopened.
   With writes off it's public items only, as before. Revisit with login.
+- **Categories are free text** (2026-09-25), stored as `itemtype` rows and linked by
+  `item.ItemTypeID` (migration 005). Saving an item with a new category name adds it; a category
+  with no items left is deleted, so the editor only suggests categories in use.
+- **`IsPublic` is only changed when it's sent** (2026-09-25). The catalog importer sends `true`; the
+  editor never sends it, so re-saving a catalog item in the editor keeps it public.
+- **Catalog items are costed by the client's rules engine** (2026-09-25), run in Node by
+  `dev/import-catalog.mjs`, not re-implemented in PHP. One set of rules for the UI and the import.
+- **Schema and seed are generated, not hand-written** (`php dev/dump-db.php`). Changes still go
+  through a migration; regenerate the two files after applying one.
 - **Rank goes into the DB as a nullable INT.** Rank will never be non-numeric. Done in migration 001.
 - **Same URL surface as the C# API,** so the React ports over unchanged. A cleaner
   REST scheme can come later along with the React rework.
@@ -216,20 +231,15 @@ Behavior kept from the old code, but worth confirming:
 
 ## Next steps
 
-1. **Commit the schema to the repo.** There's no schema or seed file yet, so the DB can't
-   be rebuilt from source. Add a schema dump (after migration 004) plus the lookup-table
-   seed data (`itemsize`, `attribute`, `attributescale`, `skills`, ...).
-2. **Decide on writes before deploying** (see Decisions). If writes stay on, consider a
+1. **Write the core book catalog** in `db/catalog/` (format: `db/catalog/README.md`), dry-run
+   it, and check the report's rule errors and CR mismatches against the book and errata.
+2. **Abilities for Modifiers** (see "Not done yet"), and remove the stray `'Skills '` row.
+3. **Decide on writes before deploying** (see Decisions). If writes stay on, consider a
    stopgap such as a shared-secret header or HTTP basic auth on the write routes.
-3. **Deploy to Dreamhost** following `README.md`: `public/` into the web folder, `src/` +
-   `config/` outside it, `SetEnv ITEMCREATOR_ROOT`. Nothing is deployed there yet, so the
-   Dreamhost DB is created fresh from the schema and seed files in step 1.
-4. **Settle the open rules questions** above.
-5. **Attacks summary:** list each attack with its sub-rows (multiplier, ammo) in Panel 3,
-   which the old code was working toward.
-6. **Power Supply implementations** (Fusion, Antimatter, Coil, Environmental, Hyperspace Tap),
-   so a Coil supply can take the cheaper Charge Resource.
-7. **Login / authentication** as part of the SilentSpirits revamp, shared with SystemGeneratorLive.
-8. **Merge planning with SystemGeneratorLive.** Shared layout and styling, a shared DB
+4. **Deploy to Dreamhost** following `README.md`: `public/` into the web folder, `src/` +
+   `config/` outside it, `SetEnv ITEMCREATOR_ROOT`, and the DB from `db/schema.sql` + `db/seed.sql`.
+5. **Settle the open rules questions** above.
+6. **Login / authentication** as part of the SilentSpirits revamp, shared with SystemGeneratorLive.
+7. **Merge planning with SystemGeneratorLive.** Shared layout and styling, a shared DB
    config approach (SystemGeneratorLive uses `db_config.php` variables; this project
    uses `config/config.php` returning an array), and a common site shell.

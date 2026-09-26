@@ -34,6 +34,12 @@ final class LookupRepository
         return $this->rows('SELECT * FROM skills ORDER BY skillName');
     }
 
+    /** @return list<array<string, mixed>> item categories, by name */
+    public function itemTypes(): array
+    {
+        return $this->rows('SELECT * FROM itemtype ORDER BY ItemTypeName');
+    }
+
     /** @return list<array<string, mixed>> */
     public function attributes(): array
     {

@@ -5,6 +5,7 @@ import Inventory from './components/Inventory.jsx';
 import ItemEditor from './components/ItemEditor.jsx';
 import Panel from './components/Panel.jsx';
 import BuildSummary from './components/summary/BuildSummary.jsx';
+import { categoriesOf } from './domain/inventory.js';
 import { createInitialItem, itemReducer, toApiItem } from './domain/item.js';
 import { summarizeItem } from './domain/summary.js';
 import { useInventory } from './hooks/useInventory.js';
@@ -41,6 +42,7 @@ function GearCreator({ lookups }) {
     const [item, dispatch] = useReducer(itemReducer, undefined, createInitialItem);
     const summary = useMemo(() => summarizeItem(item, lookups), [item, lookups]);
     const inventory = useInventory();
+    const categories = useMemo(() => categoriesOf(inventory.items ?? []), [inventory.items]);
     const [status, setStatus] = useState(null);
     /** A pending question before something that would lose work: { message, actionLabel, run }. */
     const [confirm, setConfirm] = useState(null);
@@ -127,13 +129,14 @@ function GearCreator({ lookups }) {
                     dispatch={dispatch}
                     summary={summary}
                     lookups={lookups}
+                    categories={categories}
                     toolbar={{ onNew: startNew, onSave: save, onDelete: remove, canDelete: item.itemId != null, saveHint, busy }}
                     status={status}
                     confirm={confirm && { ...confirm, onConfirm: confirm.run }}
                     onCancelConfirm={() => setConfirm(null)}
                 />
             </Panel>
-            <Panel title="Panel.03" size="large">
+            <Panel title="Panel.03" size="large" scroll>
                 <BuildSummary item={item} dispatch={dispatch} summary={summary} skills={lookups.skills} onExport={exportCsv} />
             </Panel>
         </>

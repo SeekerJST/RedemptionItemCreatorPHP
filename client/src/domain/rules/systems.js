@@ -29,6 +29,13 @@ export const computerTargetNumber = (rank) => 12 + 2 * rank;
 
 export const DRIVE_IMPLEMENTATIONS = {
     standard: { name: 'Standard' },
+    // Flavor only (§5.10): same price and rules as Standard, but they record what kind of drive it is.
+    air: { name: 'Air' },
+    ground: { name: 'Ground' },
+    sea: { name: 'Sea' },
+    reaction: { name: 'Reaction' },
+    reactionless: { name: 'Reactionless' },
+    gravitic: { name: 'Gravitic' },
     lightSail: { name: 'Light Sail', price: 15, grades: [GRADE.MODERATE], noFuel: true, noManeuver: true },
     jump: { name: 'Jump', grades: [GRADE.MAJOR], noFuel: true },
 };
@@ -52,6 +59,18 @@ export const RESOURCE_TYPES = {
     magazine: { name: 'Magazine', perRank: { 1: 5, 2: 10, 3: 15 } },
     charge: { name: 'Charge', perRank: { 1: 4, 2: 8, 3: 12 } },
     tangle: { name: 'Tangle', perRank: { 1: 10, 2: 10, 3: 10 } },
+};
+
+/**
+ * Power Supply types (§5.22) and the Resource type each runs on (feed null: needs none).
+ * They cost the same; Coil's saving is its cheaper Charge Resource, not a discount here.
+ */
+export const POWER_SUPPLY_IMPLEMENTATIONS = {
+    fusion: { name: 'Fusion', feed: 'fuel' },
+    antimatter: { name: 'Antimatter', feed: 'fuel' },
+    coil: { name: 'Coil', feed: 'charge' },
+    environmental: { name: 'Environmental', feed: null },
+    hyperspaceTap: { name: 'Hyperspace Tap', feed: null },
 };
 
 export const POWER_SUPPLY_MIN_ITEM_SIZE = { 2: SIZE.MEDIUM, 3: SIZE.LARGE };
@@ -107,6 +126,13 @@ export const systemRules = {
         gradeKind: 'none',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.QUANTITY },
+        // What it counters (§5.9). No default: the book's list is "common implementations", not all of them.
+        implementations: {
+            armor: { name: 'Armor' },
+            shields: { name: 'Shields' },
+            disabling: { name: 'Disabling' },
+            strike: { name: 'Strike' },
+        },
         cost: (row) => 20 * row.rank,
         children: [],
     },
@@ -193,6 +219,12 @@ export const systemRules = {
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.QUANTITY },
+        // Link types (§5.18); same price. No default: unspecified until chosen.
+        implementations: {
+            data: { name: 'Data' },
+            psi: { name: 'Psi' },
+            weapon: { name: 'Weapon' },
+        },
         cost: perUnit({ 1: 5, 2: 15, 3: 50 }),
         children: [],
     },
@@ -202,6 +234,13 @@ export const systemRules = {
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.QUANTITY },
+        // Specialties (§5.19); same price. Coil Gin and Tangle Spinner are always Major in the book.
+        implementations: {
+            g3p: { name: 'G3P' },
+            coilGin: { name: 'Coil Gin' },
+            tangleSpinner: { name: 'Tangle Spinner' },
+            other: { name: 'Other Specialty' },
+        },
         cost: perUnit({ 1: 25, 2: 50, 3: 100 }),
         power: oneSlotAtGrade, // ruling: one slot of its grade
         children: ['resource'], // supply
@@ -230,6 +269,8 @@ export const systemRules = {
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.RANK },
+        implementations: POWER_SUPPLY_IMPLEMENTATIONS,
+        defaultImplementation: 'fusion', // the most common kind
         cost: (row) => priceFor({ 1: 5, 2: 10, 3: 40 }, row.grade) * row.rank,
         power: (row) => ({ provides: [{ grade: row.grade, slots: SLOTS_PER_SOURCE * row.rank }] }),
         children: ['resource'], // Fuel or Charge

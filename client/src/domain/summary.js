@@ -15,6 +15,8 @@ import {
     rowPower,
     validateItem,
 } from './rules/index.js';
+import { MULTIPLIER_IMPLEMENTATIONS, attackImplementation, isAmmoFed } from './rules/attacks.js';
+import { SCALE_NAMES } from './rules/common.js';
 import { FORCE_FIELD } from './rules/protection.js';
 import { bodyPurchase, sizeOrdinal } from './rules/sizes.js';
 import { LIMIT_CAPS } from './rules/validate.js';
@@ -93,6 +95,7 @@ export function summarizeItem(item, lookups) {
             .map((g) => ({ ...g, gradeName: GRADE_NAMES[g.grade] })),
         attributeSystems,
         systems: systemBreakdown(item.attributes, relatedById, attributeSystems, nameById),
+        attacks: attackSummary(related, nameById, attributeCosts, item.modifierSkills, defaultSkill),
         modifiers,
         tasks: byKey('task'),
         limitCounts: [1, 2, 3].map((grade) => ({
@@ -166,6 +169,71 @@ function effectiveSystems(attributes) {
         return parent ? systemOf(parent, seen) : null;
     };
     return new Map(attributes.map((a) => [a.id, systemOf(a)]));
+}
+
+const ATTACK_KEYS = new Set(['attack', 'attackMelee', 'antiMissile']);
+const SHOTS_PER_AMMO_RANK = 10;
+
+/**
+ * Each attack as it plays at the table (spec §5.3): final multiplier, implementation, mounts,
+ * what feeds it, its extras, the effects its implementation adds for free, and its BP with sub-rows.
+ */
+function attackSummary(related, nameById, attributeCosts, modifierSkills, defaultSkill) {
+    const bp = (id) => attributeCosts.get(id)?.buildPoints ?? 0;
+
+    return related
+        .filter(({ row }) => ATTACK_KEYS.has(row.key) && row.parentId == null)
+        .map(({ row, children }) => {
+            const melee = row.key === 'attackMelee';
+            const antiMissile = row.key === 'antiMissile';
+            const steps = sum(children.filter((c) => c.key === 'attackMultiplier').map((c) => c.rank));
+            const multiplier = antiMissile ? 1 : 2 + steps;
+            const implementation = antiMissile ? null : attackImplementation(children);
+            const scale = SCALE_NAMES[row.grade] ?? '?';
+
+            let feed;
+            if (melee) {
+                feed = 'None needed (melee)';
+            } else if (!antiMissile && isAmmoFed(children)) {
+                const ranks = sum(children.filter((c) => c.key === 'resource').map((c) => c.rank));
+                feed = `Ammunition: ${ranks * SHOTS_PER_AMMO_RANK} shots`;
+            } else {
+                const perMount = antiMissile ? 1 : (MULTIPLIER_IMPLEMENTATIONS[implementation]?.slotsPerMount ?? 1);
+                const slots = perMount * row.rank;
+                feed = `${slots} ${GRADE_NAMES[row.grade] ?? '?'} Power Slot${slots === 1 ? '' : 's'}`;
+            }
+
+            const extras = children
+                .filter((c) => !['attackMultiplier', 'resource'].includes(c.key))
+                .map((c) => {
+                    const name = nameById.get(c.id) ?? ATTRIBUTE_RULES[c.key]?.name ?? '?';
+                    if (c.key === 'modifier') return `+${c.rank} ${modifierSkills[c.id] ?? defaultSkill}`;
+                    if (c.key === 'bleed') return `Bleed ${c.rank} (${GRADE_NAMES[c.grade] ?? '?'})`;
+                    if (c.key === 'counter') return c.rank > 1 ? `Counter ×${c.rank}` : 'Counter';
+                    return name;
+                });
+
+            // Free with the implementation (spec §5.3): the Plasma Bleed's magnitude follows the scale.
+            const free = [];
+            if (implementation === 'plasma') {
+                free.push('Counter (Shields)', `Bleed ${Math.floor(multiplier / 2)} (${GRADE_NAMES[row.grade] ?? '?'})`);
+            } else if (implementation === 'tse' || implementation === 'hyperspace') {
+                free.push('Counter (Armor)');
+            }
+
+            return {
+                id: row.id,
+                name: nameById.get(row.id) ?? '?',
+                scale,
+                multiplier,
+                implementation: implementation ? MULTIPLIER_IMPLEMENTATIONS[implementation]?.name ?? implementation : null,
+                mounts: row.rank,
+                feed,
+                extras,
+                free,
+                buildPoints: bp(row.id) + sum(children.map((c) => bp(c.id))),
+            };
+        });
 }
 
 /** Attributes shown in their own part of the summary rather than under a system. */

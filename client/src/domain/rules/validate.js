@@ -11,6 +11,7 @@ import {
     COMPUTER_TASK_LIMIT,
     DRIVE_IMPLEMENTATIONS,
     LIFE_SUPPORT_IMPLEMENTATIONS,
+    POWER_SUPPLY_IMPLEMENTATIONS,
     POWER_SUPPLY_MIN_ITEM_SIZE,
     computerTargetNumber,
 } from './systems.js';
@@ -170,6 +171,16 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
     const fuelled = all.find((row) => row.key === 'drive' && !DRIVE_IMPLEMENTATIONS[row.implementation]?.noFuel);
     if (fuelled && !hasResource('fuel', 'general')) {
         error('Drives need a Fuel Resource (unless it\'s a Light Sail or Jump drive).', fuelled.id);
+    }
+    // Fusion and Antimatter run on Fuel, Coil on Charge; Environmental and Hyperspace Tap need nothing.
+    for (const feed of ['fuel', 'charge']) {
+        const supply = all.find(
+            (row) => row.key === 'powerSupply' && POWER_SUPPLY_IMPLEMENTATIONS[row.implementation ?? 'fusion']?.feed === feed
+        );
+        if (supply && !hasResource(feed, 'general')) {
+            const type = POWER_SUPPLY_IMPLEMENTATIONS[supply.implementation ?? 'fusion'].name;
+            error(`A ${type} Power Supply needs a ${feed === 'fuel' ? 'Fuel' : 'Charge'} Resource.`, supply.id);
+        }
     }
 
     // ---- power -----------------------------------------------------------------------------

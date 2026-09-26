@@ -23,6 +23,8 @@ const savedItem = {
     itemID: 'abc-123',
     itemName: 'Gauss Rifle',
     itemSize: 'SMALL',
+    itemType: 'Ranged Weapons',
+    IsPublic: true,
     CostRating: 0,
     modifierList: [{ modifierID: 'Modifier_3', modifierName: 'Firearms' }],
     taskList: [],
@@ -53,7 +55,7 @@ describe('loading a saved item', () => {
     const item = itemReducer(createInitialItem(), { type: 'loadItem', apiItem: savedItem });
 
     it('restores the ID, name, size, and rows in their saved order, and starts clean', () => {
-        expect(item).toMatchObject({ itemId: 'abc-123', name: 'Gauss Rifle', size: 'SMALL', dirty: false });
+        expect(item).toMatchObject({ itemId: 'abc-123', name: 'Gauss Rifle', size: 'SMALL', category: 'Ranged Weapons', dirty: false });
         expect(item.attributes.map((row) => row.id)).toEqual([2, 1, 3]);
         expect(item.attributes[0]).toMatchObject({ parentId: 1, AttributeName: 40, Rank: 2, Implementation: 'kinetic' });
         expect(item.tags[0]).toEqual({ id: 1, TagDesc: 'Rugged', TagRank: '2', TagFree: true });
@@ -72,6 +74,9 @@ describe('loading a saved item', () => {
     it('saves back the same rows it loaded', () => {
         const api = toApiItem(item, fakeSummary(item), 'Athletics');
         expect(api.itemID).toBe('abc-123');
+        expect(api.itemType).toBe('Ranged Weapons');
+        expect('IsPublic' in api).toBe(false); // left to the API, so saving keeps a catalog item public
+        expect(toApiItem({ ...item, category: '  ' }, fakeSummary(item), 'Athletics').itemType).toBeNull();
         expect(api.modifierList).toEqual(savedItem.modifierList);
         expect(api.attributeList.map(({ id, parentId, AttributeSystem, AttributeName, Scale, Rank, Implementation }) =>
             ({ id, parentId, AttributeSystem, AttributeName, Scale, Rank, Implementation })

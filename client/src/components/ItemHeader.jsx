@@ -1,13 +1,26 @@
 import { Button } from '@svar-ui/react-core';
 
 /**
- * New/Save/Delete toolbar, item name, and size picker.
+ * New/Save/Delete toolbar, item name, size picker, and category (suggesting the categories in use).
  *
  * status: { kind: 'ok' | 'error' | 'busy', text } shown under the toolbar, or null.
  * confirm: { message, actionLabel, onConfirm } asks before something that loses work, or null.
  * An inline question rather than window.confirm, so nothing blocks the page.
  */
-export default function ItemHeader({ name, size, sizes, onNameChange, onSizeChange, toolbar, status, confirm, onCancelConfirm }) {
+export default function ItemHeader({
+    name,
+    size,
+    sizes,
+    category,
+    categories,
+    onNameChange,
+    onSizeChange,
+    onCategoryChange,
+    toolbar,
+    status,
+    confirm,
+    onCancelConfirm,
+}) {
     const { onNew, onSave, onDelete, canDelete, saveHint, busy } = toolbar;
 
     return (
@@ -62,6 +75,25 @@ export default function ItemHeader({ name, size, sizes, onNameChange, onSizeChan
                                     <option key={s.ItemSizeID} value={s.SizeName}>{s.SizeName}</option>
                                 ))}
                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="headerCellLeft">
+                            <label htmlFor="item_category_fld">Category </label>
+                            <input
+                                type="text"
+                                id="item_category_fld"
+                                className="item_TextField"
+                                list="item_category_options"
+                                placeholder="e.g. Armor"
+                                value={category}
+                                onChange={(e) => onCategoryChange(e.target.value)}
+                            />
+                            <datalist id="item_category_options">
+                                {categories.map((name) => (
+                                    <option key={name} value={name} />
+                                ))}
+                            </datalist>
                         </td>
                     </tr>
                 </tbody>

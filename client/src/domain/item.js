@@ -33,6 +33,8 @@ export function createInitialItem() {
         dirty: false,
         name: '',
         size: '',
+        /** Inventory category, e.g. "Armor"; '' = uncategorized. */
+        category: '',
         tags: [newRow.tags(1)],
         attributes: [newRow.attributes(1)],
         limits: [newRow.limits(1)],
@@ -68,6 +70,9 @@ function editItem(item, action) {
 
         case 'setSize':
             return { ...item, size: action.size };
+
+        case 'setCategory':
+            return { ...item, category: action.category };
 
         case 'addRow': {
             // action.parentId (attributes only): add the new row as a sub-row of that row.
@@ -185,6 +190,7 @@ export function fromApiItem(apiItem) {
         itemId: apiItem.itemID ?? null,
         name: apiItem.itemName ?? '',
         size: apiItem.itemSize ?? '',
+        category: apiItem.itemType ?? '',
         tags: (apiItem.tagList ?? []).map((row) =>
             normalizeRow('tags', { id: row.id, TagDesc: row.TagDesc ?? '', TagRank: row.TagRank ?? '1', TagFree: row.TagFree ?? false })
         ),
@@ -223,6 +229,8 @@ export function toApiItem(item, summary, defaultSkill) {
         itemID: item.itemId,
         itemName: item.name,
         itemSize: item.size,
+        itemType: item.category.trim() || null,
+        // IsPublic isn't sent: the API keeps a saved item's value, and new items start private.
         CostRating: summary.costRating,
         modifierList: summary.modifiers.map((row) => ({
             modifierID: `Modifier_${row.id}`,

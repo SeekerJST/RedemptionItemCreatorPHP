@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@svar-ui/react-core';
+import AttackList from './AttackList.jsx';
 import ModifierList from './ModifierList.jsx';
 import PowerSlotList from './PowerSlotList.jsx';
 import StructureList from './StructureList.jsx';
@@ -74,6 +75,11 @@ export default function BuildSummary({ item, dispatch, summary, skills, onExport
                     <tr>
                         <td colSpan={4}>
                             <SystemBreakdown systems={summary.systems} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colSpan={4}>
+                            <AttackList attacks={summary.attacks} />
                         </td>
                     </tr>
                     <tr>

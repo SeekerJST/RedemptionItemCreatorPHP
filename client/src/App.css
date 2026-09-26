@@ -323,12 +323,35 @@ p.inventory_note {
     opacity: 0.85;
 }
 
+input.inventory_search {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+    padding: 4px 6px;
+    font: inherit;
+}
+
+/* The groups scroll together; the search box stays put above them. */
+div.inventory_groups {
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+details.inventory_group > summary {
+    cursor: pointer;
+    font-weight: bold;
+    margin: 6px 0 4px;
+}
+
+span.inventory_count {
+    font-weight: normal;
+    opacity: 0.8;
+}
+
 ul.inventory_list {
     list-style: none;
     margin: 0;
     padding: 0;
-    max-height: 100vh;
-    overflow-y: auto;
 }
 
 button.inventory_item {
@@ -384,4 +407,27 @@ div.toolbar_message.error {
 
 div.toolbar_message.confirm {
     color: #e0b04a;
+}
+
+/* Panel 3: one small table per attack. */
+div.attack_list {
+    margin-top: 8px;
+}
+
+table.attack_entry {
+    width: 100%;
+    margin: 4px 0 8px;
+    border-left: 3px solid rgba(250, 235, 215, 0.4);
+    padding-left: 6px;
+}
+
+/* A panel's content, scrolling inside the panel's fixed height. The bottom padding keeps the
+   last lines clear of the clipped bottom corner. */
+div.panel_scroll {
+    /* Positioned, so absolutely placed content (the summary's heading) scrolls with it. */
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-bottom: 8vh;
 }

@@ -67,6 +67,12 @@ export const protectionRules = {
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.RANK },
+        // How it repairs (§5.23); same price. Force Field regeneration is Shohan-only (a table call, not enforced).
+        implementations: {
+            biological: { name: 'Biological' },
+            forceField: { name: 'Force Field' },
+            mechanical: { name: 'Mechanical' },
+        },
         cost: (row) => curveB(priceFor({ 1: 5, 2: 10, 3: 15 }, row.grade), row.rank),
         children: [],
     },

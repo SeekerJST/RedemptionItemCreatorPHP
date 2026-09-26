@@ -1,0 +1,80 @@
+{
+  "category": "Examples",
+  "items": [
+    {
+      "name": "Powered Armor (test build)",
+      "size": "Medium",
+      "category": "Armor",
+      "notes": "The first test build from Items/Powered Armor.csv: 280 BP, CR 4.",
+      "printedCR": 4,
+      "attributes": [
+        { "attribute": "Body", "rank": 4 },
+        { "attribute": "Armor Rating", "grade": "Battlefield", "rank": 3 },
+        { "attribute": "Force Field", "grade": "Minor", "rank": 3 },
+        {
+          "attribute": "Power Supply", "grade": "Moderate", "rank": 2, "implementation": "Fusion",
+          "subRows": [{ "attribute": "Resource", "type": "Fuel", "grade": "Moderate", "rank": 3 }]
+        },
+        { "attribute": "Computer", "grade": "Minor", "rank": 4 },
+        { "attribute": "Modifier", "skill": "Athletics", "rank": 2 },
+        { "attribute": "Modifier", "skill": "Stealth", "rank": 2 },
+        { "attribute": "Communication", "implementation": "Radio", "grade": "Minor" },
+        { "attribute": "Link", "grade": "Moderate", "rank": 2 }
+      ],
+      "tags": [{ "name": "Now You See Me Now You Don't", "rank": 2, "free": true }],
+      "limitations": [{ "name": "Upkeep: CR1 Each Long Rest", "grade": "Moderate" }]
+    },
+    {
+      "name": "Redemption-class Frigate",
+      "size": "Huge",
+      "category": "Starships",
+      "page": 219,
+      "notes": "The book's worked example (item_creation_rules.md §10), launchers in increments of 4. The book also gives +2 Detection, which isn't in the skills table yet, so it's left out: 1,451 BP here instead of 1,471; CR 10 either way.",
+      "printedCR": 10,
+      "attributes": [
+        { "attribute": "Armor Rating", "grade": "Space", "rank": 6 },
+        { "attribute": "Body", "rank": 3 },
+        { "attribute": "Life Support", "grade": "Major" },
+        { "attribute": "Hangar", "grade": "Major" },
+        { "attribute": "Cargo", "grade": "Major" },
+        { "attribute": "Communication", "implementation": "Radio", "grade": "Moderate" },
+        { "attribute": "Communication", "implementation": "Laser Link", "grade": "Moderate" },
+        {
+          "attribute": "Communication", "implementation": "Ansible", "grade": "Major",
+          "subRows": [{ "attribute": "Resource", "type": "Tangle", "grade": "Major", "rank": 5 }]
+        },
+        {
+          "attribute": "Drive", "implementation": "Reaction", "grade": "Moderate",
+          "subRows": [{ "attribute": "Resource", "type": "Fuel", "grade": "Moderate", "rank": 7 }]
+        },
+        {
+          "attribute": "Drive", "implementation": "Gravitic", "grade": "Major",
+          "subRows": [{ "attribute": "Maneuver", "rank": 3 }]
+        },
+        { "attribute": "Power Supply", "implementation": "Fusion", "grade": "Major", "rank": 2 },
+        {
+          "attribute": "Attack", "grade": "Space", "rank": 2,
+          "subRows": [{ "attribute": "Attack Multiplier", "implementation": "Plasma", "rank": 6 }]
+        },
+        {
+          "attribute": "Launchers", "grade": "Space", "rank": 2,
+          "subRows": [{ "attribute": "Resource", "type": "Magazine", "grade": "Major", "rank": 6 }]
+        },
+        { "attribute": "Anti-Missile", "grade": "Space", "rank": 2 },
+        { "attribute": "Modifier", "skill": "Gunnery", "rank": 2 },
+        { "attribute": "Computer", "grade": "Major", "rank": 3 }
+      ],
+      "tags": [
+        { "name": "Tag 1", "rank": 3 },
+        { "name": "Tag 2", "rank": 3 },
+        { "name": "Tag 3", "rank": 3 },
+        { "name": "Tag 4", "rank": 2 },
+        { "name": "Tag 5", "rank": 1 }
+      ],
+      "limitations": [
+        { "name": "Property of the Terran Sphere", "grade": "Moderate" },
+        { "name": "Crew Complement", "grade": "Moderate" }
+      ]
+    }
+  ]
+}
