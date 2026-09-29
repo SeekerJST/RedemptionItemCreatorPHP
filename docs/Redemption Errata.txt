@@ -1,0 +1,160 @@
+Combat
+
+P183: Plasma Weapon Attacks should be +2 Multiplier versus shields, not "Double Damage" as described here. This brings it in line with the description for Counter: Shields on P212.
+P183: Terran Sphere psionics using force fields circumvent the restriction on Psionic effects by having a gap in their force field's protection. This means that their force fields may be bypassed by aimed or area attacks that happen while they are using their powers. Normally this vulnerability only lasts for the Psionics turn, leaving them vulnerable to sustained attacks, but ongoing effects require the gap to remain open and exploitable.
+P185: Armor Reduction from Coordinated Fire or from attacks with Counter: Armor persists until the end of the round, allowing subsequent players to take advantage of the target's weakened state.
+P191: Battle strain can be spent on a 1 to 1 basis to increase the number of missiles in a salvo. This can not be used in conjunction with the Coordinated fire effect.
+P191: Using Battle Strain to Activate Tags or Perform Extra Actions with a unit does not fall under the single Battle Strain expenditure per round rule. Additional extra actions after the first cost increasing multiples of 3 Battle Strain (6, 9, etc...) as per the extra actions for AP rule.
+P191: A character attached to a unit may use Tags and their personal AP to skill switch from the unit's target number on to their corresponding skill.
+P194: Missile attacks reduce their targets' total margin of defense by the number of attacking missiles in the salvo not -1 per salvo launched at the target. This reduction is not restricted to their bonus margin of defense from anti missile fire.
+Item Creation
+
+P209-212: Software no longer requires a computer rank by size. Instead, program size sets the computer grade it needs. Tiny, Small, and Medium programs need a Minor computer, carry 1 or 2 Tasks, and serve a single user. Large and Huge programs need a Moderate computer, carry multiple Tasks, and serve dozens of users at once. Colossal programs need a Major computer and serve hundreds of users at once. Computer rank no longer limits program size; it only caps Task target numbers. A Task runs at its own TN or the computer rank's maximum TN, whichever is lower. Replace every "Required Computer Rank" in program stat blocks with the matching Required Computer Grade.
+P210: Omission of Turret rules from Attack attribute - Spending the base cost for an attack multiple times allows additional gunners to make attacks with the weapon, or the same gunner assuming he spends the action points. The Ships of the Line design exercise starting on page 219 provides an example of these rules in action.
+P210: Melee attacks can never gain the Area attribute.
+P210: Rail (Kinetic Ranged) weapons integrated into an item (ship and vehicle weapons, and units slaved to a host such as suit-mounted or Weapon Link weapons) draw a Power Slot like any other Attack, in addition to their Ammunition. Standalone rail weapons (hand weapons such as gauss pistols and rifles) need no Power Supply: the power is built into the casing of each round, and this is already included in their Ammunition.
+P210: The Hyperspace implementation (the Shohan Dreadnought's hyper cannon, the only such attack in the game) includes Counter: Armor and Area: Small Sudden at no extra cost. Both are printed in the cannon's stat block so its effects can be read without looking up the implementation.
+P211: A Plasma Attack's free Bleed (half its Weapon Multiplier, at the grade matching the Attack's scale) can be increased. Additional Bleed damage costs the difference between the full Bleed cost and the free Bleed.
+P212: Counter Armor no longer can bypass non-partial armor on an aimed attack. Instead on an unaimed attack it will reduce armor by 1. Aimed attacks will grant an additional 1 armor reduction for the attack, bringing the aimed attack to -2 armor. However, the armor reduction contributed to other attacks remains at -1 armor.
+P212-215: Counter: Strain raises or lowers Psionic Strain by 5 per Counter (20 BP each). Regeneration: Strain restores Psionic Strain like other Regeneration implementations. A drug's Duration is bought as a Resource (1 Minor rank ≈ 10 combat rounds or 1 hour; 1 Moderate rank ≈ 1 day).
+P213: Reactionless drives should not expel Reaction Mass.
+P214: Hangar: "multiple items" means 3 items, or 4 if crammed in. For example, a Major Hangar on a Huge ship holds 3 Large craft (4 crammed), and a Moderate Hangar holds 3 items two sizes smaller (4 crammed).
+P214: Launchers are bought in sets of 4 (one set draws 1 Power Slot and costs 4 × the per-launcher price: 20 / 40 / 60 BP). Ships printing launcher counts that are not multiples of 4 are corrected by errata (Standard Assault Shuttle, Dragon, Conventional Frigate, Redemption, Havenite Marauder). A Magazine does not have to match the launcher count.
+P215: Add a Link type, Refueling: a docking connection that transfers fuel to a linked craft of up to the Link's maximum size. Each Refueling Link draws 1 Power Slot of its grade while in use. (The Fleet Auxiliary's three Major Refueling Links account for 3 of its 4 used Power Slots.)
+P216: A Moderate Power Supply may be installed on a Small item (the table lists Medium). Major Power Supplies still require a Large item, except that the compact Hyperspace Tap and Coil implementations can squeeze a Major Power Supply into a Medium item.
+P217: A Fuel Resource can feed Drives and Power Supplies of its own grade or lower. A larger fuel tank can feed a smaller drive (for example, Major Fuel can feed a Moderate Reaction Drive), but never the reverse.
+P217: Shohan Force Field Regeneration is always Major grade (regenerates every round).
+P217-218: Key Personnel (the item needs a specific crew member, such as a Navigator) is a Moderate limitation. A Modifier covering several skills is costed per skill (10 BP × rank × number of skills). A Minor Reaction Drive is a jet pack that works on a planet or in microgravity.
+P217-218: The grade of a Modifier is how many skills it covers: Minor for one skill (10 BP per rank), Moderate for two (20 BP per rank), and Major for three or more, or a whole class of skills such as "Weapons" or "Technical Skills" (30 BP per rank). This replaces costing multi-skill Modifiers per skill. The +4 limit per skill still applies; how a class Modifier stacks with others is left to the table.
+Gear
+
+P225: Update the Quick Reference table to match the errata: Standard Light Armor CR 0, CC 0; Psionic Light Armor CR 0, CC 0; Flight Pack CR 0, CC 0; Personal Psi Link CR 1, CC 1; Stealth FTL Recon Drone CR 6, CC 21; Factory Freighter CR 9, CC 45; Tse Blade CR 4, CC 10. Replace the Programs "Min" column (minimum computer rank) with the required computer grade: Minor for all eight programs.
+P226-271: Equipment Modifiers listed for "Sidearms" should read "Firearms". Sidearms is an earlier name for the personal weapon skill.
+P226-271: Several stat blocks printed an Armor or Attack Multiplier rank as the final value, leaving out the base rank, so the printed Armor Rating or Weapon Multiplier is one step too low. The affected items are corrected individually below.
+P226: Psionic Light Armor's fuel should read 10 Days/Combat turns instead of "1 Day".
+P226: The Camouflage Suit's Armor Rating is 4 (Firefight), not 3.
+P226: Standard Light Armor's Cost Rating is 0, not 2 (its CC is already 0).
+P226: Psionic Light Armor's Cost Rating is 0 and its Character Creation cost is 0 (was CR 1, CC 1). Its stats are unchanged.
+P226: The Stealth Suit is a Small item, not Medium; it can be worn under street clothing.
+P227: Riot/LEO Armor, Psi Variant, fuel should also be 10 Days/Combat turns.
+P227: Standard Powered Armor possesses Battlefield, not Firefight level armor.
+P227: Riot/LEO Armor is a Small item, not Medium, and its Armor Rating is 4 (Firefight), not 3.
+P227: Riot/LEO Armor, Psi Variant is a Small item, not Medium. It has Life Support: Minor (the rebreather its limitation refers to), gains the Tag [Mental Block], and its Strain Threshold is 10, not 5.
+P228: Kavacha Powered Armor possesses Battlefield, not Firefight level armor. This applies to both the A-350 Marine Engagement Suit and the A-350SR Marine Reconnaissance Suit.
+P229: The Knife gains Limitation: Usage Restriction (Firefight targets only; useless against Battlefield or hull armor), Minor.
+P229: The Flight Pack gains Modifier: Pilot +2. [Turn Your Head to Steer] is a Free Tag and [A Leap of Faith] is rank 3. Its Usage Restriction is a Moderate limitation. Its Cost Rating is 0 and its Character Creation cost is 0 (was CR 1, CC 1).
+P229: The Bolt-on Thruster Pack gains Modifier: Pilot +2 and Life Support: Minor (extending suit operations in space). Its fuel is 3 Moderate Fuel, not Minor.
+P230: The Quality Gauss Pistol's attack increases to 3x from 2x.
+P230: The Heavy Gauss Pistol's single-target attack increases to 3x from 2x. The burst fire mode remains 2x.
+P230: The Concealable Pistol's attack increases to 3x from 2x, it gains Modifier: Firearms +2, and its ammunition increases to 4 Minor Ammunition (40 shots) from 3 (30 shots).
+P231: Wellpoint Armory Stormguard 9MP ammo now costs CR 1 instead of "3x".
+P231: The Security Gauss Rifle's single-target attack increases to 4x from 3x. The burst fire mode remains 3x.
+P232: The Plasma Carbine has the following changes: Weapon multiplier increases to 4x from 3x, Ammo cost is CR 1, not 5x, and it loses the Area attack attribute, to be replaced with Counter: Armor.
+P232: The Sniper Rifle's attack increases to 5x from 4x.
+P232: The Plasma Carbine's attack increases to 5x from 4x. Its Bleed is 4 (Minor): 2 free from the Plasma implementation plus 2 bought.
+P232: Delete "Upkeep: 1" from the Plasma Carbine. Upkeep, a recurring maintenance cost, was phased out of the rules; this listing is a leftover.
+P233: The Explosive Grenade's attack increases to 6x from 5x.
+P233: The Tactical Railgun is a Small item, not Medium. Its Hungry limitation is a Moderate limitation. Its attack remains 4x.
+P233: The Tactical Missile Rack gains Limitation: Slave (Moderate). It is a module mounted on and powered by a host unit.
+P234: Light Plasma cannon ammo now costs CR 1.
+P234: The Light Plasma Cannon's attack increases to 5x from 4x. Its Bleed is 4 (Moderate): 2 free from the Plasma implementation plus 2 bought.
+P235: Personal Psi Link should read Moderate instead of Major Power Supply. Strain should be 10 not 25 - This is the most important change on the list, as starting Psionics were more powerful than intended as a result.
+P235: The Carry Comp's computer is rank 4 (20 target, 5 tasks), not rank 3.
+P235: The Personal Psi Link carries 2 Moderate Charge (20 days or 20 combat rounds), not 1. Its Cost Rating is 1 and its Character Creation cost is 1 (was CR 2, CC 3); the printed price matched its original Major Power Supply.
+P235: The Coil Stack Battery/Charger is Small, not Tiny (a Moderate Power Supply needs a Small item), and holds 2 Moderate Charge, not 1. CR 0, CC 0 (unchanged).
+P236: The Personal G3P's [Hobbyist Builder's Best Friend] Tag is rank 3.
+P237: The Advanced Neural Interface Control Link's [Dance Along the Bleeding Edge, But You Might Get Cut] is a Major Limitation, not a Tag: hacking that breaches the user's defenses can inflict physical damage.
+P237: The Basic Neural Interface Control Link's Initiative Modifier is +1, not +2.
+P237: Reflex Enhancements gain the Tag [Need For Speed].
+P237: The Advanced NICL's Initiative Modifier is +2, not +3; its Major Neural Interface already gives +3 Initiative when operating linked equipment, and the Modifier is the general bonus. [Dance Along the Bleeding Edge, But You Might Get Cut] splits in two: the Tag [Dance Along The Bleeding Edge 2] and the Major limitation [...But You Might Get Cut 2] (hacking that breaches the user's defenses can inflict physical damage). CR 1, CC 4 (unchanged).
+P237: The Basic Neural Interface Control Link's Technical-class Skills +1 is a Major Modifier, since it covers a class of skills. Its Usage Restriction (skill modifiers only apply to linked gear) is Moderate, not Minor. Its Cost Rating is 1 (was 0).
+P237: The Advanced Neural Interface Control Link's Technical-class Skills +1 is a Major Modifier, since it covers a class of skills. Its Usage Restriction (skill modifiers only apply to linked gear) is Moderate, not Minor. Its Cost Rating is 2 (was 1).
+P238: The Psionic Strain on Psi Amps reduced from +25 to +10.
+P238: The Telekinetic Shuttle now has a Major Psi Link.
+P238: The Psi Amp is rebuilt. Its initial hit is +5 Psionic Strain (Counter: Strain, 1 rank), followed by Regeneration: Strain 5 (Major, every round) for its Duration of 10 combat rounds (1 Minor Resource rank). [Euphoria] is a Minor limitation. This supersedes the earlier +10 Strain erratum. CR 1, CC 1 (unchanged).
+P238: The Psi Damp is costed as Counter: Strain, 5 ranks (−25 Psionic Strain), with a Duration of 1 day (1 Moderate Resource rank). [It Itches In My Brain] becomes [It Itches In My Brain 3], a Moderate limitation. CR 1, CC 1 (unchanged).
+P239: "Fluffy" has Armor Rating 3 (Firefight), not 2.
+P239: "Fluffy" and the Monster in the Dark gain Drive: Minor Land (legs), which carries their Maneuver 1.
+P240: The Family Transport's fuel is 2 Minor Fuel (20 days/combat rounds), not 5, and its Drive Task is 15, not 16.
+P240: The Colonial Personal Transport (Hoverbike) has Armor Rating 2 (Firefight), not 1. Replace "Cover: Moderate (Partial)" with Limitation: Partial Armor (Moderate); an aimed shot bypasses its armor.
+P241: The Speedster gains Modifier: Drive +2 and the Free Tag [...And Turns A Few Heads 3].
+P242: The Light Performance Aircraft has Armor Rating 2 (Firefight), not 1.
+P242: The Light Air Transport gains Task: Intrusion Detection 17.
+P242: The Light Performance Aircraft has Life Support: 3 Minor (3 people), not 1 Moderate (12 people); it is a 2–3 seat craft.
+P243: The Cargo Transport's Tag is [Security 2], not [Security].
+P243: The Armored Cargo Transport's Body Track is 90, not 80 (80 isn't a whole Large increment; 90 costs the same).
+P243: The Armored Cargo Transport's computer is Minor rank 4 (20 target, 5 tasks), not rank 3, so it can run its Intrusion Detection 20 Task.
+P244: The Air Transport has Armor Rating 2 (Battlefield), not 1, and Maneuver 2, not 1. Its cargo is 3 Major, not 3 Moderate, and it gains Life Support: Moderate (12 passengers). Its computer is rank 3 (18 target, 5 tasks), not rank 2, and it gains Task: Intrusion Detection 17.
+P244: The Air Transport's Body Track is 90, not 80 (80 isn't a whole Large increment; 90 costs the same).
+P244: The Assault Platform's Body Track is 90, not 80 (80 isn't a whole Large increment; 90 costs the same).
+P245: The Attack Hovercraft's heavy railgun single-target attack increases to 5x from 4x. The burst fire mode remains 4x.
+P245: The Armored Personnel Carrier has Armor Rating 4 (Battlefield), not 3. Its heavy gauss gun's single-target attack increases to 5x from 4x; the burst fire mode remains 4x. Its troop bay is a Major Hangar, not Minor.
+P245: The Armored Personnel Carrier's Power Supply is Moderate Fusion rank 2, not rank 1, so its 2 Weapon Links have power for linked weapons. Its Total Power Slots read 3 Minor (0 used), 6 Moderate (2 used).
+P245: The Attack Hovercraft's Power Supply is Moderate Fusion rank 2, not rank 1, so its 3 Weapon Links have power for linked weapons. Its Total Power Slots read 3 Minor (0 used), 6 Moderate (2 used).
+P245: The Attack Hovercraft's Body Track is 90, not 80 (80 isn't a whole Large increment; 90 costs the same).
+P245: The Armored Personnel Carrier's Body Track is 90, not 80 (80 isn't a whole Large increment; 90 costs the same).
+P246: The Autonomous Kill Vehicle's light particle beam increases to 5x from 4x. It gains a Major Coil Power Supply (rank 1) with 1 Major Charge (10 combat rounds) to power the beam. Its Maneuver drops to 3 from 5. Its "ineffective at Far Range" restriction becomes a Moderate Limitation: No Far Range. Total Power Slots: 3 Moderate (0 used), 3 Major (1 used).
+P246: The Recon Drone's Maneuver is 4, not 5 (the maximum is 4). Its computer is Minor rank 3 (18 target, 5 tasks), not rank 2, so it can run its Piloting 18 Task.
+P247: The Stealth FTL Recon Drone's stat block is replaced. The original build left out the cost of its Shrouded Hull. Corrected stats: Size Medium, CR 6, CC 21. Armor Rating 1 (Space, Shrouded); Body Track 10. Drives: Moderate Reaction, Major Gravitic, Maneuver 2; Resource: 2 Major Fuel (shared by both Drives). Communications: Major (Ansible; Resource: 1 Major Tangle). Computer: Minor 4 (20 target, 5 tasks); Tasks: Piloting 17, Detection 19, Intrusion Detection 15. Tags: [Security 2], [I Spy with my Little Eye...]. Limitations: One Track Mind (Moderate; follows its programmed route), One-Time Use (Major; each drone is burned out by its run and requires an extended Engineering roll to be brought back into service). Total Power Slots: 3 Moderate (0 used), 3 Major (0 used).
+P248: The Telekinetic Shuttle's Coil Power Supply runs on 2 Major Charge, not 2 Major Fuel.
+P249: The Shuttle/Yacht gains Task: Pilot 17 and the Free Tag [The Grand Tour 3]. Its Tangle is 2 ranks (20 days), not 1.
+P250: The Locust Mobile Industrial Platform has Armor Rating 2 (Space), not 1, and a Body Track of 250, not 200. It has Maneuver 1.
+P250: The Locust Mobile Industrial Platform's Total Power Slots read 6 Major (3 used); the grade was missing.
+P251: The Factory Freighter's Reaction Drive is Moderate, not Major. It has 2 Major Hangars, not 3, and 5 Major Life Support (500 people), not 6. Its computer is Major rank 3 (18 target); delete "5 tasks", since a Major computer runs unlimited tasks. Its CR is 9 and CC 45, not CR 8 and CC 36. Total Power Slots: 3 Major and 3 Moderate, 3 Major used.
+P252: The Security Escort/Corsair's Total Power Slots read 6 Major (2 used), 3 Moderate (0 used), not 9 Major (4 used). Weapons fitted to its Weapon Links draw further slots.
+P252: The Standard Assault Shuttle carries 4 Launchers (Space), not 2.
+P252: The Standard Assault Shuttle gains Communications: Moderate (Radio).
+P253: The Tanker/Command Ship's 100 ranks of Major Fuel are bulk fuel stores carried as Cargo, not the ship's own Fuel Resource. Pumping fuel from the storage tanks into a ship's systems requires an Engineering check.
+P253: The Tanker/Command Ship has Armor Rating 4 (Space), not 3.
+P253: The Tanker/Command Ship's own Fuel Resource is 10 Major (100 days/combat rounds), separate from the bulk fuel it carries as Cargo.
+P253: In the System Defense Craft's alternate forms, "missile array" means its 4 Launchers and "particle cannon" means its heavy railgun (the name from an earlier draft). The Strike Craft removes the 4 Launchers; the Torpedo Boat removes the heavy railgun.
+P254: The Dragon-class Fleet Interceptor/Escort is missing the auxiliary Major Fusion Power Supply described in its design notes. Its Power Slots become 6 Moderate and 3 Major.
+P254: The Dragon-class Fleet Interceptor/Escort's Air Drive is Minor, not Moderate; its drives are a Moderate in-system Reaction Drive and a Minor Air Drive. It carries 8 Launchers (Space), not 6.
+P254: The Dragon-class Fleet Interceptor/Escort carries 2 Major Fuel (20 days/combat rounds), not 2 Moderate, so it can run its Major Fusion reactor as well as its drives.
+P255: The Bridgehead Assault Shuttle has Armor Rating 4 (Space), not 3, and its rapid plasma cannon increases to 5x from 4x.
+P255: The Phantom DRIV possesses a Moderate Laser Link.
+P255: The Bridgehead Assault Shuttle's rapid plasma cannon has Bleed: Major 2 (its free Plasma Bleed, half of 5x rounded down), not Major 3. Its Total Power Slots read 3 Moderate (1 used), 3 Major (3 used).
+P256: The Standard Cruiser gains Power Supply: Major Fusion, rank 1, to power its integrated railgun turrets. Its Total Power Slots read 6 Major (4 used), 3 Moderate (0 used), not 3 Major (2 used).
+P256: The Standard Cruiser gains Computer: Major 3 (18 target, unlimited tasks), matching the Redemption and Retribution.
+P258: Skeleton Crew of Standard Frigate up to 100, from 10, Full Complement to 200, from 20.
+P258: The Conventional Frigate carries 8 Launchers (Space), not 6.
+P259: The Resolute-class Frigate has Armor Rating 5 (Space), not 4, and its laser turret increases to 7x from 6x.
+P259: The Redemption-class Frigate carries 4 Launchers (Space), not 6; the ship is built around its plasma cannons. Its Total Power Slots read 9 Major (7 used), 3 Moderate (0 used), not 9 Major (7 used) with no Moderate listed.
+P260: The Retribution-class Frigate's "Anti-Missile (Space) 2x" reads "Anti-Missile (Space) 1x"; it has one Anti-Missile mount. Its Total Power Slots read 9 Major (6 used), not 7 used.
+P260: The Retribution-class Frigate's Reaction Drive is Moderate, not Major, like its sister ship the Redemption. Its Total Power Slots read 6 Major (6 used), 3 Moderate (0 used).
+P261: The Fleet Auxiliary's 300 ranks of Major Fuel are bulk fuel stores carried as Cargo, not the ship's own Fuel Resource. Pumping fuel from the storage tanks into a ship's systems requires an Engineering check.
+P261: The Marine LASCO Vessel carries 10 Major Fuel (100 days), not 13. It gains the Limitation Prerequisite: [Property of the Terran Sphere] (Moderate). Each of its 4 Major Hangars holds 3 Large craft (4 if crammed), so it launches 12 to 16 Bridgehead Assault Shuttles.
+P261: The Fleet Auxiliary's own Fuel Resource is 11 Major (110 days/combat rounds), separate from the bulk fuel it carries as Cargo.
+P262: The Arniston is missing its Power Slots listing: 6 Major, 3 Used.
+P262: The Arniston's Manufacture is Major, not Moderate, and it gains a Major Weapon Link so the crew can fit a custom weapon besides the missiles. Its Detection is +2, not +1. It uses 4 of its 6 Major Power Slots, not 3; a weapon fitted to the Link draws another.
+P262: The Arniston's fuel reads "6 Major Fuel (60 days/combat rounds)", not 6 days.
+P263: The Havenite Lilith Carrier's heavy particle cannons are 7x, not 6x. Its Armor Rating is 5 (Space, Shrouded Hull), not 3. Its cargo is 2 Major, not 1 Huge (Cargo has no Huge grade). It gains Manufacture: Major, and its Unique Fuel (Antimatter) limitation is Major. Total Power Slots: 6 Major, 5 used.
+P263: The Havenite Marauder has Armor Rating 4 (Space, Shrouded Hull), not 5. Its Reaction Drive is Moderate, not Major, and it has no Gravitic Drive; it relies on a carrier to travel between systems. It gains Power Supply: Major Antimatter, rank 1, which powers its Anti-Missile and launchers. Its Unique Fuel (Antimatter) limitation is Major. Remove its Intrusion Detection task. Total Power Slots: 3 Major and 3 Moderate, 3 Major used.
+P263: The Havenite Marauder's magazine reads "6 Major Magazine (60 shots)", not 640 shots.
+P263: The Havenite Marauder carries 8 Launchers (Space), not 6, to fit its heavy missile loadout.
+P264: Heavy Railgun - Attack increases from 6 to 7, body to 50.
+P264: Heavy Laser Cannon - Attack increases from 7 to 8, body to 50.
+P264: The Havenite Lamprey's drive is a Major Gravitic Drive modified for in-system use (like the Phantom's), not a Reactionless drive. It gains the Limitations Usage Restriction: in-system only, not FTL-capable (Minor), and One-Time Use (Major); the boarding craft must be reserviced after each action.
+P264: The Havenite Lamprey's fuel reads "4 Major Fuel (40 days/combat rounds)", not 4 days.
+P264: The Heavy Railgun gains Power Requirement: 1 Major slot, drawn from its host through the Weapon Link (like the Heavy Laser Cannon).
+P265: The Quad Missile Pack's magazine reads "8 Major Magazines (80 shots)", not 2 Major Magazines.
+P266: Basic Security Software and Security Software are Small items. Traceback and Honey Pot are Tiny add-on modules for a larger security suite.
+P266: Security Software gains the Free Tags [This Is A Private Conversation 2] and [I See You 2].
+P266: Honey Pot's [The Wages of Sin] Tag is rank 2.
+P267: Cover Identity and Good Cover Identity are Tiny items. The identity is stored on a chip (such as an ident card or passport) and runs on whatever computer reads the chip, spoofing that reader. The reader needs a Minor computer or better; its Tasks run at the lower of their own TN and the reader's max TN.
+P267: Military-Grade Security loses its Compromise Task. [I See You 3] and [Like Fort Knox 3] are Free Tags ([Like Fort Knox] was rank 1), and it gains the Free Tag [This Is A Private Conversation 2].
+P268: Tse Blade attack multipliers increase to 5x.
+P268: Shohan Personal Armor possesses Battlefield, not Firefight level armor.
+P268: The Tse Blade's [Flexible Geometry Blade] is a Free Tag. [Where Did You Get Your Hands on One?] is a standard Tag (it applies when a character who is neither Shohan nor Altered carries one). Its Cost Rating is 4 and its Character Creation cost is 10 (was CR 5, CC 15).
+P268: Shohan Personal Armor's Regeneration grades are Biological 4 at Moderate (4 Body per scene) and Force Field 4 at Major (every round). [Emergent Altered] is a Moderate limitation (Malfunction), and the armor has a second Moderate limitation, Target On Your Back.
+P268: The Shohan Personal Armor's 2 Weapon Links are Moderate. Its Weapons +2 Modifier works only with weapons fitted to those Links (Limitation: Usage Restriction, Minor). Its Computer is Minor rank 3 (18 target), not Moderate, its Athletics Modifier is +1, not +2, and its Body Track is 45, not 40. Total Power Slots: 3 Moderate, 3 used (Force Field and one weapon on each Link).
+P268: The Shohan Personal Armor's Weapons +2 Modifier covers two skills, Melee and Heavy Weapons (pairing with a Tse Blade), and is costed as a Moderate Modifier. Target On Your Back is a Major limitation, not Moderate: the armor can't be concealed, and anyone wearing it is visibly in the other side's armor. Cost Rating unchanged (5).
+P269: Shohan War Drone's Body increases to 80, armor increases to 5.
+P269: The War Drone (Cerberus)'s Brain is Moderate rank 4 (20 target), not rank 3, so it can run its Combat 20 Task.
+P271: The Resistance Lumber Mech's Body Track is 70, not 80. Its Coil Power Supply uses 2 Moderate Charge, not Fuel. [Kinetic Feedback Control Rig] is a Free Tag (free Skill switch from Drive to Athletics).
+P271: The Resistance Lumber Mech's Total Power Slots read 3 Minor (0 used), 3 Moderate (1 used), not 2 Minor.
+Psionics
+
+P278: Astral Projection costs 1 strain per round or scene that the character maintains the projection.
+P285: Necromantic attunements may be sacrificed to gain strain at 10 points for every rank of the attunement.
+P285: Necromancers may shunt damage to their strain track at a 1 to 1 ratio, previously this was 3 strain for every point of damage.

@@ -816,9 +816,11 @@ Free effects: Plasma → Counter (Shields), Bleed 4 (floor(8/2)).
 | p213 | Reactionless drives don't expel reaction mass | §5.10 |
 | p216 | **[New 2026-09-25]** Power Supplies may go on an item one size smaller than the table first listed: Moderate on Small (was Medium). Major stays Large, except that a Hyperspace Tap or a Coil stack can fit a Major Power Supply in a Medium item. | §5.22, §9 |
 | p217 | **[New 2026-09-25]** A Fuel Resource can feed Drives and Power Supplies of its own grade or lower (a larger tank can feed a smaller drive). | §5.24, §9 |
+| p217–218 | **[New 2026-09-29]** A Modifier's grade is how many skills it covers: Minor 1 skill (10 BP/rank), Moderate 2 (20), Major 3+ or a class of skills (30). Replaces per-skill costing. | §5.20 |
 
 **Gear errata (Chapter 11 catalog).** These don't change the rules, but if the app seeds
-reference items from Chapter 11, use the corrected values:
+reference items from Chapter 11, use the corrected values. This table is a summary; the
+complete list is in `errata.csv` / `errata.sql`, and each item's errata are in `equipment_catalog.md`.
 
 | Page | Item | Correction |
 |---|---|---|
@@ -830,7 +832,8 @@ reference items from Chapter 11, use the corrected values:
 | p232 | Plasma Carbine | 4x multiplier (was 3x); ammo CR 1 (was 5x); loses Area, gains Counter: Armor |
 | p234 | Light Plasma Cannon | Ammo CR 1 |
 | p235 | Personal Psi Link | Moderate Power Supply (not Major); Strain 10 (not 25) |
-| p238 | Psi Amps | Psionic Strain +10 (not +25) |
+| p237 | Basic and Advanced NICL | **[New 2026-09-29]** Technical-class Skills +1 is a Major Modifier; Usage Restriction is Moderate. CR 1 and CR 2 (were 0 and 1) |
+| p238 | Psi Amps | Rebuilt (2026-09-28): Counter: Strain +5, Regeneration: Strain 5 (Major), Duration 1 Minor. Supersedes the +10 Strain erratum |
 | p238 | Telekinetic Shuttle | Major Psi Link |
 | p255 | Phantom DRIV | Moderate Laser Link |
 | p258 | Standard Frigate | Skeleton crew 100 (was 10); full complement 200 (was 20) |
@@ -838,7 +841,7 @@ reference items from Chapter 11, use the corrected values:
 | p264 | Heavy Railgun | Attack 7 (was 6), Body 50 |
 | p264 | Heavy Laser Cannon | Attack 8 (was 7), Body 50 |
 | p268 | Tse Blade | 5x multiplier |
-| p268 | Shohan Personal Armor | Battlefield armor (not Firefight) |
+| p268 | Shohan Personal Armor | Battlefield armor (not Firefight). **[New 2026-09-29]** Weapons +2 covers Melee and Heavy Weapons (Moderate Modifier); Target On Your Back is a Major limitation. CR 5 unchanged |
 | p269 | Shohan War Drone | Body 80, Armor 5 |
 
 ---
