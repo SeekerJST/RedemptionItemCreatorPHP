@@ -40,7 +40,9 @@ function fakeSummary(item) {
     const byId = (value) => new Map(item.attributes.map((row) => [row.id, value(row)]));
     return {
         costRating: 0,
-        modifiers: item.attributes.filter((row) => row.AttributeName === 20),
+        modifiers: item.attributes
+            .filter((row) => row.AttributeName === 20)
+            .map((row) => ({ ...row, skill: item.modifierSkills[row.id] })),
         tasks: [],
         attributeSystems: byId((row) => row.AttributeSystem ?? item.attributes.find((p) => p.id === row.parentId)?.AttributeSystem ?? null),
         attributeCosts: byId(() => ({ buildPoints: 0, power: { uses: 0 } })),
@@ -70,7 +72,7 @@ describe('loading a saved item', () => {
     });
 
     it('saves back the same rows it loaded', () => {
-        const api = toApiItem(item, fakeSummary(item), 'Athletics');
+        const api = toApiItem(item, fakeSummary(item));
         expect(api.itemID).toBe('abc-123');
         expect(api.modifierList).toEqual(savedItem.modifierList);
         expect(api.attributeList.map(({ id, parentId, AttributeSystem, AttributeName, Scale, Rank, Implementation }) =>

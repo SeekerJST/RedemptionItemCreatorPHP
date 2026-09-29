@@ -46,7 +46,7 @@ function GearCreator({ lookups }) {
     const [confirm, setConfirm] = useState(null);
     const [busy, setBusy] = useState(false);
 
-    const apiItem = () => toApiItem(item, summary, lookups.skills[0]?.skillName ?? '');
+    const apiItem = () => toApiItem(item, summary);
     const exportCsv = () => downloadItemCsv(apiItem());
 
     /** Runs an API call with the toolbar disabled, reporting failures in the status line. */

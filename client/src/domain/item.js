@@ -36,7 +36,7 @@ export function createInitialItem() {
         tags: [newRow.tags(1)],
         attributes: [newRow.attributes(1)],
         limits: [newRow.limits(1)],
-        /** Skill chosen for each Modifier attribute row, keyed by row id. */
+        /** Each Modifier attribute row's skill (Minor) or skills text (Moderate/Major), keyed by row id. */
         modifierSkills: {},
         /** Name typed for each Task attribute row, keyed by row id. */
         taskNames: {},
@@ -216,9 +216,8 @@ export function fromApiItem(apiItem) {
  *
  * @param {object} item
  * @param {object} summary from summarizeItem
- * @param {string} defaultSkill shown for a Modifier row until a skill is picked
  */
-export function toApiItem(item, summary, defaultSkill) {
+export function toApiItem(item, summary) {
     return {
         itemID: item.itemId,
         itemName: item.name,
@@ -226,7 +225,7 @@ export function toApiItem(item, summary, defaultSkill) {
         CostRating: summary.costRating,
         modifierList: summary.modifiers.map((row) => ({
             modifierID: `Modifier_${row.id}`,
-            modifierName: item.modifierSkills[row.id] ?? defaultSkill,
+            modifierName: row.skill,
         })),
         taskList: summary.tasks.map((row) => ({
             taskID: `Task_${row.id}`,

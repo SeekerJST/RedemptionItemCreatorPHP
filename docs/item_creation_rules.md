@@ -527,13 +527,23 @@ Produces items from design specs and raw mass. Needs a suitable Power Supply. An
 Implementations: **G3P** (general purpose), **Coil Gin** (always Major), **Tangle Spinner**
 (always Major), **Other Specialties** (flavor only).
 
-### 5.20 Modifier — 10 BP per rank
+### 5.20 Modifier — 10 / 20 / 30 BP per rank
 
-Bonus to one Skill or Ability check. **Max rank 4 per Skill/Ability** (sum all Modifier
+Bonus to Skill or Ability checks. **Max rank 4 per Skill/Ability** (sum all Modifier
 rows targeting the same Skill/Ability when validating).
 
-**[Ruling 2026-09-28]** A Modifier covering several skills is costed **per skill**:
-`10 × rank × skillCount` (Social Aggregator: +3 to three skills = 90 BP).
+**[Ruling 2026-09-28]** The grade is how many skills the Modifier covers:
+
+| Grade | Covers | BP per rank | Example |
+|---|---|---:|---|
+| Minor | 1 skill | 10 | Gunnery +2 = 20 |
+| Moderate | 2 skills | 20 | Melee, Heavy Weapons +2 = 40 (Shohan Personal Armor) |
+| Major | 3+ skills, or a class of skills ("Weapons", "Technical Skills") | 30 | Persuade, Discern, Socialize +3 = 90 (Social Aggregator) |
+
+In the app, a Minor Modifier picks its skill from the list; Moderate and Major ones name
+their skills as free text. The +4 cap counts the listed skills the text names (a class
+such as "Weapons" names none, so it isn't checked). **[Ruling 2026-09-29]** Deliberately
+loose: whether a class Modifier stacks past +4 with others is left to the table.
 
 ### 5.21 Neural Interface — 3 / 5 / 10 BP
 

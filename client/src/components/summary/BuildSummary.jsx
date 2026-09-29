@@ -80,7 +80,6 @@ export default function BuildSummary({ item, dispatch, summary, skills, onExport
                         <td colSpan={2} className="itemContents">
                             <ModifierList
                                 modifiers={summary.modifiers}
-                                selectedSkills={item.modifierSkills}
                                 skills={skills}
                                 onChange={(rowId, skill) => dispatch({ type: 'setModifierSkill', rowId, skill })}
                             />

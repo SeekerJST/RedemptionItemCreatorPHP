@@ -55,19 +55,15 @@ export function summarizeItem(item, lookups) {
 
     const power = powerBudget(related, size);
     const byKey = (key) => item.attributes.filter((a) => relatedById.get(a.id)?.row.key === key);
-    const modifiers = byKey('modifier');
-    const defaultSkill = lookups.skills[0]?.skillName ?? '';
+    const skillNames = lookups.skills.map((s) => s.skillName);
+    const modifiers = byKey('modifier').map((row) => modifierEntry(row, item.modifierSkills[row.id], skillNames));
 
     const issues = validateItem({
         related,
         size,
         power,
         limits: item.limits,
-        modifiers: modifiers.map((row) => ({
-            rowId: row.id,
-            skill: item.modifierSkills[row.id] ?? defaultSkill,
-            rank: Number(row.Rank) || 0,
-        })),
+        modifiers: modifiers.map((row) => ({ rowId: row.id, skills: row.skills, rank: Number(row.Rank) || 0 })),
         nameOf: (id) => nameById.get(id),
     });
 
@@ -102,7 +98,31 @@ export function summarizeItem(item, lookups) {
         })),
         issues,
         rowStatus: rowStatus(issues),
-        defaultSkill,
+    };
+}
+
+/**
+ * A Modifier row plus what it's for. A Minor Modifier covers one skill, picked from the list
+ * (the first one until picked). Moderate and Major ones cover several, typed as free text
+ * ("Melee, Heavy Weapons" or a class like "Weapons"); `skills` is the listed skills named in it.
+ * A row keeps its text when its grade changes, so switching back restores it.
+ */
+function modifierEntry(row, text, skillNames) {
+    const grade = Number(row.Scale) || 1;
+    if (grade === 1) {
+        const skill = skillNames.includes(text) ? text : (skillNames[0] ?? '');
+        return { ...row, grade, freeText: false, skill, skills: skill ? [skill] : [] };
+    }
+    const named = String(text ?? '')
+        .split(/[,/&;+]|\band\b/i)
+        .map((part) => part.trim().toLowerCase())
+        .filter(Boolean);
+    return {
+        ...row,
+        grade,
+        freeText: true,
+        skill: text ?? '',
+        skills: skillNames.filter((name) => named.includes(name.toLowerCase())),
     };
 }
 

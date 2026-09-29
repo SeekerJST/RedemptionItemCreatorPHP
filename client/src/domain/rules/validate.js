@@ -26,7 +26,8 @@ const LIMIT_GRADE_NAMES = { 1: 'Minor', 2: 'Moderate', 3: 'Major' };
  * @param {number|null} input.size item size ordinal
  * @param {{grades: Array, ok: boolean}} input.power from powerBudget()
  * @param {Array<{id, LimitDesc, LimitScale}>} input.limits
- * @param {Array<{rowId: number, skill: string, rank: number}>} input.modifiers each Modifier row's skill
+ * @param {Array<{rowId: number, skills: string[], rank: number}>} input.modifiers the skills each Modifier row
+ *        adds to (a class like "Weapons" names no single skill, so it adds to none)
  * @param {(rowId: number) => string} input.nameOf display name for an attribute row
  * @returns {Array<{severity: 'error'|'warning', message: string, rows: Array<{section: string, id: number}>}>}
  *          rows: the grid rows the issue is about (to highlight), possibly none
@@ -191,11 +192,13 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
 
     // ---- modifiers: at most +4 to any one Skill -------------------------------------------
     const bySkill = new Map();
-    for (const { rowId, skill, rank } of modifiers) {
-        const entry = bySkill.get(skill) ?? { total: 0, rowIds: [] };
-        entry.total += rank;
-        entry.rowIds.push(rowId);
-        bySkill.set(skill, entry);
+    for (const { rowId, skills, rank } of modifiers) {
+        for (const skill of skills) {
+            const entry = bySkill.get(skill) ?? { total: 0, rowIds: [] };
+            entry.total += rank;
+            entry.rowIds.push(rowId);
+            bySkill.set(skill, entry);
+        }
     }
     for (const [skill, { total, rowIds }] of bySkill) {
         if (total > MAX_MODIFIER_PER_SKILL) {

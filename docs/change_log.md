@@ -3,6 +3,17 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-29: Multi-skill Modifiers
+
+- **Modifier grade = breadth** (ruling 2026-09-28, `item_creation_rules.md` §5.20): Minor covers 1 skill,
+  Moderate 2, Major 3+ or a class of skills. 10 / 20 / 30 BP per rank. The editor now offers the grade.
+- **Panel 3:** a Minor Modifier keeps the skill dropdown; Moderate and Major get a free-text field (like
+  Tasks), e.g. "Melee, Heavy Weapons". The text is saved in `itemmodifier.ModifierName` (`varchar(100)`),
+  so no migration. A row keeps its text if its grade changes, so switching back restores it.
+- **Validation:** the +4-per-skill cap also counts listed skills named in the free text.
+- `toApiItem()` takes the Modifier text from the summary; its `defaultSkill` argument is gone.
+- Tests: 182 (new `summary.test.js`); the Frigate fixture's Modifiers are now explicitly Minor.
+
 ## 2026-09-25 (2): One Run starts the API and the UI; GitHub
 
 - **`dev/start.mjs`:** `npm run dev` (and so Run in Visual Studio) starts the PHP API on 5135 and

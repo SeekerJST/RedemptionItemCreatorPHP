@@ -207,12 +207,16 @@ export const systemRules = {
         children: ['resource'], // supply
     },
 
+    /**
+     * The grade is how many skills it covers (ruling 2026-09-28): Minor 1, Moderate 2,
+     * Major 3+ or a class of skills ("Weapons"). 10 / 20 / 30 BP per rank.
+     */
     modifier: {
         name: 'Modifier',
-        gradeKind: 'none',
+        gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, max: 4, meaning: RANK.RANK },
-        cost: (row) => 10 * row.rank,
+        cost: (row) => 10 * (row.grade ?? GRADE.MINOR) * row.rank,
         children: [],
     },
 

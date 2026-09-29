@@ -133,7 +133,7 @@ describe('validation (§9)', () => {
         const a = row('modifier', MINOR, 3);
         const b = row('modifier', MINOR, 2);
         const issues = check([a, b], {
-            modifiers: [{ rowId: a.id, skill: 'Gunnery', rank: 3 }, { rowId: b.id, skill: 'Gunnery', rank: 2 }],
+            modifiers: [{ rowId: a.id, skills: ['Gunnery'], rank: 3 }, { rowId: b.id, skills: ['Gunnery', 'Tactics'], rank: 2 }],
         });
         const issue = issues.find((i) => i.message.includes('Gunnery'));
         expect(issue.message).toContain('+5');

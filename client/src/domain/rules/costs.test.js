@@ -147,7 +147,11 @@ describe('flat per-unit prices', () => {
     it('Far Ranged: 20 / 40, no Major', () => {
         expect([MINOR, MODERATE, MAJOR].map((g) => cost('farRanged', g, 1))).toEqual([20, 40, 0]);
     });
-    it('Modifier: 10 per rank', () => expect(cost('modifier', MINOR, 4)).toBe(40));
+    it('Modifier: 10 / 20 / 30 per rank for 1 skill / 2 skills / 3+ or a class', () => {
+        expect(cost('modifier', MINOR, 4)).toBe(40);
+        expect(cost('modifier', MODERATE, 2)).toBe(40); // Melee, Heavy Weapons +2
+        expect(cost('modifier', MAJOR, 3)).toBe(90); // Persuade, Discern, Socialize +3
+    });
     it('Artificial Ecology: 15 / 30 / 60', () => {
         expect([MINOR, MODERATE, MAJOR].map((g) => cost('lifeSupport', g, 1, { implementation: 'artificialEcology' }))).toEqual([15, 30, 60]);
     });

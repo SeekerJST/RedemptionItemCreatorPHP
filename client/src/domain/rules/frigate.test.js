@@ -33,8 +33,8 @@ const ATTRIBUTES = [
     [17, 'launchers', MAJOR, 2, null, null, 120], // 2 increments of 4 (book: 6 launchers, 90)
     [18, 'resource', MAJOR, 6, 'magazine', 17, 90],
     [19, 'antiMissile', MAJOR, 2, null, null, 40],
-    [20, 'modifier', null, 2, null, null, 20], // +2 Gunnery
-    [21, 'modifier', null, 2, null, null, 20], // +2 Detection
+    [20, 'modifier', MINOR, 2, null, null, 20], // +2 Gunnery
+    [21, 'modifier', MINOR, 2, null, null, 20], // +2 Detection
     [22, 'computer', MAJOR, 3, null, null, 60],
 ].map(([id, key, grade, rank, implementation, parentId, bookBP]) => ({ id, key, grade, rank, implementation, parentId, bookBP }));
 
@@ -84,7 +84,7 @@ describe('Redemption-class Frigate', () => {
             size: SIZE.HUGE,
             power: powerBudget(related, SIZE.HUGE),
             limits: LIMITS,
-            modifiers: [{ rowId: 20, skill: 'Gunnery', rank: 2 }, { rowId: 21, skill: 'Detection', rank: 2 }],
+            modifiers: [{ rowId: 20, skills: ['Gunnery'], rank: 2 }, { rowId: 21, skills: ['Detection'], rank: 2 }],
         });
         expect(issues).toEqual([]);
     });
