@@ -175,7 +175,7 @@ alongside an XP cost.
 | [Cover Identity](#cover-identity) | Tiny | 45 | 2 | 2 | ✔ |
 | [Good Cover Identity](#good-cover-identity) | Tiny | 65 | 4 | 4 | ✔ |
 | [Tse Blade](#tse-blade) | Small | 150 | 4 | 4 | ✔ |
-| [Shohan Personal Armor](#shohan-personal-armor) | Medium | 347 | 5 | 5 | ✔ |
+| [Shohan Personal Armor](#shohan-personal-armor) | Medium | 337 | 5 | 5 | ✔ |
 | [War Drone (Cerberus)](#war-drone-cerberus) | Medium | 733 | 13 | — | — |
 | [Shohan Deployment Pod](#shohan-deployment-pod) | Large | 590 | 5 | — | — |
 | [Shohan Destroyer](#shohan-destroyer) | Huge | 1,314 | 9 | — | — |
@@ -2808,6 +2808,8 @@ p. 268 · **Size:** Small · **Printed CR:** 4 · **CC:** 10
 
 p. 268 · **Size:** Medium · **Printed CR:** 5 · **CC:** 15
 
+> **Errata** (new, 2026-09-29) p268: Weapons +2 covers two skills, Melee and Heavy Weapons (a Tse Blade combo), costed as a Moderate Modifier. Target On Your Back is a Major limitation, not Moderate: anyone wearing it is visibly in the other side's armor.
+
 > **Errata** (new, 2026-09-28) p268: Body Track 45 (was 40).
 
 > **Errata** (new, 2026-09-28) p268: Its 2 Weapon Links are Moderate. Its Weapons +2 Modifier works only with weapons on those Links (Usage Restriction, Minor). Computer is Minor rank 3 (was Moderate). Athletics +1 (was +2).
@@ -2830,12 +2832,12 @@ p. 268 · **Size:** Medium · **Printed CR:** 5 · **CC:** 15
 | Life Support | Minor ×1 | 5 |
 | Modifier | Athletics +1 | 10 |
 | Modifier | Detection +2 | 20 |
-| Modifier | Weapons +2 | 20 |
+| Modifier | Weapons (Melee, Heavy Weapons) +2 (counted ×2 skills) | 40 |
 | Limitation | Minor: Usage Restriction (Weapons +2 applies only to weapons on its Weapon Links) | −10 |
 | Tag | [The Armor Just Ate the Table] | 5 |
 | Limitation | Moderate: Malfunction [Emergent Altered] | −20 |
-| Limitation | Moderate: Target On Your Back | −20 |
-| **Total** | | **347** |
+| Limitation | Major: Target On Your Back (visibly wearing enemy armor; not concealable) | −50 |
+| **Total** | | **337** |
 
 **Formula CR:** 5 ✔ matches printed
 
