@@ -52,14 +52,14 @@ Designs may exceed the budget; that only raises CR. Nothing forbids an over-budg
 
 ## 3. Size Categories
 
-| Size | Examples | Base BP Budget | Budget Increment | Base CR | Default Body | Software: required computer rank |
+| Size | Examples | Base BP Budget | Budget Increment | Base CR | Default Body | Software: required computer grade **[Errata p209]** |
 |---|---|---:|---:|---:|---:|---|
-| Tiny | Coin, insect, or smaller | 25 | 10 | 0 | 1 | Any computer |
-| Small | Hand-held up to what a person can comfortably carry | 50 | 25 | 0 | 5 | Rank 2 |
-| Medium | Average human up to a small truck | 100 | 50 | 1 | 10 | Rank 3 |
-| Large | Large truck to commercial aircraft / small starship | 300 | 100 | 3 | 50 | Rank 4 |
-| Huge | Capital starships, small stations, major architecture | 600 | 200 | 6 | 200 | Rank 5 |
-| Colossal | Largest stations, entire cities | 1,200 | 400 | 9 | 500 | Rank 6 |
+| Tiny | Coin, insect, or smaller | 25 | 10 | 0 | 1 | Minor |
+| Small | Hand-held up to what a person can comfortably carry | 50 | 25 | 0 | 5 | Minor |
+| Medium | Average human up to a small truck | 100 | 50 | 1 | 10 | Minor |
+| Large | Large truck to commercial aircraft / small starship | 300 | 100 | 3 | 50 | Moderate |
+| Huge | Capital starships, small stations, major architecture | 600 | 200 | 6 | 200 | Moderate |
+| Colossal | Largest stations, entire cities | 1,200 | 400 | 9 | 500 | Major |
 
 - Default Body is free; extra Body is bought with the Body Track attribute.
 - For **software**, the size category is chosen by complexity and sets the computer
@@ -192,10 +192,10 @@ Melee and Flare + Melee are unusual but legal.
 | **Kinetic** | Multiplier upgrades cost 10% less, rounded up | Fires solid projectiles; needs an Ammunition Resource bought separately. | All |
 | **Melee** | Everything (base and upgrades) costs half | Attacks are ranged by default; this limits to melee. **Can never take Area. [Errata p210]** | All |
 | **Anti-Missile** | Half of base cost (5 / 10 / 20); **1x** **[Ruling 2026-09-23]** | Its own attribute: the only 1x attack. Only targets missiles. Cannot take a multiplier. | All |
-| **Plasma** | none to BP | Uses **2× the Power Slots**. Gains **Counter (Shields)** free. Applies a free **Bleed** of `floor(m / 2)` damage/round; its magnitude matches the Attack's scale (Firefight → Minor, Battlefield → Moderate, Space → Major). **[Ruling]** | All (Terran Sphere tech) |
+| **Plasma** | none to BP | Uses **2× the Power Slots**. Gains **Counter (Shields)** free. Applies a free **Bleed** of `floor(m / 2)` damage/round; its magnitude matches the Attack's scale (Firefight → Minor, Battlefield → Moderate, Space → Major).  **[Ruling]** Extra Bleed damage above the free amount costs the difference between the full Bleed cost and the free Bleed **[Ruling 2026-09-27]**. | All (Terran Sphere tech) |
 | **Flare** | none | Energy variant. Cover Tags cannot be condemned against it. | Shohan only |
 | **Tse** | none | Melee only. Gains **Counter (Armor)** free. | Shohan only; cannot be manufactured by the Fourth Population |
-| **Hyperspace** | none | Gains **Counter (Armor)** free. Only known example: the Dreadnought's Hyper Cannon. | Shohan only |
+| **Hyperspace** | none | Gains **Counter (Armor)** and **Area: Small Sudden** free **[Errata p210]**; both are printed in the stat block as reminders. Only known example: the Dreadnought's Hyper Cannon. | Shohan only |
 
 Resulting costs:
 ```
@@ -288,8 +288,21 @@ per implementation:
 
 ### 5.8 Computer — variable BP
 
-Rank sets the largest program it can run and the max TN of its Tasks. Grade sets how many
-programs/Tasks it can run at once.
+Rank sets the max TN of its Tasks. Grade sets how many programs/Tasks it can run at once and
+which program sizes it can run.
+
+**[Errata p209–212] Software requirements.** Program size sets the computer **grade** it needs
+(rank no longer limits program size):
+
+| Program size | Required Computer Grade | Tasks per program | Users |
+|---|---|---|---|
+| Tiny, Small, Medium | Minor | 1–2 | Single user |
+| Large, Huge | Moderate | Multiple | Dozens at once |
+| Colossal | Major | Multiple | Hundreds at once |
+
+A program's Task runs at **min(Task TN, computer rank's max TN)**. A TN 20 program on a rank 2
+computer (max TN 16) is legal and rolls at 16. Store `requiredComputerGrade` on programs
+(derived from size); drop `requiredComputerRank`.
 
 | Rank | TN |
 |---:|---:|
@@ -328,8 +341,9 @@ Negates something specific. Repeatable. Common implementations:
 | **Shields** | Actions against Force Fields with this item get +2 Weapon Multiplier. |
 | **Disabling** | On a successful attack or Skill check, negates Target Modifiers on electronic items for one combat round or scene. An appropriate Engineering check by the victim can undo it. |
 | **Strike** | Lowers the difficulty of rolls made to oppose a named class of thing (e.g. a drug that eases curing a specific disease). |
+| **Strain** **[Errata p212]** | Raises or lowers the user's Psionic Strain by 5 per Counter (20 BP each; buy several for more). Used by drugs: Psi Amp +5 (1), Psi Damp −25 (5). |
 
-Free Counters from implementations (Plasma → Shields; Tse, Hyperspace → Armor) cost 0 BP.
+Free Counters from implementations (Plasma → Shields; Tse, Hyperspace → Armor) cost 0 BP. Hyperspace's free Area: Small Sudden also costs 0 BP.
 
 ### 5.10 Drive — 10 / 25 / 50 BP
 
@@ -351,7 +365,7 @@ Lets the item move under its own power. Repeatable (a ship can have several).
 | Air | usually Minor | Flavor only (wings, rotors, lighter-than-air, thrust). | All |
 | Ground | usually Minor | Flavor only (wheels, rails, hover, legs). | All |
 | Sea | usually Minor | Surface ships to submarines. | All |
-| Reaction | Moderate | Rocketry, usually fusion. Can share fuel with a Fusion/Antimatter Power Supply. | All |
+| Reaction | Moderate | Rocketry, usually fusion. Can share fuel with a Fusion/Antimatter Power Supply. **[Ruling 2026-09-28]** A **Minor** Reaction Drive is a jet pack: it works on a planet or in microgravity (Flight Pack). | All |
 | **Reactionless** | Moderate | Does **not** expel reaction mass **[Errata p213]**, still needs fuel. | Shohan only (rumored elsewhere) |
 | **Light Sail** | Moderate | Costs **15 BP**. No Fuel needed. The item cannot take **Maneuver**. | All |
 | Gravitic | Major | Unsafe inside deep gravity wells; only works outside a system's grav shore. | Fourth Population's FTL |
@@ -386,6 +400,17 @@ Weapon reaches one combat scale further; extended range is Hard.
 
 Battlefield weapons with Far Ranged can hit Space-scale targets at Short range only
 (e.g. a planetary cannon hitting low orbit, at Hard).
+
+**Range scale ladder [Ruling 2026-09-27]:** Far range at one combat scale is Short range
+at the next scale up. Firefight Far = Battlefield Short; Battlefield Far = Space Short.
+Use this whenever an item's range or movement limit is stated at one scale and checked
+at another (e.g. the Flight Pack: Far range at Battlefield scale, Short range at Space).
+
+**Larger-scale attacks on smaller targets [Ruling 2026-09-27]:** an attack of a larger
+combat scale used against targets of a smaller scale (e.g. Battlefield against Firefight)
+counts as an area attack by default, without buying Area. A limitation such as "no area
+attacks against Firefight targets" (Tse Blade, War Drone claws) removes that and is a
+legitimate refund.
 
 ### 5.13 Force Field — variable BP
 
@@ -433,6 +458,8 @@ Stores, launches, and recovers auxiliary craft.
 | Minor | One item 2 sizes smaller than the host | 15 |
 | Moderate | One item 1 size smaller, or several items 2 sizes smaller | 30 |
 | Major | Several items 1+ sizes smaller | 60 |
+
+**Capacity (errata, p214):** "several" / "multiple" items means **3 items, or 4 if crammed in**. So a Major Hangar on a Huge host holds 3 Large craft (4 crammed); a Moderate Hangar holds 3 items two sizes smaller (4 crammed). The app should store hangar capacity as 3 with a crammed maximum of 4.
 
 ### 5.16 Launcher — 5 / 10 / 15 BP each
 
@@ -485,6 +512,7 @@ Lets the item host and operate smaller modular items. Repeatable, mixed grades a
 | Data | Hard, unlimited-bandwidth connection. Can't be hacked without physical access. |
 | Psi | Lets a Psionic draw on the item's Power Supply. |
 | Weapon | Modular mount that accepts a separately built Attack. Built-in Attacks (e.g. turrets) don't need one. |
+| **Refueling** **[Errata p215]** | Docking connection that transfers fuel to a linked craft up to the Link's max size. **Draws 1 Power Slot of its grade** while in use. |
 
 ### 5.19 Manufacture — 25 / 50 / 100 BP
 
@@ -504,6 +532,9 @@ Implementations: **G3P** (general purpose), **Coil Gin** (always Major), **Tangl
 Bonus to one Skill or Ability check. **Max rank 4 per Skill/Ability** (sum all Modifier
 rows targeting the same Skill/Ability when validating).
 
+**[Ruling 2026-09-28]** A Modifier covering several skills is costed **per skill**:
+`10 × rank × skillCount` (Social Aggregator: +3 to three skills = 90 BP).
+
 ### 5.21 Neural Interface — 3 / 5 / 10 BP
 
 | Grade | Capability | Initiative bonus | BP |
@@ -519,16 +550,16 @@ Each rank gives **3 Power Slots** of its grade.
 | Grade | Minimum item size | Powers combat scale | Psionic effect scale | Strain threshold per rank | BP per rank |
 |---|---|---|---|---:|---:|
 | Minor | — | Firefight | Minor | 5 | 5 |
-| Moderate | Medium | Battlefield | Moderate | 10 | 10 |
-| Major | Large | Space | Major | 20 | 40 |
+| Moderate | Small **[Errata p216]** | Battlefield | Moderate | 10 | 10 |
+| Major | Large (Medium for a Hyperspace Tap or Coil) **[Errata p216]** | Space | Major | 20 | 40 |
 
 | Implementation | Fuel | Rules | Availability |
 |---|---|---|---|
 | Fusion | Fuel Resource | Most common. Can share fuel with a Reaction Drive. | All |
 | Antimatter | Fuel Resource | Can share fuel with a Reaction Drive. Doubles effective fuel rating when running on antimatter. Often hybrid fusion/antimatter. Antimatter fuel costs **+1 CR when bought in Port**: a provisioning cost, not a build cost, so it doesn't change BP or the item's CR. **[Ruling]** | All |
-| Coil | **Charge** Resource | Battery. Recharges from an external powered station. Its 20% discount is the Charge Resource's reduced price (4 / 8 / 12 BP); not an extra discount. **[Ruling]** | All |
+| Coil | **Charge** Resource | Battery. Recharges from an external powered station. Its 20% discount is the Charge Resource's reduced price (4 / 8 / 12 BP); not an extra discount. **[Ruling]** A Major Coil stack fits in a Medium item (one size below the usual minimum) **[Errata p216]**. | All |
 | Environmental | none | Wind, water, geothermal, solar. Static or slow-moving. | All |
-| Hyperspace Tap | none | Also bundled into Jump Drives. | Shohan only |
+| Hyperspace Tap | none | Also bundled into Jump Drives. Compact enough that a Major tap fits in a Medium item (one size below the usual minimum) **[Errata p216]**. | Shohan only |
 
 **Power budget:**
 ```
@@ -551,6 +582,7 @@ the lowest higher grade with spare slots.
 | Consumer | Slots |
 |---|---|
 | Attack (energy-fed) | 1 per Attack/turret, grade = Attack scale |
+| Rail (Kinetic Ranged) Attack **[Errata p210]** | Integrated or slaved (ship/vehicle weapons, suit-mounted or Weapon Link modules): 1 per Attack/turret, grade = Attack scale, **plus** Ammunition. Standalone (hand weapons): 0; power is built into each round's casing, already included in the Ammunition. |
 | Plasma Attack | 2 per Attack/turret |
 | Launcher | `ceil(count / 4)`, grade = launcher scale |
 | Anti-Missile Attack | 1 each (as shown in the example) |
@@ -574,13 +606,15 @@ Repairs a depletable Track (Body, Force Field) automatically.
 ```
 regenBP(grade, points) = costB(base[grade], points)     // base 5 / 10 / 15
 ```
-Implementations: **Biological**, **Force Field** (Shohan force fields only), **Mechanical**
-(repair robots, nanites, smart materials).
+Implementations: **Biological**, **Force Field** (Shohan force fields only; **always Major grade** **[Ruling 2026-09-27]**), **Mechanical**
+(repair robots, nanites, smart materials), **Strain** **[Errata]** (restores Psionic Strain; e.g. Psi Amp: Strain 5, Major, every round for its Duration).
 
 ### 5.24 Resource — 5 / 10 / 15 BP per rank
 
 A consumable. Each rank ≈ 30 days of light standby, 10 days of constant use, 10 combat
 rounds, or 10 firings. Buy as many ranks as needed.
+
+**[Errata] Duration** (drugs and other timed effects) is bought as a Resource: 1 Minor rank ≈ 10 combat rounds or 1 hour; 1 Moderate rank ≈ 1 day.
 
 | Grade | Combat scale | Drive / Power Supply grade | BP per rank |
 |---|---|---|---:|
@@ -592,7 +626,7 @@ rounds, or 10 firings. Buy as many ranks as needed.
 |---|---|
 | Ammunition | Feeds Kinetic Attacks; 10 shots per rank. Most rounds of the right scale fit. |
 | Charge | Feeds Coil Power Supplies. **20% cheaper, rounded down** (4 / 8 / 12 BP). Recharges only at an external station. |
-| Fuel | Feeds Drives and Power Supplies of the same scale and principle (shareable). |
+| Fuel | Feeds Drives and Power Supplies of the same principle (shareable). **[Errata p217]** A Fuel Resource can feed consumers of its own grade **or lower** (a Major tank can feed a Moderate Reaction Drive), never higher. |
 | Magazine | Feeds Launchers; 10 missiles per rank. |
 | Tangle | Feeds Ansibles; ~10 days casual use per rank. **10 BP per rank.** |
 
@@ -627,7 +661,7 @@ taskBP = 2 × TN              // halved if the item's Computer is a Brain
 | Grade | BP refund | Max per design | Examples |
 |---|---:|---:|---|
 | Minor | 10 | 3 | **Hungry** (uses a whole Resource rank per use, e.g. a burst-fire area attack); **Usage Restriction** (fails under a plausible condition, like rain) |
-| Moderate | 20 | 2 | **Malfunction** (failed rolls can produce Drawback Tags); **Prerequisite** (needs rails, a satellite network…); **Slave** (must be mounted on / controlled by bigger equipment); **Crew Requirement**; **Partial Armor** (aimed shots bypass armor) |
+| Moderate | 20 | 2 | **Malfunction** (failed rolls can produce Drawback Tags); **Prerequisite** (needs rails, a satellite network…); **Slave** (must be mounted on / controlled by bigger equipment); **Crew Requirement**; **Partial Armor** (aimed shots bypass armor); **Key Personnel** (needs a specific crew member, e.g. a Navigator) **[Ruling 2026-09-28]** |
 | Major | 50 | 1 | **One-Time Use** (needs an overhaul, Hard Engineering, before reuse); **Restricted Technology** (heavily regulated; severe reprisals) |
 
 Crew Requirement crew by item size: Small 1, Medium 2, Large 5, Huge 20, Colossal 100.
@@ -691,12 +725,12 @@ Hard errors (the rules forbid it):
 5. Power Slots cover the load using the cumulative, top-down check in §5.22.
 6. Launchers (non-Disposable) have a Magazine.
 7. Ansible has Tangle.
-8. Drives have Fuel unless Light Sail, Jump, or an implementation says otherwise.
+8. Drives have Fuel unless Light Sail, Jump, or an implementation says otherwise. The Fuel's grade must be equal to or higher than the Drive's grade **[Errata p217]**.
 9. Light Sail items have no Maneuver. Maneuver rank ≤ 4.
 10. Modifier rank ≤ 4 per Skill/Ability (summed).
 11. Tag rank ≤ 3.
 12. Limitation counts: Minor ≤ 3, Moderate ≤ 2, Major ≤ 1.
-13. Power Supply minimum size: Moderate ≥ Medium, Major ≥ Large.
+13. Power Supply minimum size: Moderate ≥ Small; Major ≥ Large, or ≥ Medium if the implementation is Hyperspace Tap or Coil **[Errata p216]**.
 14. Artificial Ecology minimum size: Minor ≥ Large, Moderate ≥ Huge, Major = Colossal.
 15. Force Field grade covers the item's size (Minor ≤ Medium, Moderate ≤ Large, Major ≤ Colossal).
 16. Terran Force Field: not Major, no Regeneration.
@@ -706,7 +740,7 @@ Hard errors (the rules forbid it):
 20. Far Ranged is not available at Major.
 21. Computer rank 1–6.
 22. Shrouded Hull only on Space-scale Armor.
-23. Software items: the running Computer's rank ≥ the size's required rank.
+23. Software items: the running Computer's grade ≥ the size's required grade (Tiny–Medium Minor, Large–Huge Moderate, Colossal Major); Tiny–Medium programs carry at most 2 Tasks. Program Tasks above the computer's TN are legal and run at the computer's max TN.
 
 Warnings (legal but worth flagging):
 
@@ -770,6 +804,8 @@ Free effects: Plasma → Counter (Shields), Bleed 4 (floor(8/2)).
 | p210 | Melee Attacks can never gain Area | §5.1, §5.3, §9 |
 | p212 | Counter (Armor): −1 unaimed, −2 aimed; −1 carries to other attackers | §5.9 |
 | p213 | Reactionless drives don't expel reaction mass | §5.10 |
+| p216 | **[New 2026-09-25]** Power Supplies may go on an item one size smaller than the table first listed: Moderate on Small (was Medium). Major stays Large, except that a Hyperspace Tap or a Coil stack can fit a Major Power Supply in a Medium item. | §5.22, §9 |
+| p217 | **[New 2026-09-25]** A Fuel Resource can feed Drives and Power Supplies of its own grade or lower (a larger tank can feed a smaller drive). | §5.24, §9 |
 
 **Gear errata (Chapter 11 catalog).** These don't change the rules, but if the app seeds
 reference items from Chapter 11, use the corrected values:
