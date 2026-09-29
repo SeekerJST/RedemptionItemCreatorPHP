@@ -57,7 +57,7 @@ These apply across the catalog. Items only repeat them where it helps.
 | Coil Power Supply with "Fuel" | Entered as the **Charge** resource (Coil runs on Charge). Noted where the book says Fuel. |
 | Armor ratings and weapon multipliers one step low | A known editing error (PJ, 2026-09-26): some stat blocks printed the **Multiplier rank** as the final value, leaving out the base rank. Items confirmed from the build notes are corrected in the errata (+1 Armor and/or +1 to the single-target Attack). Don't apply this as a blanket rule: many items were printed correctly. |
 | `Sidearms` (Modifiers on Chapter 11 gear) | **Firearms**. "Sidearms" is an old name for the personal-weapon skill that slipped into the equipment chapter (new errata, 2026-09-26). All entries below use Firearms. |
-| Modifier covering several skills (`Firearms/Heavy Weapons +1`) | **Costed per skill** (10 BP × rank × skills). The Social Aggregator's printed CR only matches this way. **Rules question:** confirm. |
+| Modifier covering several skills (`Firearms/Heavy Weapons +1`) | **Grade by breadth** (ruling 2026-09-28): Minor 1 skill (10 BP/rank), Moderate 2 skills (20), Major 3+ skills or a class like "Weapons" (30). |
 | `Malfunction: [Tag]` | A **Moderate Malfunction** limitation (−20); the Tag is the Drawback it produces. |
 | `Side Effect: [Tag]`, `[Disoriented]` from a Jump Drive, `[Emergent Altered]` | Drawback Tags. 0 BP. |
 | `[Free Tags 3] or 15 BP` | A 15 BP placeholder the owner spends on Tags or other attributes. Entered as a 15 BP row. |
@@ -113,8 +113,8 @@ alongside an XP cost.
 | [Personal G3P](#personal-g3p) | Small | 75 | 1 | 1 | ✔ |
 | [Craftsman G3P](#craftsman-g3p) | Medium | 165 | 2 | 2 | ✔ |
 | [Commercial G3P](#commercial-g3p) | Large | 330 | 3 | 3 | ✔ |
-| [Basic Neural Interface Control Link (NICL)](#basic-neural-interface-control-link-nicl) | Tiny | 25 | 0 | 0 | ✔ |
-| [Advanced Neural Interface Control Link](#advanced-neural-interface-control-link) | Tiny | 40 | 1 | 1 | ✔ |
+| [Basic Neural Interface Control Link (NICL)](#basic-neural-interface-control-link-nicl) | Tiny | 35 | 1 | 1 | ✔ |
+| [Advanced Neural Interface Control Link](#advanced-neural-interface-control-link) | Tiny | 50 | 2 | 2 | ✔ |
 | [Reflex Enhancements](#reflex-enhancements) | Tiny | 35 | 1 | 1 | ✔ |
 | [Cybernetic Arm](#cybernetic-arm) | Small | 37 | 0 | 0 | ✔ |
 | [Psi Amp](#psi-amp) | Tiny | 35 | 1 | 1 | ✔ |
@@ -955,7 +955,9 @@ p. 236 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
 
 #### Basic Neural Interface Control Link (NICL)
 
-p. 237 · **Size:** Tiny · **Printed CR:** 0 · **CC:** 2 · **XP:** 4
+p. 237 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 2 · **XP:** 4
+
+> **Errata** (new, 2026-09-29) p237: Technical-class Skills +1 is a Major Modifier (it covers a class of skills). Its Usage Restriction is Moderate, not Minor. CR 1 (was 0).
 
 > **Errata** (new, 2026-09-27) p237: Modifier: Initiative +1 (was +2), per the build notes.
 
@@ -963,23 +965,25 @@ p. 237 · **Size:** Tiny · **Printed CR:** 0 · **CC:** 2 · **XP:** 4
 |---|---|---:|
 | Link | Minor Data | 5 |
 | Neural Interface | Moderate | 5 |
-| Modifier | Technical-class Skills +1 | 10 |
+| Modifier | Technical-class Skills +1 (Major: a class of skills) | 30 |
 | Modifier | Initiative +1 | 10 |
 | Tag | [Protective Limiters] | 5 |
-| Limitation | Minor: Usage Restriction (Skill modifiers only apply to linked gear) | −10 |
-| **Total** | | **25** |
+| Limitation | Moderate: Usage Restriction (Skill modifiers only apply to linked gear) | −20 |
+| **Total** | | **35** |
 
-**Formula CR:** 0 ✔ matches printed
+**Formula CR:** 1 ✔ matches printed
 
 - Initiative: +2 from the Moderate Neural Interface when operating linked equipment; +1 in general from the Modifier.
 
 **Check:**
 
-- "Technical-class Skills +1" covers a class of skills. Costed as one Modifier.
+- Printed CR shown here is the errata value (CR 1). The book printed CR 0; CC is unchanged.
 
 #### Advanced Neural Interface Control Link
 
-p. 237 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 4 · **XP:** 6
+p. 237 · **Size:** Tiny · **Printed CR:** 2 · **CC:** 4 · **XP:** 6
+
+> **Errata** (new, 2026-09-29) p237: Technical-class Skills +1 is a Major Modifier (it covers a class of skills). Its Usage Restriction is Moderate, not Minor. CR 2 (was 1).
 
 > **Errata** (new, 2026-09-28) p237: Initiative Modifier is +2 (was +3). The Major Neural Interface gives +3 Initiative when operating linked equipment; the Modifier is the general bonus. [Dance Along the Bleeding Edge, But You Might Get Cut] splits in two: the Tag [Dance Along The Bleeding Edge 2] and the Major limitation [...But You Might Get Cut 2].
 
@@ -989,14 +993,14 @@ p. 237 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 4 · **XP:** 6
 |---|---|---:|
 | Link | Major Data | 50 |
 | Neural Interface | Major | 10 |
-| Modifier | Technical-class Skills +1 | 10 |
+| Modifier | Technical-class Skills +1 (Major: a class of skills) | 30 |
 | Modifier | Initiative +2 | 20 |
 | Tag | [Dance Along The Bleeding Edge] 2 | 10 |
 | Limitation | Major: [...But You Might Get Cut 2]: hacking that breaches the user’s defenses can inflict physical damage | −50 |
-| Limitation | Minor: Usage Restriction (Skill modifiers only apply to linked gear) | −10 |
-| **Total** | | **40** |
+| Limitation | Moderate: Usage Restriction (Skill modifiers only apply to linked gear) | −20 |
+| **Total** | | **50** |
 
-**Formula CR:** 1 ✔ matches printed
+**Formula CR:** 2 ✔ matches printed
 
 - Initiative: +3 from the Major Neural Interface when operating linked equipment; +2 in general from the Modifier.
 

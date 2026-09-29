@@ -63,7 +63,7 @@ These apply across the catalog. Items only repeat them where it helps.
 | Coil Power Supply with "Fuel" | Entered as the **Charge** resource (Coil runs on Charge). Noted where the book says Fuel. |
 | Armor ratings and weapon multipliers one step low | A known editing error (PJ, 2026-09-26): some stat blocks printed the **Multiplier rank** as the final value, leaving out the base rank. Items confirmed from the build notes are corrected in the errata (+1 Armor and/or +1 to the single-target Attack). Don't apply this as a blanket rule: many items were printed correctly. |
 | `Sidearms` (Modifiers on Chapter 11 gear) | **Firearms**. "Sidearms" is an old name for the personal-weapon skill that slipped into the equipment chapter (new errata, 2026-09-26). All entries below use Firearms. |
-| Modifier covering several skills (`Firearms/Heavy Weapons +1`) | **Costed per skill** (10 BP × rank × skills). The Social Aggregator's printed CR only matches this way. **Rules question:** confirm. |
+| Modifier covering several skills (`Firearms/Heavy Weapons +1`) | **Grade by breadth** (ruling 2026-09-28): Minor 1 skill (10 BP/rank), Moderate 2 skills (20), Major 3+ skills or a class like "Weapons" (30). |
 | `Malfunction: [Tag]` | A **Moderate Malfunction** limitation (−20); the Tag is the Drawback it produces. |
 | `Side Effect: [Tag]`, `[Disoriented]` from a Jump Drive, `[Emergent Altered]` | Drawback Tags. 0 BP. |
 | `[Free Tags 3] or 15 BP` | A 15 BP placeholder the owner spends on Tags or other attributes. Entered as a 15 BP row. |
