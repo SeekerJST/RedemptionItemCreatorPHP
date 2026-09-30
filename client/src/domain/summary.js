@@ -1,4 +1,4 @@
-// Everything the Build Point Summary panel shows, derived from the item state.
+// Everything the Build Summary panel shows, derived from the item state.
 // Pure: same item + lookups in, same summary out. Nothing is stored twice.
 // The rules themselves live in domain/rules; this module applies them to the item.
 

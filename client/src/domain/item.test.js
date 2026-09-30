@@ -23,6 +23,9 @@ const savedItem = {
     itemID: 'abc-123',
     itemName: 'Gauss Rifle',
     itemSize: 'SMALL',
+    category: 'Weapons: Firearms',
+    description: 'A reliable rifle.',
+    IsPublic: false,
     CostRating: 0,
     modifierList: [{ modifierID: 'Modifier_3', modifierName: 'Firearms' }],
     taskList: [],
@@ -55,7 +58,15 @@ describe('loading a saved item', () => {
     const item = itemReducer(createInitialItem(), { type: 'loadItem', apiItem: savedItem });
 
     it('restores the ID, name, size, and rows in their saved order, and starts clean', () => {
-        expect(item).toMatchObject({ itemId: 'abc-123', name: 'Gauss Rifle', size: 'SMALL', dirty: false });
+        expect(item).toMatchObject({
+            itemId: 'abc-123',
+            name: 'Gauss Rifle',
+            size: 'SMALL',
+            category: 'Weapons: Firearms',
+            description: 'A reliable rifle.',
+            isPublic: false,
+            dirty: false,
+        });
         expect(item.attributes.map((row) => row.id)).toEqual([2, 1, 3]);
         expect(item.attributes[0]).toMatchObject({ parentId: 1, AttributeName: 40, Rank: 2, Implementation: 'kinetic' });
         expect(item.tags[0]).toEqual({ id: 1, TagDesc: 'Rugged', TagRank: '2', TagFree: true });
@@ -73,7 +84,7 @@ describe('loading a saved item', () => {
 
     it('saves back the same rows it loaded', () => {
         const api = toApiItem(item, fakeSummary(item));
-        expect(api.itemID).toBe('abc-123');
+        expect(api).toMatchObject({ itemID: 'abc-123', category: 'Weapons: Firearms', description: 'A reliable rifle.' });
         expect(api.modifierList).toEqual(savedItem.modifierList);
         expect(api.attributeList.map(({ id, parentId, AttributeSystem, AttributeName, Scale, Rank, Implementation }) =>
             ({ id, parentId, AttributeSystem, AttributeName, Scale, Rank, Implementation })
@@ -91,6 +102,34 @@ describe('loading a saved item', () => {
 
     it('starts over with New', () => {
         expect(itemReducer(item, { type: 'newItem' })).toEqual(createInitialItem());
+    });
+});
+
+describe('a public (read-only) item', () => {
+    const item = itemReducer(createInitialItem(), { type: 'loadItem', apiItem: { ...savedItem, IsPublic: true } });
+
+    it('loads read-only', () => {
+        expect(item.isPublic).toBe(true);
+    });
+
+    it('ignores edits', () => {
+        for (const action of [
+            { type: 'setName', name: 'Hacked' },
+            { type: 'setDescription', description: 'Hacked' },
+            { type: 'setCategory', category: 'Hacked' },
+            { type: 'addRow', section: 'tags' },
+            { type: 'deleteRow', section: 'attributes', id: 1 },
+            { type: 'setModifierSkill', rowId: 3, skill: 'Melee' },
+        ]) {
+            expect(itemReducer(item, action)).toBe(item);
+        }
+    });
+
+    it('copies to an editable, unsaved private item with everything else kept', () => {
+        const copy = itemReducer(item, { type: 'copyItem' });
+        expect(copy).toMatchObject({ itemId: null, isPublic: false, dirty: true, name: 'Gauss Rifle (copy)', category: 'Weapons: Firearms' });
+        expect(copy.attributes).toEqual(item.attributes);
+        expect(itemReducer(copy, { type: 'setName', name: 'My Rifle' }).name).toBe('My Rifle');
     });
 });
 

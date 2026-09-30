@@ -3,6 +3,24 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-29 (2): Categories, descriptions, and read-only public items
+
+- **`db/migrations/005_item_description.sql`:** `item.Category` (`VARCHAR(100)`) and `item.Description`
+  (`TEXT`). Safe to run twice. Applied locally; **still needs running on Dreamhost.** `IsPublic` already
+  existed; the migration documents how it's now used.
+- **Public items are read-only.** `updateitem`/`deleteitem` return 403 for `IsPublic = 1`; `createitem`
+  always saves 0 and the API ignores a client's `IsPublic`. `getitem` and `getallitems` report it.
+- **Panel 1:** the Inventory is an expandable tree by category (group, then subgroup; Uncategorized
+  last). The open item's branch expands itself; public items show a lock.
+- **Panel 2:** a Category field (suggests existing categories) and a [Copy] button. A public item loads
+  read-only: fields locked, no sidebar editor or dragging, [Save]/[Delete]/[+]/[+>] disabled, and a note
+  under the toolbar. [Copy] makes an unsaved private copy named "… (copy)".
+- **Panel 3:** renamed **Build Summary**, with a Description field under the title.
+- **CSV export:** Category and Description lines in the header block.
+- Tests: 191 client (new `inventory.test.js`, read-only and Copy in `item.test.js`); smoke test 51 checks
+  (description, category, and a public item refusing update and delete). Checked in Chrome with seeded
+  public and private items, which were removed afterwards.
+
 ## 2026-09-29: Multi-skill Modifiers
 
 - **Modifier grade = breadth** (ruling 2026-09-28, `item_creation_rules.md` §5.20): Minor covers 1 skill,

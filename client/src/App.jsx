@@ -5,6 +5,7 @@ import Inventory from './components/Inventory.jsx';
 import ItemEditor from './components/ItemEditor.jsx';
 import Panel from './components/Panel.jsx';
 import BuildSummary from './components/summary/BuildSummary.jsx';
+import { knownCategories } from './domain/inventory.js';
 import { createInitialItem, itemReducer, toApiItem } from './domain/item.js';
 import { summarizeItem } from './domain/summary.js';
 import { useInventory } from './hooks/useInventory.js';
@@ -45,6 +46,8 @@ function GearCreator({ lookups }) {
     /** A pending question before something that would lose work: { message, actionLabel, run }. */
     const [confirm, setConfirm] = useState(null);
     const [busy, setBusy] = useState(false);
+
+    const categories = useMemo(() => knownCategories(inventory.items ?? []), [inventory.items]);
 
     const apiItem = () => toApiItem(item, summary);
     const exportCsv = () => downloadItemCsv(apiItem());
@@ -93,6 +96,13 @@ function GearCreator({ lookups }) {
                 }),
         });
 
+    /** An editable, unsaved copy of the open item (the way to change a public one). */
+    const copy = () => {
+        setConfirm(null);
+        dispatch({ type: 'copyItem' });
+        setStatus({ kind: 'ok', text: `Copied "${item.name}". Save to keep your copy.` });
+    };
+
     const startNew = () =>
         unlessUnsaved('Discard changes', () => {
             setConfirm(null);
@@ -127,7 +137,17 @@ function GearCreator({ lookups }) {
                     dispatch={dispatch}
                     summary={summary}
                     lookups={lookups}
-                    toolbar={{ onNew: startNew, onSave: save, onDelete: remove, canDelete: item.itemId != null, saveHint, busy }}
+                    categories={categories}
+                    toolbar={{
+                        onNew: startNew,
+                        onSave: save,
+                        onCopy: copy,
+                        onDelete: remove,
+                        canCopy: item.itemId != null,
+                        canDelete: item.itemId != null,
+                        saveHint,
+                        busy,
+                    }}
                     status={status}
                     confirm={confirm && { ...confirm, onConfirm: confirm.run }}
                     onCancelConfirm={() => setConfirm(null)}

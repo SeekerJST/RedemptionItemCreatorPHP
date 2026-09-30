@@ -48,7 +48,7 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `src/Http/` | `Request`, `Response`, `HttpException`. |
 | `config/config.example.php` | Template for `config.php` (`db`, `allow_writes`, `debug`). |
 | `client/src/App.jsx` | Layout only: loads lookups, holds the item state (`useReducer`), derives the summary, renders the three panels. |
-| `client/src/domain/` | Pure logic, no React. `constants.js` (UI constants and attribute IDs), `costs.js` (row BP), `summary.js` (everything Panel 3 shows), `item.js` (item reducer and the API payload), `ruleRows.js` (item rows → rules rows). |
+| `client/src/domain/` | Pure logic, no React. `constants.js` (UI constants and attribute IDs), `costs.js` (row BP), `summary.js` (everything Panel 3 shows), `item.js` (item reducer and the API payload), `ruleRows.js` (item rows → rules rows), `inventory.js` (the Inventory tree by category). |
 | `client/src/domain/rules/` | **The item creation rules** (docs/item_creation_rules.md) as code: one entry per attribute (cost, grades, rank meaning, power, allowed sub-rows), cost curves, sizes, Cost Rating, power budget. `*.test.js` beside them; the Frigate fixture is `frigate.test.js`. |
 | `client/src/components/EditableGrid.jsx` | SVAR grid + sidebar editor used by all three sections. Displays rows owned by React state; with `tree`, nests attribute sub-rows by `parentId`. Contains the SVAR workarounds. |
 | `client/src/components/` | `ItemEditor` (Panel 2), `ItemHeader`, `Section`, `LimitCounts`, `gridColumns.js`, `summary/*` (Panel 3 pieces). |
@@ -76,7 +76,7 @@ Routes match the C# API and are case-insensitive.
 |---|---|---|
 | GET | `itemcreator/getitemsizes` | `{ "1": "TINY", ... }` |
 | GET | `itemcreator/getitemsizesds`, `getskillsds`, `getitemattributesds`, `getattributescaleds` | Raw rows with DB column names. Byte-identical to the C# output. |
-| GET | `itemcreator/getallitems` | Items with `IsPublic = 1`; every item while `allow_writes` is on |
+| GET | `itemcreator/getallitems` | Items with `IsPublic = 1`; every item while `allow_writes` is on. Each has `category` and `IsPublic`. |
 | GET | `itemcreator/getitem/{id}` | 404 if missing |
 | POST | `itemcreator/createitem` | 201 + item with new `itemID` |
 | PUT | `itemcreator/updateitem/{id}` | Replaces all child rows |
@@ -109,6 +109,12 @@ parameter still works.
 - **Native prepares** (`ATTR_EMULATE_PREPARES => false`) make INT columns come back as JSON
   numbers, matching the C# output. Don't turn emulation on.
 - The code must run on PHP 8.0 (local interpreter): no enums, readonly properties, or `array_is_list()`.
+- **Public items are read-only (migration 005).** `updateitem` and `deleteitem` return 403 for an item
+  with `IsPublic = 1`. `createitem` always saves `IsPublic = 0`, and `Item::fromArray` ignores any
+  `IsPublic` the client sends, so nothing through the API can publish or unlock an item. The catalog
+  import (and later an admin panel) sets it in the database.
+- **`item.Category`** is `"Group: Subgroup"` (e.g. `Weapons: Firearms`) or one level (`Armor`); NULL is
+  Uncategorized. The Inventory tree splits on the first `:`.
 
 **React client:**
 - **React state owns the item; the grids only display it.** Edits, deletes, and drags come
@@ -148,6 +154,10 @@ parameter still works.
   reverse. Saving writes a sub-row's effective system; loading drops it again when it only repeats
   the parent's. The item state carries `itemId` (null until first saved) and `dirty`; any edit
   action sets `dirty`, and `loadItem`/`saved`/`newItem` clear it.
+- **Read-only items in the client:** `item.isPublic` locks everything. The reducer ignores edit actions
+  (the backstop), `EditableGrid` takes `readOnly` (no sidebar editor, no dragging), and the [+], [+>],
+  [Save], and [Delete] buttons are disabled with a tooltip. [Copy] (`copyItem`) clears the ID and
+  `isPublic` and appends " (copy)"; saving it creates a private item.
 - **No browser dialogs.** Confirmations (delete, discarding unsaved edits) are an inline line
   under the toolbar. `window.confirm` would also block browser-automation testing.
 
@@ -156,7 +166,7 @@ parameter still works.
 **Working:**
 - The full API is ported and verified against the running C# API: lookups are
   byte-identical, CSV output matches apart from fixes, and items saved by the C# version load correctly.
-- The smoke test passes all 40 checks.
+- The smoke test passes all 51 checks.
 - **Save, load, and delete** (Phase 4): [New]/[Save]/[Delete] in Panel 2, and the Inventory panel
   lists saved items and loads one on click. Sub-rows, implementations, and row order are saved
   (migration 004, applied to the local DB).
@@ -174,7 +184,8 @@ parameter still works.
 **Not done yet:**
 - There's no authentication. Write endpoints are controlled by the `allow_writes` config flag.
 - Nothing in the UI sets `IsPublic`: new items are private (0), so with writes off they
-  don't appear in `getallitems`.
+  don't appear in `getallitems`. Private items aren't limited to their creator yet (that needs login).
+- The catalog isn't imported yet, so the Inventory only holds saved test items.
 - Power Supply has no implementation (Fusion, Coil, ...) in the rules, so a Coil supply's
   cheaper Charge can't be chosen yet, and exports can't say which kind a supply is.
 - The Attacks summary (each attack with its sub-rows, and a name field) from the old code
@@ -187,6 +198,10 @@ parameter still works.
   Until then, item entries still have to get into the DB, either by keeping
   `allow_writes` on in production or by writing rows directly. Not settled yet.
   Leaving writes on means anyone can create, edit, or delete items.
+- **Public and private items** (2026-09-29). Public items (the catalog, to start) can be loaded
+  read-only by anyone; [Copy] makes an editable private copy. Private items are editable and, once
+  login exists, visible only to their creator. Everything a player saves starts private. An **admin
+  panel** will manage which items are public; that's a few iterations off.
 - **`getallitems` lists private items while writes are on** (2026-09-25). With writes on,
   anyone can already load, edit, or delete any item by ID, so hiding private items protects
   nothing, and new items (`IsPublic = 0`) have to show up in the Inventory to be reopened.

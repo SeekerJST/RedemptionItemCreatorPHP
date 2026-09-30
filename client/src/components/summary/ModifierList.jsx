@@ -2,7 +2,7 @@
  * Each Modifier attribute with its bonus: a skill picker for a Minor (one-skill) Modifier,
  * a free-text field for a Moderate or Major (multi-skill) one.
  */
-export default function ModifierList({ modifiers, skills, onChange }) {
+export default function ModifierList({ modifiers, skills, readOnly = false, onChange }) {
     if (modifiers.length === 0) {
         return null;
     }
@@ -23,12 +23,14 @@ export default function ModifierList({ modifiers, skills, onChange }) {
                                     placeholder={row.grade === 2 ? 'Two skills, e.g. Melee, Heavy Weapons' : 'Skills or a class, e.g. Weapons'}
                                     title="Separate skill names with commas."
                                     maxLength={100}
+                                    readOnly={readOnly}
                                     value={row.skill}
                                     onChange={(e) => onChange(row.id, e.target.value)}
                                 />
                             ) : (
                                 <select
                                     aria-label="Modifier skill"
+                                    disabled={readOnly}
                                     value={row.skill}
                                     onChange={(e) => onChange(row.id, e.target.value)}
                                 >

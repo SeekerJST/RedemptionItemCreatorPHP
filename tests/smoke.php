@@ -8,7 +8,9 @@ declare(strict_types=1);
  *   php -S localhost:5135 -t public dev/router.php     (in one terminal)
  *   php tests/smoke.php [http://localhost:5135]        (in another)
  *
- * Needs allow_writes => true in config/config.php.
+ * Needs allow_writes => true in config/config.php. The public-item checks also use the
+ * database settings there: no API route can publish an item, so the test flips IsPublic
+ * on its own throwaway item directly.
  */
 $base = rtrim($argv[1] ?? 'http://localhost:5135', '/') . '/itemcreator';
 $failures = 0;
@@ -53,6 +55,9 @@ $item = [
     'itemName' => 'Smoke Test Blaster',
     'itemSize' => 'SMALL',
     'CostRating' => 2,
+    'category' => 'Weapons: Firearms',
+    'description' => 'A test blaster, with "quotes" and, commas.',
+    'IsPublic' => true, // a client can't publish an item: ignored
     'modifierList' => [['modifierID' => 'Modifier_2', 'modifierName' => 'Firearms']],
     'taskList' => [['taskID' => 'Task_3', 'taskName' => 'Hacking']],
     'attributeList' => [
@@ -97,6 +102,9 @@ check('getallitems lists the new private item while writes are on', in_array($id
 check('getitem returns the item',$status === 200 && ($read['itemName'] ?? null) === 'Smoke Test Blaster', "HTTP $status $body");
 check('size comes back by name', ($read['itemSize'] ?? null) === 'SMALL');
 check('CostRating is saved', ($read['CostRating'] ?? null) === 2);
+check('category is saved', ($read['category'] ?? null) === 'Weapons: Firearms', $body);
+check('description is saved', ($read['description'] ?? null) === 'A test blaster, with "quotes" and, commas.', $body);
+check('a new item is private even if the client says IsPublic', ($read['IsPublic'] ?? null) === false, $body);
 check('attributes round-trip, with AttributeSystem', count($read['attributeList'] ?? []) === 5 && $read['attributeList'][0]['AttributeSystem'] === 'Weapons', $body);
 check('attributes come back in the saved order, not id order', array_column($read['attributeList'] ?? [], 'id') === [1, 2, 3, 5, 4], $body);
 check('parentId round-trips (null for top-level rows)', array_column($read['attributeList'] ?? [], 'parentId') === [null, null, null, 1, 1], $body);
@@ -109,6 +117,7 @@ check('modifier/task IDs keep their prefixes', ($read['modifierList'][0]['modifi
 echo "Update\n";
 $update = $read;
 $update['itemName'] = 'Smoke Test Blaster Mk II';
+$update['description'] = 'Now with more blast.';
 $update['itemSize'] = 'medium'; // size names match case-insensitively
 $update['tagList'] = [];
 $update['attributeList'] = array_slice($update['attributeList'], 0, 1);
@@ -119,6 +128,7 @@ $reread = json_decode($body, true);
 check('update replaced name, size, and child rows',
     ($reread['itemName'] ?? null) === 'Smoke Test Blaster Mk II'
     && ($reread['itemSize'] ?? null) === 'MEDIUM'
+    && ($reread['description'] ?? null) === 'Now with more blast.'
     && count($reread['attributeList']) === 1
     && $reread['tagList'] === [], $body);
 [$status] = call('PUT', "$base/updateitem/not-$id", json_encode($update));
@@ -132,9 +142,36 @@ check('Modifier/Task rows are qualified with their names', strpos($body, 'Modifi
 check('attribute header has an Implementation column', strpos($body, "System,Attribute Name,Implementation,Scale,Rank,Build Points,Power Slots\n") !== false, $body);
 check('sub-rows follow their parent, marked and with their implementation',
     strpos($body, "Weapons,Attack,,Minor,4,36,0\nWeapons,> Resource,Ammunition,Minor,2,10,0\nWeapons,> Attack Multiplier,Kinetic,Minor,2,27,0\nModifiers,") !== false, $body);
+check('the category and description frame the Cost Rating', strpos($body, "Item Size,SMALL\nCategory,Weapons: Firearms\nCost Rating,2\nDescription,\"A test blaster, with \"\"quotes\"\" and, commas.\"\n") !== false, $body);
 check('blank limit rows are skipped', substr_count($body, 'No Far Range') === 1 && strpos($body, ",Minor,0\n") === false, $body);
 [$status, $getBody] = call('GET', "$base/exportitemtocvs/download?item=" . rawurlencode(json_encode($item)));
 check('GET ?item= export (the C# contract) matches POST', $status === 200 && $getBody === $body);
+
+echo "Public (read-only) items\n";
+$config = require __DIR__ . '/../config/config.php';
+$db = $config['db'];
+$pdo = new PDO(
+    sprintf('mysql:host=%s;port=%d;dbname=%s;charset=utf8mb4', $db['host'], $db['port'] ?? 3306, $db['name']),
+    $db['user'],
+    $db['pass'],
+    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+);
+$setPublic = static fn (int $flag) => $pdo->prepare('UPDATE item SET IsPublic = ? WHERE ItemID = ?')->execute([$flag, $id]);
+$setPublic(1);
+[, $body] = call('GET', "$base/getitem/$id");
+check('getitem reports IsPublic', (json_decode($body, true)['IsPublic'] ?? null) === true, $body);
+[, $body] = call('GET', "$base/getallitems");
+$listed = array_column(json_decode($body, true) ?? [], 'IsPublic', 'itemID');
+check('getallitems reports IsPublic', ($listed[$id] ?? null) === true, $body);
+$categories = array_column(json_decode($body, true) ?? [], 'category', 'itemID');
+check('getallitems reports the category', ($categories[$id] ?? null) === 'Weapons: Firearms', $body);
+[$status, $body] = call('PUT', "$base/updateitem/$id", json_encode($update));
+check('updating a public item is a 403', $status === 403 && strpos($body, 'read-only') !== false, "HTTP $status $body");
+[$status] = call('DELETE', "$base/deleteitem/$id");
+check('deleting a public item is a 403', $status === 403);
+[$status] = call('GET', "$base/getitem/$id");
+check('the public item is still there', $status === 200);
+$setPublic(0);
 
 echo "Delete\n";
 [$status] = call('DELETE', "$base/deleteitem/$id");

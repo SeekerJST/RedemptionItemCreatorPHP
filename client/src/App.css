@@ -323,12 +323,49 @@ p.inventory_note {
     opacity: 0.85;
 }
 
+/* The category tree: groups, then subgroups, then items. Only the outermost list scrolls. */
+ul.inventory_tree,
 ul.inventory_list {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+div.inventory > ul.inventory_tree {
     max-height: 100vh;
     overflow-y: auto;
+}
+
+li.inventory_node > ul {
+    padding-left: 12px;
+}
+
+button.inventory_group {
+    display: block;
+    width: 100%;
+    margin: 0 0 4px;
+    padding: 4px 6px;
+    text-align: left;
+    color: antiquewhite;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+}
+
+li.inventory_node.depth-1 > button.inventory_group {
+    font-weight: normal;
+}
+
+button.inventory_group:hover,
+button.inventory_group:focus-visible {
+    background-color: rgba(77, 77, 77, 0.6);
+}
+
+span.inventory_count {
+    font-weight: normal;
+    opacity: 0.7;
 }
 
 button.inventory_item {
@@ -382,6 +419,36 @@ div.toolbar_message.error {
     font-weight: bold;
 }
 
+div.toolbar_message.readonly {
+    color: #9fc5df;
+}
+
 div.toolbar_message.confirm {
     color: #e0b04a;
+}
+
+/* Panel 3's Description field, under the Build Summary title. */
+div.item_description {
+    clear: both;
+    padding-top: 8px;
+}
+
+div.item_description label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+div.item_description textarea {
+    box-sizing: border-box;
+    width: 100%;
+    font: inherit;
+    color: antiquewhite;
+    background-color: rgba(77, 77, 77, 0.5);
+    border: 1px solid rgba(160, 160, 160, 0.5);
+    resize: vertical;
+}
+
+div.item_description textarea[readonly] {
+    border-color: transparent;
+    resize: none;
 }

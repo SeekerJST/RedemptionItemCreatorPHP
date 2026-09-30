@@ -44,6 +44,7 @@ const EDITOR_TOP_BAR = {
  *        defaults to `columns`. Lets the sidebar offer different fields/options per row.
  * @param {string[]} [props.liveFields] editor fields whose unsaved value should immediately
  *        re-shape the editor (e.g. picking a different Attribute changes which grades it offers)
+ * @param {boolean} [props.readOnly] display only: no sidebar editor and no dragging
  */
 export default function EditableGrid({
     rows,
@@ -56,6 +57,7 @@ export default function EditableGrid({
     rowClass,
     editorColumns,
     liveFields = [],
+    readOnly = false,
 }) {
     const [editingId, setEditingId] = useState(null);
     // Unsaved editor values for the liveFields, so the editor can re-shape itself before Save.
@@ -67,16 +69,18 @@ export default function EditableGrid({
     const [resets, setResets] = useState(0);
 
     // The grid calls init() once, so it reads the latest callbacks through a ref.
-    const callbacks = useRef({ onReorder, onSelect });
+    const callbacks = useRef({ onReorder, onSelect, readOnly });
     useLayoutEffect(() => {
-        callbacks.current = { onReorder, onSelect };
+        callbacks.current = { onReorder, onSelect, readOnly };
     });
 
     const init = useCallback((api) => {
         // Double-click opens the sidebar editor instead of the grid's inline editor.
         api.intercept('open-editor', ({ id }) => {
-            setEditingId(id);
-            setDraft({});
+            if (!callbacks.current.readOnly) {
+                setEditingId(id);
+                setDraft({});
+            }
             return false;
         });
         // Drags fire move-item repeatedly while in progress; inProgress === false marks the drop.
@@ -116,12 +120,12 @@ export default function EditableGrid({
                 columns={columns}
                 init={init}
                 autoRowHeight
-                reorder={Boolean(onReorder)}
+                reorder={Boolean(onReorder) && !readOnly}
                 tree={tree}
                 rowStyle={rowClass}
             />
             {/* Portaled to <body>: inside the scrolling section it would be clipped off-screen. */}
-            {editingRow && createPortal(
+            {editingRow && !readOnly && createPortal(
                 <WillowDark>
                     <Editor
                         key={editingRow.id}

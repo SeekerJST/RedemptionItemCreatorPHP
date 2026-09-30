@@ -30,11 +30,11 @@ final class ItemRepository
     public function listItems(bool $includePrivate): array
     {
         $stmt = $this->db->prepare(
-            'SELECT i.ItemID, i.ItemName, s.SizeName, i.CostRating
+            'SELECT i.ItemID, i.ItemName, i.Category, s.SizeName, i.CostRating, i.IsPublic
                FROM item i
                LEFT JOIN itemsize s ON s.ItemSizeID = i.ItemSize
               WHERE i.IsPublic = 1 OR ?
-              ORDER BY i.ItemName'
+              ORDER BY i.Category, i.ItemName'
         );
         $stmt->bindValue(1, (int) $includePrivate, PDO::PARAM_INT);
         $stmt->execute();
@@ -42,15 +42,17 @@ final class ItemRepository
         return array_map(static fn (array $r): array => [
             'itemID' => $r['ItemID'],
             'itemName' => $r['ItemName'],
+            'category' => (string) $r['Category'],
             'itemSize' => $r['SizeName'],
             'CostRating' => $r['CostRating'],
+            'IsPublic' => (bool) $r['IsPublic'],
         ], $stmt->fetchAll());
     }
 
     public function find(string $itemId): ?Item
     {
         $stmt = $this->db->prepare(
-            'SELECT i.ItemID, i.ItemName, s.SizeName, i.CostRating
+            'SELECT i.ItemID, i.ItemName, i.Category, i.Description, s.SizeName, i.CostRating, i.IsPublic
                FROM item i
                LEFT JOIN itemsize s ON s.ItemSizeID = i.ItemSize
               WHERE i.ItemID = ?'
@@ -66,6 +68,9 @@ final class ItemRepository
         $item->itemName = (string) $row['ItemName'];
         $item->itemSize = (string) $row['SizeName'];
         $item->costRating = $row['CostRating'];
+        $item->category = (string) $row['Category'];
+        $item->description = (string) $row['Description'];
+        $item->isPublic = (bool) $row['IsPublic'];
 
         // Rows saved before migration 004 have no SortOrder; they keep their id order.
         $attributeSql = 'SELECT * FROM itemattribute WHERE ItemID = ? ORDER BY SortOrder IS NULL, SortOrder, ItemAttributeID';
@@ -114,44 +119,50 @@ final class ItemRepository
         return $item;
     }
 
-    /** @return string the new ItemID */
+    /** @return string the new ItemID. New items are always private (IsPublic = 0). */
     public function create(Item $item): string
     {
         $sizeId = $this->sizeId($item->itemSize);
         $itemId = self::uuid4();
 
         $this->transaction(function () use ($item, $itemId, $sizeId): void {
-            $this->db->prepare('INSERT INTO item (ItemID, ItemName, ItemSize, CostRating) VALUES (?, ?, ?, ?)')
-                ->execute([$itemId, $item->itemName, $sizeId, $item->costRating]);
+            $this->db->prepare('INSERT INTO item (ItemID, ItemName, Category, Description, ItemSize, CostRating, IsPublic) VALUES (?, ?, ?, ?, ?, ?, 0)')
+                ->execute([$itemId, $item->itemName, self::nullIfEmpty($item->category), $item->description, $sizeId, $item->costRating]);
             $this->insertChildren($itemId, $item);
         });
 
         return $itemId;
     }
 
-    /** @return bool false when no item has that ID */
+    /**
+     * @return bool false when no item has that ID
+     * @throws HttpException 403 for a public item
+     */
     public function update(Item $item): bool
     {
         $itemId = (string) $item->itemId;
         $sizeId = $this->sizeId($item->itemSize);
 
         return $this->transaction(function () use ($item, $itemId, $sizeId): bool {
-            if (!$this->exists($itemId)) {
+            if (!$this->lockWritable($itemId)) {
                 return false;
             }
-            $this->db->prepare('UPDATE item SET ItemName = ?, ItemSize = ?, CostRating = ? WHERE ItemID = ?')
-                ->execute([$item->itemName, $sizeId, $item->costRating, $itemId]);
+            $this->db->prepare('UPDATE item SET ItemName = ?, Category = ?, Description = ?, ItemSize = ?, CostRating = ? WHERE ItemID = ?')
+                ->execute([$item->itemName, self::nullIfEmpty($item->category), $item->description, $sizeId, $item->costRating, $itemId]);
             $this->deleteChildren($itemId);
             $this->insertChildren($itemId, $item);
             return true;
         });
     }
 
-    /** @return bool false when no item has that ID */
+    /**
+     * @return bool false when no item has that ID
+     * @throws HttpException 403 for a public item
+     */
     public function delete(string $itemId): bool
     {
         return $this->transaction(function () use ($itemId): bool {
-            if (!$this->exists($itemId)) {
+            if (!$this->lockWritable($itemId)) {
                 return false;
             }
             $this->deleteChildren($itemId);
@@ -178,11 +189,24 @@ final class ItemRepository
         throw HttpException::badRequest("Unknown itemSize '$sizeName'. Expected one of: $valid.");
     }
 
-    private function exists(string $itemId): bool
+    /**
+     * Locks the item row for the rest of the transaction.
+     *
+     * @return bool false when no item has that ID
+     * @throws HttpException 403 if the item is public (read-only)
+     */
+    private function lockWritable(string $itemId): bool
     {
-        $stmt = $this->db->prepare('SELECT 1 FROM item WHERE ItemID = ? FOR UPDATE');
+        $stmt = $this->db->prepare('SELECT IsPublic FROM item WHERE ItemID = ? FOR UPDATE');
         $stmt->execute([$itemId]);
-        return $stmt->fetchColumn() !== false;
+        $isPublic = $stmt->fetchColumn();
+        if ($isPublic === false) {
+            return false;
+        }
+        if ((int) $isPublic === 1) {
+            throw HttpException::forbidden("Item '$itemId' is public and read-only. Copy it to make changes.");
+        }
+        return true;
     }
 
     private function deleteChildren(string $itemId): void
@@ -287,6 +311,11 @@ final class ItemRepository
             $this->db->rollBack();
             throw $e;
         }
+    }
+
+    private static function nullIfEmpty(string $value): ?string
+    {
+        return $value === '' ? null : $value;
     }
 
     private static function nullableString(mixed $value): ?string

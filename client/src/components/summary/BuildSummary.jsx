@@ -13,7 +13,7 @@ const Rule = ({ span = 4 }) => (
     </tr>
 );
 
-/** Panel 3: Build Point and Cost Rating totals, structure, power, systems, modifiers, tasks. */
+/** Panel 3: the description, Build Point and Cost Rating totals, structure, power, systems, modifiers, tasks. */
 export default function BuildSummary({ item, dispatch, summary, skills, onExport }) {
     const [exportError, setExportError] = useState(null);
 
@@ -29,12 +29,24 @@ export default function BuildSummary({ item, dispatch, summary, skills, onExport
     return (
         <div>
             <div>
-                <div className="breakdown-left">Build Point Summary</div>
+                <div className="breakdown-left">Build Summary</div>
                 <div className="breakdown-right">
                     <Button type="primary" onClick={handleExport}>[Export CSV]</Button>
                 </div>
             </div>
             {exportError && <p role="alert" style={{ color: 'darkred', clear: 'both' }}>{exportError}</p>}
+
+            <div className="item_description">
+                <label htmlFor="item_description_fld">Description</label>
+                <textarea
+                    id="item_description_fld"
+                    rows={4}
+                    value={item.description}
+                    readOnly={item.isPublic}
+                    placeholder={item.isPublic ? '' : 'What the item is and does'}
+                    onChange={(e) => dispatch({ type: 'setDescription', description: e.target.value })}
+                />
+            </div>
 
             <table>
                 <tbody>
@@ -81,6 +93,7 @@ export default function BuildSummary({ item, dispatch, summary, skills, onExport
                             <ModifierList
                                 modifiers={summary.modifiers}
                                 skills={skills}
+                                readOnly={item.isPublic}
                                 onChange={(rowId, skill) => dispatch({ type: 'setModifierSkill', rowId, skill })}
                             />
                         </td>
@@ -88,6 +101,7 @@ export default function BuildSummary({ item, dispatch, summary, skills, onExport
                             <TaskList
                                 tasks={summary.tasks}
                                 names={item.taskNames}
+                                readOnly={item.isPublic}
                                 onChange={(rowId, name) => dispatch({ type: 'setTaskName', rowId, name })}
                             />
                         </td>

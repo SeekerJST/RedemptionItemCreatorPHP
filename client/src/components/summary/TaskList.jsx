@@ -1,5 +1,5 @@
 /** A name field for each Task attribute, with its rank. */
-export default function TaskList({ tasks, names, onChange }) {
+export default function TaskList({ tasks, names, readOnly = false, onChange }) {
     if (tasks.length === 0) {
         return null;
     }
@@ -16,6 +16,7 @@ export default function TaskList({ tasks, names, onChange }) {
                             <input
                                 type="text"
                                 aria-label="Task name"
+                                readOnly={readOnly}
                                 value={names[row.id] ?? ''}
                                 onChange={(e) => onChange(row.id, e.target.value)}
                             />

@@ -23,6 +23,16 @@ final class Item
     public string $itemName = '';
     public string $itemSize = '';
     public ?int $costRating = null;
+    /** "Group: Subgroup" (e.g. "Weapons: Firearms") or one level ("Armor"); '' = Uncategorized. */
+    public string $category = '';
+    public string $description = '';
+
+    /**
+     * Public items are read-only through the API (the catalog, for now); players copy them to
+     * make changes. Only the database sets this: fromArray() ignores it, so a client can't
+     * publish an item or unlock a public one.
+     */
+    public bool $isPublic = false;
 
     /**
      * In editor order. parentId: the id of the row this one sits under (null = top level).
@@ -54,6 +64,8 @@ final class Item
         $item->itemName = trim(self::str($data, 'itemname', 'itemName') ?? '');
         $item->itemSize = trim(self::str($data, 'itemsize', 'itemSize') ?? '');
         $item->costRating = self::int($data, 'costrating', 'CostRating');
+        $item->category = trim(self::str($data, 'category', 'category') ?? '');
+        $item->description = trim(self::str($data, 'description', 'description') ?? '');
 
         foreach (self::list($data, 'attributelist') as $i => $row) {
             $where = "attributeList[$i]";
@@ -118,6 +130,9 @@ final class Item
             'itemName' => $this->itemName,
             'itemSize' => $this->itemSize,
             'CostRating' => $this->costRating,
+            'category' => $this->category,
+            'description' => $this->description,
+            'IsPublic' => $this->isPublic,
             'modifierList' => array_map(static fn (array $m): array => [
                 'modifierID' => self::MODIFIER_PREFIX . $m['id'],
                 'modifierName' => $m['name'],

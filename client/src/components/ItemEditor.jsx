@@ -14,8 +14,14 @@ const LIVE_ATTRIBUTE_FIELDS = ['AttributeName'];
 /** "+3" for a power source, the slot count for a power user, blank otherwise. */
 const powerLabel = ({ provides, uses }) => (provides ? `+${provides}` : uses ? String(uses) : '');
 
-/** Panel 2: the item's name and size, and its Tags, Attributes, and Limitations grids. */
-export default function ItemEditor({ item, dispatch, summary, lookups, toolbar, status, confirm, onCancelConfirm }) {
+const READ_ONLY_HINT = 'Public items are read-only: copy it to make changes';
+
+/**
+ * Panel 2: the item's name, category, and size, and its Tags, Attributes, and Limitations grids.
+ * A public item (item.isPublic) is shown read-only. categories: suggestions for the Category field.
+ */
+export default function ItemEditor({ item, dispatch, summary, lookups, categories, toolbar, status, confirm, onCancelConfirm }) {
+    const readOnly = item.isPublic;
     const columnsForAttributes = useMemo(() => attributeColumns(), []);
     const [selectedAttributeId, setSelectedAttributeId] = useState(null);
     const selectedAttribute = item.attributes.find((row) => row.id === selectedAttributeId);
@@ -35,7 +41,9 @@ export default function ItemEditor({ item, dispatch, summary, lookups, toolbar, 
     const canAddSubRow =
         selectedAttribute != null && selectedAttribute.parentId == null && (ATTRIBUTE_RULES[selectedKey]?.children ?? []).length > 0;
     let subRowHint = 'Add a sub-row under the selected attribute';
-    if (!selectedAttribute) {
+    if (readOnly) {
+        subRowHint = READ_ONLY_HINT;
+    } else if (!selectedAttribute) {
         subRowHint = 'Select an attribute row to add a sub-row under it';
     } else if (selectedAttribute.parentId != null) {
         subRowHint = 'Sub-rows can only be one level deep: select a top-level row';
@@ -124,9 +132,13 @@ export default function ItemEditor({ item, dispatch, summary, lookups, toolbar, 
         <>
             <ItemHeader
                 name={item.name}
+                category={item.category}
                 size={item.size}
                 sizes={lookups.sizes}
+                categories={categories}
+                readOnly={readOnly}
                 onNameChange={(name) => dispatch({ type: 'setName', name })}
+                onCategoryChange={(category) => dispatch({ type: 'setCategory', category })}
                 onSizeChange={(size) => dispatch({ type: 'setSize', size })}
                 toolbar={toolbar}
                 status={status}
@@ -135,12 +147,13 @@ export default function ItemEditor({ item, dispatch, summary, lookups, toolbar, 
             />
 
             <div className="section_container">
-                <Section title="Tags" ruleWidth="500px" onAdd={add('tags')}>
+                <Section title="Tags" ruleWidth="500px" onAdd={add('tags')} addHint={readOnly ? READ_ONLY_HINT : null}>
                     <EditableGrid
                         rows={tagRows}
                         columns={tagColumns}
                         onReorder={reorder('tags')}
                         rowClass={rowClassFor('tags')}
+                        readOnly={readOnly}
                         {...handlersFor('tags')}
                     />
                 </Section>
@@ -150,10 +163,11 @@ export default function ItemEditor({ item, dispatch, summary, lookups, toolbar, 
                     title="Attributes"
                     ruleWidth="600px"
                     onAdd={add('attributes')}
+                    addHint={readOnly ? READ_ONLY_HINT : null}
                     actions={
                         <Button
                             type="primary"
-                            disabled={!canAddSubRow}
+                            disabled={readOnly || !canAddSubRow}
                             title={subRowHint}
                             onClick={addSubRow}
                         >
@@ -170,14 +184,21 @@ export default function ItemEditor({ item, dispatch, summary, lookups, toolbar, 
                         rowClass={rowClassFor('attributes')}
                         editorColumns={editorColumnsForAttribute}
                         liveFields={LIVE_ATTRIBUTE_FIELDS}
+                        readOnly={readOnly}
                         {...handlersFor('attributes')}
                     />
                 </Section>
 
-                <Section title="Limitations" ruleWidth="500px" onAdd={add('limits')}>
+                <Section title="Limitations" ruleWidth="500px" onAdd={add('limits')} addHint={readOnly ? READ_ONLY_HINT : null}>
                     <div className="limitationBody">
                         <LimitCounts counts={summary.limitCounts} />
-                        <EditableGrid rows={limitRows} columns={limitColumns} rowClass={rowClassFor('limits')} {...handlersFor('limits')} />
+                        <EditableGrid
+                            rows={limitRows}
+                            columns={limitColumns}
+                            rowClass={rowClassFor('limits')}
+                            readOnly={readOnly}
+                            {...handlersFor('limits')}
+                        />
                     </div>
                 </Section>
             </div>

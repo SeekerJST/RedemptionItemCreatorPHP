@@ -29,10 +29,18 @@ export function createInitialItem() {
     return {
         /** The saved item's ID; null until the item is first saved. */
         itemId: null,
+        /**
+         * A public item (e.g. from the catalog) is read-only: edits are ignored, and the API
+         * refuses to save or delete it. Copy makes an editable private copy.
+         */
+        isPublic: false,
         /** True when there are edits since the item was created, loaded, or saved. */
         dirty: false,
         name: '',
         size: '',
+        /** "Group: Subgroup" (e.g. "Weapons: Firearms") or one level ("Armor"); '' = Uncategorized. */
+        category: '',
+        description: '',
         tags: [newRow.tags(1)],
         attributes: [newRow.attributes(1)],
         limits: [newRow.limits(1)],
@@ -55,8 +63,13 @@ export function itemReducer(item, action) {
             // action.itemId: the ID the API gave a newly created item (or the existing one).
             return { ...item, itemId: action.itemId, dirty: false };
 
+        case 'copyItem':
+            // A new, unsaved, editable copy: saving it creates a private item.
+            return { ...item, itemId: null, isPublic: false, name: `${item.name} (copy)`, dirty: true };
+
         default:
-            return { ...editItem(item, action), dirty: true };
+            // A read-only item ignores edits; the UI doesn't offer them, this is the backstop.
+            return item.isPublic ? item : { ...editItem(item, action), dirty: true };
     }
 }
 
@@ -68,6 +81,12 @@ function editItem(item, action) {
 
         case 'setSize':
             return { ...item, size: action.size };
+
+        case 'setCategory':
+            return { ...item, category: action.category };
+
+        case 'setDescription':
+            return { ...item, description: action.description };
 
         case 'addRow': {
             // action.parentId (attributes only): add the new row as a sub-row of that row.
@@ -183,8 +202,11 @@ export function fromApiItem(apiItem) {
     return {
         ...createInitialItem(),
         itemId: apiItem.itemID ?? null,
+        isPublic: Boolean(apiItem.IsPublic),
         name: apiItem.itemName ?? '',
         size: apiItem.itemSize ?? '',
+        category: apiItem.category ?? '',
+        description: apiItem.description ?? '',
         tags: (apiItem.tagList ?? []).map((row) =>
             normalizeRow('tags', { id: row.id, TagDesc: row.TagDesc ?? '', TagRank: row.TagRank ?? '1', TagFree: row.TagFree ?? false })
         ),
@@ -222,6 +244,8 @@ export function toApiItem(item, summary) {
         itemID: item.itemId,
         itemName: item.name,
         itemSize: item.size,
+        category: item.category,
+        description: item.description,
         CostRating: summary.costRating,
         modifierList: summary.modifiers.map((row) => ({
             modifierID: `Modifier_${row.id}`,
