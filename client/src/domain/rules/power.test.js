@@ -82,6 +82,11 @@ describe('Power Slots (§5.22)', () => {
         expect(grade(budget(plasmaAttack('plasmaSelfPowered')), MODERATE).used).toBe(0); // Plasma Carbine
     });
 
+    it('Links: only Refueling draws power, 1 slot of its grade per Link (errata p215)', () => {
+        expect(grade(budget([row('link', MAJOR, 3, { implementation: 'refueling' })]), MAJOR).used).toBe(3); // Fleet Auxiliary
+        expect(grade(budget([row('link', MAJOR, 2, { implementation: 'weapon' })]), MAJOR).used).toBe(0);
+    });
+
     it('Launchers use 1 slot per increment of 4; Anti-Missile 1 per mount', () => {
         expect(grade(budget([row('launchers', MAJOR, 2)]), MAJOR).used).toBe(2);
         expect(grade(budget([row('antiMissile', MAJOR, 2)]), MAJOR).used).toBe(2);

@@ -23,12 +23,26 @@ export const MULTIPLIER_IMPLEMENTATIONS = {
     // Self-powered plasma (the Plasma Carbine) needs special Ammunition instead of the slots. That
     // requirement is built in as a Moderate limitation: it takes one of the two Moderate limitation
     // slots but gives no BP back (ruling 2026-09-29).
-    plasma: { name: 'Plasma', slotsPerMount: 2, needsPower: true },
-    plasmaSelfPowered: { name: 'Plasma (self-powered)', needsAmmunition: true, impliedLimitation: GRADE.MODERATE },
+    // freeCounter / freeArea: sub-rows the implementation includes at no cost (spec §5.3, errata p210).
+    plasma: { name: 'Plasma', slotsPerMount: 2, needsPower: true, freeCounter: 'shields' },
+    plasmaSelfPowered: { name: 'Plasma (self-powered)', needsAmmunition: true, impliedLimitation: GRADE.MODERATE, freeCounter: 'shields' },
     flare: { name: 'Flare' },
-    hyperspace: { name: 'Hyperspace' },
-    tse: { name: 'Tse', meleeOnly: true },
+    hyperspace: { name: 'Hyperspace', freeCounter: 'armor', freeArea: true },
+    tse: { name: 'Tse', meleeOnly: true, freeCounter: 'armor' },
 };
+
+/**
+ * What an Attack's implementation includes free: a Counter (by implementation key) and/or Area.
+ * `attack`: the parent rule row of the sub-row being costed; `siblings`: its other sub-rows.
+ * @returns {{counter: string|null, area: boolean}}
+ */
+export function attackFreeEffects(attack, siblings = []) {
+    if (!attack || !['attack', 'attackMelee'].includes(attack.key)) {
+        return { counter: null, area: false };
+    }
+    const implementation = MULTIPLIER_IMPLEMENTATIONS[attackImplementation(siblings)];
+    return { counter: implementation?.freeCounter ?? null, area: Boolean(implementation?.freeArea) };
+}
 
 const ATTACK_CHILDREN = ['attackMultiplier', 'farRanged', 'counter', 'bleed', 'resource', 'modifier'];
 

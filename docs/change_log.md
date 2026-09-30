@@ -3,6 +3,27 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-29 (6): The remaining rules gaps
+
+- **Free sub-rows from an Attack's implementation** (spec §5.3, errata p210): Plasma's first Counter (Shields),
+  Tse's and Hyperspace's first Counter (Armor), and Hyperspace's Area cost 0. A second one costs in full.
+- **Counter implementations:** Armor, Shields, Disabling, Strike, Missiles, Detection, Strain (raise), Strain
+  (lower), and plain Counter. The Strain direction doesn't change the cost.
+- **Power Supply implementations:** Fusion and Antimatter need Fuel, Coil needs Charge; Environmental and
+  Hyperspace Tap need nothing. Minimum sizes per errata p216: Moderate on Small, Major on Large, or Medium for
+  a Coil or Hyperspace Tap.
+- **Fuel grade** (errata p217): the best Fuel on the item must reach each fuelled Drive's and Power Supply's grade.
+- **Regeneration implementations:** Biological, Force Field, Mechanical, Strain. Force Field Regeneration must
+  be Major and sit under a Force Field.
+- **Resource: Duration.** **Link types:** Data, Psi, Weapon, Refueling (draws 1 slot of its grade per Link).
+- **Drive types** for the catalog: Air, Ground, Sea, Reaction, Reactionless, Gravitic (no grade restrictions).
+- **Frigate fixture** now follows the catalog's Redemption: 1,416 BP, CR 10, Major 7 of 9, with Plasma's free
+  Counter and Bleed. The new fuel check flagged the Workbench version's Moderate Fuel.
+- **System Breakdown:** a sub-row whose parent is shown elsewhere (Regeneration on a Force Field) now stands at
+  the top level, "…, on Force Field", instead of hanging under the row before it.
+- Not done: Terran vs Shohan Force Fields (§9 #16) need the faction field, still out of scope.
+- Tests: 209 client; smoke test 51. Checked in Chrome with a seeded item (removed afterwards).
+
 ## 2026-09-29 (5): Plasma's free Bleed
 
 - **Bleed under a Plasma Attack** is free up to `floor(m / 2)` at the Attack's scale; ranks above that cost the

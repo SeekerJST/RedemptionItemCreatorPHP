@@ -15,6 +15,15 @@ export const FORCE_FIELD = {
     maxItemSize: { 1: SIZE.MEDIUM, 2: SIZE.LARGE, 3: SIZE.COLOSSAL },
 };
 
+/** Spec §5.23. Strain (errata) restores Psionic Strain, e.g. the Psi Amp. */
+export const REGENERATION_IMPLEMENTATIONS = {
+    general: { name: 'Regeneration' },
+    biological: { name: 'Biological' },
+    forceField: { name: 'Force Field' },
+    mechanical: { name: 'Mechanical' },
+    strain: { name: 'Strain' },
+};
+
 export const protectionRules = {
     armorRating: {
         name: 'Armor Rating',
@@ -63,11 +72,14 @@ export const protectionRules = {
         children: ['regeneration'],
     },
 
+    /** Force Field Regeneration is Shohan only and always Major (ruling 2026-09-27). */
     regeneration: {
         name: 'Regeneration',
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.RANK },
+        implementations: REGENERATION_IMPLEMENTATIONS,
+        defaultImplementation: 'general',
         cost: (row) => curveB(priceFor({ 1: 5, 2: 10, 3: 15 }, row.grade), row.rank),
         children: [],
     },

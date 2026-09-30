@@ -140,6 +140,35 @@ describe('Bleed (§5.4)', () => {
     });
 });
 
+describe('free sub-rows from an Attack implementation (spec §5.3, errata p210)', () => {
+    const attackWith = (implementation) => ({
+        parent: { id: 10, key: 'attack', grade: MINOR, rank: 1 },
+        siblings: [{ id: 11, key: 'attackMultiplier', grade: MINOR, rank: 3, implementation, parentId: 10 }],
+    });
+    const sub = (key, implementation, rank = 1, id = 12) => ({ id, key, grade: MINOR, rank, implementation, parentId: 10 });
+
+    it('Plasma: one Counter (Shields) free; a second rank or a second row costs 20', () => {
+        expect(rowCost(sub('counter', 'shields'), attackWith('plasma'))).toBe(0);
+        expect(rowCost(sub('counter', 'shields', 2), attackWith('plasma'))).toBe(20);
+        const ctx = attackWith('plasmaSelfPowered');
+        const second = sub('counter', 'shields', 1, 13);
+        expect(rowCost(second, { ...ctx, siblings: [...ctx.siblings, sub('counter', 'shields')] })).toBe(20);
+        expect(rowCost(sub('counter', 'armor'), attackWith('plasma'))).toBe(20); // Plasma Carbine's bought Counter
+    });
+
+    it('Tse and Hyperspace: Counter (Armor) free; Hyperspace also Area', () => {
+        expect(rowCost(sub('counter', 'armor'), attackWith('tse'))).toBe(0);
+        expect(rowCost(sub('counter', 'armor'), attackWith('hyperspace'))).toBe(0);
+        expect(rowCost(sub('area', null), attackWith('hyperspace'))).toBe(0);
+        expect(rowCost(sub('area', null), attackWith('plasma'))).toBe(20);
+    });
+
+    it('elsewhere, a Counter is 20 each and Area 20', () => {
+        expect(cost('counter', MINOR, 2, { implementation: 'shields' })).toBe(40);
+        expect(cost('area', MINOR, 1)).toBe(20);
+    });
+});
+
 describe('Body Track (§5.5): priced by item size, not grade', () => {
     it.each([
         [SIZE.SMALL, 5],

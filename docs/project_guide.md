@@ -180,16 +180,16 @@ parameter still works.
   They're shown indented in the System Breakdown.
 - The project is a git repository.
 - **Rules engine and validation** (implementation plan, Phases 1-2): costs, Cost Rating, power
-  slots, and §9 checks come from `client/src/domain/rules`, with 178 client tests including the
-  Redemption-class Frigate. Panel 3 lists rule problems and highlights the rows involved.
+  slots, and §9 checks come from `client/src/domain/rules`, with the client tests including the
+  Redemption-class Frigate (built as the catalog has it: 1,416 BP, CR 10). Panel 3 lists rule problems and highlights the rows involved.
 
 **Not done yet:**
 - There's no authentication. Write endpoints are controlled by the `allow_writes` config flag.
 - Nothing in the UI sets `IsPublic`: new items are private (0), so with writes off they
   don't appear in `getallitems`. Private items aren't limited to their creator yet (that needs login).
 - The catalog isn't imported yet, so the Inventory only holds saved test items.
-- Power Supply has no implementation (Fusion, Coil, ...) in the rules, so a Coil supply's
-  cheaper Charge can't be chosen yet, and exports can't say which kind a supply is.
+- Terran vs Shohan Force Fields (§9 #16) aren't modelled: that needs the faction/tech-base field,
+  which is out of scope for now.
 - The Attacks summary (each attack with its sub-rows, and a name field) from the old code
   was never displayed there and hasn't been rebuilt.
 - Not deployed to Dreamhost yet.
@@ -244,8 +244,8 @@ Behavior kept from the old code, but worth confirming:
 4. **Settle the open rules questions** above.
 5. **Attacks summary:** list each attack with its sub-rows (multiplier, ammo) in Panel 3,
    which the old code was working toward.
-6. **Power Supply implementations** (Fusion, Antimatter, Coil, Environmental, Hyperspace Tap),
-   so a Coil supply can take the cheaper Charge Resource.
+6. **Catalog import.** Have `docs/catalog_tools` emit structured rows (attribute, grade, rank,
+   implementation, sub-rows) and load them as public items with their category and description.
 7. **Login / authentication** as part of the SilentSpirits revamp, shared with SystemGeneratorLive.
 8. **Merge planning with SystemGeneratorLive.** Shared layout and styling, a shared DB
    config approach (SystemGeneratorLive uses `db_config.php` variables; this project

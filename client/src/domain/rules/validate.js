@@ -12,8 +12,9 @@ import {
     COMPUTER_TASK_LIMIT,
     DRIVE_IMPLEMENTATIONS,
     LIFE_SUPPORT_IMPLEMENTATIONS,
-    POWER_SUPPLY_MIN_ITEM_SIZE,
+    POWER_SUPPLY_IMPLEMENTATIONS,
     computerTargetNumber,
+    powerSupplyMinSize,
 } from './systems.js';
 import { bodyPurchase, sizeName } from './sizes.js';
 
@@ -109,8 +110,18 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
             );
         }
 
-        if (row.key === 'powerSupply' && size != null && size < (POWER_SUPPLY_MIN_ITEM_SIZE[row.grade] ?? 0)) {
-            error(`A ${GRADE_NAMES[row.grade]} Power Supply needs at least a ${sizeName(POWER_SUPPLY_MIN_ITEM_SIZE[row.grade])} item.`, row.id);
+        const supplyMin = row.key === 'powerSupply' ? powerSupplyMinSize(row.grade, implementation) : 0;
+        if (row.key === 'powerSupply' && size != null && size < supplyMin) {
+            const kind = POWER_SUPPLY_IMPLEMENTATIONS[implementation]?.compactMajor ? `${GRADE_NAMES[row.grade]} ${POWER_SUPPLY_IMPLEMENTATIONS[implementation].name}` : `${GRADE_NAMES[row.grade]} Power Supply`;
+            error(`A ${kind} needs at least a ${sizeName(supplyMin)} item.`, row.id);
+        }
+
+        const underForceField = row.key === 'regeneration' && parent?.key === 'forceField';
+        if (row.key === 'regeneration' && implementation === 'forceField' && parent && !underForceField) {
+            error('Force Field Regeneration goes under a Force Field.', row.id);
+        }
+        if (row.key === 'regeneration' && (underForceField || implementation === 'forceField') && row.grade !== 3) {
+            error('Force Field Regeneration is always Major.', row.id);
         }
 
         const ecologyMin = LIFE_SUPPORT_IMPLEMENTATIONS.artificialEcology.minItemSize[row.grade];
@@ -170,9 +181,33 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
     if (ansible && !hasResource('tangle', 'general')) {
         error('An Ansible needs a Tangle Resource.', ansible.id);
     }
+    // Fuel feeds Drives and Power Supplies of its own grade or lower (errata p217), so the best
+    // Fuel on the item has to reach each consumer's grade.
     const fuelled = all.find((row) => row.key === 'drive' && !DRIVE_IMPLEMENTATIONS[row.implementation]?.noFuel);
     if (fuelled && !hasResource('fuel', 'general')) {
         error('Drives need a Fuel Resource (unless it\'s a Light Sail or Jump drive).', fuelled.id);
+    }
+    const supplyFeed = (row) => (row.key === 'powerSupply' ? POWER_SUPPLY_IMPLEMENTATIONS[row.implementation]?.feed : null);
+    for (const supply of all.filter((row) => supplyFeed(row))) {
+        const feed = supplyFeed(supply);
+        if (!hasResource(feed, 'general')) {
+            const needs = feed === 'charge' ? 'a Charge Resource' : 'a Fuel Resource';
+            error(`A ${POWER_SUPPLY_IMPLEMENTATIONS[supply.implementation].name} Power Supply needs ${needs}.`, supply.id);
+        }
+    }
+    const fuelRows = all.filter((row) => row.key === 'resource' && row.implementation === 'fuel');
+    if (fuelRows.length > 0) {
+        const bestFuel = Math.max(...fuelRows.map((row) => row.grade ?? 0));
+        const consumers = all.filter(
+            (row) =>
+                (row.key === 'drive' && !DRIVE_IMPLEMENTATIONS[row.implementation]?.noFuel) || supplyFeed(row) === 'fuel'
+        );
+        for (const consumer of consumers.filter((row) => (row.grade ?? 0) > bestFuel)) {
+            error(
+                `${name(consumer)} is ${GRADE_NAMES[consumer.grade]}: its Fuel must be ${GRADE_NAMES[consumer.grade]} or higher, and the best Fuel here is ${GRADE_NAMES[bestFuel]}.`,
+                [consumer.id, ...fuelRows.map((row) => row.id)]
+            );
+        }
     }
 
     // ---- power -----------------------------------------------------------------------------

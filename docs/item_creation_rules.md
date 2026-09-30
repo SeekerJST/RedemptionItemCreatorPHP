@@ -795,7 +795,11 @@ Book pp. 219–221. All numbers below re-checked against the formulas in this sp
 
 **With launchers in increments of 4 [Ruling 2026-09-23]**, the 6 launchers become 2 increments
 (8 launchers, 120 BP): **1,471 BP → 871 over → CR 10**, with the same power use (2 Major slots).
-The app's test fixture uses these numbers.
+
+**The app's test fixture now follows the catalog instead [2026-09-29]** (`equipment_catalog.md`,
+p259 errata): 4 launchers, Major Fuel (this exercise's Moderate Fuel can't feed the Major
+Gravitic Drive and Fusion supply under errata p217), and Crew Requirement + Restricted Technology.
+**1,416 BP, CR 10**, Major 7 of 9 slots.
 
 Power check: available Major = 3 (Gravitic Drive) + 6 (2 Power Supply ranks) = 9.
 Used Major = 4 (2 Plasma turrets × 2) + 2 (6 Launchers → ceil(6/4)) + 2 (Anti-Missile) = 8. ✔

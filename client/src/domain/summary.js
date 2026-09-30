@@ -203,7 +203,7 @@ const SHOWN_ELSEWHERE = new Set(['armorRating', 'body', 'forceField', 'modifier'
 function systemBreakdown(attributes, relatedById, systemsById, nameById) {
     const systems = new Map();
     for (const attribute of attributes) {
-        const { row } = relatedById.get(attribute.id);
+        const { row, parent } = relatedById.get(attribute.id);
         if (SHOWN_ELSEWHERE.has(row.key)) {
             continue;
         }
@@ -215,11 +215,15 @@ function systemBreakdown(attributes, relatedById, systemsById, nameById) {
                 ? rule?.implementations?.[row.implementation]?.name
                 : null;
         const name = implementation ? `${nameById.get(attribute.id)} (${implementation})` : nameById.get(attribute.id);
-        const label = grade ? `${name} (${grade})` : name;
+        const graded = grade ? `${name} (${grade})` : name;
+        // A sub-row whose parent is shown elsewhere (e.g. Regeneration on a Force Field) has no parent
+        // line here to sit under, so it stands at the top level and names its parent.
+        const orphaned = parent != null && SHOWN_ELSEWHERE.has(parent.key);
+        const label = orphaned ? `${graded}, on ${nameById.get(parent.id)}` : graded;
         const systemName = systemsById.get(attribute.id) || UNASSIGNED_SYSTEM;
 
         const rows = systems.get(systemName) ?? [];
-        rows.push({ id: attribute.id, label, rank: attribute.Rank, depth: attribute.parentId == null ? 0 : 1 });
+        rows.push({ id: attribute.id, label, rank: attribute.Rank, depth: attribute.parentId == null || orphaned ? 0 : 1 });
         systems.set(systemName, rows);
     }
 

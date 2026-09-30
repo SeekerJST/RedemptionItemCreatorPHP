@@ -91,9 +91,34 @@ describe('validation (§9)', () => {
         expectError(check([row('forceField', MINOR), row('powerSupply', MINOR)], { size: SIZE.LARGE }), 'only covers items up to Medium');
     });
 
-    it('Power Supply minimum sizes', () => {
-        expectError(check([row('powerSupply', MODERATE)], { size: SIZE.SMALL }), 'needs at least a Medium item');
-        expectError(check([row('powerSupply', MAJOR)], { size: SIZE.MEDIUM }), 'needs at least a Large item');
+    it('Power Supply minimum sizes (errata p216): Moderate on Small; Major on Large, or Medium if compact', () => {
+        expectError(check([row('powerSupply', MODERATE)], { size: SIZE.TINY }), 'needs at least a Small item');
+        expect(errors(check([row('powerSupply', MODERATE)], { size: SIZE.SMALL }))).toEqual([]);
+        expectError(check([row('powerSupply', MAJOR)], { size: SIZE.MEDIUM }), 'Major Power Supply needs at least a Large item');
+        const coil = row('powerSupply', MAJOR, 1, { implementation: 'coil' });
+        expect(errors(check([coil, row('resource', MAJOR, 1, { implementation: 'charge' })], { size: SIZE.MEDIUM }))).toEqual([]);
+        expectError(check([coil], { size: SIZE.SMALL }), 'Major Coil needs at least a Medium item');
+        expect(errors(check([row('powerSupply', MAJOR, 1, { implementation: 'hyperspaceTap' })], { size: SIZE.MEDIUM }))).toEqual([]);
+    });
+
+    it('Power Supply feeds: Fusion and Antimatter need Fuel, Coil needs Charge', () => {
+        expectError(check([row('powerSupply', MINOR, 1, { implementation: 'fusion' })]), 'Fusion Power Supply needs a Fuel Resource');
+        expectError(check([row('powerSupply', MINOR, 1, { implementation: 'coil' })]), 'Coil Power Supply needs a Charge Resource');
+        expect(errors(check([row('powerSupply', MINOR, 1, { implementation: 'environmental' })]))).toEqual([]);
+    });
+
+    it('Fuel grade (errata p217): the best Fuel must reach each Drive and fuelled Power Supply', () => {
+        const drive = row('drive', MODERATE, 1, { implementation: 'reaction' });
+        expectError(check([drive, row('resource', MINOR, 3, { implementation: 'fuel' })]), 'its Fuel must be Moderate or higher, and the best Fuel here is Minor');
+        expect(errors(check([drive, row('resource', MAJOR, 3, { implementation: 'fuel' })]))).toEqual([]); // bigger tank, smaller drive
+    });
+
+    it('Force Field Regeneration: always Major, and only under a Force Field', () => {
+        const field = row('forceField', MINOR, 3);
+        expectError(check([field, under(field, 'regeneration', MODERATE, 4)]), 'always Major');
+        expect(errors(check([field, under(field, 'regeneration', MAJOR, 4), row('powerSupply', MINOR, 1)]))).toEqual([]);
+        const body = row('body', null, 1);
+        expectError(check([body, under(body, 'regeneration', MAJOR, 2, { implementation: 'forceField' })]), 'goes under a Force Field');
     });
 
     it('Artificial Ecology minimum size', () => {

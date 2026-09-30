@@ -1,5 +1,6 @@
 // All other attributes (item_creation_rules.md §5.1, §5.6–§5.12, §5.14–§5.22, §5.24, §5.26).
 
+import { attackFreeEffects } from './attacks.js';
 import { ALL_GRADES, GRADE, RANK, perUnit, priceFor } from './common.js';
 import { SIZE } from './sizes.js';
 
@@ -27,8 +28,17 @@ export const COMPUTER_IMPLEMENTATIONS = {
 export const COMPUTER_TASK_LIMIT = { 1: 5, 2: 50, 3: Infinity };
 export const computerTargetNumber = (rank) => 12 + 2 * rank;
 
+// Spec §5.10. Air, Ground, and Sea are "usually Minor" and Reaction, Reactionless, and Gravitic
+// usually a set grade, but the book builds exceptions (a Minor Reaction Drive is a jet pack), so
+// only Light Sail and Jump restrict their grade.
 export const DRIVE_IMPLEMENTATIONS = {
     standard: { name: 'Standard' },
+    air: { name: 'Air' },
+    ground: { name: 'Ground' },
+    sea: { name: 'Sea' },
+    reaction: { name: 'Reaction' },
+    reactionless: { name: 'Reactionless' }, // Shohan; expels no reaction mass, still needs Fuel
+    gravitic: { name: 'Gravitic' }, // only outside a system's grav shore
     lightSail: { name: 'Light Sail', price: 15, grades: [GRADE.MODERATE], noFuel: true, noManeuver: true },
     jump: { name: 'Jump', grades: [GRADE.MAJOR], noFuel: true },
 };
@@ -52,9 +62,67 @@ export const RESOURCE_TYPES = {
     magazine: { name: 'Magazine', perRank: { 1: 5, 2: 10, 3: 15 } },
     charge: { name: 'Charge', perRank: { 1: 4, 2: 8, 3: 12 } },
     tangle: { name: 'Tangle', perRank: { 1: 10, 2: 10, 3: 10 } },
+    // Timed effects such as drugs (errata): 1 Minor rank ≈ 10 combat rounds or 1 hour; 1 Moderate ≈ 1 day.
+    duration: { name: 'Duration', perRank: { 1: 5, 2: 10, 3: 15 } },
 };
 
-export const POWER_SUPPLY_MIN_ITEM_SIZE = { 2: SIZE.MEDIUM, 3: SIZE.LARGE };
+/**
+ * Spec §5.22. `feed`: the Resource type it runs on (item-level; Resources can be shared).
+ * `compactMajor`: a Major one fits in a Medium item, one size below the usual minimum (errata p216).
+ */
+export const POWER_SUPPLY_IMPLEMENTATIONS = {
+    general: { name: 'Power Supply' },
+    fusion: { name: 'Fusion', feed: 'fuel' },
+    antimatter: { name: 'Antimatter', feed: 'fuel' },
+    coil: { name: 'Coil', feed: 'charge', compactMajor: true },
+    environmental: { name: 'Environmental' },
+    hyperspaceTap: { name: 'Hyperspace Tap', compactMajor: true }, // Shohan
+};
+
+/** Smallest item a Power Supply fits in (errata p216): Moderate on Small, Major on Large (Medium if compact). */
+export function powerSupplyMinSize(grade, implementation) {
+    if (grade === GRADE.MAJOR) {
+        return POWER_SUPPLY_IMPLEMENTATIONS[implementation]?.compactMajor ? SIZE.MEDIUM : SIZE.LARGE;
+    }
+    return grade === GRADE.MODERATE ? SIZE.SMALL : 0;
+}
+
+/** Spec §5.18. Refueling (errata p215) draws 1 Power Slot of its grade per Link while in use. */
+export const LINK_IMPLEMENTATIONS = {
+    general: { name: 'Link' },
+    data: { name: 'Data' },
+    psi: { name: 'Psi' },
+    weapon: { name: 'Weapon' },
+    refueling: { name: 'Refueling', drawsPower: true },
+};
+
+/**
+ * Spec §5.9: Counters are open-ended; these are the named ones. Strain (errata p212) raises or
+ * lowers the user's Psionic Strain by 5 per Counter; the direction doesn't change the cost.
+ */
+export const COUNTER_IMPLEMENTATIONS = {
+    general: { name: 'Counter' },
+    armor: { name: 'Armor' },
+    shields: { name: 'Shields' },
+    disabling: { name: 'Disabling' },
+    strike: { name: 'Strike' },
+    missiles: { name: 'Missiles' },
+    detection: { name: 'Detection' },
+    strainRaise: { name: 'Strain (raise)' },
+    strainLower: { name: 'Strain (lower)' },
+};
+
+/**
+ * True if this row is the one an Attack's implementation makes free (e.g. Plasma's Counter
+ * (Shields)): `freeKey` names the implementation, and only the first matching sub-row (lowest id)
+ * is free, so buying a second one costs in full.
+ */
+function isFreeSubRow(row, ctx, freeKey, matches) {
+    if (!freeKey) {
+        return false;
+    }
+    return matches(row) && !(ctx.siblings ?? []).some((other) => other.key === row.key && matches(other) && other.id < row.id);
+}
 
 /** One slot of the row's grade per unit bought (Gravity Control, Manufacture). */
 const oneSlotAtGrade = (row) => ({ uses: [{ grade: row.grade, slots: row.rank }] });
@@ -65,7 +133,8 @@ export const systemRules = {
         gradeKind: 'none',
         grades: ALL_GRADES,
         rank: { min: 1, max: 1, meaning: RANK.QUANTITY },
-        cost: () => 20,
+        // Hyperspace Attacks include Area: Small Sudden free (errata p210).
+        cost: (row, ctx) => (isFreeSubRow(row, ctx, attackFreeEffects(ctx.parent, ctx.siblings).area, () => true) ? 0 : 20),
         children: [],
     },
 
@@ -102,12 +171,19 @@ export const systemRules = {
         children: ['task'],
     },
 
+    /** Some Attack implementations include a Counter free: Plasma → Shields, Tse and Hyperspace → Armor. */
     counter: {
         name: 'Counter',
         gradeKind: 'none',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.QUANTITY },
-        cost: (row) => 20 * row.rank,
+        implementations: COUNTER_IMPLEMENTATIONS,
+        defaultImplementation: 'general',
+        cost: (row, ctx) => {
+            const free = attackFreeEffects(ctx.parent, ctx.siblings).counter;
+            const freeRanks = isFreeSubRow(row, ctx, free, (r) => r.implementation === free) ? 1 : 0;
+            return 20 * Math.max(0, row.rank - freeRanks);
+        },
         children: [],
     },
 
@@ -193,7 +269,10 @@ export const systemRules = {
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.QUANTITY },
+        implementations: LINK_IMPLEMENTATIONS,
+        defaultImplementation: 'general',
         cost: perUnit({ 1: 5, 2: 15, 3: 50 }),
+        power: (row) => (LINK_IMPLEMENTATIONS[row.implementation]?.drawsPower ? oneSlotAtGrade(row) : {}),
         children: [],
     },
 
@@ -234,6 +313,8 @@ export const systemRules = {
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.RANK },
+        implementations: POWER_SUPPLY_IMPLEMENTATIONS,
+        defaultImplementation: 'general',
         cost: (row) => priceFor({ 1: 5, 2: 10, 3: 40 }, row.grade) * row.rank,
         power: (row) => ({ provides: [{ grade: row.grade, slots: SLOTS_PER_SOURCE * row.rank }] }),
         children: ['resource'], // Fuel or Charge
