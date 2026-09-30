@@ -4,7 +4,7 @@
 // Errors are builds the rules forbid; warnings are legal but worth a look. Neither blocks
 // anything: the player decides.
 
-import { MULTIPLIER_IMPLEMENTATIONS } from './attacks.js';
+import { MULTIPLIER_IMPLEMENTATIONS, impliedLimitations } from './attacks.js';
 import { ATTRIBUTE_RULES } from './registry.js';
 import { GRADE_NAMES, SCALE_NAMES } from './common.js';
 import { FORCE_FIELD } from './protection.js';
@@ -94,7 +94,8 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
             ['attack', 'attackMelee'].includes(row.key) &&
             children.some((c) => c.key === 'attackMultiplier' && MULTIPLIER_IMPLEMENTATIONS[c.implementation]?.needsAmmunition);
         if (isKinetic && !children.some((c) => c.key === 'resource' && ['ammunition', 'general'].includes(c.implementation ?? 'general'))) {
-            error(`${name(row)} is Kinetic: it needs an Ammunition Resource as a sub-row.`, row.id);
+            const fed = children.find((c) => c.key === 'attackMultiplier' && MULTIPLIER_IMPLEMENTATIONS[c.implementation]?.needsAmmunition);
+            error(`${name(row)} is ${MULTIPLIER_IMPLEMENTATIONS[fed.implementation].name}: it needs an Ammunition Resource as a sub-row.`, row.id);
         }
 
         if (row.key === 'body' && size != null && !bodyPurchase(size)) {
@@ -207,15 +208,23 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
         }
     }
 
-    // ---- limitation caps ---------------------------------------------------------------------
+    // ---- limitation caps (built-in limitations, e.g. self-powered Plasma, count too) ----------
+    const implied = impliedLimitations(all);
     for (const grade of [1, 2, 3]) {
         const taken = limits.filter((l) => (l.LimitDesc ?? '').trim() !== '' && String(l.LimitScale) === String(grade));
-        if (taken.length > LIMIT_CAPS[grade]) {
-            error(
-                `Too many ${LIMIT_GRADE_NAMES[grade]} limitations: ${taken.length}, and at most ${LIMIT_CAPS[grade]} are allowed.`,
-                taken.map((limit) => limit.id),
-                'limits'
-            );
+        const builtIn = implied.filter((l) => l.grade === grade);
+        const count = taken.length + builtIn.length;
+        if (count > LIMIT_CAPS[grade]) {
+            issues.push({
+                severity: 'error',
+                message:
+                    `Too many ${LIMIT_GRADE_NAMES[grade]} limitations: ${count}, and at most ${LIMIT_CAPS[grade]} are allowed.` +
+                    (builtIn.length ? ` (${builtIn.map((l) => l.name).join(', ')} counts as one.)` : ''),
+                rows: [
+                    ...taken.map((limit) => ({ section: 'limits', id: limit.id })),
+                    ...builtIn.map((l) => ({ section: 'attributes', id: l.rowId })),
+                ],
+            });
         }
     }
 

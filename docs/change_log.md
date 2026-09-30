@@ -3,6 +3,18 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-29 (4): Self-powered Plasma
+
+- **Plasma (self-powered)** (`plasmaSelfPowered`, ruling 2026-09-29): needs special ammunition (an Ammunition
+  Resource) instead of 2 Power Slots per mount. The requirement is built in as a **Moderate limitation**: it
+  counts toward the Moderate cap (validation and Panel 2's limit counts) but refunds no BP.
+- **Plain Plasma always draws its 2 slots per mount,** even with Ammunition (the Light Plasma Cannon uses both).
+  Before, a Plasma Attack with an Ammunition sub-row drew no power.
+- **Plasma Carbine** (catalog): self-powered Plasma replaces its Prerequisite (special ammunition) limitation, and
+  its bought Bleed drops a rank (Minor 3: 2 free + 1 bought). 115 BP, CR 2 unchanged. Errata entries added
+  (p211 rule, p232 item) and all four errata documents updated.
+- Tests: 195 client.
+
 ## 2026-09-29 (3): Self-powered Kinetic weapons; Abilities
 
 - **Kinetic splits in two** (errata p210, ruling 2026-09-29): **Kinetic** is a built-in or slaved rail

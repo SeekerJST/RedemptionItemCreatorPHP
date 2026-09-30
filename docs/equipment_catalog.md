@@ -99,7 +99,7 @@ alongside an XP cost.
 | [Standard Gauss Rifle](#standard-gauss-rifle) | Small | 10 | −1 | −1 | ✔ |
 | [Quality Gauss Rifle](#quality-gauss-rifle) | Small | 29 | 0 | 0 | ✔ |
 | [Security Gauss Rifle](#security-gauss-rifle) | Small | 91 | 1 | 1 | ✔ |
-| [Plasma Carbine](#plasma-carbine) | Small | 110 | 2 | 2 | ✔ |
+| [Plasma Carbine](#plasma-carbine) | Small | 115 | 2 | 2 | ✔ |
 | [Sniper Rifle](#sniper-rifle) | Small | 134 | 3 | 3 | ✔ |
 | [Explosive Grenade](#explosive-grenade) | Small | 90 | 1 | 1 | ✔ |
 | [Tactical Railgun](#tactical-railgun) | Small | 107 | 2 | 2 | ✔ |
@@ -708,6 +708,8 @@ p. 232 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
 
 Description: "The smallest implementation of the Terran Sphere’s anti-Shohan plasma arms, this is the preferred Marine weapon for close combat, due to the operator being less likely to get caught in the ensuing conflagration."
 
+> **Errata** (new, 2026-09-29) p232: Its attack is self-powered Plasma: it needs special ammunition instead of 2 Power Slots, and that requirement is built into the implementation (it takes a Moderate limitation slot but refunds nothing), replacing the separate Prerequisite (special ammunition) limitation. Bleed 3 (Minor): 2 free from Plasma plus 1 bought (was 2 bought). CR 2 unchanged.
+
 > **Errata** (new, 2026-09-28) p232: Delete "Upkeep: 1". Upkeep was a recurring maintenance cost that was phased out of the rules; this listing is a leftover.
 
 > **Errata** p232: Weapon Multiplier 4x (was 3x). Ammunition costs CR 1 (was 5x). Loses Area; gains Counter: Armor.
@@ -716,20 +718,20 @@ Description: "The smallest implementation of the Terran Sphere’s anti-Shohan p
 
 | Row | Detail | BP |
 |---|---|---:|
-| Attack | Plasma (Firefight) 5x | 70 |
+| Attack | Plasma (self-powered) (Firefight) 5x | 70 |
 | Counter | Shields (free) | 0 |
-| Bleed | Minor 4 (Plasma: 2 free + 2 bought) | 25 |
+| Bleed | Minor 3 (Plasma: 2 free + 1 bought) | 10 |
 | Counter | Armor | 20 |
 | Resource | Ammunition, Minor ×2 | 10 |
 | Tag | [The Building's on Fire, and It's My Fault] | 5 |
-| Limitation | Moderate: Prerequisite (special ammunition) | −20 |
-| **Total** | | **110** |
+| Limitation (built in) | Moderate: special ammunition (Plasma (self-powered)); takes a Moderate slot, no refund | 0 |
+| **Total** | | **115** |
 
 **Formula CR:** 2 ✔ matches printed
 
 **Check:**
 
-- Plasma normally draws 2 Power Slots, but this carbine is fed by ammunition only. The rule allows either feed, so that's legal; just noting it.
+- Self-powered Plasma: special ammunition replaces Plasma's 2 Power Slots, so the carbine needs no power.
 
 #### Sniper Rifle
 

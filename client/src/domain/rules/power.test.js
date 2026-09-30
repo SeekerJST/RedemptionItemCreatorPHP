@@ -69,6 +69,19 @@ describe('Power Slots (§5.22)', () => {
         expect(grade(budget(kineticAttack('kineticSelfPowered')), MODERATE).used).toBe(0); // gauss rifle
     });
 
+    it('Plasma draws 2 slots per mount even with Ammunition; self-powered Plasma draws none', () => {
+        const plasmaAttack = (implementation) => {
+            const attack = row('attack', MODERATE, 1);
+            return [
+                attack,
+                row('attackMultiplier', MODERATE, 3, { parentId: attack.id, implementation }),
+                row('resource', MODERATE, 4, { parentId: attack.id, implementation: 'ammunition' }),
+            ];
+        };
+        expect(grade(budget(plasmaAttack('plasma')), MODERATE).used).toBe(2); // Light Plasma Cannon
+        expect(grade(budget(plasmaAttack('plasmaSelfPowered')), MODERATE).used).toBe(0); // Plasma Carbine
+    });
+
     it('Launchers use 1 slot per increment of 4; Anti-Missile 1 per mount', () => {
         expect(grade(budget([row('launchers', MAJOR, 2)]), MAJOR).used).toBe(2);
         expect(grade(budget([row('antiMissile', MAJOR, 2)]), MAJOR).used).toBe(2);

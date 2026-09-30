@@ -13,7 +13,8 @@ def audit(it):
             m=re.search(r'\((Firefight|Battlefield|Space)\)',d); g=SCG[m.group(1)]
             n=int(re.search(r'×(\d+) mounts',d).group(1)) if 'mounts' in d else 1
             impl=d.split(' (')[0]
-            if 'Plasma' in impl: use[g]+=2*n
+            if 'self-powered' in d: notes.append(f'self-powered ({lab}): no power counted')
+            elif 'Plasma' in impl: use[g]+=2*n
             elif 'Kinetic' in impl and 'Melee' not in impl and SCG[m.group(1)]>0: use[g]+=n; notes.append(f'rail {m.group(1)} ({lab}) counted as powered')
             elif impl=='Melee': notes.append(f'kinetic melee ({lab}): no power counted')
             else: use[g]+=n

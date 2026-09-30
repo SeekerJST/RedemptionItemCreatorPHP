@@ -15,6 +15,7 @@ import {
     rowPower,
     validateItem,
 } from './rules/index.js';
+import { impliedLimitations } from './rules/attacks.js';
 import { FORCE_FIELD } from './rules/protection.js';
 import { bodyPurchase, sizeOrdinal } from './rules/sizes.js';
 import { LIMIT_CAPS } from './rules/validate.js';
@@ -68,6 +69,7 @@ export function summarizeItem(item, lookups) {
     });
 
     const attributeSystems = effectiveSystems(item.attributes);
+    const builtInLimits = impliedLimitations(related.map((entry) => entry.row));
 
     return {
         basePoints: sizeRow?.BasePoints ?? 0,
@@ -93,7 +95,10 @@ export function summarizeItem(item, lookups) {
         tasks: byKey('task'),
         limitCounts: [1, 2, 3].map((grade) => ({
             scaleName: GRADE_NAMES[grade],
-            count: item.limits.filter((l) => limitCost(l) !== 0 && String(l.LimitScale) === String(grade)).length,
+            // Built-in limitations (self-powered Plasma) take a slot too, though they refund nothing.
+            count:
+                item.limits.filter((l) => limitCost(l) !== 0 && String(l.LimitScale) === String(grade)).length +
+                builtInLimits.filter((l) => l.grade === grade).length,
             cap: LIMIT_CAPS[grade],
         })),
         issues,

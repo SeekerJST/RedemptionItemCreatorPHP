@@ -151,4 +151,20 @@ describe('validation (§9)', () => {
         expect(check([], { limits: [...limits.slice(0, 2), { id: 9, LimitDesc: '', LimitScale: '2' }] })
             .some((i) => i.message.includes('limitations'))).toBe(false);
     });
+
+    it('self-powered Plasma: needs Ammunition, and takes a Moderate limitation slot', () => {
+        const carbine = row('attack');
+        const multiplier = under(carbine, 'attackMultiplier', MINOR, 3, { implementation: 'plasmaSelfPowered' });
+        expectError(check([carbine, multiplier]), 'Plasma (self-powered): it needs an Ammunition Resource');
+
+        const ammo = under(carbine, 'resource', MINOR, 2, { implementation: 'ammunition' });
+        const oneModerate = [{ id: 1, LimitDesc: 'L1', LimitScale: '2' }];
+        expect(errors(check([carbine, multiplier, ammo], { limits: oneModerate }))).toEqual([]); // no power needed
+
+        const twoModerate = [...oneModerate, { id: 2, LimitDesc: 'L2', LimitScale: '2' }];
+        const issue = check([carbine, multiplier, ammo], { limits: twoModerate }).find((i) => i.message.includes('Moderate limitations'));
+        expect(issue.message).toContain('Moderate limitations: 3');
+        expect(issue.message).toContain('Plasma (self-powered) counts as one');
+        expect(issue.rows).toContainEqual({ section: 'attributes', id: multiplier.id });
+    });
 });

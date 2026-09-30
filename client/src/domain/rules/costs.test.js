@@ -77,6 +77,11 @@ describe('Attack (§5.3, 2x at base; each Multiplier rank +1x)', () => {
         expect(total(MINOR, 4, 'kineticSelfPowered')).toBe(10 + 27); // same discount
     });
 
+    it('Plasma costs the same built in or self-powered (the carbine: Firefight 5x = 70)', () => {
+        expect(total(MINOR, 5, 'plasma')).toBe(70);
+        expect(total(MINOR, 5, 'plasmaSelfPowered')).toBe(70);
+    });
+
     it('Melee: everything costs half', () => {
         expect([2, 3, 4, 5, 6].map((m) => total(MINOR, m, 'energy', 'attackMelee'))).toEqual([5, 10, 20, 35, 55]);
     });

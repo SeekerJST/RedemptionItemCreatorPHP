@@ -6,7 +6,7 @@
 //   Attack (Melee)     everything costs half; never takes Area
 //   Anti-Missile       the only 1x attack; half the base; no multiplier
 
-import { ALL_GRADES, RANK, priceFor } from './common.js';
+import { ALL_GRADES, GRADE, RANK, priceFor } from './common.js';
 import { curveAUpgrade } from './curves.js';
 
 /** Cost of a 2x Attack mount by combat scale (Firefight / Battlefield / Space). */
@@ -19,7 +19,12 @@ export const MULTIPLIER_IMPLEMENTATIONS = {
     // pistols and rifles): Ammunition only; the power is built into each round's casing.
     kinetic: { name: 'Kinetic', upgradeFactor: 0.9, needsAmmunition: true, needsPower: true },
     kineticSelfPowered: { name: 'Kinetic (self-powered)', upgradeFactor: 0.9, needsAmmunition: true },
-    plasma: { name: 'Plasma', slotsPerMount: 2 },
+    // Plasma draws 2 Power Slots per mount, even with Ammunition (the Light Plasma Cannon uses both).
+    // Self-powered plasma (the Plasma Carbine) needs special Ammunition instead of the slots. That
+    // requirement is built in as a Moderate limitation: it takes one of the two Moderate limitation
+    // slots but gives no BP back (ruling 2026-09-29).
+    plasma: { name: 'Plasma', slotsPerMount: 2, needsPower: true },
+    plasmaSelfPowered: { name: 'Plasma (self-powered)', needsAmmunition: true, impliedLimitation: GRADE.MODERATE },
     flare: { name: 'Flare' },
     hyperspace: { name: 'Hyperspace' },
     tse: { name: 'Tse', meleeOnly: true },
@@ -54,6 +59,20 @@ function attackPower(row, ctx) {
     }
     const perMount = implementation?.slotsPerMount ?? 1;
     return { uses: [{ grade: row.grade, slots: perMount * row.rank }] };
+}
+
+/**
+ * Limitations an implementation carries built in: they count toward the limitation caps but
+ * refund nothing. `rows`: rule rows (the Multiplier sub-row holds the implementation).
+ * @returns {Array<{rowId: number, grade: number, name: string}>}
+ */
+export function impliedLimitations(rows) {
+    return rows
+        .filter((row) => row.key === 'attackMultiplier' && MULTIPLIER_IMPLEMENTATIONS[row.implementation]?.impliedLimitation)
+        .map((row) => {
+            const implementation = MULTIPLIER_IMPLEMENTATIONS[row.implementation];
+            return { rowId: row.id, grade: implementation.impliedLimitation, name: implementation.name };
+        });
 }
 
 /**

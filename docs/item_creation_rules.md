@@ -192,7 +192,7 @@ Melee and Flare + Melee are unusual but legal.
 | **Kinetic** | Multiplier upgrades cost 10% less, rounded up | Fires solid projectiles; needs an Ammunition Resource bought separately. Two implementations **[Ruling 2026-09-29]**: **Kinetic** (built into or slaved to a host: ship and vehicle guns, suit or Weapon Link mounts) also draws a Power Slot; **Kinetic (self-powered)** (hand weapons such as gauss pistols and rifles) draws none, since each round carries its own power **[Errata p210]**. | All |
 | **Melee** | Everything (base and upgrades) costs half | Attacks are ranged by default; this limits to melee. **Can never take Area. [Errata p210]** | All |
 | **Anti-Missile** | Half of base cost (5 / 10 / 20); **1x** **[Ruling 2026-09-23]** | Its own attribute: the only 1x attack. Only targets missiles. Cannot take a multiplier. | All |
-| **Plasma** | none to BP | Uses **2× the Power Slots**. Gains **Counter (Shields)** free. Applies a free **Bleed** of `floor(m / 2)` damage/round; its magnitude matches the Attack's scale (Firefight → Minor, Battlefield → Moderate, Space → Major).  **[Ruling]** Extra Bleed damage above the free amount costs the difference between the full Bleed cost and the free Bleed **[Ruling 2026-09-27]**. | All (Terran Sphere tech) |
+| **Plasma** | none to BP | Uses **2× the Power Slots**. Gains **Counter (Shields)** free. Applies a free **Bleed** of `floor(m / 2)` damage/round; its magnitude matches the Attack's scale (Firefight → Minor, Battlefield → Moderate, Space → Major).  **[Ruling]** Extra Bleed damage above the free amount costs the difference between the full Bleed cost and the free Bleed **[Ruling 2026-09-27]**. Plasma draws its 2 slots per mount even with Ammunition (the Light Plasma Cannon uses both). **Plasma (self-powered)** **[Ruling 2026-09-29]** (hand weapons, e.g. the Plasma Carbine) needs special ammunition (an Ammunition Resource) instead of Power Slots; that requirement is built in as a **Moderate limitation** that takes one of the two Moderate slots but refunds no BP. | All (Terran Sphere tech) |
 | **Flare** | none | Energy variant. Cover Tags cannot be condemned against it. | Shohan only |
 | **Tse** | none | Melee only. Gains **Counter (Armor)** free. | Shohan only; cannot be manufactured by the Fourth Population |
 | **Hyperspace** | none | Gains **Counter (Armor)** and **Area: Small Sudden** free **[Errata p210]**; both are printed in the stat block as reminders. Only known example: the Dreadnought's Hyper Cannon. | Shohan only |
@@ -594,7 +594,7 @@ the lowest higher grade with spare slots.
 |---|---|
 | Attack (energy-fed) | 1 per Attack/turret, grade = Attack scale |
 | Rail (Kinetic Ranged) Attack **[Errata p210]** | Integrated or slaved (ship/vehicle weapons, suit-mounted or Weapon Link modules): 1 per Attack/turret, grade = Attack scale, **plus** Ammunition. Standalone (hand weapons): 0; power is built into each round's casing, already included in the Ammunition. |
-| Plasma Attack | 2 per Attack/turret |
+| Plasma Attack | 2 per Attack/turret, with or without Ammunition. **Plasma (self-powered)**: 0 (special ammunition instead) |
 | Launcher | `ceil(count / 4)`, grade = launcher scale |
 | Anti-Missile Attack | 1 each (as shown in the example) |
 | Force Field | 1 for the whole Force Field track, grade = Force Field grade |
@@ -740,7 +740,7 @@ Hard errors (the rules forbid it):
 9. Light Sail items have no Maneuver. Maneuver rank ≤ 4.
 10. Modifier rank ≤ 4 per Skill/Ability (summed).
 11. Tag rank ≤ 3.
-12. Limitation counts: Minor ≤ 3, Moderate ≤ 2, Major ≤ 1.
+12. Limitation counts: Minor ≤ 3, Moderate ≤ 2, Major ≤ 1. Built-in limitations count too: each Plasma (self-powered) Attack takes a Moderate slot **[Ruling 2026-09-29]**.
 13. Power Supply minimum size: Moderate ≥ Small; Major ≥ Large, or ≥ Medium if the implementation is Hyperspace Tap or Coil **[Errata p216]**.
 14. Artificial Ecology minimum size: Minor ≥ Large, Moderate ≥ Huge, Major = Colossal.
 15. Force Field grade covers the item's size (Minor ≤ Medium, Moderate ≤ Large, Major ≤ Colossal).
@@ -817,6 +817,7 @@ Free effects: Plasma → Counter (Shields), Bleed 4 (floor(8/2)).
 | p213 | Reactionless drives don't expel reaction mass | §5.10 |
 | p216 | **[New 2026-09-25]** Power Supplies may go on an item one size smaller than the table first listed: Moderate on Small (was Medium). Major stays Large, except that a Hyperspace Tap or a Coil stack can fit a Major Power Supply in a Medium item. | §5.22, §9 |
 | p217 | **[New 2026-09-25]** A Fuel Resource can feed Drives and Power Supplies of its own grade or lower (a larger tank can feed a smaller drive). | §5.24, §9 |
+| p211 | **[New 2026-09-29]** Plasma (self-powered): special ammunition instead of 2 Power Slots, built in as a Moderate limitation (takes a slot, no refund). Built-in Plasma draws 2 slots per mount even with ammunition. Kinetic splits the same way: Kinetic (Power Slot + Ammunition) and Kinetic (self-powered) (Ammunition only). | §5.3, §5.22, §9 |
 | p217–218 | **[New 2026-09-29]** A Modifier's grade is how many skills it covers: Minor 1 skill (10 BP/rank), Moderate 2 (20), Major 3+ or a class of skills (30). Replaces per-skill costing. | §5.20 |
 
 **Gear errata (Chapter 11 catalog).** These don't change the rules, but if the app seeds
@@ -830,7 +831,7 @@ complete list is in `errata.csv` / `errata.sql`, and each item's errata are in `
 | p227 | Standard Powered Armor | Battlefield armor (not Firefight) |
 | p228 | Kavacha Powered Armor | Battlefield armor (not Firefight) |
 | p231 | Wellpoint Armory Stormguard 9MP | Ammo CR 1 (not "3x") |
-| p232 | Plasma Carbine | 4x multiplier (was 3x); ammo CR 1 (was 5x); loses Area, gains Counter: Armor |
+| p232 | Plasma Carbine | 5x multiplier (errata 2026-09-27; first 4x); ammo CR 1 (was 5x); loses Area, gains Counter: Armor. **[New 2026-09-29]** Self-powered Plasma replaces its Prerequisite (special ammunition) limitation; Bleed 3 (2 free + 1 bought). CR 2 unchanged |
 | p234 | Light Plasma Cannon | Ammo CR 1 |
 | p235 | Personal Psi Link | Moderate Power Supply (not Major); Strain 10 (not 25) |
 | p237 | Basic and Advanced NICL | **[New 2026-09-29]** Technical-class Skills +1 is a Major Modifier; Usage Restriction is Moderate. CR 1 and CR 2 (were 0 and 1) |
