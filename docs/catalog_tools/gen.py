@@ -1,4 +1,6 @@
 from items import *
+import json as _json, os as _os
+DESC=_json.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),'descriptions.json'),encoding='utf-8'))
 import re
 def slug(n): return re.sub(r'[^\w\- ]','',n.lower()).replace(' ','-')
 def fmt(v): return '—' if v is None else (('−'+str(-v)) if isinstance(v,int) and v<0 else str(v))
@@ -136,6 +138,8 @@ for it in I:
     hdr=[f"p. {it['page']}",f"**Size:** {it['size']}",f"**Printed CR:** {fmt(it['cr'])}",f"**CC:** {fmt(it['cc'])}"]
     for k,v in it['extra'].items(): hdr.append(f"**{k}:** {v}")
     W(" · ".join(hdr)+"\n")
+    _d=DESC.get(it['name'],'').replace('"','\\"')
+    W(f'Description: "{_d}"\n')
     for e in it['errata']: W(f"> **Errata** {e}\n")
     W("| Row | Detail | BP |\n|---|---|---:|")
     for n,d,bp in it['rows']:

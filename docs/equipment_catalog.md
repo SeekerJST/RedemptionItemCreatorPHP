@@ -223,6 +223,8 @@ Gathered from the entries so they can be settled once.
 
 p. 226 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 
+Description: "A basic armored vest designed to repel low-level weaponry."
+
 > **Errata** (new, 2026-09-27) p226: CR 0, not 2 (a typo; its printed CC is already 0).
 
 | Row | Detail | BP |
@@ -240,6 +242,8 @@ p. 226 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 #### Psionic Light Armor
 
 p. 226 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
+
+Description: "This variant on the standard vest includes a small battery pack to power Psionic effects."
 
 > **Errata** p226: Charge lasts 10 days / combat turns (was 1 day). One rank of Charge = 10 days, so this is 1 rank.
 
@@ -268,6 +272,8 @@ p. 226 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 
 p. 226 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 
+Description: "This extra-durable suit is produced in a variety of camouflage schemes to suit specific environments."
+
 > **Errata** (new, 2026-09-26) p226: Armor Rating 4 (was 3).
 
 | Row | Detail | BP |
@@ -284,6 +290,8 @@ p. 226 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 #### Stealth Suit
 
 p. 226 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
+
+Description: "Ninja-inspired garb augmented with active camouflage and ECM systems in addition to armor."
 
 > **Errata** (new, 2026-09-27) p226: Size is Small, not Medium (per the build notes); it can be worn under street clothing.
 
@@ -305,6 +313,8 @@ p. 226 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
 
 p. 227 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
 
+Description: "A heavy suit of armor designed to repel multiple incoming attacks in hostile environments."
+
 > **Errata** (new, 2026-09-27) p227: Size is Small, not Medium (per the build notes). Armor Rating 4 (Firefight), not 3.
 
 | Row | Detail | BP |
@@ -323,6 +333,8 @@ p. 227 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
 #### Riot/LEO Armor, Psi Variant
 
 p. 227 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
+
+Description: "A riot suit with a power supply and link for Psionics."
 
 > **Errata** (new, 2026-09-27) p227: Size is Small, not Medium (per the build notes). Restores Minor Life Support (the rebreather its limitation refers to) and adds Tag [Mental Block]. Strain Threshold is 10, not 5.
 
@@ -353,6 +365,8 @@ p. 227 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
 
 p. 227 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
 
+Description: "The standard infantry armor of the Terran Sphere and other Fourth Population forces. Its tough construction and integrated weapon mount grant its wearer a considerable advantage over unarmored enemies."
+
 > **Errata** p227: Armor is Battlefield, not Firefight.
 
 | Row | Detail | BP |
@@ -378,6 +392,8 @@ p. 227 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
 #### Kavacha-class A-350 Marine Engagement Suit
 
 p. 228 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
+
+Description: "The Kavacha-class suit represents the Terran Sphere’s most advanced personal defense technology, adding Force Fields to powered armor’s already significant benefits. Though it doesn’t put its wearer on even terms with a Shohan Soldier, it does give squads of marines a fighting chance against them in combat."
 
 > **Errata** p228: Armor is Battlefield, not Firefight.
 
@@ -412,6 +428,8 @@ p. 228 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 
 p. 228 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 
+Description: "A lighter version of the Kavacha-class powered armor suit with integrated stealth technologies."
+
 > **Errata** (new, 2026-09-26) p228: Armor is Battlefield, not Firefight (the Kavacha errata covers both suits).
 
 | Row | Detail | BP |
@@ -443,6 +461,8 @@ p. 228 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 
 p. 229 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 
+Description: "This condensed vectored thrust unit allows a character in powered armor to make tactical hops on the Battlefield or brief jumps between starships in close Space range."
+
 > **Errata** (new, 2026-09-27) p229: Adds Modifier: Pilot +2. [Turn Your Head to Steer] is a Free Tag; [A Leap of Faith] is rank 3. Its Usage Restriction is a Moderate limitation. CR 0, CC 0 (was CR 1, CC 1).
 
 | Row | Detail | BP |
@@ -470,6 +490,8 @@ p. 229 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 
 p. 229 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 
+Description: "This bolt-on thruster assembly adds Space flight and maneuvering capabilities to powered armor suits."
+
 > **Errata** (new, 2026-09-27) p229: Adds Modifier: Pilot +2 and Life Support: Minor (extends suit operations in space). Fuel is 3 Moderate, not Minor (Minor fuel cannot feed its Moderate drive).
 
 | Row | Detail | BP |
@@ -492,6 +514,8 @@ p. 229 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 
 p. 229 · **Size:** Small · **Printed CR:** −2 · **CC:** 0
 
+Description: "A short piece of sharp metal."
+
 > **Errata** (new, 2026-09-27) p229: Adds Limitation: Usage Restriction (Firefight targets only; useless against Battlefield or hull armor), Minor.
 
 | Row | Detail | BP |
@@ -505,6 +529,8 @@ p. 229 · **Size:** Small · **Printed CR:** −2 · **CC:** 0
 #### Concealable Knife
 
 p. 229 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
+
+Description: "A blade that may fold or be disguised to go unnoticed."
 
 | Row | Detail | BP |
 |---|---|---:|
@@ -522,6 +548,8 @@ p. 229 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 
 p. 230 · **Size:** Small · **Printed CR:** −1 · **CC:** 0
 
+Description: "A common slugthrower, and one of the most ubiquitous weapons in the Fourth Population."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Attack | Kinetic (Firefight) 2x | 10 |
@@ -534,6 +562,8 @@ p. 230 · **Size:** Small · **Printed CR:** −1 · **CC:** 0
 #### Quality Gauss Pistol
 
 p. 230 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
+
+Description: "Manufactured or crafted from higher-quality designs and components, providing improved accuracy and reliability."
 
 > **Errata** (new, 2026-09-26) p230: Attack increases to 3x (was 2x); the build notes used 3x.
 
@@ -550,6 +580,8 @@ p. 230 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 #### Heavy Gauss Pistol
 
 p. 230 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
+
+Description: "A fully automatic weapon, providing intense firepower in a small package."
 
 > **Errata** (new, 2026-09-26) p230: Single-target mode increases to 3x (was 2x). Burst mode stays 2x.
 
@@ -572,6 +604,8 @@ p. 230 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 
 p. 230 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 
+Description: "The concealable pistol lacks both bulge and bang."
+
 > **Errata** (new, 2026-09-26) p230: Attack increases to 3x (was 2x), adds Modifier: Firearms +2 (per the build notes), and Ammunition increases to 4 ranks / 40 shots (was 3 / 30). 79 BP, CR 1.
 
 | Row | Detail | BP |
@@ -589,6 +623,8 @@ p. 230 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 #### Wellpoint Armory Stormguard 9MP
 
 p. 231 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
+
+Description: "One of the few chemical propellant guns still manufactured, each of the pistol’s six barrels contains a full clip of ammunition that can be ignited individually or in rapid sequence. To compete with modern gauss gun technology, the Stormguard uses extremely specialized ammunition."
 
 > **Errata** p231: Ammunition now costs CR 1 (was "3x"). Update the Prerequisite text.
 
@@ -616,6 +652,8 @@ p. 231 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
 
 p. 231 · **Size:** Small · **Printed CR:** −1 · **CC:** 0
 
+Description: "This is the common long arm of the Fourth Population, and is available to most every criminal, law enforcer, and hunter."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Attack | Kinetic (Firefight) 2x | 10 |
@@ -628,6 +666,8 @@ p. 231 · **Size:** Small · **Printed CR:** −1 · **CC:** 0
 #### Quality Gauss Rifle
 
 p. 231 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
+
+Description: ""
 
 | Row | Detail | BP |
 |---|---|---:|
@@ -644,6 +684,8 @@ p. 231 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 #### Security Gauss Rifle
 
 p. 231 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: "A high-capacity gauss rifle capable of rapid-fire bursts."
 
 > **Errata** (new, 2026-09-26) p231: Single-target attack increases to 4x (was 3x). Burst mode stays 3x.
 
@@ -663,6 +705,8 @@ p. 231 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 #### Plasma Carbine
 
 p. 232 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
+
+Description: "The smallest implementation of the Terran Sphere’s anti-Shohan plasma arms, this is the preferred Marine weapon for close combat, due to the operator being less likely to get caught in the ensuing conflagration."
 
 > **Errata** (new, 2026-09-28) p232: Delete "Upkeep: 1". Upkeep was a recurring maintenance cost that was phased out of the rules; this listing is a leftover.
 
@@ -691,6 +735,8 @@ p. 232 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
 
 p. 232 · **Size:** Small · **Printed CR:** 3 · **CC:** 6
 
+Description: "A time-honored method for eliminating foes at long range, updated to use high-powered laser technology."
+
 > **Errata** (new, 2026-09-26) p232: Attack 5x (was 4x).
 
 | Row | Detail | BP |
@@ -715,6 +761,8 @@ p. 232 · **Size:** Small · **Printed CR:** 3 · **CC:** 6
 #### Explosive Grenade
 
 p. 233 · **Size:** Small · **Printed CR:** 1 · **CC:** 0
+
+Description: ""
 
 > **Errata** (new, 2026-09-26) p233: Attack 6x (was 5x).
 
@@ -741,6 +789,8 @@ p. 233 · **Size:** Small · **Printed CR:** 1 · **CC:** 0
 
 p. 233 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
 
+Description: "A scaled-up version of the gauss gun, the tactical railgun consumes far more power. Railguns have replaced chemically powered artillery on the modern battlefield. This version is designed for emplacement in fortifications for suppressive fire."
+
 > **Errata** (new, 2026-09-26) p233: Size is Small (was Medium). Its Hungry limitation is Moderate (was treated as Minor). Attack stays 4x.
 
 | Row | Detail | BP |
@@ -766,6 +816,8 @@ p. 233 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
 
 p. 233 · **Size:** Medium · **Printed CR:** 1 · **CC:** 1
 
+Description: "A popular battlefield module capable of launching multiple different missile loadouts."
+
 > **Errata** (new, 2026-09-27) p233: Adds Limitation: Slave (Moderate); the rack is a module mounted on and powered by a host unit.
 
 | Row | Detail | BP |
@@ -784,6 +836,8 @@ p. 233 · **Size:** Medium · **Printed CR:** 1 · **CC:** 1
 #### Light Plasma Cannon
 
 p. 234 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
+
+Description: "In unskilled hands, this squad-based anti-Shohan weapon can cause severe environmental complications to both sides of a conflict."
 
 > **Errata** p234: Ammunition costs CR 1 (was 5x). Update the Prerequisite text.
 
@@ -808,6 +862,8 @@ p. 234 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
 
 p. 234 · **Size:** Small · **Printed CR:** — · **CC:** —
 
+Description: "The tactical railgun, missile rack, and light plasma cannon can be miniaturized for mounting to powered armor or units, with the same firepower if the unit can provide for these additional requirements."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Template | Apply to Tactical Railgun, Tactical Missile Rack, or Light Plasma Cannon: size becomes Small, add +1 Moderate slot to the power requirement, add Limitation: Slave (unit with a Weapon Link) | 0 |
@@ -822,6 +878,8 @@ p. 234 · **Size:** Small · **Printed CR:** — · **CC:** —
 #### Personal Computer
 
 p. 234 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
+
+Description: "A standard personal computing device that fits comfortably in a hand and has two variable-geometry screens."
 
 | Row | Detail | BP |
 |---|---|---:|
@@ -838,6 +896,8 @@ p. 234 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 #### Carry Comp
 
 p. 235 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1
+
+Description: "A tiny disc-shaped computer the size of a thick coin that can be attached to a neural interface implant/DNI jack and worn behind the ear."
 
 > **Errata** (new, 2026-09-27) p235: Computer is rank 4 (TN 20), not rank 3.
 
@@ -860,6 +920,8 @@ p. 235 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1
 #### Personal Psi Link
 
 p. 235 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: "Standard equipment for Psionics trained in Telekinesis or Energy Manipulation, a Psi Link is capable of providing the power needed for such effects and the ability to interface with larger power supplies if necessary. Most are built into gantlets out of convenience, but can range from helmets and backpacks to an ornamental mage’s staff, depending on the Psionic's tastes and peculiarities."
 
 > **Errata** p235: Power Supply is Moderate (was Major); Strain Threshold 10 (was 25). The Charge resource drops to Moderate to match.
 
@@ -886,6 +948,8 @@ p. 235 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 
 p. 235 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 
+Description: "A Stack can hold a stable electrical charge via a segment of superconducting Coil capable of powering or recharging a device."
+
 > **Errata** (new, 2026-09-28) p235: Size is Small, not Tiny (a Moderate Power Supply needs a Small item), and it holds 2 Moderate Charge, not 1.
 
 | Row | Detail | BP |
@@ -905,6 +969,8 @@ p. 235 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
 
 p. 236 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 
+Description: "A sophisticated micro-manufacturing pod capable of turning out Tiny and Small items or constructing parts for many Medium items."
+
 > **Errata** (new, 2026-09-27) p236: [Hobbyist Builder's Best Friend] is rank 3 (was 1).
 
 | Row | Detail | BP |
@@ -922,6 +988,8 @@ p. 236 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
 
 p. 236 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
 
+Description: "A manufacturing pod suitable for a small shop or tradesman, capable of turning out many Medium items or parts for larger items."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Manufacture | Moderate | 50 |
@@ -937,6 +1005,8 @@ p. 236 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
 #### Commercial G3P
 
 p. 236 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
+
+Description: "A manufacturing pod suitable for a dedicated commercial structure. These heavyweights are capable of producing many Medium or Large items or the parts required for a Huge item, if given the time and materials."
 
 | Row | Detail | BP |
 |---|---|---:|
@@ -956,6 +1026,8 @@ p. 236 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
 #### Basic Neural Interface Control Link (NICL)
 
 p. 237 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 2 · **XP:** 4
+
+Description: "Known as DNIs, NICLs, (Nickles) or Slots, neural interfaces are some of the most common pieces of cyberware in the Fourth Population. Nanotechnology techniques grow a weave inside the subject’s brain, creating an interface between a sentient being and technology that flows at the speed of thought. However, these DNIs are deliberately inhibited to prevent them from completely overriding a user’s senses and motor control for their own safety."
 
 > **Errata** (new, 2026-09-29) p237: Technical-class Skills +1 is a Major Modifier (it covers a class of skills). Its Usage Restriction is Moderate, not Minor. CR 1 (was 0).
 
@@ -983,6 +1055,8 @@ p. 237 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 2 · **XP:** 4
 
 p. 237 · **Size:** Tiny · **Printed CR:** 2 · **CC:** 4 · **XP:** 6
 
+Description: "Unlike their relatively tame brothers, these DNIs lack the inhibitors that prevent them from overriding a character’s senses and motor control. The user experience is greatly improved, at the cost of creating a potential back door directly into their brain."
+
 > **Errata** (new, 2026-09-29) p237: Technical-class Skills +1 is a Major Modifier (it covers a class of skills). Its Usage Restriction is Moderate, not Minor. CR 2 (was 1).
 
 > **Errata** (new, 2026-09-28) p237: Initiative Modifier is +2 (was +3). The Major Neural Interface gives +3 Initiative when operating linked equipment; the Modifier is the general bonus. [Dance Along the Bleeding Edge, But You Might Get Cut] splits in two: the Tag [Dance Along The Bleeding Edge 2] and the Major limitation [...But You Might Get Cut 2].
@@ -1008,6 +1082,8 @@ p. 237 · **Size:** Tiny · **Printed CR:** 2 · **CC:** 4 · **XP:** 6
 
 p. 237 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 4 · **XP:** 6
 
+Description: ""
+
 > **Errata** (new, 2026-09-27) p237: Adds Tag: [Need For Speed].
 
 | Row | Detail | BP |
@@ -1021,6 +1097,8 @@ p. 237 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 4 · **XP:** 6
 #### Cybernetic Arm
 
 p. 238 · **Size:** Small · **Printed CR:** 0 · **CC:** 2 · **XP:** 4
+
+Description: "A replacement limb with enhanced control and power support options."
 
 | Row | Detail | BP |
 |---|---|---:|
@@ -1039,6 +1117,8 @@ p. 238 · **Size:** Small · **Printed CR:** 0 · **CC:** 2 · **XP:** 4
 #### Psi Amp
 
 p. 238 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1
+
+Description: "This drug blasts away Psionic Strain in a chemical rush. Unfortunately, like many drugs, there are side effects."
 
 > **Errata** (new, 2026-09-28) p238: Rebuilt. The initial hit is Counter: Strain, 1 rank (+5 Psionic Strain), followed by Regeneration: Strain 5 (Major, every round) for its Duration (1 Minor rank: 10 combat rounds). [Euphoria] is a Minor limitation. Supersedes the +10 Strain erratum.
 
@@ -1062,6 +1142,8 @@ p. 238 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1
 
 p. 238 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1
 
+Description: "Frequently used to restrain incarcerated Psionics, Psi Damps cause no lasting harm but are universally described as uncomfortable for prisoners who are required to take them."
+
 > **Errata** (new, 2026-09-28) p238: Costed as Counter: Strain, 5 ranks (−25 Psionic Strain), with a Duration of 1 Moderate Resource rank (1 day). [It Itches In My Brain] becomes [It Itches In My Brain 3], a Moderate limitation.
 
 | Row | Detail | BP |
@@ -1080,6 +1162,8 @@ p. 238 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1
 #### “Fluffy”
 
 p. 239 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
+
+Description: "Your best friend, their worst nightmare. He’s just a little… stubborn sometimes."
 
 > **Errata** (new, 2026-09-28) p239: Adds Drive: Minor Land (legs), which carries its Maneuver 1.
 
@@ -1113,6 +1197,8 @@ p. 239 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
 
 p. 239 · **Size:** Medium · **Printed CR:** — · **CC:** —
 
+Description: "Did you hear that…?"
+
 > **Errata** (new, 2026-09-28) p239: Adds Drive: Minor Land (legs), which carries its Maneuver 1.
 
 | Row | Detail | BP |
@@ -1144,6 +1230,8 @@ p. 239 · **Size:** Medium · **Printed CR:** — · **CC:** —
 
 p. 240 · **Size:** Medium · **Printed CR:** 1 · **CC:** 1
 
+Description: "A rugged craft capable of carrying up to two people over ground or air, these vehicles see a lot of use on newly developed worlds with remote settlements and little infrastructure. They also have a following in the Core Worlds as a compact means of personal transportation across urban sprawl."
+
 > **Errata** (new, 2026-09-28) p240: Armor Rating 2 (Firefight), not 1. "Cover: Moderate (Partial)" becomes Limitation: Partial Armor (Moderate); an aimed shot bypasses the armor.
 
 | Row | Detail | BP |
@@ -1172,6 +1260,8 @@ p. 240 · **Size:** Medium · **Printed CR:** 1 · **CC:** 1
 
 p. 240 · **Size:** Medium · **Printed CR:** 0 · **CC:** 0
 
+Description: "Basic, self-driving ground automobile transportation."
+
 > **Errata** (new, 2026-09-27) p240: Fuel is 2 Minor (20 days/combat rounds; was 5). Task: Drive 15 (was 16).
 
 | Row | Detail | BP |
@@ -1191,6 +1281,8 @@ p. 240 · **Size:** Medium · **Printed CR:** 0 · **CC:** 0
 #### Quality Family Transport
 
 p. 241 · **Size:** Medium · **Printed CR:** 1 · **CC:** 1
+
+Description: "Ground transportation with a carefully dolloped amount of panache."
 
 | Row | Detail | BP |
 |---|---|---:|
@@ -1212,6 +1304,8 @@ p. 241 · **Size:** Medium · **Printed CR:** 1 · **CC:** 1
 #### Speedster
 
 p. 241 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
+
+Description: "Performance transport for the discerning individual who needs to get there (or away) fast."
 
 > **Errata** (new, 2026-09-27) p241: Adds Modifier: Drive +2 and the Free Tag [...And Turns A Few Heads 3].
 
@@ -1238,6 +1332,8 @@ p. 241 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
 
 p. 242 · **Size:** Large · **Printed CR:** 2 · **CC:** 3
 
+Description: "A small aerial craft with the capacity to lift a handful of individuals and their gear."
+
 > **Errata** (new, 2026-09-27) p242: Adds Task: Intrusion Detection 17 (per the build notes).
 
 | Row | Detail | BP |
@@ -1261,6 +1357,8 @@ p. 242 · **Size:** Large · **Printed CR:** 2 · **CC:** 3
 #### Light Performance Aircraft
 
 p. 242 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
+
+Description: "A larger version of the Colonial Personal Transport, this vehicle uses the same vectored thrust/variable wing geometry design to achieve an impressive air performance capacity while still being legal for civilians in most jurisdictions."
 
 > **Errata** (new, 2026-09-28) p242: Life Support is 3 Minor (3 people), not 1 Moderate (12); it is a 2–3 seat craft.
 
@@ -1296,6 +1394,8 @@ p. 242 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
 
 p. 243 · **Size:** Large · **Printed CR:** 2 · **CC:** 3
 
+Description: "Typical light delivery or work vehicles in a variety of makes and models."
+
 > **Errata** (new, 2026-09-27) p243: [Security 2] (was [Security]).
 
 | Row | Detail | BP |
@@ -1319,6 +1419,8 @@ p. 243 · **Size:** Large · **Printed CR:** 2 · **CC:** 3
 #### Armored Cargo Transport
 
 p. 243 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
+
+Description: "Secure transit for any number of physical valuables and commodities."
 
 > **Errata** (new, 2026-09-28) p243: Body Track 90 (was 80). Computer is Minor rank 4 (20 target), not rank 3, to run its Intrusion Detection 20 Task.
 
@@ -1345,6 +1447,8 @@ p. 243 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
 #### Air Transport
 
 p. 244 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
+
+Description: "Fast transit for cargo or passengers anywhere on a planet."
 
 > **Errata** (new, 2026-09-28) p244: Body Track 90 (was 80).
 
@@ -1375,6 +1479,8 @@ p. 244 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
 
 p. 244 · **Size:** Large · **Printed CR:** 4 · **CC:** 10
 
+Description: "While open ground combat is relatively rare in the Fourth Population, when it does occur, armored units provide key firepower and maneuverability."
+
 > **Errata** (new, 2026-09-28) p244: Body Track 90 (was 80).
 
 | Row | Detail | BP |
@@ -1400,6 +1506,8 @@ p. 244 · **Size:** Large · **Printed CR:** 4 · **CC:** 10
 #### Attack Hovercraft
 
 p. 245 · **Size:** Large · **Printed CR:** 4 · **CC:** 10
+
+Description: "A militarized version of the same technologies that make up the Colonial Transport, these birds are frequently used as close air support for their deft aerial handling."
 
 > **Errata** (new, 2026-09-28) p245: Body Track 90 (was 80).
 
@@ -1443,6 +1551,8 @@ p. 245 · **Size:** Large · **Printed CR:** 4 · **CC:** 10
 
 p. 245 · **Size:** Large · **Printed CR:** 4 · **CC:** 10
 
+Description: "While powered armor dominates TSN urban ground engagements, not all forces can field it, instead using lightly armored squads carried by APCs that trade heavier firepower for flexibility."
+
 > **Errata** (new, 2026-09-28) p245: Body Track 90 (was 80).
 
 > **Errata** (new, 2026-09-28) p245: Power Supply is Moderate Fusion rank 2 (was 1), so its 2 Weapon Links have power. Total Power Slots read 3 Minor (0 used), 6 Moderate (2 used).
@@ -1481,6 +1591,8 @@ p. 245 · **Size:** Large · **Printed CR:** 4 · **CC:** 10
 
 p. 246 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 
+Description: "An autonomous attack drone commonly called an “Auntie”. The compromises required to create a space combatant that can be deployed from a standard Launcher preclude it from heavier combat roles."
+
 > **Errata** (new, 2026-09-26) p246: Attack 5x (was 4x). Adds a Major Coil Power Supply (rank 1) with 1 rank of Major Charge (10 combat rounds) to power the Space-scale beam (new p216 rule: Coil can be Major on a Medium item). Maneuver 3 (was 5; the cap is 4). Its Far Range restriction is a Moderate limitation, No Far Range (was a Minor Usage Restriction).
 
 | Row | Detail | BP |
@@ -1509,6 +1621,8 @@ p. 246 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 
 p. 246 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
 
+Description: "An independent drone with a sophisticated sensor array, the recon drone provides enhanced detection capacities to the deploying ship. In combat, the drone provides realtime updates via its advanced Ansible communications system."
+
 > **Errata** (new, 2026-09-28) p246: Maneuver 4 (was 5; the cap is 4). Computer is Minor rank 3 (18 target), not rank 2, to run its Piloting 18 Task.
 
 | Row | Detail | BP |
@@ -1534,6 +1648,8 @@ p. 246 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
 
 p. 247 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
 
+Description: "A probe used in search and rescue operations deemed too dangerous for a human presence. A durable inflatable sac helps it to evacuate survivors to safety. The probe’s telepresence equipment allows a ship’s medical team to conduct first response medical procedures while the patient is in transit."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Body Track | 20 (default 10 + 2×5) | 10 |
@@ -1556,6 +1672,8 @@ p. 247 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
 #### Stealth FTL Recon Drone
 
 p. 247 · **Size:** Medium · **Printed CR:** 6 · **CC:** 21
+
+Description: "An experimental design that makes a series of programmed rapid FTL jumps in the target system before jumping to a predefined collection point."
 
 > **Errata** (new, 2026-09-25) p247: Stat block replaced by PJ's rebuilt design (spreadsheet "FTL Recon Probe"): CR 6, CC 21. Changes from the printed block: the original build notes left out the Shrouded Hull; Body is the default 10 (was 15); Fuel is 2 Major ranks shared by both Drives (was 5 Moderate + 1 Major); Maneuver is 2 at Major grade (was 4 at Moderate); Tangle 1 rank (was 2); Tags [Security 2] (was [High Security 3]); adds Limitations One Track Mind (Moderate) and One-Time Use (Major).
 
@@ -1595,6 +1713,8 @@ p. 247 · **Size:** Medium · **Printed CR:** 6 · **CC:** 21
 
 p. 248 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
 
+Description: "Telekinesis offers an ideal way to move light cargo and passenger loads between surface and orbit, and shuttles designed for that use are largely responsible for making Telekinesis one of the most widespread Psionic skills in the Fourth Population."
+
 > **Errata** (new, 2026-09-28) p248: Its Coil Power Supply runs on 2 Major Charge, not 2 Major Fuel.
 
 > **Errata** p238: Telekinetic Shuttle has a Major Psi Link (added).
@@ -1629,6 +1749,8 @@ p. 248 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
 
 p. 248 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
 
+Description: "These ubiquitous ships specialize in delivering data packets too large to be transferred over the Ansible relays. Paper mail is rare, but what little that remains usually travels on these vessels."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Armor Rating | Space, rank 2 | 90 |
@@ -1658,6 +1780,8 @@ p. 248 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
 
 p. 249 · **Size:** Large · **Printed CR:** 4 · **CC:** 10
 
+Description: "The smallest starships, these are fairly common either for personal pleasure or light commercial uses in the Fringes. In the Terran Sphere Core, the strict licensing requirements means they are rarely allowed anywhere near inhabited planets."
+
 > **Errata** (new, 2026-09-27) p249: Adds Task: Pilot 17 and the Free Tag [The Grand Tour 3]. Tangle is 2 ranks (20 days), not 1.
 
 | Row | Detail | BP |
@@ -1684,6 +1808,8 @@ p. 249 · **Size:** Large · **Printed CR:** 4 · **CC:** 10
 #### Locust Mobile Industrial Platform
 
 p. 250 · **Size:** Huge · **Printed CR:** 7 · **CC:** 28
+
+Description: "A new colony’s first step toward self-sufficiency is often agriculture. The last step is usually spacecraft. Between the two, the Locust plies her trade, building a colony’s space-based infrastructure. The Locust is a starship capable of processing raw materials from asteroid mining and manufacturing complete spacecraft. At its heart is a top-quality G3P capable of working with almost any material at nanoscale precision. This device can “print” small spacecraft whole, such as security escorts and shuttlecraft, and components for prefabricated settlements and habitats. For mineral extraction, the G3P essentially runs in reverse, separating small asteroids into their constituent elements. Decomposition is significantly slower than traditional mining techniques, however, and a Locust’s crew often prefers to purchase raw and processed materials when possible."
 
 > **Errata** (new, 2026-09-28) p250: Total Power Slots read 6 Major (3 used); the grade was missing.
 
@@ -1722,6 +1848,8 @@ p. 250 · **Size:** Huge · **Printed CR:** 7 · **CC:** 28
 
 p. 251 · **Size:** Huge · **Printed CR:** 9 · **CC:** 45
 
+Description: "Both a freighter and a manufacturing depot, the general freighter works the commodities circuit, plying shipments of tangle and coil to serve the twin pillars of the TSC’s economy: information and power. Out on the Fringes, the ships are also contracted for heavy duty manufacturing work that a colony might not have the capacity or expertise to perform on its own. Due the large size and long deployment times, entire families often reside on the ship, making it more like a small town in space."
+
 > **Errata** (new, 2026-09-27) p251: Reaction Drive is Moderate, not Major. Hangars 2 Major (was 3). Life Support 5 Major (500 people, was 6). CR 9, CC 45 (was CR 8, CC 36). Computer is Major rank 3 (18 target); remove "5 tasks" (a Major computer runs unlimited tasks).
 
 | Row | Detail | BP |
@@ -1757,6 +1885,8 @@ p. 251 · **Size:** Huge · **Printed CR:** 9 · **CC:** 45
 
 p. 251 · **Size:** Huge · **Printed CR:** 7 · **CC:** 28
 
+Description: "A huge vessel, the Light Lugger is an in-system workhorse. Designed to work in parallel with a system’s port stations, the lugger is powered by transit lasers that create a cargo transit system not unlike a railroad."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Armor Rating | Space, rank 3 | 110 |
@@ -1788,6 +1918,8 @@ p. 251 · **Size:** Huge · **Printed CR:** 7 · **CC:** 28
 #### Security Escort/Corsair
 
 p. 252 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
+
+Description: "A light warship designed for escort work or raiding. Countless variations of the same basic hull exist throughout the Fourth Population. Due to its low cost compared to other ships, vessels of this type are often found on both sides of the law."
 
 > **Errata** (new, 2026-09-28) p252: Total Power Slots read 6 Major (2 used), 3 Moderate (0 used), not 9 Major (4 used). Weapons fitted to its Weapon Links draw further slots.
 
@@ -1823,6 +1955,8 @@ p. 252 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
 #### Standard Assault Shuttle
 
 p. 252 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
+
+Description: "Designed to ferry troops and materiel into combat, assault shuttles balance speed, firepower, and protection. Due to its relatively short flight range, the shuttle is usually deployed from a larger ship."
 
 > **Errata** (new, 2026-09-28) p252: Adds Communications: Moderate (Radio).
 
@@ -1862,6 +1996,8 @@ p. 252 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
 
 p. 253 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
 
+Description: "These ships sacrifice weaponry for sensors, communications, fuel, and supplies for the squadron. They also frequently serve as a squadron’s command ship."
+
 > **Errata** (new, 2026-09-28) p253: The ship's own Fuel is 10 Major (100 days), separate from the bulk fuel it carries as Cargo.
 
 > **Errata** (new, 2026-09-26) p253: Armor Rating 4 (was 3).
@@ -1898,6 +2034,8 @@ p. 253 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
 
 p. 253 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
 
+Description: "Employed by system defense fleets as a cheap way to bulk up their firepower, these escort-sized hulls trade a gravitic drive for armor and weaponry. They are the administrative bane of the Fleet, who dismisses them as “pocket cruisers” and would prefer FTL-capable craft that it can draft when needed."
+
 > **Errata** (new, 2026-09-28) p253: In the alternate forms, "missile array" means the 4 Launchers and "particle cannon" means the heavy railgun (an earlier draft's name).
 
 | Row | Detail | BP |
@@ -1931,6 +2069,8 @@ p. 253 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
 #### Dragon-class Fleet Interceptor/Escort
 
 p. 254 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
+
+Description: "An experiment by the Terran Sphere Navy to create a parasitic light space and atmospheric escort and support craft capable of taking on the Shohan. The Dragon forgoes traditional beam armament for reverse-engineered Force Fields and a heavy missile loadout, carrying a mix of countermeasure missiles and plasma heads."
 
 > **Errata** (new, 2026-09-28) p254: Fuel is 2 Major (20 days), not 2 Moderate, so it can run the Major Fusion reactor as well as the drives.
 
@@ -1970,6 +2110,8 @@ p. 254 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
 
 p. 255 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
 
+Description: "Although classified as an assault shuttle, the larger custom-built Bridgeheads are starships in their own right. With both plasma weapons and Force Field technology, a fast gravitic drive, the Bridgehead is becoming a workhorse in The War beyond its original role as an assault platform, with DIRT teams using them when stealth is unnecessary or by the Fleet as a fast, light recon vessel."
+
 > **Errata** (new, 2026-09-28) p255: Bleed is Major 2 (the free Plasma Bleed: half of 5x, rounded down), not Major 3. Total Power Slots read 3 Moderate (1 used), 3 Major (3 used).
 
 > **Errata** (new, 2026-09-26) p255: Armor Rating 4 (was 3); plasma cannon 5x (was 4x).
@@ -2008,6 +2150,8 @@ p. 255 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
 #### Phantom Deep Recon and Insertion Vehicle (DRIV)
 
 p. 255 · **Size:** Large · **Printed CR:** 8 · **CC:** 36
+
+Description: "The Phantom uses experimental stealth technologies, including a meta-material hull Shroud, heat sinks, and a modified in-system drive to become effectively invisible to scanners. The ship is intended as a recon platform into Shohan-occupied systems, and more dangerously as an insertion vehicle and base for DIRT teams on Shohan-controlled worlds. The lightly armed ship carries jammers in its missile bays and relies on speed and stealth to keep it out of trouble."
 
 > **Errata** p255: Moderate Laser Link (added).
 
@@ -2051,6 +2195,8 @@ p. 255 · **Size:** Large · **Printed CR:** 8 · **CC:** 36
 
 p. 256 · **Size:** Huge · **Printed CR:** 8 · **CC:** 36
 
+Description: "The Fourth Population’s standard mid-sized patrol craft carries a respectable arsenal with decent staying power. These craft are deployed as a visible show of TSN force in systems where a frigate’s presence is deemed excessive."
+
 > **Errata** (new, 2026-09-28) p256: Adds Computer: Major 3 (18 target, unlimited tasks), matching the Redemption and Retribution.
 
 > **Errata** (new, 2026-09-28) p256: Adds Power Supply: Major Fusion, rank 1, to power its integrated railgun turrets. Total Power Slots read 6 Major (4 used), 3 Moderate (0 used), not 3 Major (2 used).
@@ -2093,6 +2239,8 @@ p. 256 · **Size:** Huge · **Printed CR:** 8 · **CC:** 36
 
 p. 257 · **Size:** Huge · **Printed CR:** 7 · **CC:** 28
 
+Description: "The first ship to be engineered solely to counter the Shohan, the Defiance-class has become the Fleet’s backbone as it struggles to rebuild. Only slightly larger than an escort, it combines the smaller ship’s maneuverability with a cruiser’s firepower, at the expense of a standard cruiser’s range. As an early plasma weapon platform design, the ship suffers from a few flaws related to the massive plasma cannon it mounts."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Attack (spinal heavy plasma cannon) | Plasma (Space) 8x | 250 |
@@ -2127,6 +2275,8 @@ p. 257 · **Size:** Huge · **Printed CR:** 7 · **CC:** 28
 #### Conventional Frigate
 
 p. 258 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
+
+Description: "Frigates represent the Fourth Population’s heavy warcraft. Many of the Fleet’s frigates were lost at the Massacre of Artemis III. Larger systems, such as Sol and Alpha Centauri, still possess squadrons of these vessels, although they are rapidly being retrofitted into Redemption-class variants. While the Terran Sphere is optimizing its frigates for ship-to-ship combat, traditional frigate designs carry out fleet engagements while supporting marine deployments against planetary targets."
 
 > **Errata** (new, 2026-09-28) p258: 8 Launchers (Space), not 6 (launchers come in sets of 4).
 
@@ -2170,6 +2320,8 @@ p. 258 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 
 p. 258 · **Size:** Huge · **Printed CR:** 9 · **CC:** 45
 
+Description: "Prior to the Redemption-class frigate, Intrepids were a mainstay of the Fleet. Their heavy turrets, thick hull plating, and strong engines are designed to mix it up at close range with fleet pirate raiders and ponderous Kriak clanships alike."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Attack (railgun turrets) | Kinetic (Space) 7x ×2 mounts (+40 each extra) | 215 |
@@ -2205,6 +2357,8 @@ p. 258 · **Size:** Huge · **Printed CR:** 9 · **CC:** 45
 
 p. 259 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 
+Description: "A complement to the Intrepid-class frigate, the Resolute is designed to provide long-range supply and command support. Though less durable, it boasts longer-ranged weaponry and increased hangar space for support craft, as well as deeper fuel and tangle reserves for extended operations."
+
 > **Errata** (new, 2026-09-26) p259: Armor Rating 5 (was 4); laser turret 7x (was 6x).
 
 | Row | Detail | BP |
@@ -2239,6 +2393,8 @@ p. 259 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 #### Redemption-class Frigate
 
 p. 259 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
+
+Description: "The newest generation of Terran Sphere frigates is designed to devastate Shohan ships at the expense of most of its planetary strike capacity."
 
 > **Errata** (new, 2026-09-28) p259: 4 Launchers (Space), not 6; the ship is built around its plasma cannons. Total Power Slots: 9 Major (7 used), 3 Moderate (0 used).
 
@@ -2290,6 +2446,8 @@ p. 259 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 
 p. 260 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 
+Description: "The sister class to the Redemption. While built on the same general hull design, the Retribution is the sniper to the Redemption’s brawler, trading one of the Redemption’s Plasma Cannons for a heavier missile armament."
+
 > **Errata** (new, 2026-09-28) p260: Reaction Drive is Moderate, not Major, like its sister ship the Redemption. Total Power Slots read 6 Major (6 used), 3 Moderate (0 used).
 
 > **Errata** (new, 2026-09-28) p260: "Anti-Missile (Space) 2x" reads Anti-Missile (Space) 1x (one mount). Total Power Slots read 9 Major (6 used), not 7 used.
@@ -2334,6 +2492,8 @@ p. 260 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 #### Marine LASCO (Launch, Support, and Command) Vessel
 
 p. 261 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
+
+Description: "A JESF design, the LASCO is dedicated to planetary operations: housing marines, launch bays, and weaponry for bombardment. Like the Redemption-class frigate, the LASCO is a specialized implementation of a role previously filled by conventional frigates. A LASCO can fight in a space engagement if it must, but at a significant disadvantage compared to other frigates due to its specialized weaponry."
 
 > **Errata** (new, 2026-09-27) p261: Fuel is 10 Major (100 days), not 13. Adds Limitation: Prerequisite [Property of the Terran Sphere] (Moderate). The 4 Major Hangars hold 3 Large craft each (4 crammed), so 12–16 Bridgehead Assault Shuttles.
 
@@ -2380,6 +2540,8 @@ p. 261 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 
 p. 261 · **Size:** Huge · **Printed CR:** 9 · **CC:** 45
 
+Description: "Designed to extend the reach of limited-range Defiance squadrons and other Fleet elements, these frigate-class hulls are a fleet’s front-line resupply nodes. They carry considerable cargo and enough fuel to supply three frigates with a full refuel. Industrial G3Ps can convert raw materials into whatever the cargo bays don’t carry. As part of the ongoing experiment with Dragon-class escorts, the Fleet has also outfitted them with a large parasite contingent to deploy in support of Fleet operations."
+
 > **Errata** (new, 2026-09-28) p261: The ship's own Fuel is 11 Major (110 days), separate from the bulk fuel it carries as Cargo.
 
 > **Errata** (new, 2026-09-25) p261: The printed "300 Major Fuel" is bulk fuel held as Cargo (enough to refuel three frigates), not the ship's own Fuel Resource. Pumping it from the storage tanks into a ship's systems takes an Engineering check.
@@ -2417,6 +2579,8 @@ p. 261 · **Size:** Huge · **Printed CR:** 9 · **CC:** 45
 #### Arniston (Unique Armed Merchantman)
 
 p. 262 · **Size:** Huge · **Printed CR:** 9 · **CC:** 45
+
+Description: "The Arniston began life several decades ago as a fleet auxiliary in the JESF before being sold off as naval surplus to an outer Colony. It turned up as a tramp freighter plying the Gap trading lines, and its captain, Marcos, was caught smuggling. The Seventh Fleet offered Marcos a deal: sell the Arniston to a Nav Int shell corporation and retire far from the Gap. The ship has since been rebuilt by Nav Int with the intent of investigating the increased pirate attacks in the Gap, but even before the latest Navy refit, the Arniston—especially its engines—had been extensively modified. Nav Int commissioned its previous engineer rather than scrap and rebuild its drives."
 
 > **Errata** (new, 2026-09-28) p262: Fuel reads 6 Major Fuel (60 days/combat rounds), not 6 days.
 
@@ -2466,6 +2630,8 @@ p. 262 · **Size:** Huge · **Printed CR:** 9 · **CC:** 45
 
 p. 263 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 
+Description: "While the fleets of the Free Haven have a number of more standard designs, they also maintain a number of heavy warships designed to support light raider squadrons. Most carriers lurk in orbit around a system’s outer planets while their escorts prey on TSC shipping, thus minimizing the risk to their Navigators, but they have on occasion made starfall in an inner system to support a raiding squadron."
+
 > **Errata** (new, 2026-09-27) p263: Heavy particle cannon is 7x (was 6x). Armor Rating 5 (was 3). Cargo 2 Major (was "1 Huge"; Cargo has no Huge grade). Adds Manufacture: Major. Unique Fuel (Antimatter) is a Major limitation. Power Slots 6 Major (from its two Major drives), 5 used.
 
 | Row | Detail | BP |
@@ -2509,6 +2675,8 @@ p. 263 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 #### Havenite Marauder
 
 p. 263 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
+
+Description: "Fast and stealthy, Marauders use their heavy missile loadouts to ambush unsuspecting starships before their motherships move in to claim the prize. The tight crew quarters make the ships uncomfortable for any but a Havenite crew."
 
 > **Errata** (new, 2026-09-28) p263: 8 Launchers (Space), not 6 (launchers come in sets of 4; fits its heavy missile loadout).
 
@@ -2554,6 +2722,8 @@ p. 263 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
 
 p. 264 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
 
+Description: "This small boarding craft relies heavily on its stealth technologies to carry it through mission, having little in the way of armament and a small fuel reserve for its hungry in-system drive."
+
 > **Errata** (new, 2026-09-28) p264: Fuel reads 4 Major Fuel (40 days/combat rounds), not 4 days.
 
 > **Errata** (new, 2026-09-27) p264: The drive is a Major Gravitic drive modified for in-system use (like the Phantom's), not a Reactionless drive, with Limitation: Usage Restriction (in-system only; not FTL-capable), Minor. Adds Limitation: One-Time Use (Major); the boarding craft must be reserviced after action.
@@ -2594,6 +2764,8 @@ p. 264 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
 
 p. 264 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
 
+Description: "An aftermarket kinetic weapon for light space combatants."
+
 > **Errata** (new, 2026-09-28) p264: Adds Power Requirement: 1 Major slot (drawn from the host through its Weapon Link), like the Heavy Laser Cannon.
 
 > **Errata** p264: Attack 7x (was 6x); Body 50 (was 10).
@@ -2615,6 +2787,8 @@ p. 264 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
 
 p. 264 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 
+Description: "The high damage and savings on ammo help make up for this high-quality laser cannon’s high purchase cost."
+
 > **Errata** p264: Attack 8x (was 7x); Body 50 (was 10).
 
 | Row | Detail | BP |
@@ -2631,6 +2805,8 @@ p. 264 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 #### Quad Missile Pack
 
 p. 265 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
+
+Description: "This four-tube missile pack can be attached to any starship Weapon Link. While the launcher itself is cheaper than other weapons, the individual missiles are not included."
 
 > **Errata** (new, 2026-09-28) p265: Magazine reads 8 Major Magazines (80 shots), not 2.
 
@@ -2653,6 +2829,8 @@ p. 265 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
 
 p. 266 · **Size:** Small · **Printed CR:** 2 · **CC:** 3 · **Required Computer Grade:** Minor
 
+Description: "Social Aggregators marry network analysis tools and social data feeds to create context sensitive info feeds for the user. In one sweep over the room, a person may quickly discover numerous tidbits about it occupants from a variety sources."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Modifier | Social Analysis (Persuade, Discern, Socialize) +3 (counted ×3 skills) | 90 |
@@ -2667,6 +2845,8 @@ p. 266 · **Size:** Small · **Printed CR:** 2 · **CC:** 3 · **Required Comput
 
 p. 266 · **Size:** Small · **Printed CR:** 0 · **CC:** 0 · **Required Computer Grade:** Minor
 
+Description: "Most computer systems in the Fourth Population possess at least modicum of security software to ward off malware and other electronic miscreants."
+
 > **Errata** (new, 2026-09-27) p266: A Small item (per the build notes); requires a Minor computer.
 
 | Row | Detail | BP |
@@ -2680,6 +2860,8 @@ p. 266 · **Size:** Small · **Printed CR:** 0 · **CC:** 0 · **Required Comput
 #### Security Software
 
 p. 266 · **Size:** Small · **Printed CR:** 1 · **CC:** 1 · **Required Computer Grade:** Minor
+
+Description: "A more sophisticated option of the security conscious."
 
 > **Errata** (new, 2026-09-27) p266: Adds the Free Tags [This Is A Private Conversation 2] and [I See You 2].
 
@@ -2697,6 +2879,8 @@ p. 266 · **Size:** Small · **Printed CR:** 1 · **CC:** 1 · **Required Comput
 
 p. 266 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1 · **Required Computer Grade:** Minor
 
+Description: ""
+
 > **Errata** (new, 2026-09-27) p266: A Tiny add-on module for a larger security suite.
 
 | Row | Detail | BP |
@@ -2709,6 +2893,8 @@ p. 266 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1 · **Required Compute
 #### Honey Pot
 
 p. 266 · **Size:** Tiny · **Printed CR:** 2 · **CC:** 3 · **Required Computer Grade:** Minor
+
+Description: ""
 
 > **Errata** (new, 2026-09-27) p266: A Tiny add-on module for a larger security suite. [The Wages of Sin] is rank 2.
 
@@ -2723,6 +2909,8 @@ p. 266 · **Size:** Tiny · **Printed CR:** 2 · **CC:** 3 · **Required Compute
 #### Military-Grade Security
 
 p. 267 · **Size:** Small · **Printed CR:** 4 · **CC:** 10 · **Required Computer Grade:** Minor
+
+Description: "Hardened system security that fights back."
 
 > **Errata** (new, 2026-09-27) p267: Compromise task removed. [I See You 3] and [Like Fort Knox 3] are Free Tags (Like Fort Knox was rank 1), and it adds the Free Tag [This Is A Private Conversation 2]. Its TN 20 Tasks run at TN 20 only on a rank 4 or better computer.
 
@@ -2740,6 +2928,8 @@ p. 267 · **Size:** Small · **Printed CR:** 4 · **CC:** 10 · **Required Compu
 
 p. 267 · **Size:** Tiny · **Printed CR:** 2 · **CC:** 3 · **Required Computer Grade:** Minor
 
+Description: "Various forged electronic certificates, all proudly proclaiming you are who you are almost certainly not."
+
 > **Errata** (new, 2026-09-25) p267 (clarification): A Tiny item. The identity is stored on a chip (ident card, passport) and runs on whatever computer reads it to spoof that reader.
 
 | Row | Detail | BP |
@@ -2754,6 +2944,8 @@ p. 267 · **Size:** Tiny · **Printed CR:** 2 · **CC:** 3 · **Required Compute
 #### Good Cover Identity
 
 p. 267 · **Size:** Tiny · **Printed CR:** 4 · **CC:** 10 · **Required Computer Grade:** Minor
+
+Description: "Good enough to fool your own mother—when they release her someday…"
 
 > **Errata** (new, 2026-09-25) p267 (clarification): A Tiny item. The identity is stored on a chip (ident card, passport) and runs on whatever computer reads it to spoof that reader.
 
@@ -2776,6 +2968,8 @@ p. 267 · **Size:** Tiny · **Printed CR:** 4 · **CC:** 10 · **Required Comput
 #### Tse Blade
 
 p. 268 · **Size:** Small · **Printed CR:** 4 · **CC:** 10
+
+Description: "The standard weapon of Shohan Warriors, the Tse is known for its Force Field “blade.” However, the Tse Blade also contains a potent, if slow-firing, ranged energy weapon."
 
 > **Errata** p268: Attack multipliers 5x (was 4x).
 
@@ -2811,6 +3005,8 @@ p. 268 · **Size:** Small · **Printed CR:** 4 · **CC:** 10
 #### Shohan Personal Armor
 
 p. 268 · **Size:** Medium · **Printed CR:** 5 · **CC:** 15
+
+Description: "The standard Shohan soldier’s armor."
 
 > **Errata** (new, 2026-09-29) p268: Weapons +2 covers two skills, Melee and Heavy Weapons (a Tse Blade combo), costed as a Moderate Modifier. Target On Your Back is a Major limitation, not Moderate: anyone wearing it is visibly in the other side's armor.
 
@@ -2851,6 +3047,8 @@ p. 268 · **Size:** Medium · **Printed CR:** 5 · **CC:** 15
 
 p. 269 · **Size:** Medium · **Printed CR:** — · **CC:** —
 
+Description: "It’s uncertain whether these so-called Cerberuses count as merely equipment, or if select Shohan have used their biotech to warp themselves into an extreme warrior form. The hulking gorilla-sized War Drone serves as the Shohan’s ground-scale heavy weapons platform."
+
 > **Errata** (new, 2026-09-28) p269: Computer is a Moderate Brain rank 4 (20 target), not rank 3, to run its Combat 20 Task.
 
 > **Errata** p269: Body 80, Armor 5 (was lower).
@@ -2888,6 +3086,8 @@ p. 269 · **Size:** Medium · **Printed CR:** — · **CC:** —
 
 p. 269 · **Size:** Large · **Printed CR:** — · **CC:** —
 
+Description: "The Shohan version of the Terran assault shuttle. The Shohan launch dozens of these disposable pods to the surface of a planet when commencing a planetary invasion. Those that survive become both gateways and field fortifications for the arriving Shohan."
+
 | Row | Detail | BP |
 |---|---|---:|
 | Attack (heavy flare gun) | Flare (Battlefield) 4x ×3 mounts (+20 each extra) | 90 |
@@ -2917,6 +3117,8 @@ p. 269 · **Size:** Large · **Printed CR:** — · **CC:** —
 #### Shohan Destroyer
 
 p. 270 · **Size:** Huge · **Printed CR:** — · **CC:** —
+
+Description: "Combining the maneuverability of a cruiser with the firepower of a frigate, Shohan destroyers make up the bulk of the Shohan fleet. Project Leapfrog speculates that Destroyers represent a larval form of the Dreadnoughts."
 
 | Row | Detail | BP |
 |---|---|---:|
@@ -2949,6 +3151,8 @@ p. 270 · **Size:** Huge · **Printed CR:** — · **CC:** —
 #### Shohan Dreadnought
 
 p. 270 · **Size:** Colossal · **Printed CR:** — · **CC:** —
+
+Description: "If the Shohan merely possessed fleets of Destroyers, they would still be a formidable foe. Unfortunately for the Terran Sphere, the Destroyer is only an escort and raider for the true master of the Shohan fleet: the Dreadnought. These massive vessels’ hyper cannons are the pinnacle of known Shohan weaponry, producing a massive FTL beam with a range beyond anything in the Terran Sphere."
 
 | Row | Detail | BP |
 |---|---|---:|
@@ -2986,6 +3190,8 @@ p. 270 · **Size:** Colossal · **Printed CR:** — · **CC:** —
 
 p. 271 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 
+Description: "Artemis III’s security forces started the Shohan occupation with APCs and hovercrafts designed for use in Sopara’s urban environs. These vehicles have proven less than ideal in the Cathedral Tree forests’ close confines against the Shohan Cerberuses. The Resistance has scavenged lumber mechs, designed to clamber along the forests’ thick canopies, to convert them into crude heavy combatants."
+
 > **Errata** (new, 2026-09-28) p271: Total Power Slots read 3 Minor (0 used), 3 Moderate (1 used), not 2 Minor.
 
 > **Errata** (new, 2026-09-27) p271: Body Track 70 (was 80). The Coil Power Supply's "2 Moderate Fuel" should read 2 Moderate Charge. [Kinetic Feedback Control Rig] is a Free Tag (free Skill switch from Drive to Athletics).
@@ -3019,6 +3225,8 @@ p. 271 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 #### Resistance Variable Laser Array
 
 p. 271 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: "Artemis III’s Resistance forces includes some of the Colony’s brilliant engineers working with, or themselves becoming, Altered. The Variable Laser Array is the product of that ingenuity and intel, a makeshift but effective counter against Shohan Force Fields. Altered engineers realized that Force Fields have “eddies” in their effectiveness, and the Array was designed to analyze and exploit these weaknesses. As an added bonus, the weapon automatically calibrates its focus to maximize its effect against armor. The current version is too heavy for infantry—the Resistance instead deploys it as a standalone squad weapon or mounts it to vehicles and powered armor."
 
 > **Errata** (new, 2026-09-25) p216: Moderate Power Supplies are allowed on Small items, so this is now legal.
 
