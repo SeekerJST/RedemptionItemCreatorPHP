@@ -74,6 +74,7 @@ describe('Attack (§5.3, 2x at base; each Multiplier rank +1x)', () => {
         expect(total(MINOR, 2, 'kinetic')).toBe(10);
         expect(total(MINOR, 3, 'kinetic')).toBe(10 + 9);
         expect(total(MINOR, 4, 'kinetic')).toBe(10 + 27);
+        expect(total(MINOR, 4, 'kineticSelfPowered')).toBe(10 + 27); // same discount
     });
 
     it('Melee: everything costs half', () => {

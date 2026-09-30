@@ -69,7 +69,11 @@ describe('validation (§9)', () => {
         const attack = row('attack');
         const kinetic = under(attack, 'attackMultiplier', MINOR, 1, { implementation: 'kinetic' });
         expectError(check([attack, kinetic]), 'needs an Ammunition Resource');
-        expect(errors(check([attack, kinetic, under(attack, 'resource', MINOR, 2, { implementation: 'ammunition' })]))).toEqual([]);
+        // Built in (rail), so it also draws a Power Slot.
+        expect(errors(check([attack, kinetic, under(attack, 'resource', MINOR, 2, { implementation: 'ammunition' }), row('powerSupply', MINOR, 1)]))).toEqual([]);
+
+        const pistol = row('attack');
+        expectError(check([pistol, under(pistol, 'attackMultiplier', MINOR, 1, { implementation: 'kineticSelfPowered' })]), 'needs an Ammunition Resource');
     });
 
     it('an energy Attack with no power is flagged, and the rows drawing that power are highlighted', () => {

@@ -189,7 +189,7 @@ Melee and Flare + Melee are unusual but legal.
 | Implementation | Cost effect | Rules | Availability |
 |---|---|---|---|
 | **Energy** | none | Lasers, particle cannons. No special rules. | All |
-| **Kinetic** | Multiplier upgrades cost 10% less, rounded up | Fires solid projectiles; needs an Ammunition Resource bought separately. | All |
+| **Kinetic** | Multiplier upgrades cost 10% less, rounded up | Fires solid projectiles; needs an Ammunition Resource bought separately. Two implementations **[Ruling 2026-09-29]**: **Kinetic** (built into or slaved to a host: ship and vehicle guns, suit or Weapon Link mounts) also draws a Power Slot; **Kinetic (self-powered)** (hand weapons such as gauss pistols and rifles) draws none, since each round carries its own power **[Errata p210]**. | All |
 | **Melee** | Everything (base and upgrades) costs half | Attacks are ranged by default; this limits to melee. **Can never take Area. [Errata p210]** | All |
 | **Anti-Missile** | Half of base cost (5 / 10 / 20); **1x** **[Ruling 2026-09-23]** | Its own attribute: the only 1x attack. Only targets missiles. Cannot take a multiplier. | All |
 | **Plasma** | none to BP | Uses **2× the Power Slots**. Gains **Counter (Shields)** free. Applies a free **Bleed** of `floor(m / 2)` damage/round; its magnitude matches the Attack's scale (Firefight → Minor, Battlefield → Moderate, Space → Major).  **[Ruling]** Extra Bleed damage above the free amount costs the difference between the full Bleed cost and the free Bleed **[Ruling 2026-09-27]**. | All (Terran Sphere tech) |
@@ -530,7 +530,8 @@ Implementations: **G3P** (general purpose), **Coil Gin** (always Major), **Tangl
 ### 5.20 Modifier — 10 / 20 / 30 BP per rank
 
 Bonus to Skill or Ability checks. **Max rank 4 per Skill/Ability** (sum all Modifier
-rows targeting the same Skill/Ability when validating).
+rows targeting the same Skill/Ability when validating). The Abilities are **Detection**,
+**Discern**, and **Initiative** **[PJ 2026-09-29]**.
 
 **[Ruling 2026-09-28]** The grade is how many skills the Modifier covers:
 

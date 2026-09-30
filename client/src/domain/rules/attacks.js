@@ -14,7 +14,11 @@ export const ATTACK_BASE = { 1: 10, 2: 20, 3: 40 };
 
 export const MULTIPLIER_IMPLEMENTATIONS = {
     energy: { name: 'Energy' },
-    kinetic: { name: 'Kinetic', upgradeFactor: 0.9, needsAmmunition: true },
+    // Rail weapons (errata p210). Built into or slaved to a host (ship and vehicle guns, suit or
+    // Weapon Link mounts): Ammunition plus a Power Slot. Self-powered (hand weapons such as gauss
+    // pistols and rifles): Ammunition only; the power is built into each round's casing.
+    kinetic: { name: 'Kinetic', upgradeFactor: 0.9, needsAmmunition: true, needsPower: true },
+    kineticSelfPowered: { name: 'Kinetic (self-powered)', upgradeFactor: 0.9, needsAmmunition: true },
     plasma: { name: 'Plasma', slotsPerMount: 2 },
     flare: { name: 'Flare' },
     hyperspace: { name: 'Hyperspace' },
@@ -36,12 +40,19 @@ export function isAmmoFed(children = []) {
     return children.some((child) => child.key === 'resource' && ['ammunition', 'general', null, undefined].includes(child.implementation));
 }
 
-/** Power for an Attack: 1 slot per mount at its scale (Plasma: 2), unless it's ammo-fed. */
+/**
+ * Power for an Attack: 1 slot per mount at its scale (Plasma: 2). An ammo-fed Attack draws none,
+ * except a built-in Kinetic (rail) weapon, which needs both; a self-powered Kinetic one never does.
+ */
 function attackPower(row, ctx) {
-    if (isAmmoFed(ctx.children)) {
+    const implementation = MULTIPLIER_IMPLEMENTATIONS[attackImplementation(ctx.children)];
+    if (implementation?.needsAmmunition && !implementation.needsPower) {
         return {};
     }
-    const perMount = MULTIPLIER_IMPLEMENTATIONS[attackImplementation(ctx.children)]?.slotsPerMount ?? 1;
+    if (!implementation?.needsPower && isAmmoFed(ctx.children)) {
+        return {};
+    }
+    const perMount = implementation?.slotsPerMount ?? 1;
     return { uses: [{ grade: row.grade, slots: perMount * row.rank }] };
 }
 

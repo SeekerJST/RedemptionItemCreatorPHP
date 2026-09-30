@@ -3,6 +3,17 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-29 (3): Self-powered Kinetic weapons; Abilities
+
+- **Kinetic splits in two** (errata p210, ruling 2026-09-29): **Kinetic** is a built-in or slaved rail
+  weapon and needs Ammunition plus a Power Slot; **Kinetic (self-powered)** (`kineticSelfPowered`) is a hand
+  weapon and needs Ammunition only. Both get the 10% multiplier discount. Before, any Attack with an
+  Ammunition sub-row drew no power.
+- **`db/migrations/006_skill_abilities.sql`:** `skills.SkillType` (`Skill`/`Ability`), adds the Abilities
+  Detection, Discern, and Initiative, and removes the stray `Skills ` row. Safe to run twice. Applied locally;
+  **still needs running on Dreamhost.** The Minor Modifier picker lists Skills and Abilities in two groups.
+- Tests: 192 client; smoke test still 51 checks.
+
 ## 2026-09-29 (2): Categories, descriptions, and read-only public items
 
 - **`db/migrations/005_item_description.sql`:** `item.Category` (`VARCHAR(100)`) and `item.Description`

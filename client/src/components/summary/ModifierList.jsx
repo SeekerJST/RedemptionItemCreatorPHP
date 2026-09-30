@@ -1,5 +1,11 @@
+/** How the skills table's SkillType groups the Minor picker (migration 006). */
+const SKILL_GROUPS = [
+    { type: 'Skill', label: 'Skills' },
+    { type: 'Ability', label: 'Abilities' },
+];
+
 /**
- * Each Modifier attribute with its bonus: a skill picker for a Minor (one-skill) Modifier,
+ * Each Modifier attribute with its bonus: a picker for a Minor Modifier (one Skill or Ability),
  * a free-text field for a Moderate or Major (multi-skill) one.
  */
 export default function ModifierList({ modifiers, skills, readOnly = false, onChange }) {
@@ -34,8 +40,14 @@ export default function ModifierList({ modifiers, skills, readOnly = false, onCh
                                     value={row.skill}
                                     onChange={(e) => onChange(row.id, e.target.value)}
                                 >
-                                    {skills.map((skill) => (
-                                        <option key={skill.skillID} value={skill.skillName}>{skill.skillName}</option>
+                                    {SKILL_GROUPS.map(({ type, label }) => (
+                                        <optgroup key={type} label={label}>
+                                            {skills
+                                                .filter((skill) => (skill.SkillType ?? 'Skill') === type)
+                                                .map((skill) => (
+                                                    <option key={skill.skillID} value={skill.skillName}>{skill.skillName}</option>
+                                                ))}
+                                        </optgroup>
                                     ))}
                                 </select>
                             )}

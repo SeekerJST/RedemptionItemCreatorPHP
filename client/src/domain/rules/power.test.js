@@ -51,9 +51,22 @@ describe('Power Slots (§5.22)', () => {
         const multiplier = row('attackMultiplier', MAJOR, 6, { parentId: plasma.id, implementation: 'plasma' });
         expect(grade(budget([plasma, multiplier]), MAJOR).used).toBe(4);
 
-        const kinetic = row('attack', MINOR, 1);
-        const ammo = row('resource', MINOR, 3, { parentId: kinetic.id, implementation: 'ammunition' });
-        expect(grade(budget([kinetic, ammo]), MINOR).used).toBe(0);
+        const clip = row('attack', MINOR, 1);
+        const ammo = row('resource', MINOR, 3, { parentId: clip.id, implementation: 'ammunition' });
+        expect(grade(budget([clip, ammo]), MINOR).used).toBe(0);
+    });
+
+    it('Kinetic (rail, errata p210): built in needs ammo and a slot; self-powered needs ammo only', () => {
+        const kineticAttack = (implementation) => {
+            const attack = row('attack', MODERATE, 1);
+            return [
+                attack,
+                row('attackMultiplier', MODERATE, 2, { parentId: attack.id, implementation }),
+                row('resource', MODERATE, 4, { parentId: attack.id, implementation: 'ammunition' }),
+            ];
+        };
+        expect(grade(budget(kineticAttack('kinetic')), MODERATE).used).toBe(1); // Tactical Railgun
+        expect(grade(budget(kineticAttack('kineticSelfPowered')), MODERATE).used).toBe(0); // gauss rifle
     });
 
     it('Launchers use 1 slot per increment of 4; Anti-Missile 1 per mount', () => {

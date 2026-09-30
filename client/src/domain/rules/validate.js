@@ -4,6 +4,7 @@
 // Errors are builds the rules forbid; warnings are legal but worth a look. Neither blocks
 // anything: the player decides.
 
+import { MULTIPLIER_IMPLEMENTATIONS } from './attacks.js';
 import { ATTRIBUTE_RULES } from './registry.js';
 import { GRADE_NAMES, SCALE_NAMES } from './common.js';
 import { FORCE_FIELD } from './protection.js';
@@ -91,7 +92,7 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
 
         const isKinetic =
             ['attack', 'attackMelee'].includes(row.key) &&
-            children.some((c) => c.key === 'attackMultiplier' && c.implementation === 'kinetic');
+            children.some((c) => c.key === 'attackMultiplier' && MULTIPLIER_IMPLEMENTATIONS[c.implementation]?.needsAmmunition);
         if (isKinetic && !children.some((c) => c.key === 'resource' && ['ammunition', 'general'].includes(c.implementation ?? 'general'))) {
             error(`${name(row)} is Kinetic: it needs an Ammunition Resource as a sub-row.`, row.id);
         }

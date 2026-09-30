@@ -75,7 +75,7 @@ Routes match the C# API and are case-insensitive.
 | Method | Route | Notes |
 |---|---|---|
 | GET | `itemcreator/getitemsizes` | `{ "1": "TINY", ... }` |
-| GET | `itemcreator/getitemsizesds`, `getskillsds`, `getitemattributesds`, `getattributescaleds` | Raw rows with DB column names. Byte-identical to the C# output. |
+| GET | `itemcreator/getitemsizesds`, `getskillsds`, `getitemattributesds`, `getattributescaleds` | Raw rows with DB column names. Byte-identical to the C# output, except `getskillsds`, which gained `SkillType` (migration 006). |
 | GET | `itemcreator/getallitems` | Items with `IsPublic = 1`; every item while `allow_writes` is on. Each has `category` and `IsPublic`. |
 | GET | `itemcreator/getitem/{id}` | 404 if missing |
 | POST | `itemcreator/createitem` | 201 + item with new `itemID` |
@@ -113,6 +113,8 @@ parameter still works.
   with `IsPublic = 1`. `createitem` always saves `IsPublic = 0`, and `Item::fromArray` ignores any
   `IsPublic` the client sends, so nothing through the API can publish or unlock an item. The catalog
   import (and later an admin panel) sets it in the database.
+- **`skills.SkillType`** (migration 006) is `Skill` or `Ability` (Detection, Discern, Initiative). The table may
+  be rebuilt for the character creator, so keep code that depends on it small.
 - **`item.Category`** is `"Group: Subgroup"` (e.g. `Weapons: Firearms`) or one level (`Armor`); NULL is
   Uncategorized. The Inventory tree splits on the first `:`.
 
