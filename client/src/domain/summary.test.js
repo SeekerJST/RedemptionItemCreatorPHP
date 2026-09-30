@@ -51,3 +51,40 @@ describe('Modifiers', () => {
         expect(messages).toEqual(['Modifiers to Melee add up to +5; the most is +4.']);
     });
 });
+
+describe('the Plasma Carbine, as the app builds it', () => {
+    const ids = { Attack: 1, 'Attack Multiplier': 2, Bleed: 3, Counter: 4, Resource: 5 };
+    const carbineLookups = {
+        sizes: [{ SizeName: 'SMALL', BasePoints: 50, IncrementPoints: 25, BaseCR: 0 }],
+        attributes: Object.entries(ids).map(([AttributeName, AttributeID]) => ({ AttributeID, AttributeName })),
+        skills: [],
+    };
+    const row = (id, name, grade, rank, parentId = null, Implementation = null) => ({
+        id, parentId, AttributeSystem: 'Weapons', AttributeName: ids[name], Scale: String(grade), Rank: rank, Implementation,
+    });
+    const item = {
+        ...createInitialItem(),
+        size: 'SMALL',
+        tags: [{ id: 1, TagDesc: "The Building's on Fire, and It's My Fault", TagRank: '1', TagFree: false }],
+        limits: [],
+        attributes: [
+            row(1, 'Attack', 1, 1),
+            row(2, 'Attack Multiplier', 1, 3, 1, 'plasmaSelfPowered'), // 5x
+            row(3, 'Bleed', 1, 3, 1), // 2 free + 1 bought
+            row(4, 'Counter', 1, 1, 1), // Armor
+            row(5, 'Resource', 1, 2, 1, 'ammunition'),
+        ],
+    };
+    const summary = summarizeItem(item, carbineLookups);
+
+    it('costs 115 BP, CR 2, with the Bleed at 10 and no power drawn', () => {
+        expect(summary.attributeCosts.get(3).buildPoints).toBe(10);
+        expect(summary.totalBP).toBe(115);
+        expect(summary.costRating).toBe(2);
+        expect(summary.powerSlots).toEqual([]);
+    });
+
+    it('counts self-powered Plasma as one Moderate limitation', () => {
+        expect(summary.limitCounts.find((c) => c.scaleName === 'Moderate').count).toBe(1);
+    });
+});

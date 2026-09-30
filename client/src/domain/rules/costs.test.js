@@ -114,6 +114,30 @@ describe('Bleed (§5.4)', () => {
     ])('magnitude %i, 1-4 damage', (grade, expected) => {
         expect(ranks('bleed', grade, 4)).toEqual(expected);
     });
+
+    describe("under a Plasma Attack: floor(m / 2) free at the Attack's scale; above that, the difference", () => {
+        const plasma = (grade, multiplierRank, implementation = 'plasma') => ({
+            parent: { id: 10, key: 'attack', grade, rank: 1 },
+            siblings: [{ id: 11, key: 'attackMultiplier', grade, rank: multiplierRank, implementation, parentId: 10 }],
+        });
+        const bleed = (grade, rank, ctx) => rowCost({ id: 12, key: 'bleed', grade, rank, parentId: 10 }, ctx);
+
+        it('Plasma Carbine: Firefight 5x gives Minor 2 free; Bleed 3 costs 10, Bleed 4 costs 25', () => {
+            const carbine = plasma(MINOR, 3, 'plasmaSelfPowered');
+            expect([1, 2, 3, 4].map((rank) => bleed(MINOR, rank, carbine))).toEqual([0, 0, 10, 25]);
+        });
+
+        it('Frigate: Space 8x gives Major 4 free', () => {
+            expect(bleed(MAJOR, 4, plasma(MAJOR, 6))).toBe(0);
+            expect(bleed(MAJOR, 5, plasma(MAJOR, 6))).toBe(20); // 70 - 50
+        });
+
+        it('a Bleed at another magnitude, or under a non-Plasma Attack, costs in full', () => {
+            expect(bleed(MODERATE, 2, plasma(MINOR, 3))).toBe(15);
+            expect(bleed(MINOR, 3, plasma(MINOR, 3, 'kinetic'))).toBe(20);
+            expect(bleed(MINOR, 3, {})).toBe(20);
+        });
+    });
 });
 
 describe('Body Track (§5.5): priced by item size, not grade', () => {

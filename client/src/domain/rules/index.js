@@ -79,16 +79,20 @@ export function rowCost(row, ctx = {}) {
         return 0;
     }
     const implementation = row.implementation ?? rule.defaultImplementation ?? null;
-    return rule.cost({ ...row, implementation }, { size: null, parent: null, children: [], ...ctx });
+    return rule.cost({ ...row, implementation }, { size: null, parent: null, children: [], siblings: [], ...ctx });
 }
 
-/** Rule rows with each one's parent and children, for costing or power. */
+/**
+ * Rule rows with each one's parent, children, and siblings (the parent's other sub-rows),
+ * for costing or power.
+ */
 export function withRelations(rows) {
     const byId = new Map(rows.map((row) => [row.id, row]));
     return rows.map((row) => ({
         row,
         parent: row.parentId != null ? byId.get(row.parentId) ?? null : null,
         children: rows.filter((other) => other.parentId === row.id),
+        siblings: row.parentId != null ? rows.filter((other) => other.parentId === row.parentId && other.id !== row.id) : [],
     }));
 }
 

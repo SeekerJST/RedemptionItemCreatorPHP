@@ -2,6 +2,7 @@
 // (item_creation_rules.md §5.2, §5.4, §5.5, §5.13, §5.23).
 
 import { ALL_GRADES, GRADE, RANK, priceFor } from './common.js';
+import { freePlasmaBleed } from './attacks.js';
 import { curveA, curveB } from './curves.js';
 import { SIZE, bodyPurchase } from './sizes.js';
 
@@ -76,7 +77,16 @@ export const protectionRules = {
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.RANK }, // damage per round
-        cost: (row) => curveB(priceFor({ 1: 5, 2: 10, 3: 20 }, row.grade), row.rank),
+        // Under a Plasma Attack, Bleed at the Attack's scale is free up to floor(m / 2); ranks above
+        // that cost the difference between the full Bleed and the free Bleed (ruling 2026-09-27).
+        cost: (row, ctx) => {
+            const base = priceFor({ 1: 5, 2: 10, 3: 20 }, row.grade);
+            const free = freePlasmaBleed(ctx.parent, ctx.siblings);
+            if (free && free.grade === row.grade) {
+                return row.rank <= free.rank ? 0 : curveB(base, row.rank) - curveB(base, free.rank);
+            }
+            return curveB(base, row.rank);
+        },
         children: [],
     },
 };

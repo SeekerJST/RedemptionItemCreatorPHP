@@ -62,6 +62,23 @@ function attackPower(row, ctx) {
 }
 
 /**
+ * The Bleed a Plasma Attack gets free (spec §5.3): floor(multiplier / 2) damage per round, at the
+ * grade matching the Attack's scale (Firefight → Minor, Battlefield → Moderate, Space → Major).
+ * `attack`: the Attack rule row; `children`: its sub-rows (the Multiplier holds the implementation).
+ * @returns {{grade: number, rank: number}|null} null if the Attack isn't Plasma
+ */
+export function freePlasmaBleed(attack, children = []) {
+    if (!attack || !['attack', 'attackMelee'].includes(attack.key)) {
+        return null;
+    }
+    const multiplier = children.find((child) => child.key === 'attackMultiplier');
+    if (!multiplier || !['plasma', 'plasmaSelfPowered'].includes(multiplier.implementation)) {
+        return null;
+    }
+    return { grade: attack.grade, rank: Math.floor((2 + (multiplier.rank || 0)) / 2) };
+}
+
+/**
  * Limitations an implementation carries built in: they count toward the limitation caps but
  * refund nothing. `rows`: rule rows (the Multiplier sub-row holds the implementation).
  * @returns {Array<{rowId: number, grade: number, name: string}>}

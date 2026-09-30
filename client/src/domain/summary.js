@@ -41,7 +41,7 @@ export function summarizeItem(item, lookups) {
         related.map((entry) => [
             entry.row.id,
             {
-                buildPoints: Math.round(rowCost(entry.row, { size, parent: entry.parent, children: entry.children })),
+                buildPoints: Math.round(rowCost(entry.row, { size, parent: entry.parent, children: entry.children, siblings: entry.siblings })),
                 power: rowPower(entry, size),
             },
         ])

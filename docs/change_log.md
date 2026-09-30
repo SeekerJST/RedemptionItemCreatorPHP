@@ -3,6 +3,16 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-29 (5): Plasma's free Bleed
+
+- **Bleed under a Plasma Attack** is free up to `floor(m / 2)` at the Attack's scale; ranks above that cost the
+  difference between the full Bleed and the free Bleed (spec §5.3, ruling 2026-09-27). A Bleed at another
+  magnitude, or under a non-Plasma Attack, costs in full, as before.
+- `withRelations()` now gives each row its **siblings** (the parent's other sub-rows), so a Bleed can see the
+  Multiplier that makes its Attack Plasma.
+- Tests: 200 client, including the Plasma Carbine built through `summarizeItem()`: 115 BP, CR 2, Bleed 10,
+  no power, one Moderate limitation slot. It now matches the catalog.
+
 ## 2026-09-29 (4): Self-powered Plasma
 
 - **Plasma (self-powered)** (`plasmaSelfPowered`, ruling 2026-09-29): needs special ammunition (an Ammunition
