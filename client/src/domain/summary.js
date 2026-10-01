@@ -13,6 +13,7 @@ import {
     powerBudget,
     rowCost,
     rowPower,
+    selfContainedAttacks,
     validateItem,
 } from './rules/index.js';
 import { impliedLimitations } from './rules/attacks.js';
@@ -36,13 +37,16 @@ export function summarizeItem(item, lookups) {
         item.attributes.map((a) => [a.id, lookups.attributes.find((l) => l.AttributeID === a.AttributeName)?.AttributeName ?? '?'])
     );
 
+    // A One-Time Use item's attacks need no feed (ruling 2026-09-30).
+    const selfContained = selfContainedAttacks(item.limits);
+
     // Per-row cost and power. Costs round to the nearest whole number, halves up.
     const attributeCosts = new Map(
         related.map((entry) => [
             entry.row.id,
             {
                 buildPoints: Math.round(rowCost(entry.row, { size, parent: entry.parent, children: entry.children, siblings: entry.siblings })),
-                power: rowPower(entry, size),
+                power: rowPower(entry, size, { selfContained }),
             },
         ])
     );
@@ -54,7 +58,7 @@ export function summarizeItem(item, lookups) {
     const attributeBP = sum([...attributeCosts.values()].map((cost) => cost.buildPoints));
     const totalBP = tagBP + attributeBP + limitBP;
 
-    const power = powerBudget(related, size);
+    const power = powerBudget(related, size, { selfContained });
     const byKey = (key) => item.attributes.filter((a) => relatedById.get(a.id)?.row.key === key);
     const skillNames = lookups.skills.map((s) => s.skillName);
     const modifiers = byKey('modifier').map((row) => modifierEntry(row, item.modifierSkills[row.id], skillNames));
@@ -64,7 +68,12 @@ export function summarizeItem(item, lookups) {
         size,
         power,
         limits: item.limits,
-        modifiers: modifiers.map((row) => ({ rowId: row.id, skills: row.skills, rank: Number(row.Rank) || 0 })),
+        modifiers: modifiers.map((row) => ({
+            rowId: row.id,
+            skills: row.skills,
+            rank: Number(row.Rank) || 0,
+            specialtyMissing: row.specialtyMissing,
+        })),
         nameOf: (id) => nameById.get(id),
     });
 
@@ -106,21 +115,53 @@ export function summarizeItem(item, lookups) {
     };
 }
 
+/** Skills that always take a specialty: "Engineering (Weapons)", "Science (Physics)", "Profession (Lawyer)". */
+export const SPECIALTY_SKILLS = ['Engineering', 'Science', 'Profession'];
+
+/** The Minor Modifier picker's choice for text that isn't a listed skill ("Design Software"). */
+export const OTHER_SKILL = '__other__';
+
+/** "Engineering (Starship)" -> { base: 'Engineering', detail: 'Starship' }; "Firearms" -> detail ''. */
+function splitSkill(text) {
+    const match = /^(.*?)\s*\((.*)\)\s*$/.exec(text);
+    return match ? { base: match[1].trim(), detail: match[2].trim() } : { base: text.trim(), detail: '' };
+}
+
 /**
- * A Modifier row plus what it's for. A Minor Modifier covers one skill, picked from the list
- * (the first one until picked). Moderate and Major ones cover several, typed as free text
- * ("Melee, Heavy Weapons" or a class like "Weapons"); `skills` is the listed skills named in it.
- * A row keeps its text when its grade changes, so switching back restores it.
+ * A Modifier row plus what it's for. `skill` is its saved text; `skills` the listed skills it
+ * adds to (for the +4 cap: "Medicine (first response only)" counts toward Medicine).
+ *
+ * Minor: one target, picked from the list (the first one until anything is chosen). `choice` is
+ * the listed skill, or OTHER_SKILL for anything else ("Design Software"); `detail` is a specialty
+ * ("Engineering (Starship)"), a note, or the Other text. Engineering, Science, and Profession need
+ * a specialty (`specialtyMissing`). Moderate and Major: several targets as free text ("Melee, Heavy
+ * Weapons", or a class like "Weapons"). A row keeps its text when its grade changes.
  */
 function modifierEntry(row, text, skillNames) {
     const grade = Number(row.Scale) || 1;
     if (grade === 1) {
-        const skill = skillNames.includes(text) ? text : (skillNames[0] ?? '');
-        return { ...row, grade, freeText: false, skill, skills: skill ? [skill] : [] };
+        if (text === undefined) {
+            const first = skillNames[0] ?? '';
+            return { ...row, grade, freeText: false, skill: first, choice: first, detail: '', skills: first ? [first] : [], specialtyMissing: null };
+        }
+        const { base, detail } = splitSkill(text);
+        const listed = skillNames.includes(text) ? text : skillNames.includes(base) ? base : null;
+        const choice = listed ?? OTHER_SKILL;
+        const shownDetail = listed ? (listed === text ? '' : detail) : text;
+        return {
+            ...row,
+            grade,
+            freeText: false,
+            skill: text,
+            choice,
+            detail: shownDetail,
+            skills: listed ? [listed] : [],
+            specialtyMissing: listed && SPECIALTY_SKILLS.includes(listed) && !shownDetail ? listed : null,
+        };
     }
     const named = String(text ?? '')
         .split(/[,/&;+]|\band\b/i)
-        .map((part) => part.trim().toLowerCase())
+        .map((part) => splitSkill(part).base.toLowerCase())
         .filter(Boolean);
     return {
         ...row,
@@ -128,6 +169,7 @@ function modifierEntry(row, text, skillNames) {
         freeText: true,
         skill: text ?? '',
         skills: skillNames.filter((name) => named.includes(name.toLowerCase())),
+        specialtyMissing: null,
     };
 }
 

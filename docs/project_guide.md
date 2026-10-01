@@ -56,7 +56,10 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `dev/router.php` | Router for PHP's built-in server; stands in for `.htaccess` locally. |
 | `index.php` (root) | Only there so Visual Studio's F5 (built-in server, no router) can reach the API. |
 | `db/migrations/` | Numbered SQL scripts. Run each one once, in order, on every existing database. A new database (e.g. the first Dreamhost one) is created from the schema file instead, which already includes them. |
-| `tests/smoke.php` | End-to-end test (32 checks) against a running server. |
+| `tests/smoke.php` | End-to-end test (51 checks) against a running server. |
+| `db/seed/` | `catalog.json` (the equipment catalog as app items, generated) and `import_catalog.php` (loads it as public items). |
+| `docs/catalog_tools/` | The catalog's source: `items.py` (data), `costs.py` (helpers: catalog text plus app rows), `gen.py` (the markdown), `gen_errata*.py` (errata files), `gen_catalog_json.py` (`db/seed/catalog.json`). |
+| `client/scripts/price-catalog.mjs` | Prices `catalog.json` with the app's rules (`npm run price-catalog`). |
 | `api.http` | Sample requests for Visual Studio's HTTP editor. |
 
 ## Running locally
@@ -65,8 +68,20 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 "C:\Program Files\IIS Express\PHP\v8.0\php.exe" -S localhost:5135 -t public dev/router.php
 cd client && npm run dev          # http://localhost:58967, proxies /itemcreator to :5135
 "C:\Program Files\IIS Express\PHP\v8.0\php.exe" tests/smoke.php   # needs allow_writes => true
-cd client && npm test              # rules tests (Vitest)
+cd client && npm test              # rules tests (Vitest), including catalog parity
 ```
+
+**Loading the catalog** (after editing `docs/catalog_tools`):
+
+```
+py docs/catalog_tools/gen_catalog_json.py                          # export: db/seed/catalog.json
+cd client && npm test && npm run price-catalog                     # check parity, then price it
+"C:\Program Files\IIS Express\PHP\v8.0\php.exe" db/seed/import_catalog.php   # load (--dry-run to check)
+```
+
+`catalog.test.js` builds every catalog item with the app's rules and fails if any row, total, or CR
+differs from the catalog, or if an item breaks a rule. `price-catalog` refuses to price in that case.
+The import gives each item a fixed ID from its name, so re-importing replaces the same items.
 
 ## API
 
@@ -187,7 +202,7 @@ parameter still works.
 - There's no authentication. Write endpoints are controlled by the `allow_writes` config flag.
 - Nothing in the UI sets `IsPublic`: new items are private (0), so with writes off they
   don't appear in `getallitems`. Private items aren't limited to their creator yet (that needs login).
-- The catalog isn't imported yet, so the Inventory only holds saved test items.
+- The catalog (103 items) is imported locally as public items; Dreamhost needs it after the schema.
 - Terran vs Shohan Force Fields (§9 #16) aren't modelled: that needs the faction/tech-base field,
   which is out of scope for now.
 - The Attacks summary (each attack with its sub-rows, and a name field) from the old code
@@ -244,8 +259,7 @@ Behavior kept from the old code, but worth confirming:
 4. **Settle the open rules questions** above.
 5. **Attacks summary:** list each attack with its sub-rows (multiplier, ammo) in Panel 3,
    which the old code was working toward.
-6. **Catalog import.** Have `docs/catalog_tools` emit structured rows (attribute, grade, rank,
-   implementation, sub-rows) and load them as public items with their category and description.
+6. **Catalog import on Dreamhost**, once the schema and seed files exist (step 1).
 7. **Login / authentication** as part of the SilentSpirits revamp, shared with SystemGeneratorLive.
 8. **Merge planning with SystemGeneratorLive.** Shared layout and styling, a shared DB
    config approach (SystemGeneratorLive uses `db_config.php` variables; this project

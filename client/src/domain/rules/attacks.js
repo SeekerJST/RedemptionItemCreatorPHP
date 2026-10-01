@@ -143,7 +143,8 @@ export const attackRules = {
         name: 'Attack Multiplier',
         gradeKind: 'none', // the parent Attack's scale
         grades: ALL_GRADES,
-        rank: { min: 1, meaning: RANK.MULTIPLIER_STEPS },
+        // Rank 0 = 2x, no upgrade: lets a 2x Attack carry an implementation (e.g. a Kinetic pistol).
+        rank: { min: 0, meaning: RANK.MULTIPLIER_STEPS },
         implementations: MULTIPLIER_IMPLEMENTATIONS,
         defaultImplementation: 'energy',
         subRowOnly: true, // only ever under an Attack or Attack (Melee)

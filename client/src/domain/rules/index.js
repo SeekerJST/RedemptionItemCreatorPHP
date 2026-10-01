@@ -97,7 +97,7 @@ export function withRelations(rows) {
 }
 
 export { costRating } from './costRating.js';
-export { powerBudget, rowPower } from './power.js';
+export { powerBudget, rowPower, selfContainedAttacks } from './power.js';
 export { validateItem } from './validate.js';
 
 /** How an attribute's grade reads: "Battlefield" for scale attributes, "Moderate" for graded ones, "" if none. */

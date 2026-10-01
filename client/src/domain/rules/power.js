@@ -3,15 +3,25 @@
 import { ATTRIBUTE_RULES } from './registry.js';
 
 const GRADES_HIGH_TO_LOW = [3, 2, 1];
+const ATTACK_KEYS = new Set(['attack', 'attackMelee', 'antiMissile']);
+
+/**
+ * True if the item's attacks need no feed: a One-Time Use item (a grenade) is its own charge
+ * (ruling 2026-09-30).
+ * @param {Array<{LimitDesc: string}>} limits
+ */
+export function selfContainedAttacks(limits = []) {
+    return limits.some((limit) => /^\s*One-Time Use\b/i.test(limit.LimitDesc ?? ''));
+}
 
 /**
  * One row's own power figures, for display: slots it provides and slots it uses.
  * (Shared load like a Force Field track shows on every row; the budget counts it once.)
  * @param {{row, parent, children}} entry from withRelations()
  */
-export function rowPower({ row, parent, children }, size = null) {
+export function rowPower({ row, parent, children }, size = null, { selfContained = false } = {}) {
     const rule = ATTRIBUTE_RULES[row.key];
-    if (!rule?.power) {
+    if (!rule?.power || (selfContained && ATTACK_KEYS.has(row.key))) {
         return { provides: 0, uses: 0 };
     }
     const implementation = row.implementation ?? rule.defaultImplementation ?? null;
@@ -27,19 +37,20 @@ export function rowPower({ row, parent, children }, size = null) {
  *
  * @param {Array<{row: object, parent: object|null, children: object[]}>} related from withRelations()
  * @param {number|null} size item size ordinal
+ * @param {{selfContained?: boolean}} [options] selfContained: attacks draw nothing (selfContainedAttacks())
  * @returns {{
  *   grades: Array<{grade: number, available: number, used: number, borrowed: number, short: number}>,
  *   ok: boolean
  * }} per grade: `borrowed` = load covered by spare higher-grade slots; `short` = load nothing covers
  */
-export function powerBudget(related, size = null) {
+export function powerBudget(related, size = null, { selfContained = false } = {}) {
     const available = { 1: 0, 2: 0, 3: 0 };
     const used = { 1: 0, 2: 0, 3: 0 };
     const shared = new Set();
 
     for (const { row, parent, children } of related) {
         const rule = ATTRIBUTE_RULES[row.key];
-        if (!rule?.power) {
+        if (!rule?.power || (selfContained && ATTACK_KEYS.has(row.key))) {
             continue;
         }
         const implementation = row.implementation ?? rule.defaultImplementation ?? null;

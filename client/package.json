@@ -9,6 +9,7 @@
     "prebuild": "node -e \"const fs=require('fs');fs.rmSync('../public/assets',{recursive:true,force:true});fs.rmSync('../public/index.html',{force:true})\"",
     "build": "vite build",
     "lint": "eslint .",
+    "price-catalog": "node scripts/price-catalog.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"

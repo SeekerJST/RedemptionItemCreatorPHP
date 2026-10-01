@@ -171,6 +171,32 @@ final class ItemRepository
         });
     }
 
+    /**
+     * Writes an item under a fixed ID, replacing any item already there, with IsPublic as given.
+     * For seeding (db/seed/import_catalog.php): it deliberately bypasses the read-only lock on
+     * public items, and no API route calls it.
+     *
+     * @return bool true if an item with that ID was replaced, false if it was new
+     */
+    public function import(Item $item, string $itemId, bool $isPublic): bool
+    {
+        $sizeId = $this->sizeId($item->itemSize);
+
+        return $this->transaction(function () use ($item, $itemId, $sizeId, $isPublic): bool {
+            $stmt = $this->db->prepare('SELECT 1 FROM item WHERE ItemID = ? FOR UPDATE');
+            $stmt->execute([$itemId]);
+            $replaced = $stmt->fetchColumn() !== false;
+            if ($replaced) {
+                $this->deleteChildren($itemId);
+                $this->db->prepare('DELETE FROM item WHERE ItemID = ?')->execute([$itemId]);
+            }
+            $this->db->prepare('INSERT INTO item (ItemID, ItemName, Category, Description, ItemSize, CostRating, IsPublic) VALUES (?, ?, ?, ?, ?, ?, ?)')
+                ->execute([$itemId, $item->itemName, self::nullIfEmpty($item->category), $item->description, $sizeId, $item->costRating, (int) $isPublic]);
+            $this->insertChildren($itemId, $item);
+            return $replaced;
+        });
+    }
+
     // ---- internals --------------------------------------------------------------
 
     /**

@@ -366,9 +366,10 @@ Lets the item move under its own power. Repeatable (a ship can have several).
 | Ground | usually Minor | Flavor only (wheels, rails, hover, legs). | All |
 | Sea | usually Minor | Surface ships to submarines. | All |
 | Reaction | Moderate | Rocketry, usually fusion. Can share fuel with a Fusion/Antimatter Power Supply. **[Ruling 2026-09-28]** A **Minor** Reaction Drive is a jet pack: it works on a planet or in microgravity (Flight Pack). | All |
-| **Reactionless** | Moderate | Does **not** expel reaction mass **[Errata p213]**, still needs fuel. | Shohan only (rumored elsewhere) |
+| **Reactionless** | Moderate | Does **not** expel reaction mass **[Errata p213]**, still needs fuel (unless its item's Power Supply runs it: see below). | Shohan only (rumored elsewhere) |
 | **Light Sail** | Moderate | Costs **15 BP**. No Fuel needed. The item cannot take **Maneuver**. | All |
 | Gravitic | Major | Unsafe inside deep gravity wells; only works outside a system's grav shore. | Fourth Population's FTL |
+| **Biological** **[Ruling 2026-09-30]** | usually Minor | A creature's legs, wings, or fins. No Fuel. | All |
 | **Jump** | Major | Includes a **Hyperspace Tap** Power Supply; no Fuel. Comes with Drawback Tag **[Disoriented]**: can't act for 1 combat round after arriving. | Shohan, Celestines, older Populations only |
 
 ### 5.11 Maneuver — 5 / 10 / 20 BP per rank
@@ -541,8 +542,13 @@ rows targeting the same Skill/Ability when validating). The Abilities are **Dete
 | Moderate | 2 skills | 20 | Melee, Heavy Weapons +2 = 40 (Shohan Personal Armor) |
 | Major | 3+ skills, or a class of skills ("Weapons", "Technical Skills") | 30 | Persuade, Discern, Socialize +3 = 90 (Social Aggregator) |
 
-In the app, a Minor Modifier picks its skill from the list; Moderate and Major ones name
-their skills as free text. The +4 cap counts the listed skills the text names (a class
+**Engineering, Science, and Profession** always take a specialty: Engineering (Weapons),
+Science (Physics), Profession (Lawyer). **[PJ 2026-09-30]**
+
+In the app, a Minor Modifier picks its skill from the list, with a specialty for those three
+and an optional note ("Medicine (first response only)"), or **Other…** for a target that isn't
+a skill ("Design Software", "Credentials"); Moderate and Major ones name their skills as free
+text. The +4 cap counts the listed skills the text names (a class
 such as "Weapons" names none, so it isn't checked). **[Ruling 2026-09-29]** Deliberately
 loose: whether a class Modifier stacks past +4 with others is left to the table.
 
@@ -592,7 +598,7 @@ the lowest higher grade with spare slots.
 
 | Consumer | Slots |
 |---|---|
-| Attack (energy-fed) | 1 per Attack/turret, grade = Attack scale |
+| Attack (energy-fed) | 1 per Attack/turret, grade = Attack scale. On a **One-Time Use** item (a grenade): 0, the item is its own charge **[Ruling 2026-09-30]** |
 | Rail (Kinetic Ranged) Attack **[Errata p210]** | Integrated or slaved (ship/vehicle weapons, suit-mounted or Weapon Link modules): 1 per Attack/turret, grade = Attack scale, **plus** Ammunition. Standalone (hand weapons): 0; power is built into each round's casing, already included in the Ammunition. |
 | Plasma Attack | 2 per Attack/turret, with or without Ammunition. **Plasma (self-powered)**: 0 (special ammunition instead) |
 | Launcher | `ceil(count / 4)`, grade = launcher scale |
@@ -732,11 +738,11 @@ Hard errors (the rules forbid it):
 1. Attack multiplier ≥ 2x. Anti-Missile is exactly 1x. **[Ruling 2026-09-23]**
 2. Melee Attack + Area. **[Errata p210]** Melee + Anti-Missile. **[Ruling]**
 3. Tse on a non-Melee Attack.
-4. Every Attack has a feed: ammo/clip Resource **or** Power Slot(s). Kinetic needs Ammunition.
+4. Every Attack has a feed: ammo/clip Resource **or** Power Slot(s), except on a One-Time Use item **[Ruling 2026-09-30]**. Resources can be shared, so several Attacks (a weapon's modes) can use one Ammunition row. Kinetic needs Ammunition.
 5. Power Slots cover the load using the cumulative, top-down check in §5.22.
 6. Launchers (non-Disposable) have a Magazine.
 7. Ansible has Tangle.
-8. Drives have Fuel unless Light Sail, Jump, or an implementation says otherwise. The Fuel's grade must be equal to or higher than the Drive's grade **[Errata p217]**.
+8. Drives have Fuel unless Light Sail, Jump, Biological, or the item has a Coil, Environmental, or Hyperspace Tap Power Supply to run them **[Ruling 2026-09-30]**. The Fuel's grade must be equal to or higher than the Drive's grade **[Errata p217]**.
 9. Light Sail items have no Maneuver. Maneuver rank ≤ 4.
 10. Modifier rank ≤ 4 per Skill/Ability (summed).
 11. Tag rank ≤ 3.
@@ -751,7 +757,7 @@ Hard errors (the rules forbid it):
 20. Far Ranged is not available at Major.
 21. Computer rank 1–6.
 22. Shrouded Hull only on Space-scale Armor.
-23. Software items: the running Computer's grade ≥ the size's required grade (Tiny–Medium Minor, Large–Huge Moderate, Colossal Major); Tiny–Medium programs carry at most 2 Tasks. Program Tasks above the computer's TN are legal and run at the computer's max TN.
+23. Software items (Tasks but no Computer of their own): shown as "Requires a Minor/Moderate/Major Computer to run" **[PJ 2026-09-30]**. The running Computer's grade ≥ the size's required grade (Tiny–Medium Minor, Large–Huge Moderate, Colossal Major); Tiny–Medium programs carry at most 2 Tasks. Program Tasks above the computer's TN are legal and run at the computer's max TN.
 
 Warnings (legal but worth flagging):
 
@@ -819,6 +825,9 @@ Free effects: Plasma → Counter (Shields), Bleed 4 (floor(8/2)).
 | p210 | Melee Attacks can never gain Area | §5.1, §5.3, §9 |
 | p212 | Counter (Armor): −1 unaimed, −2 aimed; −1 carries to other attackers | §5.9 |
 | p213 | Reactionless drives don't expel reaction mass | §5.10 |
+| p213 | **[New 2026-09-30]** Drives need no Fuel when a Coil, Environmental, or Hyperspace Tap Power Supply runs them; Biological Drives need none. | §5.10, §9 |
+| p210 | **[New 2026-09-30]** Attacks on a One-Time Use item need no feed. | §5.22, §9 |
+| p216 | **[New 2026-09-30]** An item with no Power Supply or Drive of its own draws its Power Slots from its host (a Slave limitation still means it needs the right Link). | §5.22 |
 | p216 | **[New 2026-09-25]** Power Supplies may go on an item one size smaller than the table first listed: Moderate on Small (was Medium). Major stays Large, except that a Hyperspace Tap or a Coil stack can fit a Major Power Supply in a Medium item. | §5.22, §9 |
 | p217 | **[New 2026-09-25]** A Fuel Resource can feed Drives and Power Supplies of its own grade or lower (a larger tank can feed a smaller drive). | §5.24, §9 |
 | p211 | **[New 2026-09-29]** Plasma (self-powered): special ammunition instead of 2 Power Slots, built in as a Moderate limitation (takes a slot, no refund). Built-in Plasma draws 2 slots per mount even with ammunition. Kinetic splits the same way: Kinetic (Power Slot + Ammunition) and Kinetic (self-powered) (Ammunition only). | §5.3, §5.22, §9 |

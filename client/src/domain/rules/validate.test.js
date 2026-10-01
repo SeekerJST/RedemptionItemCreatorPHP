@@ -74,13 +74,46 @@ describe('validation (§9)', () => {
 
         const pistol = row('attack');
         expectError(check([pistol, under(pistol, 'attackMultiplier', MINOR, 1, { implementation: 'kineticSelfPowered' })]), 'needs an Ammunition Resource');
+
+        // Two modes of one weapon share its Ammunition (the Stormguard's three modes, one magazine).
+        const single = row('attack');
+        const burst = row('attack');
+        const modes = [
+            single, under(single, 'attackMultiplier', MINOR, 1, { implementation: 'kineticSelfPowered' }),
+            under(single, 'resource', MINOR, 6, { implementation: 'ammunition' }),
+            burst, under(burst, 'attackMultiplier', MINOR, 1, { implementation: 'kineticSelfPowered' }),
+        ];
+        expect(errors(check(modes))).toEqual([]);
     });
 
-    it('an energy Attack with no power is flagged, and the rows drawing that power are highlighted', () => {
+    it('an energy Attack with too little power is flagged, and the rows drawing that power are highlighted', () => {
         const attack = row('attack', MODERATE);
-        const issue = check([attack, row('cargo', MODERATE)]).find((i) => i.message.includes('Power Slots'));
+        const issue = check([attack, row('powerSupply', MINOR, 1)]).find((i) => i.message.includes('Power Slots'));
         expect(issue.message).toContain('Not enough Moderate Power Slots: 1 needed, 0 available');
         expect(issue.rows).toEqual([{ section: 'attributes', id: attack.id }]);
+    });
+
+    it('an item with no power source of its own draws on its host: a note, not an error', () => {
+        const issues = check([row('attack', MODERATE), row('cargo', MODERATE)]);
+        expect(errors(issues)).toEqual([]);
+        expect(warnings(issues)).toContain('Draws 1 Moderate Power Slot from its host (it has no Power Supply or Drive of its own).');
+    });
+
+    it('a One-Time Use item\'s attacks need no feed (the grenade)', () => {
+        const grenade = row('attack', MINOR);
+        const limits = [{ id: 1, LimitDesc: 'One-Time Use', LimitScale: '3' }];
+        const related = withRelations([grenade, row('powerSupply', MINOR, 1)]);
+        const power = powerBudget(related, SIZE.MEDIUM, { selfContained: true });
+        expect(power.grades.find((g) => g.grade === MINOR).used).toBe(0);
+        expect(validateItem({ related, size: SIZE.MEDIUM, power, limits }).filter((i) => i.message.includes('Power'))).toEqual([]);
+    });
+
+    it('Drives: no Fuel needed when a Coil, Environmental, or Hyperspace Tap supply runs them, or for a Biological drive', () => {
+        const ground = row('drive', MINOR, 1, { implementation: 'ground' });
+        expectError(check([ground]), 'Drives need a Fuel Resource');
+        const coil = row('powerSupply', MODERATE, 1, { implementation: 'coil' });
+        expect(errors(check([ground, coil, row('resource', MODERATE, 2, { implementation: 'charge' })]))).toEqual([]); // Lumber Mech
+        expect(errors(check([row('drive', MINOR, 1, { implementation: 'biological' })]))).toEqual([]); // a creature's legs
     });
 
     it('Tiny items can\'t buy Body', () => {
@@ -148,7 +181,11 @@ describe('validation (§9)', () => {
     it('Computers: Task TN and the task limit', () => {
         const computer = row('computer', MINOR, 1); // TN 14
         expectError(check([computer, under(computer, 'task', MINOR, 16)]), 'higher than its Computer');
-        expectError(check([row('task', MINOR, 14)]), 'need a Computer');
+        // No Computer: it's software, and its size sets the Computer it needs (§9 #23).
+        expect(errors(check([row('task', MINOR, 14)], { size: SIZE.SMALL }))).toEqual([]);
+        expect(warnings(check([row('task', MINOR, 14)], { size: SIZE.SMALL }))).toContain('Requires a Minor Computer to run.');
+        expect(warnings(check([row('task', MINOR, 14)], { size: SIZE.LARGE }))).toContain('Requires a Moderate Computer to run.');
+        expectError(check([row('task', MINOR, 14), row('task', MINOR, 14), row('task', MINOR, 14)], { size: SIZE.SMALL }), 'at most 2 Tasks');
         const small = row('computer', MINOR, 3);
         const tasks = Array.from({ length: 6 }, () => under(small, 'task', MINOR, 14));
         expectError(check([small, ...tasks]), 'at most 5 Tasks');

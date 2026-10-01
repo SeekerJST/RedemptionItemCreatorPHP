@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { createInitialItem } from './item.js';
-import { summarizeItem } from './summary.js';
+import { OTHER_SKILL, summarizeItem } from './summary.js';
 
 const MODIFIER = 20;
 const lookups = {
     sizes: [],
     attributes: [{ AttributeID: MODIFIER, AttributeName: 'Modifier' }],
-    skills: ['Athletics', 'Firearms', 'Heavy Weapons', 'Melee'].map((skillName, i) => ({ skillID: i + 1, skillName })),
+    skills: ['Athletics', 'Engineering', 'Firearms', 'Heavy Weapons', 'Melee'].map((skillName, i) => ({ skillID: i + 1, skillName })),
 };
 
 /** An item with one Modifier row per [grade, rank, skill text]. */
@@ -27,13 +27,21 @@ describe('Modifiers', () => {
         expect([1, 2, 3].map((id) => attributeCosts.get(id).buildPoints)).toEqual([20, 40, 60]);
     });
 
-    it('Minor: a listed skill, the first one until picked', () => {
-        const { modifiers } = summarize([[1, 1], [1, 1, 'Melee'], [1, 1, 'Melee, Heavy Weapons']]);
-        expect(modifiers.map((m) => [m.freeText, m.skill])).toEqual([
-            [false, 'Athletics'],
-            [false, 'Melee'],
-            [false, 'Athletics'], // text left over from a Moderate grade isn't a skill
+    it('Minor: a listed skill (the first one until picked), a skill with a specialty or note, or Other', () => {
+        const { modifiers, issues } = summarize([
+            [1, 1], [1, 1, 'Melee'], [1, 1, 'Engineering (Starship)'], [1, 1, 'Melee (first response only)'],
+            [1, 1, 'Design Software'], [1, 1, ''], [1, 1, 'Engineering'],
         ]);
+        expect(modifiers.map((m) => [m.choice, m.detail, m.skills])).toEqual([
+            ['Athletics', '', ['Athletics']],
+            ['Melee', '', ['Melee']],
+            ['Engineering', 'Starship', ['Engineering']],
+            ['Melee', 'first response only', ['Melee']], // counts toward Melee's +4
+            [OTHER_SKILL, 'Design Software', []],
+            [OTHER_SKILL, '', []], // Other picked, nothing typed yet
+            ['Engineering', '', ['Engineering']],
+        ]);
+        expect(issues.map((i) => i.message)).toContain('Engineering needs a specialty, e.g. Engineering (Weapons).');
     });
 
     it('Moderate/Major: free text, counting the listed skills it names', () => {

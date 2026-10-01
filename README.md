@@ -24,6 +24,7 @@ src/               PHP source (namespace SilentSpirits\ItemCreator)
   Export/          ItemCsvExporter
 config/            config.php (gitignored, copy it from config.example.php)
 db/migrations/     Numbered SQL schema changes; run each once, in order, on every existing DB
+db/seed/           The equipment catalog (catalog.json) and its importer (import_catalog.php)
 client/            React source; `npm run build` writes into public/
 dev/router.php     Router for PHP's built-in server (stands in for .htaccess locally)
 dev/start.mjs      Starts the PHP API and the Vite dev server together (`npm run dev`)
@@ -104,7 +105,8 @@ yet, so writes are gated by `allow_writes`, and the React client doesn't use the
 
 1. Create the Dreamhost DB from the committed schema and seed files (not written yet; see
    next step 2 in `docs/project_guide.md`). They include every migration so far. After that,
-   run any newer `db/migrations/*.sql` on it, in order.
+   run any newer `db/migrations/*.sql` on it, in order. Then load the catalog:
+   `php db/seed/import_catalog.php` (needs `config/config.php`; see `docs/project_guide.md`).
 2. Run `npm run build` in `client/`.
 3. Upload the contents of `public/` to the web folder (e.g. `~/silentspiritsgames.com/itemcreator/`).
 4. Upload `src/` and `config/` somewhere outside the web root (e.g. `~/itemcreator/`), then uncomment and set

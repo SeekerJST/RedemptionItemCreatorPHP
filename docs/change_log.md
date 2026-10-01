@@ -3,6 +3,31 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-09-30: Catalog export, parity, and import
+
+- **Export:** `docs/catalog_tools/costs.py` helpers now return the catalog text **and** the row in the app's
+  terms; `gen_catalog_json.py` writes `db/seed/catalog.json` (103 items as API-shaped JSON, with sub-rows,
+  categories, descriptions, and the catalog's rows for checking). The Firearms' Kinetic attacks are marked
+  **Kinetic (self-powered)** in the catalog (errata p210); their BP and CR are unchanged.
+- **Parity test** (`client/src/domain/catalog.test.js`): every item, built with the app's rules, costs what the
+  catalog says row by row, at the same CR, and breaks no rule. All 103 pass. Only expected warnings may appear.
+- **Pricing:** `npm run price-catalog` stores the app's BuildPoints, PowerSlots, and CostRating in the JSON, and
+  refuses if parity fails.
+- **Import:** `db/seed/import_catalog.php` loads the catalog as public items with fixed IDs from their names
+  (re-importing replaces them). `ItemRepository::import()` is seed-only. Imported locally: 103 items, 23
+  categories; all 103 read back through the API still match the catalog.
+- **Rulings 2026-09-30** (errata entries added, all errata documents regenerated):
+  - An item with no Power Supply or Drive of its own draws on its host: a note, not a shortfall.
+  - A One-Time Use item's attacks need no feed.
+  - Drives need no Fuel with a Coil, Environmental, or Hyperspace Tap supply; new **Biological** Drive type.
+  - Software (Tasks, no Computer): "Requires a Minor/Moderate/Major Computer to run" by size; Tiny-Medium
+    programs carry at most 2 Tasks.
+  - Minor Modifiers: Engineering, Science, and Profession take a specialty; **Other…** takes any target.
+- **Also:** Kinetic attacks can share an item's Ammunition (a weapon's modes); an Attack Multiplier can be rank 0
+  (2x) to carry a 2x attack's implementation; the exporter nests Maneuver under the Drive of its grade.
+- Open: the Havenite Lilith Carrier's "Engineering +3" needs a specialty (the parity test allows it for now).
+- Tests: 420 client (206 of them catalog parity); smoke test 51.
+
 ## 2026-09-29 (6): The remaining rules gaps
 
 - **Free sub-rows from an Attack's implementation** (spec §5.3, errata p210): Plasma's first Counter (Shields),

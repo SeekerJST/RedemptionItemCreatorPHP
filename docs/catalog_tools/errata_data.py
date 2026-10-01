@@ -250,4 +250,11 @@ e(IC,211,None,'Attack: self-powered Plasma','rule',D9,'Plasma has a self-powered
   [(None,'Plasma implementations','Plasma','Plasma (2 Power Slots per mount); Plasma (self-powered) (special ammunition, built-in Moderate limitation)'),(None,'Kinetic implementations','Kinetic','Kinetic (Power Slot + Ammunition); Kinetic (self-powered) (Ammunition only)')])
 e(G,232,None,'Plasma Carbine: self-powered','stat',D9,"The Plasma Carbine's attack is self-powered Plasma. Its special ammunition requirement is built into that implementation, replacing the separate Prerequisite (special ammunition) limitation, and its Bleed is 3 (Minor): 2 free from Plasma plus 1 bought. Cost Rating unchanged (2).",
   [('Plasma Carbine','Attack implementation','Plasma','Plasma (self-powered)'),('Plasma Carbine','Limitation','Moderate: Prerequisite (special ammunition)','none (built into Plasma (self-powered))'),('Plasma Carbine','Bleed','Minor 4 (2 free + 2 bought)','Minor 3 (2 free + 1 bought)')])
+D10='2026-09-30'
+e(IC,213,None,'Drive: Fuel exemptions','rule',D10,'A Drive needs no Fuel Resource when it can run from its item\'s own Power Supply and that supply burns no Fuel: a Coil (battery), Environmental, or Hyperspace Tap supply. A creature\'s legs, wings, or fins are a Biological Drive, which needs no Fuel either. Light Sail and Jump drives are unchanged.',
+  [(None,'Drive Fuel','always needed (except Light Sail, Jump)','not needed when a Coil, Environmental, or Hyperspace Tap Power Supply runs it, or for a Biological Drive')])
+e(IC,210,None,'Attack: One-Time Use feed','rule',D10,'An Attack on a One-Time Use item, such as a grenade, needs no feed (no Power Slot and no Ammunition): the item is its own charge.',
+  [(None,'One-Time Use Attack feed','Power Slot or Ammunition','none')])
+e(IC,216,None,'Power: host-powered items','clarification',D10,'An item with no Power Supply or Drive of its own, such as a weapon module or a G3P, draws the Power Slots it uses from the host it is mounted on or plugged into. Its stat block lists them as its power requirement. A Slave limitation still means it needs a Link of the right type to work, not just a power connection.',
+  [(None,'Items without their own power','Not enough Power Slots','draw their slots from the host')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))

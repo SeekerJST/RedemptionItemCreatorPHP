@@ -39,6 +39,7 @@ export const DRIVE_IMPLEMENTATIONS = {
     reaction: { name: 'Reaction' },
     reactionless: { name: 'Reactionless' }, // Shohan; expels no reaction mass, still needs Fuel
     gravitic: { name: 'Gravitic' }, // only outside a system's grav shore
+    biological: { name: 'Biological', noFuel: true }, // legs, wings, fins: a creature's own muscle (ruling 2026-09-30)
     lightSail: { name: 'Light Sail', price: 15, grades: [GRADE.MODERATE], noFuel: true, noManeuver: true },
     jump: { name: 'Jump', grades: [GRADE.MAJOR], noFuel: true },
 };
@@ -74,9 +75,10 @@ export const POWER_SUPPLY_IMPLEMENTATIONS = {
     general: { name: 'Power Supply' },
     fusion: { name: 'Fusion', feed: 'fuel' },
     antimatter: { name: 'Antimatter', feed: 'fuel' },
-    coil: { name: 'Coil', feed: 'charge', compactMajor: true },
-    environmental: { name: 'Environmental' },
-    hyperspaceTap: { name: 'Hyperspace Tap', compactMajor: true }, // Shohan
+    // runsDrives: burns no Fuel, so the item's Drives can run from it instead (ruling 2026-09-30).
+    coil: { name: 'Coil', feed: 'charge', compactMajor: true, runsDrives: true },
+    environmental: { name: 'Environmental', runsDrives: true },
+    hyperspaceTap: { name: 'Hyperspace Tap', compactMajor: true, runsDrives: true }, // Shohan
 };
 
 /** Smallest item a Power Supply fits in (errata p216): Moderate on Small, Major on Large (Medium if compact). */

@@ -552,7 +552,7 @@ Description: "A common slugthrower, and one of the most ubiquitous weapons in th
 
 | Row | Detail | BP |
 |---|---|---:|
-| Attack | Kinetic (Firefight) 2x | 10 |
+| Attack | Kinetic (self-powered) (Firefight) 2x | 10 |
 | Resource | Ammunition, Minor ×2 | 10 |
 | Limitation | Minor: Usage Restriction (ineffective at Far Range) | −10 |
 | **Total** | | **10** |
@@ -569,7 +569,7 @@ Description: "Manufactured or crafted from higher-quality designs and components
 
 | Row | Detail | BP |
 |---|---|---:|
-| Attack | Kinetic (Firefight) 3x | 19 |
+| Attack | Kinetic (self-powered) (Firefight) 3x | 19 |
 | Resource | Ammunition, Minor ×3 | 15 |
 | Modifier | Firearms +1 | 10 |
 | Limitation | Minor: Usage Restriction (ineffective at Far Range) | −10 |
@@ -587,8 +587,8 @@ Description: "A fully automatic weapon, providing intense firepower in a small p
 
 | Row | Detail | BP |
 |---|---|---:|
-| Attack (mode 1: single target) | Kinetic (Firefight) 3x | 19 |
-| Attack (mode 2: burst) | Kinetic (Firefight) 2x | 10 |
+| Attack (mode 1: single target) | Kinetic (self-powered) (Firefight) 3x | 19 |
+| Attack (mode 2: burst) | Kinetic (self-powered) (Firefight) 2x | 10 |
 | Area |  | 20 |
 | Limitation | Minor: Hungry (10 shots/round, burst mode) | −10 |
 | Resource | Ammunition, Minor ×5 | 25 |
@@ -610,7 +610,7 @@ Description: "The concealable pistol lacks both bulge and bang."
 
 | Row | Detail | BP |
 |---|---|---:|
-| Attack | Kinetic (Firefight) 3x | 19 |
+| Attack | Kinetic (self-powered) (Firefight) 3x | 19 |
 | Resource | Ammunition, Minor ×4 | 20 |
 | Counter | Detection (−2 to opponents’ Discern/Detection checks to spot it) | 20 |
 | Modifier | Firearms +2 | 20 |
@@ -630,12 +630,12 @@ Description: "One of the few chemical propellant guns still manufactured, each o
 
 | Row | Detail | BP |
 |---|---|---:|
-| Attack (mode 1) | Kinetic (Firefight) 3x | 19 |
+| Attack (mode 1) | Kinetic (self-powered) (Firefight) 3x | 19 |
 | Counter | Armor (mode 1) | 20 |
-| Attack (mode 2: scatter) | Kinetic (Firefight) 3x | 19 |
+| Attack (mode 2: scatter) | Kinetic (self-powered) (Firefight) 3x | 19 |
 | Area |  | 20 |
 | Limitation | Minor: Hungry (10 shots/round, scatter) | −10 |
-| Attack (mode 3: burst) | Kinetic (Firefight) 3x | 19 |
+| Attack (mode 3: burst) | Kinetic (self-powered) (Firefight) 3x | 19 |
 | Area |  | 20 |
 | Limitation | Minor: Hungry (10 shots/round, burst) | −10 |
 | Resource | Ammunition, Minor ×6 | 30 |
@@ -656,7 +656,7 @@ Description: "This is the common long arm of the Fourth Population, and is avail
 
 | Row | Detail | BP |
 |---|---|---:|
-| Attack | Kinetic (Firefight) 2x | 10 |
+| Attack | Kinetic (self-powered) (Firefight) 2x | 10 |
 | Resource | Ammunition, Minor ×2 | 10 |
 | Limitation | Minor: Usage Restriction (cannot be concealed on a person) | −10 |
 | **Total** | | **10** |
@@ -671,7 +671,7 @@ Description: ""
 
 | Row | Detail | BP |
 |---|---|---:|
-| Attack | Kinetic (Firefight) 3x | 19 |
+| Attack | Kinetic (self-powered) (Firefight) 3x | 19 |
 | Resource | Ammunition, Minor ×2 | 10 |
 | Modifier | Firearms +1 | 10 |
 | Limitation | Minor: No Personal Concealment | −10 |
@@ -691,8 +691,8 @@ Description: "A high-capacity gauss rifle capable of rapid-fire bursts."
 
 | Row | Detail | BP |
 |---|---|---:|
-| Attack (mode 1: single target) | Kinetic (Firefight) 4x | 37 |
-| Attack (mode 2: burst) | Kinetic (Firefight) 3x | 19 |
+| Attack (mode 1: single target) | Kinetic (self-powered) (Firefight) 4x | 37 |
+| Attack (mode 2: burst) | Kinetic (self-powered) (Firefight) 3x | 19 |
 | Area |  | 20 |
 | Limitation | Minor: Hungry (10 shots/round, burst) | −10 |
 | Resource | Ammunition, Minor ×5 | 25 |

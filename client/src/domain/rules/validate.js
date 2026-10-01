@@ -16,7 +16,7 @@ import {
     computerTargetNumber,
     powerSupplyMinSize,
 } from './systems.js';
-import { bodyPurchase, sizeName } from './sizes.js';
+import { SIZE, bodyPurchase, sizeName } from './sizes.js';
 
 export const MAX_MODIFIER_PER_SKILL = 4;
 export const LIMIT_CAPS = { 1: 3, 2: 2, 3: 1 };
@@ -94,9 +94,10 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
         const isKinetic =
             ['attack', 'attackMelee'].includes(row.key) &&
             children.some((c) => c.key === 'attackMultiplier' && MULTIPLIER_IMPLEMENTATIONS[c.implementation]?.needsAmmunition);
-        if (isKinetic && !children.some((c) => c.key === 'resource' && ['ammunition', 'general'].includes(c.implementation ?? 'general'))) {
+        // Resources can be shared: a weapon's modes, or a vehicle's guns, can draw on one Ammunition row.
+        if (isKinetic && !hasResource('ammunition', 'general')) {
             const fed = children.find((c) => c.key === 'attackMultiplier' && MULTIPLIER_IMPLEMENTATIONS[c.implementation]?.needsAmmunition);
-            error(`${name(row)} is ${MULTIPLIER_IMPLEMENTATIONS[fed.implementation].name}: it needs an Ammunition Resource as a sub-row.`, row.id);
+            error(`${name(row)} is ${MULTIPLIER_IMPLEMENTATIONS[fed.implementation].name}: it needs an Ammunition Resource.`, row.id);
         }
 
         if (row.key === 'body' && size != null && !bodyPurchase(size)) {
@@ -164,11 +165,21 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
         if (row.key === 'task') {
             const computers = parent?.key === 'computer' ? [parent] : all.filter((other) => other.key === 'computer');
             const bestTN = Math.max(0, ...computers.map((c) => computerTargetNumber(c.rank)));
-            if (computers.length === 0) {
-                error('Tasks need a Computer to run on.', row.id);
-            } else if (row.rank > bestTN) {
+            // Without a Computer of its own, the item is software (checked below, item-wide).
+            if (computers.length > 0 && row.rank > bestTN) {
                 error(`Task TN ${row.rank} is higher than its Computer's TN ${bestTN}.`, row.id);
             }
+        }
+    }
+
+    // ---- software: Tasks and no Computer (§9 #23). It runs on another item's Computer, whose
+    // grade the program's size sets; Tiny-Medium programs carry at most 2 Tasks. -----------------
+    const tasks = all.filter((row) => row.key === 'task');
+    if (tasks.length > 0 && !has((row) => row.key === 'computer')) {
+        const grade = size == null ? null : size <= SIZE.MEDIUM ? 1 : size <= SIZE.HUGE ? 2 : 3;
+        warning(grade ? `Requires a ${GRADE_NAMES[grade]} Computer to run.` : 'Requires a Computer to run.', tasks.map((t) => t.id));
+        if (size != null && size <= SIZE.MEDIUM && tasks.length > 2) {
+            error(`A Tiny, Small, or Medium program carries at most 2 Tasks; this one has ${tasks.length}.`, tasks.map((t) => t.id));
         }
     }
 
@@ -183,9 +194,13 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
     }
     // Fuel feeds Drives and Power Supplies of its own grade or lower (errata p217), so the best
     // Fuel on the item has to reach each consumer's grade.
-    const fuelled = all.find((row) => row.key === 'drive' && !DRIVE_IMPLEMENTATIONS[row.implementation]?.noFuel);
+    // A Drive needs no Fuel if it can run from a Power Supply that burns none (Coil, Environmental,
+    // Hyperspace Tap), or if its type needs none (Light Sail, Jump, Biological).
+    const drivesRunOnSupply = has((row) => row.key === 'powerSupply' && POWER_SUPPLY_IMPLEMENTATIONS[row.implementation]?.runsDrives);
+    const needsFuel = (row) => row.key === 'drive' && !drivesRunOnSupply && !DRIVE_IMPLEMENTATIONS[row.implementation]?.noFuel;
+    const fuelled = all.find(needsFuel);
     if (fuelled && !hasResource('fuel', 'general')) {
-        error('Drives need a Fuel Resource (unless it\'s a Light Sail or Jump drive).', fuelled.id);
+        error('Drives need a Fuel Resource (unless it\'s a Light Sail, Jump, or Biological drive, or runs from a Coil, Environmental, or Hyperspace Tap Power Supply).', fuelled.id);
     }
     const supplyFeed = (row) => (row.key === 'powerSupply' ? POWER_SUPPLY_IMPLEMENTATIONS[row.implementation]?.feed : null);
     for (const supply of all.filter((row) => supplyFeed(row))) {
@@ -198,10 +213,7 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
     const fuelRows = all.filter((row) => row.key === 'resource' && row.implementation === 'fuel');
     if (fuelRows.length > 0) {
         const bestFuel = Math.max(...fuelRows.map((row) => row.grade ?? 0));
-        const consumers = all.filter(
-            (row) =>
-                (row.key === 'drive' && !DRIVE_IMPLEMENTATIONS[row.implementation]?.noFuel) || supplyFeed(row) === 'fuel'
-        );
+        const consumers = all.filter((row) => needsFuel(row) || supplyFeed(row) === 'fuel');
         for (const consumer of consumers.filter((row) => (row.grade ?? 0) > bestFuel)) {
             error(
                 `${name(consumer)} is ${GRADE_NAMES[consumer.grade]}: its Fuel must be ${GRADE_NAMES[consumer.grade]} or higher, and the best Fuel here is ${GRADE_NAMES[bestFuel]}.`,
@@ -211,7 +223,16 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
     }
 
     // ---- power -----------------------------------------------------------------------------
+    // An item with no Power Supply or Drive of its own (a gun module, a G3P) draws on its host:
+    // its load is a note, not a shortfall (ruling 2026-09-30).
+    const hostPowered = (power?.grades ?? []).every((g) => g.available === 0);
     for (const { grade, available, used, borrowed, short } of power?.grades ?? []) {
+        if (hostPowered) {
+            if (used > 0) {
+                warning(`Draws ${used} ${GRADE_NAMES[grade]} Power Slot${used === 1 ? '' : 's'} from its host (it has no Power Supply or Drive of its own).`);
+            }
+            continue;
+        }
         if (short > 0) {
             // Highlight the rows drawing on this grade, so it's clear what needs the power.
             const consumers = related
@@ -228,6 +249,11 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
     }
 
     // ---- modifiers: at most +4 to any one Skill -------------------------------------------
+    for (const { rowId, specialtyMissing } of modifiers) {
+        if (specialtyMissing) {
+            warning(`${specialtyMissing} needs a specialty, e.g. ${specialtyMissing} (Weapons).`, rowId);
+        }
+    }
     const bySkill = new Map();
     for (const { rowId, skills, rank } of modifiers) {
         for (const skill of skills) {
