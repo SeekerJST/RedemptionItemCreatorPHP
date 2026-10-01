@@ -137,6 +137,7 @@ P263: The Havenite Lilith Carrier's heavy particle cannons are 7x, not 6x. Its A
 P263: The Havenite Marauder has Armor Rating 4 (Space, Shrouded Hull), not 5. Its Reaction Drive is Moderate, not Major, and it has no Gravitic Drive; it relies on a carrier to travel between systems. It gains Power Supply: Major Antimatter, rank 1, which powers its Anti-Missile and launchers. Its Unique Fuel (Antimatter) limitation is Major. Remove its Intrusion Detection task. Total Power Slots: 3 Major and 3 Moderate, 3 Major used.
 P263: The Havenite Marauder's magazine reads "6 Major Magazine (60 shots)", not 640 shots.
 P263: The Havenite Marauder carries 8 Launchers (Space), not 6, to fit its heavy missile loadout.
+P263: The Havenite Lilith Carrier's Engineering +3 Modifier is Engineering (Starship) +3. Engineering, Science, and Profession always take a specialty.
 P264: Heavy Railgun - Attack increases from 6 to 7, body to 50.
 P264: Heavy Laser Cannon - Attack increases from 7 to 8, body to 50.
 P264: The Havenite Lamprey's drive is a Major Gravitic Drive modified for in-system use (like the Phantom's), not a Reactionless drive. It gains the Limitations Usage Restriction: in-system only, not FTL-capable (Minor), and One-Time Use (Major); the boarding craft must be reserviced after each action.

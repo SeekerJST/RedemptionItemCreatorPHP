@@ -856,6 +856,7 @@ complete list is in `errata.csv` / `errata.sql`, and each item's errata are in `
 | p264 | Heavy Railgun | Attack 7 (was 6), Body 50 |
 | p264 | Heavy Laser Cannon | Attack 8 (was 7), Body 50 |
 | p268 | Tse Blade | 5x multiplier |
+| p263 | Havenite Lilith Carrier | **[New 2026-09-30]** Engineering (Starship) +3 (was Engineering +3; Engineering takes a specialty) |
 | p268 | Shohan Personal Armor | Battlefield armor (not Firefight). **[New 2026-09-29]** Weapons +2 covers Melee and Heavy Weapons (Moderate Modifier); Target On Your Back is a Major limitation. CR 5 unchanged |
 | p269 | Shohan War Drone | Body 80, Armor 5 |
 

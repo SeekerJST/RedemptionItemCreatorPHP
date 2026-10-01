@@ -2634,6 +2634,8 @@ p. 263 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
 
 Description: "While the fleets of the Free Haven have a number of more standard designs, they also maintain a number of heavy warships designed to support light raider squadrons. Most carriers lurk in orbit around a system’s outer planets while their escorts prey on TSC shipping, thus minimizing the risk to their Navigators, but they have on occasion made starfall in an inner system to support a raiding squadron."
 
+> **Errata** (new, 2026-09-30) p263: Its Engineering Modifier is Engineering (Starship) +3; Engineering always takes a specialty.
+
 > **Errata** (new, 2026-09-27) p263: Heavy particle cannon is 7x (was 6x). Armor Rating 5 (was 3). Cargo 2 Major (was "1 Huge"; Cargo has no Huge grade). Adds Manufacture: Major. Unique Fuel (Antimatter) is a Major limitation. Power Slots 6 Major (from its two Major drives), 5 used.
 
 | Row | Detail | BP |
@@ -2658,7 +2660,7 @@ Description: "While the fleets of the Free Haven have a number of more standard 
 | Hangar | Major ×3 | 180 |
 | Life Support | Major ×2 | 80 |
 | Modifier | Detection +4 | 40 |
-| Modifier | Engineering +3 | 30 |
+| Modifier | Engineering (Starship) +3 | 30 |
 | Modifier | Gunnery +3 | 30 |
 | Modifier | Medicine +2 | 20 |
 | Tag | [Now You See Me, Now You Don't] 2 | 10 |

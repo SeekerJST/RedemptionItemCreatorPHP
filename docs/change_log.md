@@ -25,7 +25,7 @@ current state, and the reasoning behind recurring patterns.
   - Minor Modifiers: Engineering, Science, and Profession take a specialty; **Other…** takes any target.
 - **Also:** Kinetic attacks can share an item's Ammunition (a weapon's modes); an Attack Multiplier can be rank 0
   (2x) to carry a 2x attack's implementation; the exporter nests Maneuver under the Drive of its grade.
-- Open: the Havenite Lilith Carrier's "Engineering +3" needs a specialty (the parity test allows it for now).
+- The Havenite Lilith Carrier's Engineering Modifier is Engineering (Starship) +3 (PJ, 2026-09-30; errata entry added).
 - Tests: 420 client (206 of them catalog parity); smoke test 51.
 
 ## 2026-09-29 (6): The remaining rules gaps

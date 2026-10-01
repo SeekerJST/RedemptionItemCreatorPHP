@@ -257,4 +257,6 @@ e(IC,210,None,'Attack: One-Time Use feed','rule',D10,'An Attack on a One-Time Us
   [(None,'One-Time Use Attack feed','Power Slot or Ammunition','none')])
 e(IC,216,None,'Power: host-powered items','clarification',D10,'An item with no Power Supply or Drive of its own, such as a weapon module or a G3P, draws the Power Slots it uses from the host it is mounted on or plugged into. Its stat block lists them as its power requirement. A Slave limitation still means it needs a Link of the right type to work, not just a power connection.',
   [(None,'Items without their own power','Not enough Power Slots','draw their slots from the host')])
+e(G,263,None,'Havenite Lilith Carrier: Engineering','clarification',D10,"The Havenite Lilith Carrier's Engineering +3 Modifier is Engineering (Starship) +3. Engineering, Science, and Profession always take a specialty.",
+  [('Havenite Lilith Carrier','Modifier','Engineering +3','Engineering (Starship) +3')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))

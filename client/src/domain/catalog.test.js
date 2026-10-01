@@ -35,12 +35,10 @@ describe('catalog parity', () => {
         /^Requires a \w+ Computer to run\.$/, // programs
         /^A Brain needs a biological item or Life Support\.$/, // creatures and the War Drone are biological
     ];
-    // Open question for PJ: the Lilith Carrier prints "Engineering +3" with no specialty.
-    const PENDING = ['Havenite Lilith Carrier: Engineering needs a specialty, e.g. Engineering (Weapons).'];
     it('raises only the expected kinds of warning', () => {
         const unexpected = [...results.values()].flatMap((r) =>
             r.warnings.filter((w) => !EXPECTED_WARNINGS.some((pattern) => pattern.test(w))).map((w) => `${r.name}: ${w}`)
         );
-        expect(unexpected.filter((w) => !PENDING.includes(w))).toEqual([]);
+        expect(unexpected).toEqual([]);
     });
 });

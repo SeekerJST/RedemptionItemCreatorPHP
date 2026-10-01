@@ -18646,7 +18646,7 @@
     ],
     [
      "Modifier",
-     "Engineering +3",
+     "Engineering (Starship) +3",
      30
     ],
     [
@@ -19031,7 +19031,7 @@
     },
     {
      "modifierID": "Modifier_22",
-     "modifierName": "Engineering"
+     "modifierName": "Engineering (Starship)"
     },
     {
      "modifierID": "Modifier_23",
