@@ -46,20 +46,55 @@ th, td {
     padding-right: 3px;
 }
 
-.top_panel {
+/* The navigation bar: as wide as the three panels below it (270 + 20 + 703 + 20 + 700), lined up
+   with their left edge. [logo] Redemption › Gear Creator on the left; Login / Profile on the right. */
+.nav_bar {
     --rd-cut: 18px;
-    width: 1000px;
-    height: 58px;
-    margin-left: auto;
-    margin-right: auto;
+    box-sizing: border-box;
+    width: 1713px;
+    height: 64px;
+    margin: 0;
+    padding: 0 28px 0 14px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.top_panel .rd-title {
-    font-size: 34px;
+.nav_left,
+.nav_right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.nav_logo img {
+    display: block;
+    height: 48px;
+    width: auto;
+}
+
+a.nav_game {
+    font-size: 32px;
     line-height: 1;
+    text-decoration: none;
+}
+
+span.nav_separator {
+    color: var(--rd-gold);
+    font-size: 26px;
+    line-height: 1;
+}
+
+span.nav_tool {
+    font-family: var(--rd-font-header);
+    color: var(--rd-gold-bright);
+    font-size: 22px;
+    letter-spacing: 0.04em;
+}
+
+span.nav_user {
+    font-family: var(--rd-font-header);
+    color: var(--rd-ivory);
 }
 
 /* "Panel.02": top left, since the top-right corner is cut. */

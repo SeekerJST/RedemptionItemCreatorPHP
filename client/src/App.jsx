@@ -2,6 +2,7 @@ import { useMemo, useReducer, useState } from 'react';
 import Starfield from 'react-starfield';
 import { deleteItem, downloadItemCsv, downloadItemPdf, fetchItem, saveFile, saveItem } from './api/itemCreatorApi.js';
 import Inventory from './components/Inventory.jsx';
+import NavBar from './components/NavBar.jsx';
 import ItemEditor from './components/ItemEditor.jsx';
 import Panel from './components/Panel.jsx';
 import BuildSummary from './components/summary/BuildSummary.jsx';
@@ -20,11 +21,9 @@ export default function App() {
     return (
         <div>
             <Starfield starCount={1000} starColor={[255, 255, 255]} speedFactor={0.01} backgroundColor="black" />
-            <div className="panel_header">
-                <div className="rd-panel top_panel">
-                    <h1 className="rd-title">Redemption Gear Creator</h1>
-                </div>
-            </div>
+            <header className="panel_header">
+                <NavBar />
+            </header>
 
             <div className="panel_body">
                 {lookups ? (

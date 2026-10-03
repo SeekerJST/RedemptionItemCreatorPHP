@@ -3,6 +3,16 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-10-03: Navigation bar; PDF box and Panel 2 touches
+
+- **Navigation bar** (`components/NavBar.jsx`): the top bar now spans the three panels (1,713px, lined up with
+  them): the SilentSpirits logo, **Redemption › Gear Creator**, and **[Login]** on the right ([Profile] and
+  [Logout] when signed in). There's no login yet, so [Login] is disabled with a tooltip; the component takes
+  the user and handlers so the site's accounts can plug in. Links go to the site root until its pages exist.
+- **PDF:** the Size / CR / CC box hangs from the name bar as in the book: rounded at the bottom left, and its
+  border flares out into the bar at the top.
+- **Panel 2:** 3px of right padding, so the sections' scrollbar sits beside the gold frame.
+
 ## 2026-10-02 (5): Weapon Links use a Power Slot
 
 - **A Weapon Link powers the weapon it carries,** so it uses 1 Power Slot of its grade per Link by default
