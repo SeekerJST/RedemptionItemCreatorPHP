@@ -2,11 +2,12 @@ import { Button } from '@svar-ui/react-core';
 import logo from '../../icons/SSGSLogo.png';
 
 /**
- * Where the bar's links go. The SilentSpirits site's pages don't exist yet, so both point at the
- * site root for now; change them here when they do.
+ * Where the bar's links go. The logo goes to the current SilentSpirits Games site, which what we're
+ * building here will eventually replace. Redemption's own page doesn't exist yet, so it points at
+ * the site root for now; change it here when it does.
  */
 const NAV_LINKS = {
-    home: '/',
+    home: 'https://www.silentspiritsgames.com/',
     redemption: '/',
 };
 
