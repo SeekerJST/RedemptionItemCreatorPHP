@@ -189,9 +189,14 @@ table.layout td { vertical-align: top; padding: 0; }
 td.description { line-height: 1.3; padding: 5pt 0 0 0; }
 /* On a div: Dompdf ignores a table cell's right padding when it lays out the text. */
 td.description div { padding-right: 14pt; }
-/* The Size / CR / CC box hangs from the name bar, as in the book: a left and bottom border that
-   meet in a rounded corner, no top or right border, flush against the bar. */
-div.box { border-left: 1.2pt solid #000; border-bottom: 1.2pt solid #000; border-bottom-left-radius: 9pt; padding: 3pt 0 4pt; }
+/* The Size / CR / CC box hangs from the name bar, as in the book: a 1pt line down its left side
+   and along its bottom, rounded at the bottom left, no top or right border, flush with the bar.
+   At the top the line flares out into the bar: a reverse curve, drawn by .flare (a quarter
+   circle: only its rounded top-right border shows) over .mask (hides the top of the straight
+   left border, so the curve takes over there). */
+div.box { position: relative; border-left: 1pt solid #000; border-bottom: 1pt solid #000; border-bottom-left-radius: 9pt; padding: 3pt 0 4pt; }
+div.box .mask { position: absolute; left: -1.5pt; top: 0; width: 3pt; height: 9pt; background: #fff; }
+div.box .flare { position: absolute; left: -10pt; top: 0; width: 9pt; height: 9pt; border-top: 1pt solid #000; border-right: 1pt solid #000; border-top-right-radius: 9pt; }
 table.box { border-collapse: separate; font-family: 'Asimovian', sans-serif; font-size: 9.5pt; line-height: 1.1; }
 table.box th { text-align: right; padding: 0.5pt 3pt 0.5pt 10pt; font-weight: normal; }
 table.box td { padding: 0.5pt 8pt 0.5pt 0; }
@@ -207,7 +212,7 @@ table.box td { padding: 0.5pt 8pt 0.5pt 0; }
 <div class="namebar">{$e($block['name'])}</div>
 <table class="layout"><tr>
 <td class="description"><div>{$e($block['description'])}</div></td>
-<td style="width: 1%; white-space: nowrap;"><div class="box"><table class="box">{$box}</table></div></td>
+<td style="width: 1%; white-space: nowrap;"><div class="box"><div class="mask"></div><div class="flare"></div><table class="box">{$box}</table></div></td>
 </tr></table>
 {$sections}
 <div class="foot">Redemption Gear Creator<span class="right">{$date}</span></div>
