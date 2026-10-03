@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { catalogItem, catalogLookups } from './catalog.js';
-import { buildStatBlock, characterCreationCost } from './statBlock.js';
+import { buildStatBlock, characterCreationCost, slotsAsPrinted } from './statBlock.js';
 import { summarizeItem } from './summary.js';
 
 const catalog = JSON.parse(readFileSync(new URL('../../../db/seed/catalog.json', import.meta.url), 'utf-8'));
@@ -73,6 +73,16 @@ describe('stat blocks, as the book prints them', () => {
             }
             expect(block.name).toBe(entry.itemName);
         }
+    });
+
+    it('Power Slots as the book counts them: a lower-grade load counts against the slot that powers it', () => {
+        expect(statBlockOf('Personal Psi Link').sections.POWER['Total Power Slots']).toEqual(['3 Moderate (1 used)']);
+        expect(statBlockOf('Psionic Light Armor').sections.POWER['Total Power Slots']).toEqual(['3 Minor (1 used)']);
+        expect(slotsAsPrinted([
+            { grade: 1, available: 3, used: 4 },
+            { grade: 2, available: 0, used: 1 },
+            { grade: 3, available: 6, used: 2 },
+        ])).toEqual([{ grade: 3, available: 6, used: 4 }, { grade: 1, available: 3, used: 3 }]);
     });
 
     it('CC follows CR as the catalog does: 0 at CR 0 or less, else CR × (CR + 1) / 2', () => {

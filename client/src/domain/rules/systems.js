@@ -89,11 +89,17 @@ export function powerSupplyMinSize(grade, implementation) {
     return grade === GRADE.MODERATE ? SIZE.SMALL : 0;
 }
 
-/** Spec §5.18. Refueling (errata p215) draws 1 Power Slot of its grade per Link while in use. */
+/**
+ * Spec §5.18. Refueling draws 1 Power Slot of its grade per Link while in use (errata p215).
+ * Psi draws 1 Power Slot per Link while a psion casts through it, plus 1 more per committed
+ * (sustained) effect (the psionics rules, p275). The slot's grade is the effect's scale, picked in
+ * play, so the design counts the lowest: 1 Minor slot, which any slot can power. Committed
+ * effects vary in play and aren't counted.
+ */
 export const LINK_IMPLEMENTATIONS = {
     general: { name: 'Link' },
     data: { name: 'Data' },
-    psi: { name: 'Psi' },
+    psi: { name: 'Psi', drawsPower: true, slotGrade: GRADE.MINOR },
     weapon: { name: 'Weapon' },
     refueling: { name: 'Refueling', drawsPower: true },
 };
@@ -274,7 +280,11 @@ export const systemRules = {
         implementations: LINK_IMPLEMENTATIONS,
         defaultImplementation: 'general',
         cost: perUnit({ 1: 5, 2: 15, 3: 50 }),
-        power: (row) => (LINK_IMPLEMENTATIONS[row.implementation]?.drawsPower ? oneSlotAtGrade(row) : {}),
+        power: (row) => {
+            const link = LINK_IMPLEMENTATIONS[row.implementation];
+            if (!link?.drawsPower) return {};
+            return { uses: [{ grade: link.slotGrade ?? row.grade, slots: row.rank }] };
+        },
         children: [],
     },
 

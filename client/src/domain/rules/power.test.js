@@ -82,9 +82,14 @@ describe('Power Slots (§5.22)', () => {
         expect(grade(budget(plasmaAttack('plasmaSelfPowered')), MODERATE).used).toBe(0); // Plasma Carbine
     });
 
-    it('Links: only Refueling draws power, 1 slot of its grade per Link (errata p215)', () => {
+    it('Links: Refueling draws 1 slot of its grade per Link (errata p215); Psi 1 Minor slot per Link (p275)', () => {
         expect(grade(budget([row('link', MAJOR, 3, { implementation: 'refueling' })]), MAJOR).used).toBe(3); // Fleet Auxiliary
         expect(grade(budget([row('link', MAJOR, 2, { implementation: 'weapon' })]), MAJOR).used).toBe(0);
+        // A Major Psi Link on a Moderate supply (the Personal Psi Link): the slot is the effect's scale,
+        // picked in play, so it's counted as Minor, and the Moderate slots cover it.
+        const result = budget([row('link', MAJOR, 1, { implementation: 'psi' }), row('powerSupply', MODERATE, 1)]);
+        expect(grade(result, MINOR)).toMatchObject({ used: 1, borrowed: 1, short: 0 });
+        expect(result.ok).toBe(true);
     });
 
     it('Launchers use 1 slot per increment of 4; Anti-Missile 1 per mount', () => {

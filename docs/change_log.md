@@ -3,6 +3,15 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-10-02 (4): Psi Links use a Power Slot
+
+- **A Psi Link draws 1 Power Slot** while a Psionic casts through it, plus 1 per committed effect (the psionics
+  rules, p275, not an item-creation change, so no errata). The slot's grade is the effect's Scale, picked in
+  play, so the app counts 1 **Minor** slot per Psi Link, which any slot can power; committed effects aren't
+  counted. The catalog's psionic items now show the book's "1 used" (Personal Psi Link: 3 Moderate, 1 used).
+- **Stat blocks count Power Slots as the book does:** a lower-grade load counts against the higher-grade slot
+  that powers it (`slotsAsPrinted()`), so "3 Moderate (1 used)", not "0 Minor (1 used)".
+
 ## 2026-10-02 (3): PDF export
 
 - **[Export PDF]** in Panel 3: a stat block in the corebook's Chapter 11 layout. The client builds it with the

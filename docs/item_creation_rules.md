@@ -511,7 +511,7 @@ Lets the item host and operate smaller modular items. Repeatable, mixed grades a
 | Type | Rules |
 |---|---|
 | Data | Hard, unlimited-bandwidth connection. Can't be hacked without physical access. |
-| Psi | Lets a Psionic draw on the item's Power Supply. |
+| Psi | Lets a Psionic draw on the item's Power Supply. Uses **1 Power Slot** while the Psionic casts through it, **plus 1 per committed (sustained) effect**; the slot's grade is the effect's Scale (the psionics rules, p275). |
 | Weapon | Modular mount that accepts a separately built Attack. Built-in Attacks (e.g. turrets) don't need one. |
 | **Refueling** **[Errata p215]** | Docking connection that transfers fuel to a linked craft up to the Link's max size. **Draws 1 Power Slot of its grade** while in use. |
 
@@ -606,7 +606,7 @@ the lowest higher grade with spare slots.
 | Force Field | 1 for the whole Force Field track, grade = Force Field grade |
 | Gravity Control | 1 per unit, grade = its own grade **[Ruling]** |
 | Manufacture | 1, grade = Manufacture grade **[Ruling]** |
-| Psi Link | Psionics draw on it; strain threshold per rank applies |
+| Psi Link | 1 while a Psionic casts through it, plus 1 per committed effect (p275). The effect's Scale sets the slot's grade and is picked in play, so the app counts the design's 1 slot as **Minor** (any slot can power it) and leaves committed effects to play. Strain Threshold per rank applies. |
 
 Higher-grade slots may power lower-grade consumers (ruling above).
 

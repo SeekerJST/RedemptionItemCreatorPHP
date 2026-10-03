@@ -35,6 +35,29 @@ export const characterCreationCost = (cr) => (cr == null ? null : cr <= 0 ? 0 : 
 /** "Strain Threshold" per Power Supply rank, by grade (spec §5.22). */
 const STRAIN_PER_RANK = { 1: 5, 2: 10, 3: 20 };
 
+/**
+ * Power Slots as the book counts them: per grade the item provides, how many are in use, counting
+ * a lower-grade load against the higher-grade slot that powers it ("3 Moderate (1 used)" for a
+ * Minor Psi Link on a Moderate Coil). Each load borrows from the nearest higher grade with spare.
+ * @param {Array<{grade: number, available: number, used: number}>} grades from powerBudget()
+ * @returns {Array<{grade: number, available: number, used: number}>} highest grade first; only grades that provide slots
+ */
+export function slotsAsPrinted(grades) {
+    const byGrade = new Map(grades.map((g) => [g.grade, { ...g }]));
+    const shown = new Map([3, 2, 1].filter((g) => (byGrade.get(g)?.available ?? 0) > 0).map((g) => [g, { grade: g, available: byGrade.get(g).available, used: 0 }]));
+    for (const g of [3, 2, 1]) {
+        let load = byGrade.get(g)?.used ?? 0;
+        for (const source of [g, 1 + g, 2 + g].filter((s) => shown.has(s))) {
+            const slot = shown.get(source);
+            const take = Math.min(load, slot.available - slot.used);
+            slot.used += take;
+            load -= take;
+        }
+        if (load > 0 && shown.has(g)) shown.get(g).used += load; // short: shown as over-used
+    }
+    return [...shown.values()];
+}
+
 /** A Resource as the book writes it: "2 Minor Ammunition (20 shots)". */
 function resourceText(row) {
     const type = row.implementation ?? 'general';
@@ -148,7 +171,7 @@ export function buildStatBlock(item, summary, lookups) {
     if (hostPowered) {
         add('POWER', 'Power Requirement', list(slots.map((g) => `${g.used} ${g.gradeName}`)));
     } else if (slots.length > 0) {
-        add('POWER', 'Total Power Slots', list([...slots].reverse().map((g) => `${g.available} ${g.gradeName} (${g.used} used)`)));
+        add('POWER', 'Total Power Slots', list(slotsAsPrinted(slots).map((g) => `${g.available} ${GRADE_NAMES[g.grade]} (${g.used} used)`)));
     }
 
     // ---- CAPABILITIES ----
