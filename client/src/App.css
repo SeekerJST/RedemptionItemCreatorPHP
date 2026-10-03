@@ -41,6 +41,11 @@ th, td {
     flex-direction: column;
 }
 
+/* Panel 2: room for the sections' scrollbar beside the gold frame, not on top of it. */
+.editor_panel {
+    padding-right: 3px;
+}
+
 .top_panel {
     --rd-cut: 18px;
     width: 1000px;

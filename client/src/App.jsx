@@ -141,7 +141,7 @@ function GearCreator({ lookups }) {
             <Panel title="Panel.01" size="small">
                 <Inventory items={inventory.items} error={inventory.error} currentId={item.itemId} onOpen={open} />
             </Panel>
-            <Panel title="Panel.02" size="large">
+            <Panel title="Panel.02" size="large" className="editor_panel">
                 <ItemEditor
                     item={item}
                     dispatch={dispatch}

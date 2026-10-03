@@ -184,12 +184,17 @@ body { font-family: 'Andada Pro', serif; font-size: 10pt; color: #000; }
 .runhead .corner { float: left; width: 10pt; height: 10pt; background: #000; margin-top: 2pt; }
 .runhead .corner.right { float: right; }
 .namebar { background: #000; color: #fff; font-family: 'Asimovian', sans-serif; font-size: 12pt; letter-spacing: 0.5pt; text-transform: uppercase; padding: 3pt 6pt 2pt; }
-table.layout { width: 100%; border-collapse: collapse; margin: 5pt 0 4pt; }
+table.layout { width: 100%; border-collapse: collapse; margin: 0 0 4pt; }
 table.layout td { vertical-align: top; padding: 0; }
-td.description { line-height: 1.3; padding-right: 10pt; }
-table.box { border: 1pt solid #000; border-collapse: collapse; font-family: 'Asimovian', sans-serif; font-size: 9.5pt; }
-table.box th { text-align: right; padding: 1pt 3pt 1pt 8pt; font-weight: normal; }
-table.box td { padding: 1pt 8pt 1pt 0; }
+td.description { line-height: 1.3; padding: 5pt 0 0 0; }
+/* On a div: Dompdf ignores a table cell's right padding when it lays out the text. */
+td.description div { padding-right: 14pt; }
+/* The Size / CR / CC box hangs from the name bar, as in the book: a left and bottom border that
+   meet in a rounded corner, no top or right border, flush against the bar. */
+div.box { border-left: 1.2pt solid #000; border-bottom: 1.2pt solid #000; border-bottom-left-radius: 9pt; padding: 3pt 0 4pt; }
+table.box { border-collapse: separate; font-family: 'Asimovian', sans-serif; font-size: 9.5pt; line-height: 1.1; }
+table.box th { text-align: right; padding: 0.5pt 3pt 0.5pt 10pt; font-weight: normal; }
+table.box td { padding: 0.5pt 8pt 0.5pt 0; }
 .band { background: #dcdcdc; font-family: 'Asimovian', sans-serif; font-size: 9pt; letter-spacing: 0.6pt; padding: 1.5pt 6pt 0.5pt; margin-top: 5pt; }
 .entries { padding: 2pt 6pt 1pt; line-height: 1.35; }
 .entry { padding-left: 12pt; text-indent: -12pt; }
@@ -201,8 +206,8 @@ table.box td { padding: 1pt 8pt 1pt 0; }
 <div class="runhead"><span class="corner"></span><span class="corner right"></span>{$head}</div>
 <div class="namebar">{$e($block['name'])}</div>
 <table class="layout"><tr>
-<td class="description">{$e($block['description'])}</td>
-<td style="width: 1%; white-space: nowrap;"><table class="box">{$box}</table></td>
+<td class="description"><div>{$e($block['description'])}</div></td>
+<td style="width: 1%; white-space: nowrap;"><div class="box"><table class="box">{$box}</table></div></td>
 </tr></table>
 {$sections}
 <div class="foot">Redemption Gear Creator<span class="right">{$date}</span></div>
