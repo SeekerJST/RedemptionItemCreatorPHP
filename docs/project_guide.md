@@ -50,6 +50,7 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `client/src/App.jsx` | Layout only: loads lookups, holds the item state (`useReducer`), derives the summary, renders the three panels. |
 | `client/src/domain/` | Pure logic, no React. `constants.js` (UI constants and attribute IDs), `costs.js` (row BP), `summary.js` (everything Panel 3 shows), `item.js` (item reducer and the API payload), `ruleRows.js` (item rows → rules rows), `inventory.js` (the Inventory tree by category). |
 | `client/src/domain/rules/` | **The item creation rules** (docs/item_creation_rules.md) as code: one entry per attribute (cost, grades, rank meaning, power, allowed sub-rows), cost curves, sizes, Cost Rating, power budget. `*.test.js` beside them; the Frigate fixture is `frigate.test.js`. |
+| `client/src/styles/theme.css` | **The Redemption theme**, meant to be shared with SystemGeneratorLive and the site: colors, fonts, and `rd-` classes (`.rd-panel` gold cut-corner frame, `.rd-title`, `.rd-heading`, `.rd-button`, `.rd-field`). Matches the corebook cover via the Roll20 sheet. |
 | `client/src/components/EditableGrid.jsx` | SVAR grid + sidebar editor used by all three sections. Displays rows owned by React state; with `tree`, nests attribute sub-rows by `parentId`. Contains the SVAR workarounds. |
 | `client/src/components/` | `ItemEditor` (Panel 2), `ItemHeader`, `Section`, `LimitCounts`, `gridColumns.js`, `summary/*` (Panel 3 pieces). |
 | `client/src/api/`, `client/src/hooks/` | `itemCreatorApi.js` (fetch wrappers), `useLookups.js` (loads reference data once). |
@@ -175,6 +176,13 @@ parameter still works.
   (the backstop), `EditableGrid` takes `readOnly` (no sidebar editor, no dragging), and the [+], [+>],
   [Save], and [Delete] buttons are disabled with a tooltip. [Copy] (`copyItem`) clears the ID and
   `isPublic` and appends " (copy)"; saving it creates a private item.
+- **Styling:** colors and fonts come from `styles/theme.css` (CSS custom properties); `App.css` is layout plus the
+  theme applied to this app, including SVAR's grid and buttons (re-themed through its `--wx-*` variables).
+  - Fonts: Aerovias Brasil NF (titles) is loaded from `Fonts/` (gitignored; Vite bundles it into the build, and a
+    build without it falls back to Asimovian). Galexica (the book's headers) isn't licensed for the web yet:
+    Asimovian stands in via `--rd-font-header`. Oswald, Share Tech Mono, and Andada Pro come from Google Fonts.
+  - Keep the page's black-to-violet sky (`#root` in `index.html`) and the starfield behind **see-through** panels.
+    `#root` is `display: flow-root` so it wraps the floated panels; without it the sky collapses to the header.
 - **No browser dialogs.** Confirmations (delete, discarding unsaved edits) are an inline line
   under the toolbar. `window.confirm` would also block browser-automation testing.
 

@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 
-import { defineConfig } from 'vite';
+import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import plugin from '@vitejs/plugin-react';
 import { env } from 'process';
 
@@ -18,6 +18,10 @@ export default defineConfig({
         }
     },
     server: {
+        // The book fonts live in ../Fonts (not in git: see .gitignore); theme.css loads Aerovias from there.
+        fs: {
+            allow: [searchForWorkspaceRoot(fileURLToPath(new URL('.', import.meta.url))), '../Fonts']
+        },
         proxy: {
             '^/itemcreator': {
                 target,

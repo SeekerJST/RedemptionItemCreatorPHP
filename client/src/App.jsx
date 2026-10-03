@@ -19,7 +19,9 @@ export default function App() {
         <div>
             <Starfield starCount={1000} starColor={[255, 255, 255]} speedFactor={0.01} backgroundColor="black" />
             <div className="panel_header">
-                <div className="top_panel">Redemption Gear Creator</div>
+                <div className="rd-panel top_panel">
+                    <h1 className="rd-title">Redemption Gear Creator</h1>
+                </div>
             </div>
 
             <div className="panel_body">

@@ -1,0 +1,154 @@
+/*
+ * Redemption theme: colors, fonts, and the gold-framed panel, shared by the Gear Creator and
+ * meant for the rest of the SilentSpirits site (SystemGeneratorLive, the future website).
+ * Plain CSS, no build step needed: everything is a custom property or an `rd-` class.
+ *
+ * Matches the corebook's cover, via the Roll20 sheet (F:\Projects\Redemption Roll20 Character):
+ * indigo-navy, warm gold, slate blue, ivory. The book's fonts: Aerovias Brasil NF for titles,
+ * Galexica for headers (not licensed for the web yet: Asimovian stands in), Andada for prose.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Andada+Pro:ital,wght@0,400;0,700;1,400&family=Asimovian&family=Oswald:wght@500;600&family=Share+Tech+Mono&display=swap');
+
+/* Aerovias Brasil NF: licensed for commercial use, but the file isn't in git (see .gitignore).
+   Vite bundles it from the project's Fonts/ folder into the build; without it, titles fall back
+   to Asimovian. */
+@font-face {
+    font-family: 'Aerovias Brasil NF';
+    src: url('../../../Fonts/Aerovias Brasil NF.ttf') format('truetype');
+    font-display: swap;
+}
+
+:root {
+    /* ---- colors (from the Roll20 sheet) ---- */
+    --rd-navy: #1b2130;
+    --rd-navy-deep: #11141f;
+    --rd-panel-hi: #232b42;
+    --rd-panel-lo: #1a2135;
+    --rd-slate: #45516c;
+    --rd-slate-light: #5c6b8a;
+    --rd-gold: #caa03e;
+    --rd-gold-bright: #f0d488;
+    --rd-gold-dim: #8a6a2a;
+    --rd-gold-edge: #6e5320;
+    --rd-chrome-hi: #f4f4f4;
+    --rd-chrome-lo: #8b8f96;
+    --rd-ivory: #e9e4d6;
+    --rd-steel: #8892a6;
+    --rd-ember: #e07b2e;
+    --rd-danger: #e05a52;
+    --rd-ok: #9fdf9f;
+    --rd-field-bg: rgba(16, 19, 31, 0.85);
+    --rd-hairline: rgba(202, 160, 62, 0.3);
+
+    /* Panels are see-through, so the page's own background (here: black-to-violet sky and the
+       starfield) shows behind them. */
+    --rd-panel-fill: linear-gradient(180deg, rgba(35, 43, 66, 0.62), rgba(26, 33, 53, 0.62));
+
+    /* ---- fonts ---- */
+    --rd-font-title: 'Aerovias Brasil NF', 'Asimovian', Georgia, serif; /* cover and chapter titles */
+    --rd-font-header: 'Asimovian', Georgia, serif; /* Galexica in the book: swap here once licensed */
+    --rd-font-button: 'Oswald', 'Arial Narrow', sans-serif;
+    --rd-font-mono: 'Share Tech Mono', Consolas, 'Lucida Console', monospace; /* numeric readouts */
+    --rd-font-body: 'Segoe UI', Helvetica, Arial, sans-serif; /* dense UI: grids, fields */
+    --rd-font-prose: 'Andada Pro', Georgia, serif; /* the book's body text: descriptions */
+}
+
+/*
+ * A panel with the book's cut corners (top right and bottom left) and a thin gold frame.
+ * The Roll20 sheet frames panels with a solid gold shape behind an inset panel; that would show
+ * through a see-through panel, so here the frame is drawn with gradients instead: four straight
+ * edges plus a diagonal band in each cut corner, over the panel's fill.
+ *   --rd-cut     the size of the cut corners
+ *   --rd-frame   the frame's width
+ */
+.rd-panel {
+    --rd-cut: 22px;
+    --rd-frame: 2px;
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - var(--rd-cut)) 0, 100% var(--rd-cut), 100% 100%,
+                       var(--rd-cut) 100%, 0 calc(100% - var(--rd-cut)));
+    background:
+        /* top-right cut: the band runs along the corner's diagonal, just inside it */
+        linear-gradient(to top right, transparent calc(50% - var(--rd-frame)), var(--rd-gold) calc(50% - var(--rd-frame)), var(--rd-gold) 50%, transparent 50%)
+            right top / var(--rd-cut) var(--rd-cut) no-repeat,
+        /* bottom-left cut */
+        linear-gradient(to bottom left, transparent calc(50% - var(--rd-frame)), var(--rd-gold) calc(50% - var(--rd-frame)), var(--rd-gold) 50%, transparent 50%)
+            left bottom / var(--rd-cut) var(--rd-cut) no-repeat,
+        /* straight edges: top, right, bottom, left */
+        linear-gradient(var(--rd-gold), var(--rd-gold)) left top / calc(100% - var(--rd-cut)) var(--rd-frame) no-repeat,
+        linear-gradient(var(--rd-gold), var(--rd-gold)) right bottom / var(--rd-frame) calc(100% - var(--rd-cut)) no-repeat,
+        linear-gradient(var(--rd-gold), var(--rd-gold)) right bottom / calc(100% - var(--rd-cut)) var(--rd-frame) no-repeat,
+        linear-gradient(var(--rd-gold), var(--rd-gold)) left top / var(--rd-frame) calc(100% - var(--rd-cut)) no-repeat,
+        var(--rd-panel-fill);
+}
+
+/* Title text in the cover's style: chrome lettering with a dark edge. */
+.rd-title {
+    font-family: var(--rd-font-title);
+    font-weight: normal;
+    letter-spacing: 0.06em;
+    background: linear-gradient(180deg, var(--rd-chrome-hi) 15%, var(--rd-chrome-lo) 60%, var(--rd-chrome-hi) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.8));
+}
+
+/* A section header (the book's Galexica headings). */
+.rd-heading {
+    font-family: var(--rd-font-header);
+    font-weight: normal;
+    color: var(--rd-gold-bright);
+    letter-spacing: 0.04em;
+}
+
+/* A gold button (Oswald, uppercase), as on the Roll20 sheet. */
+.rd-button {
+    box-sizing: border-box;
+    font-family: var(--rd-font-button);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #201704;
+    background: linear-gradient(180deg, var(--rd-gold-bright), var(--rd-gold) 55%, var(--rd-gold-dim));
+    border: 1px solid var(--rd-gold-edge);
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 2px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.rd-button:hover:not(:disabled) {
+    filter: brightness(1.08);
+}
+
+.rd-button:disabled {
+    cursor: default;
+    filter: grayscale(0.7) brightness(0.65);
+}
+
+/* Fields: dark fill, slate edge, gold when focused. */
+.rd-field {
+    background-color: var(--rd-field-bg);
+    color: var(--rd-ivory);
+    border: 1px solid rgba(69, 81, 108, 0.9);
+    border-radius: 2px;
+    font-family: var(--rd-font-body);
+}
+
+.rd-field:focus {
+    outline: none;
+    border-color: var(--rd-gold);
+    box-shadow: 0 0 0 1px var(--rd-gold);
+}
+
+.rd-field[readonly],
+.rd-field:disabled {
+    border-color: rgba(69, 81, 108, 0.4);
+    color: var(--rd-steel);
+}
+
+/* Numbers: the readout font. */
+.rd-number {
+    font-family: var(--rd-font-mono);
+}

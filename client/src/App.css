@@ -1,116 +1,71 @@
-﻿#root {
+/* The Gear Creator's layout and its use of the Redemption theme (styles/theme.css: colors,
+   fonts, and the gold-framed .rd-panel). The page's black-to-violet sky (index.html) and the
+   starfield stay behind see-through panels. */
+
+#root {
+    /* Contain the floated panels, so the sky gradient (index.html) runs the full page height:
+       black space at the top to violet atmosphere at the bottom. */
+    display: flow-root;
     max-width: 1900px;
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
+    color: var(--rd-ivory);
+    font-family: var(--rd-font-body);
 }
-
-
 
 th, td {
     padding-left: .75rem;
     padding-right: .75rem;
 }
 
+/* ---- panels (frames come from .rd-panel) -------------------------------------------- */
+
 .small_panel {
+    --rd-cut: 30px;
     float: left;
-    position: relative;
-    background-color: rgba(173, 216, 230, 0.5);
-    color: antiquewhite;
     width: 270px;
     height: 125vh;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    clip-path: polygon( 
-                    0 5%, 
-                    25% 0, 
-                    100% 0, 
-                    100% 95%, 
-                    75% 100%, 
-                    0% 100% );
     margin-right: 20px;
-    padding-top: 20px;
-    /*font-family:'Agency FB'*/
-    font-family: 'Liberation Sans';
+    padding-top: 28px;
 }
 
 .large_panel {
+    --rd-cut: 40px;
     float: left;
-    position: relative;
-    background-color: rgba(173, 216, 230, 0.5);
-    color: antiquewhite;
     width: 700px;
     height: 125vh;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    clip-path: polygon( 
-                        0 5%, 
-                        10% 0, 
-                        100% 0, 
-                        100% 95%, 
-                        90% 100%, 
-                        0% 100% );
     margin-right: 20px;
     padding-top: 20px;
-    font-family: 'Liberation Sans';
     display: flex;
     flex-direction: column;
 }
 
 .top_panel {
-    position: relative;
-    background-color: rgba(173, 216, 230, 0.5);
+    --rd-cut: 18px;
     width: 1000px;
-    height: 50px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    clip-path: polygon( 
-        0 25%, 
-        2% 0, /* Left Top corner */
-        98% 0, 
-        100% 25%, /* Right Top Corner */
-        100% 75%, 
-        98% 100%, /* Right Bottom Corner */
-        2% 100%, 
-        0% 75% );
-    font-family: 'Liberation Sans';
+    height: 58px;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.top_panel .rd-title {
+    font-size: 34px;
+    line-height: 1;
+}
+
+/* "Panel.02": top left, since the top-right corner is cut. */
 .panel_title {
     position: absolute;
-    top: 0;
-    right: 3px;
-    color: lightgray;
+    top: 6px;
+    left: 14px;
+    color: var(--rd-gold-dim);
     font-size: small;
-    font-family: 'Lucida Console';
-}
-
-.panel_table_left {
-    width: 250px;
-    text-align: left;
-    font-family: 'Liberation Sans';
-}
-
-.panel_table_left_system {
-    width: 450px;
-    text-align: left;
-    font-family: 'Liberation Sans';
-}
-
-.panel_table_right {
-    width: 50px;
-    text-align: right;
-    /*font-family: 'Agency FB' font-size:13px;*/
-    font-family: 'Liberation Sans';
-}
-
-.headerCellLeft { 
-    width: 500px;
-
-}
-
-.headerCellRight {
-    width: 200px;
-    text-align: right;
+    font-family: var(--rd-font-mono);
+    letter-spacing: 0.08em;
 }
 
 .panel_header {
@@ -123,36 +78,198 @@ th, td {
 .panel_body {
     width: 1900px;
     position: relative;
-    
+}
+
+/* ---- headings: the book's Galexica, Asimovian until it's licensed ----------------- */
+
+div.item_header_left,
+div.breakdown-left,
+div.inventory > p:first-child,
+div.item_description label {
+    font-family: var(--rd-font-header);
+    color: var(--rd-gold-bright);
+    letter-spacing: 0.04em;
+    font-size: 18px;
+}
+
+div.inventory > p:first-child {
+    font-size: 20px;
+    margin: 4px 0 10px;
+}
+
+/* The rule under each section's title. */
+#root hr {
+    border: none;
+    border-top: 1px solid var(--rd-hairline);
+}
+
+/* ---- fields ------------------------------------------------------------------------ */
+
+#root input[type="text"],
+#root select,
+#root textarea {
+    background-color: var(--rd-field-bg);
+    color: var(--rd-ivory);
+    border: 1px solid rgba(69, 81, 108, 0.9);
+    border-radius: 2px;
+    font-family: var(--rd-font-body);
+    padding: 2px 6px;
+}
+
+#root input[type="text"]:focus,
+#root select:focus,
+#root textarea:focus {
+    outline: none;
+    border-color: var(--rd-gold);
+    box-shadow: 0 0 0 1px var(--rd-gold);
+}
+
+#root input[readonly],
+#root select:disabled,
+#root textarea[readonly] {
+    border-color: rgba(69, 81, 108, 0.4);
+    color: var(--rd-steel);
+}
+
+#root option,
+#root optgroup {
+    background-color: var(--rd-navy);
+    color: var(--rd-ivory);
+}
+
+/* ---- buttons: SVAR's Button, styled as the theme's gold .rd-button -------------------- */
+
+#root button.wx-button,
+body > .wx-willow-dark-theme button.wx-button {
+    font-family: var(--rd-font-button);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #201704;
+    background: linear-gradient(180deg, var(--rd-gold-bright), var(--rd-gold) 55%, var(--rd-gold-dim));
+    border: 1px solid var(--rd-gold-edge);
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 2px 4px rgba(0, 0, 0, 0.4);
+    padding: 3px 10px;
+    height: auto;
+    min-height: 26px;
+}
+
+#root button.wx-button:hover:not(:disabled) {
+    filter: brightness(1.08);
+}
+
+#root button.wx-button:disabled {
+    filter: grayscale(0.7) brightness(0.6);
+    cursor: default;
+}
+
+/* Confirm a delete or a discard: ember, not gold. */
+#root button.wx-button.wx-danger {
+    color: var(--rd-ivory);
+    background: linear-gradient(180deg, #f08a52, var(--rd-ember) 55%, #9c4a17);
+    border-color: #6b3210;
+}
+
+/* Cancel: slate. */
+#root button.wx-button:not(.wx-primary):not(.wx-danger) {
+    color: var(--rd-gold-bright);
+    background: linear-gradient(180deg, var(--rd-slate-light), var(--rd-slate) 55%, #2c3550);
+    border-color: var(--rd-gold-dim);
+}
+
+/* ---- SVAR's dark theme, in Redemption colors (grids and the sidebar editor) ---------- */
+
+.wx-willow-dark-theme {
+    --wx-color-primary: var(--rd-gold);
+    --wx-color-primary-selected: rgba(202, 160, 62, 0.25);
+    --wx-color-primary-font: #201704;
+    --wx-color-font: var(--rd-ivory);
+    --wx-color-font-alt: var(--rd-steel);
+    --wx-color-danger: var(--rd-danger);
+    --wx-color-warning: var(--rd-ember);
+    --wx-background: rgba(17, 20, 31, 0.78);
+    --wx-background-alt: var(--rd-panel-hi);
+    --wx-background-hover: rgba(69, 81, 108, 0.45);
+    --wx-font-family: var(--rd-font-body);
+    --wx-border: 1px solid rgba(69, 81, 108, 0.7);
+    --wx-table-header-background: var(--rd-panel-hi);
+    --wx-table-select-background: rgba(202, 160, 62, 0.18);
+    --wx-table-select-border: var(--rd-gold);
+    --wx-table-select-color: var(--rd-ivory);
+    --wx-icon-color: var(--rd-gold);
+}
+
+/* Column headers in the header font, gold. */
+.wx-willow-dark-theme .wx-header .wx-cell,
+.wx-willow-dark-theme .wx-header .wx-text {
+    font-family: var(--rd-font-header);
+    color: var(--rd-gold-bright);
+    font-weight: normal;
+    letter-spacing: 0.03em;
+}
+
+/* ---- tables in the summary ------------------------------------------------------------ */
+
+.panel_table_left {
+    width: 250px;
+    text-align: left;
+}
+
+.panel_table_left_system {
+    width: 450px;
+    text-align: left;
+}
+
+/* Right-hand figures (BP, ranks, counts): the readout font. */
+.panel_table_right {
+    width: 50px;
+    text-align: right;
+    font-family: var(--rd-font-mono);
+    color: var(--rd-gold-bright);
+}
+
+.headerCellLeft {
+    width: 500px;
+}
+
+.headerCellRight {
+    width: 200px;
+    text-align: right;
 }
 
 .limitation_table {
     width: 150px;
     text-align: left;
-    font-family: 'Liberation Sans';
     font-size:smaller;
 }
 
+/* ---- Panel 2: the item editor ----------------------------------------------------- */
 
-/* Panel 2's toolbar, status lines, and name/category/size. In the normal flow, so the
-   sections below start after it however many status lines it shows. */
+/* The toolbar, status lines, and name/category/size. In the normal flow, so the sections
+   below start after it however many status lines it shows. */
 div.item_name_field {
     margin-left:50px;
 }
 
+/* Name and Category labels. */
+div.item_name_field label {
+    font-family: var(--rd-font-header);
+    color: var(--rd-gold-bright);
+    letter-spacing: 0.03em;
+}
+
 .item_TextField {
-    font-family: 'Agency FB'; 
     font-size:15px;
     width:250px;
 }
 
 .item_SelectField {
-    font-family: 'Agency FB';
     font-size: 15px;
 }
 
 .item_TagText {
-    font-family: 'Agency FB'; 
     font-size:13px;
     width:250px;
 }
@@ -165,7 +282,6 @@ div.section_container {
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-
 }
 
 div.section {
@@ -181,7 +297,6 @@ div.item_header {
 }
 
 div.item_section {
-
     font-size: 15px;
     margin-left: 50px;
     width: 600px;
@@ -203,37 +318,12 @@ div.attribute_row {
     position:relative;
 }
 
-div.TagRow {
-    clip-path: polygon( 0 25%, 2% 0, /* Left Top corner */
-    98% 0, 100% 25%, /* Right Top Corner */
-    100% 75%, 98% 100%, /* Right Bottom Corner */
-    2% 100%, 0% 75% );
-    background-color: rgba(77, 77, 77, 0.5);
-    padding: 5px;
-    margin-bottom: 3px;
-}
-
-div.limitationBody {
-
-}
-
 div.toolBar {
     text-align:right;
     width:100%;
     box-sizing: border-box;
     /* Clear of the panel's edge and the "Panel.02" label above it. */
     padding: 18px 16px 0 0;
-}
-
-.TagDesc {
-    background-color: rgba(77, 77, 77, 0.5);
-    color: antiquewhite;
-    width: 300px;
-    margin-left:2px;
-}
-
-.TagRemoval {
-    float: right;
 }
 
 td.itemContents {
@@ -244,27 +334,32 @@ span.system_span {
     margin-right:25px;
 }
 
+/* ---- Panel 3: the build summary --------------------------------------------------- */
+
 div.breakdown-right {
     text-align: right;
-    margin-right: 5px;
+    margin-right: 16px;
+    margin-top: 6px;
 }
 
 div.breakdown-left {
     text-align: left;
     margin-left: 50px;
+    margin-top: 6px;
     position: absolute;
 }
-/* ---- Rule checks (Phase 2) ---------------------------------------------------------- */
+
+/* ---- rule checks ------------------------------------------------------------------- */
 
 /* Grid rows with a validation issue: a colored edge plus a light tint. */
 .wx-row.row-error {
-    box-shadow: inset 4px 0 0 #e05a52;
+    box-shadow: inset 4px 0 0 var(--rd-danger);
     background-color: rgba(224, 90, 82, 0.22);
 }
 
 .wx-row.row-warning {
-    box-shadow: inset 4px 0 0 #e0b04a;
-    background-color: rgba(224, 176, 74, 0.18);
+    box-shadow: inset 4px 0 0 var(--rd-ember);
+    background-color: rgba(224, 123, 46, 0.18);
 }
 
 div.validation_list {
@@ -285,22 +380,24 @@ div.validation_list li {
 }
 
 li.validation_error {
-    border-left-color: #e05a52;
+    border-left-color: var(--rd-danger);
     background-color: rgba(224, 90, 82, 0.18);
 }
 
 li.validation_warning {
-    border-left-color: #e0b04a;
-    background-color: rgba(224, 176, 74, 0.15);
+    border-left-color: var(--rd-ember);
+    background-color: rgba(224, 123, 46, 0.15);
 }
 
 span.validation_badge {
-    font-weight: bold;
+    font-family: var(--rd-font-button);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
     margin-right: 6px;
 }
 
 p.validation_ok {
-    color: #9fdf9f;
+    color: var(--rd-ok);
     margin: 6px 0;
 }
 
@@ -316,7 +413,9 @@ span.power_note {
     opacity: 0.85;
 }
 
-/* Panel 1: saved items. Side padding keeps the list clear of the panel's clipped corners. */
+/* ---- Panel 1: the inventory tree ---------------------------------------------------- */
+
+/* Side padding keeps the list clear of the panel's cut corners. */
 div.inventory {
     padding: 0 16px;
 }
@@ -326,7 +425,7 @@ p.inventory_note {
     opacity: 0.85;
 }
 
-/* The category tree: groups, then subgroups, then items. Only the outermost list scrolls. */
+/* Groups, then subgroups, then items. Only the outermost list scrolls. */
 ul.inventory_tree,
 ul.inventory_list {
     list-style: none;
@@ -349,25 +448,31 @@ button.inventory_group {
     margin: 0 0 4px;
     padding: 4px 6px;
     text-align: left;
-    color: antiquewhite;
+    color: var(--rd-gold-bright);
     background: none;
     border: none;
+    border-bottom: 1px solid var(--rd-hairline);
     cursor: pointer;
-    font: inherit;
-    font-weight: bold;
+    font-family: var(--rd-font-button);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
 li.inventory_node.depth-1 > button.inventory_group {
-    font-weight: normal;
+    color: var(--rd-ivory);
+    border-bottom: none;
+    text-transform: none;
+    font-family: var(--rd-font-body);
 }
 
 button.inventory_group:hover,
 button.inventory_group:focus-visible {
-    background-color: rgba(77, 77, 77, 0.6);
+    background-color: rgba(69, 81, 108, 0.45);
 }
 
 span.inventory_count {
-    font-weight: normal;
+    font-family: var(--rd-font-mono);
     opacity: 0.7;
 }
 
@@ -377,22 +482,22 @@ button.inventory_item {
     margin: 0 0 4px;
     padding: 6px 8px;
     text-align: left;
-    color: antiquewhite;
-    background-color: rgba(77, 77, 77, 0.5);
+    color: var(--rd-ivory);
+    background-color: rgba(17, 20, 31, 0.55);
     border: none;
-    border-left: 4px solid transparent;
+    border-left: 3px solid transparent;
     cursor: pointer;
     font: inherit;
 }
 
 button.inventory_item:hover,
 button.inventory_item:focus-visible {
-    background-color: rgba(77, 77, 77, 0.8);
+    background-color: rgba(69, 81, 108, 0.55);
 }
 
 button.inventory_item.current {
-    border-left-color: #9fdf9f;
-    background-color: rgba(77, 77, 77, 0.85);
+    border-left-color: var(--rd-gold);
+    background-color: rgba(69, 81, 108, 0.7);
 }
 
 span.inventory_name {
@@ -404,17 +509,19 @@ span.inventory_name {
 span.inventory_meta {
     display: block;
     font-size: 0.85em;
-    opacity: 0.85;
+    font-family: var(--rd-font-mono);
+    color: var(--rd-steel);
 }
 
-/* The line under the Save/Delete toolbar: a result, an error, or a question. */
+/* ---- the lines under the toolbar: a result, an error, a question, or a note ------------ */
+
 div.toolbar_message {
     text-align: right;
     margin: 4px 16px 4px 0;
 }
 
 div.toolbar_message.ok {
-    color: #9fdf9f;
+    color: var(--rd-ok);
 }
 
 div.toolbar_message.error {
@@ -423,18 +530,21 @@ div.toolbar_message.error {
 }
 
 div.toolbar_message.readonly {
-    color: #9fc5df;
+    color: var(--rd-steel);
+    font-style: italic;
 }
 
 div.toolbar_message.confirm {
-    color: #e0b04a;
+    color: var(--rd-ember);
 }
 
-/* Panel 3's Description field, under the Build Summary title. */
+/* ---- Panel 3's description, in the book's body font ------------------------------------- */
+
 div.item_description {
     clear: both;
     margin: 0 16px;
-    padding-top: 8px;
+    /* Below the "Build Summary" title, which is positioned on its own line. */
+    padding-top: 22px;
 }
 
 div.item_description label {
@@ -443,17 +553,18 @@ div.item_description label {
     text-align: left;
 }
 
-div.item_description textarea {
+#root div.item_description textarea {
     box-sizing: border-box;
     width: 100%;
-    font: inherit;
-    color: antiquewhite;
-    background-color: rgba(77, 77, 77, 0.5);
-    border: 1px solid rgba(160, 160, 160, 0.5);
+    font-family: var(--rd-font-prose);
+    font-size: 15px;
+    line-height: 1.45;
     resize: vertical;
 }
 
-div.item_description textarea[readonly] {
+#root div.item_description textarea[readonly] {
+    color: var(--rd-ivory);
     border-color: transparent;
+    background-color: rgba(17, 20, 31, 0.45);
     resize: none;
 }

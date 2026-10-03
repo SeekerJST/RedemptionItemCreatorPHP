@@ -3,6 +3,19 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-10-02: The Redemption theme
+
+- **`client/src/styles/theme.css`**: the corebook's look (via the Roll20 sheet), shared for the rest of the site:
+  navy/gold/slate/ivory colors, fonts as custom properties, and `rd-` classes. `.rd-panel` draws the gold
+  cut-corner frame with gradients (not the sheet's solid gold layer), so panels stay see-through.
+- **Fonts:** Aerovias Brasil NF for the title (from `Fonts/`, now gitignored, bundled by Vite; the dev server is
+  allowed to read it), Asimovian for headings (standing in for Galexica until it's licensed for the web), Oswald
+  for buttons, Share Tech Mono for figures, Andada Pro (the book's body font) for descriptions.
+- **App:** panels, title banner, headings, fields, gold/ember/slate buttons, the inventory tree, rule checks, and
+  SVAR's grids and sidebar editor in the theme. The black-to-violet sky and starfield are unchanged; `#root` now
+  wraps the panels so the sky spans the page (removing Vite's starter `index.css` rules had collapsed it).
+- Not yet: the fixed 1,900px layout still runs off narrower windows.
+
 ## 2026-09-30: Catalog export, parity, and import
 
 - **Export:** `docs/catalog_tools/costs.py` helpers now return the catalog text **and** the row in the app's
