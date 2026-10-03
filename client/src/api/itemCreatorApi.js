@@ -43,20 +43,24 @@ export async function saveItem(apiItem) {
 
 export const deleteItem = (itemId) => request(`deleteitem/${encodeURIComponent(itemId)}`, { method: 'DELETE' });
 
+/** Hands a file to the browser to save, under `fileName`. */
+export function saveFile(blob, fileName) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+}
+
 /** Asks the API to render the item as CSV and saves it through the browser. */
-export async function downloadItemCsv(apiItem) {
+export async function downloadItemCsv(apiItem, fileName) {
     const response = await request('exportitemtocvs/download', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(apiItem),
     });
-
-    const url = URL.createObjectURL(await response.blob());
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${apiItem.itemName || 'item'}.csv`;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+    saveFile(await response.blob(), fileName);
 }

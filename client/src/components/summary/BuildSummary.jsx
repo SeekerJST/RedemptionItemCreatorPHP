@@ -13,14 +13,17 @@ const Rule = ({ span = 4 }) => (
     </tr>
 );
 
-/** Panel 3: the description, Build Point and Cost Rating totals, structure, power, systems, modifiers, tasks. */
-export default function BuildSummary({ item, dispatch, summary, skills, onExport }) {
+/**
+ * Panel 3: the description, Build Point and Cost Rating totals, structure, power, systems, modifiers, tasks.
+ * exports: [{ label, title, run }], one button each; run() may return a promise, and a failure shows here.
+ */
+export default function BuildSummary({ item, dispatch, summary, skills, exports }) {
     const [exportError, setExportError] = useState(null);
 
-    const handleExport = async () => {
+    const handleExport = async (run) => {
         setExportError(null);
         try {
-            await onExport();
+            await run();
         } catch (e) {
             setExportError(`Export failed: ${e.message}`);
         }
@@ -31,7 +34,11 @@ export default function BuildSummary({ item, dispatch, summary, skills, onExport
             <div>
                 <div className="breakdown-left">Build Summary</div>
                 <div className="breakdown-right">
-                    <Button type="primary" onClick={handleExport}>[Export CSV]</Button>
+                    {exports.map(({ label, title, run }) => (
+                        <span key={label} className="export_button">
+                            <Button type="primary" title={title} onClick={() => handleExport(run)}>{label}</Button>
+                        </span>
+                    ))}
                 </div>
             </div>
             {exportError && <p role="alert" style={{ color: 'darkred', clear: 'both' }}>{exportError}</p>}

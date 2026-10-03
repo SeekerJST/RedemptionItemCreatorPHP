@@ -1,10 +1,11 @@
 import { useMemo, useReducer, useState } from 'react';
 import Starfield from 'react-starfield';
-import { deleteItem, downloadItemCsv, fetchItem, saveItem } from './api/itemCreatorApi.js';
+import { deleteItem, downloadItemCsv, fetchItem, saveFile, saveItem } from './api/itemCreatorApi.js';
 import Inventory from './components/Inventory.jsx';
 import ItemEditor from './components/ItemEditor.jsx';
 import Panel from './components/Panel.jsx';
 import BuildSummary from './components/summary/BuildSummary.jsx';
+import { exportFileName, itemExportText } from './domain/exportJson.js';
 import { knownCategories } from './domain/inventory.js';
 import { createInitialItem, itemReducer, toApiItem } from './domain/item.js';
 import { summarizeItem } from './domain/summary.js';
@@ -52,7 +53,12 @@ function GearCreator({ lookups }) {
     const categories = useMemo(() => knownCategories(inventory.items ?? []), [inventory.items]);
 
     const apiItem = () => toApiItem(item, summary);
-    const exportCsv = () => downloadItemCsv(apiItem());
+    const exportCsv = () => downloadItemCsv(apiItem(), exportFileName(item.name, 'csv'));
+    const exportJson = () =>
+        saveFile(
+            new Blob([itemExportText(item, summary, lookups.attributes)], { type: 'application/json' }),
+            exportFileName(item.name, 'json')
+        );
 
     /** Runs an API call with the toolbar disabled, reporting failures in the status line. */
     const run = async (busyText, work) => {
@@ -156,7 +162,16 @@ function GearCreator({ lookups }) {
                 />
             </Panel>
             <Panel title="Panel.03" size="large">
-                <BuildSummary item={item} dispatch={dispatch} summary={summary} skills={lookups.skills} onExport={exportCsv} />
+                <BuildSummary
+                    item={item}
+                    dispatch={dispatch}
+                    summary={summary}
+                    skills={lookups.skills}
+                    exports={[
+                        { label: '[Export CSV]', title: 'A spreadsheet of the item', run: exportCsv },
+                        { label: '[Export JSON]', title: 'The whole item as data, for another tool or to import later', run: exportJson },
+                    ]}
+                />
             </Panel>
         </>
     );

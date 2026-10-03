@@ -345,6 +345,10 @@ div.breakdown-right {
 }
 
 /* No top margin of its own: [Export CSV]'s margin already moves their shared row down. */
+span.export_button + span.export_button {
+    margin-left: 6px;
+}
+
 div.breakdown-left {
     text-align: left;
     margin-left: 50px;

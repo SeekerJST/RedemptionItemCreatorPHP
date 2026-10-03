@@ -3,6 +3,15 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-10-02 (2): JSON export
+
+- **[Export JSON]** in Panel 3, next to [Export CSV]: the item as one self-describing file
+  (`domain/exportJson.js`): `format: "redemption-item"`, `version: 1`, the item as the API saves it plus each
+  attribute row's name (`attribute`, since AttributeName is a database ID), and the computed totals (BP, Cost
+  Rating, Power Slots, rule checks). Built in the browser; no API call. It loads back into the same item.
+- Both exports name the file after the item, with characters a file name can't hold replaced (`saveFile()`
+  in `api/itemCreatorApi.js` does the browser download for both).
+
 ## 2026-10-02: The Redemption theme
 
 - **`client/src/styles/theme.css`**: the corebook's look (via the Roll20 sheet), shared for the rest of the site:
