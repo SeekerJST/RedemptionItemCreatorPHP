@@ -1,12 +1,13 @@
 import { useMemo, useReducer, useState } from 'react';
 import Starfield from 'react-starfield';
-import { deleteItem, downloadItemCsv, fetchItem, saveFile, saveItem } from './api/itemCreatorApi.js';
+import { deleteItem, downloadItemCsv, downloadItemPdf, fetchItem, saveFile, saveItem } from './api/itemCreatorApi.js';
 import Inventory from './components/Inventory.jsx';
 import ItemEditor from './components/ItemEditor.jsx';
 import Panel from './components/Panel.jsx';
 import BuildSummary from './components/summary/BuildSummary.jsx';
 import { exportFileName, itemExportText } from './domain/exportJson.js';
 import { knownCategories } from './domain/inventory.js';
+import { buildStatBlock } from './domain/statBlock.js';
 import { createInitialItem, itemReducer, toApiItem } from './domain/item.js';
 import { summarizeItem } from './domain/summary.js';
 import { useInventory } from './hooks/useInventory.js';
@@ -59,6 +60,7 @@ function GearCreator({ lookups }) {
             new Blob([itemExportText(item, summary, lookups.attributes)], { type: 'application/json' }),
             exportFileName(item.name, 'json')
         );
+    const exportPdf = () => downloadItemPdf(buildStatBlock(item, summary, lookups), exportFileName(item.name, 'pdf'));
 
     /** Runs an API call with the toolbar disabled, reporting failures in the status line. */
     const run = async (busyText, work) => {
@@ -170,6 +172,7 @@ function GearCreator({ lookups }) {
                     exports={[
                         { label: '[Export CSV]', title: 'A spreadsheet of the item', run: exportCsv },
                         { label: '[Export JSON]', title: 'The whole item as data, for another tool or to import later', run: exportJson },
+                        { label: '[Export PDF]', title: 'A printable stat block, as the corebook lays them out', run: exportPdf },
                     ]}
                 />
             </Panel>

@@ -21,7 +21,8 @@ src/               PHP source (namespace SilentSpirits\ItemCreator)
   Controller/      ItemCreatorController: one method per C# action
   Domain/Item.php  Item model: forgiving input parsing, canonical JSON output
   Repository/      LookupRepository (reference tables), ItemRepository (item CRUD, transactional)
-  Export/          ItemCsvExporter
+  Export/          ItemCsvExporter, ItemPdfExporter (Dompdf)
+lib/               dompdf/ (vendored, no Composer) and pdf-fonts/ (Andada Pro, Asimovian; SIL OFL)
 config/            config.php (gitignored, copy it from config.example.php)
 db/migrations/     Numbered SQL schema changes; run each once, in order, on every existing DB
 db/seed/           The equipment catalog (catalog.json) and its importer (import_catalog.php)
@@ -74,6 +75,7 @@ Routes match the C# API (case-insensitive), so the React client didn't need chan
 | PUT | `itemcreator/updateitem/{id}` | 200 + item; replaces all child rows; 404 if missing |
 | DELETE | `itemcreator/deleteitem/{id}` | 204; 404 if missing |
 | GET/POST | `itemcreator/exportitemtocvs/download` | CSV attachment |
+| POST | `itemcreator/exportitemtopdf/download` | PDF attachment: the stat block the client builds (`client/src/domain/statBlock.js`) |
 
 Write and export endpoints take the item JSON as the request body. The C# style
 (`?Item=<json>` / `?item=<json>` query parameter) still works. Errors come back as
@@ -109,7 +111,7 @@ yet, so writes are gated by `allow_writes`, and the React client doesn't use the
    `php db/seed/import_catalog.php` (needs `config/config.php`; see `docs/project_guide.md`).
 2. Run `npm run build` in `client/`.
 3. Upload the contents of `public/` to the web folder (e.g. `~/silentspiritsgames.com/itemcreator/`).
-4. Upload `src/` and `config/` somewhere outside the web root (e.g. `~/itemcreator/`), then uncomment and set
+4. Upload `src/`, `lib/`, `config/`, and the gitignored `Fonts/` (for the PDF's running head) somewhere outside the web root (e.g. `~/itemcreator/`), then uncomment and set
    `SetEnv ITEMCREATOR_ROOT /home/<user>/itemcreator` in the deployed `.htaccess`.
 5. Create `config/config.php` on the server with the production DB credentials and `debug => false`. Set `allow_writes` according to the pre-login write decision in `docs/project_guide.md`.
 6. Choose PHP 8.1+ for the domain in the Dreamhost panel. The code runs on 8.0, but 8.0 is end-of-life.

@@ -3,6 +3,20 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-10-02 (3): PDF export
+
+- **[Export PDF]** in Panel 3: a stat block in the corebook's Chapter 11 layout. The client builds it with the
+  rules engine (`domain/statBlock.js`): the name, description, Size / CR / CC (CC from CR, as the catalog does),
+  and the book's sections (COMBAT, POWER, CAPABILITIES, EFFECTS, SOFTWARE) of "Label: value" entries, worded as
+  the book prints them (e.g. "Attacks:" with one attack per line, free Counters unprinted, default Body unprinted).
+- **`exportitemtopdf`** (POST): `ItemPdfExporter` checks every field and lays it out (black name bar, the box,
+  grey section bands, bold labels) with **Dompdf 3.1.6**, vendored in `lib/dompdf/` (no Composer). Fonts:
+  Andada Pro and Asimovian in `lib/pdf-fonts/` (OFL), Aerovias Brasil NF from `Fonts/` when present. One page
+  is about 28 KB and renders in under half a second once the font cache is warm.
+- **Deploying:** `lib/` and `Fonts/` go up with `src/` (README).
+- Tests: 431 client (stat blocks for the catalog, worded as the book); smoke test 55 (PDF attachment, bad
+  section, missing name, POST only).
+
 ## 2026-10-02 (2): JSON export
 
 - **[Export JSON]** in Panel 3, next to [Export CSV]: the item as one self-describing file

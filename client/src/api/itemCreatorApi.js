@@ -55,6 +55,16 @@ export function saveFile(blob, fileName) {
     URL.revokeObjectURL(url);
 }
 
+/** Asks the API to render a stat block (domain/statBlock.js) as a PDF and saves it through the browser. */
+export async function downloadItemPdf(statBlock, fileName) {
+    const response = await request('exportitemtopdf/download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(statBlock),
+    });
+    saveFile(await response.blob(), fileName);
+}
+
 /** Asks the API to render the item as CSV and saves it through the browser. */
 export async function downloadItemCsv(apiItem, fileName) {
     const response = await request('exportitemtocvs/download', {

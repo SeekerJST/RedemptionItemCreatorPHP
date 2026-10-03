@@ -5,6 +5,7 @@ namespace SilentSpirits\ItemCreator\Controller;
 
 use SilentSpirits\ItemCreator\Domain\Item;
 use SilentSpirits\ItemCreator\Export\ItemCsvExporter;
+use SilentSpirits\ItemCreator\Export\ItemPdfExporter;
 use SilentSpirits\ItemCreator\Http\HttpException;
 use SilentSpirits\ItemCreator\Http\Request;
 use SilentSpirits\ItemCreator\Http\Response;
@@ -36,16 +37,20 @@ final class ItemCreatorController
         'deleteitem' => ['DELETE', 'deleteItem'],
         // GET keeps the C# contract (?item=<json>); POST avoids URL length limits for big items.
         'exportitemtocvs' => [['GET', 'POST'], 'exportItemToCsv'],
+        // The body is the stat block the client builds (client/src/domain/statBlock.js).
+        'exportitemtopdf' => ['POST', 'exportItemToPdf'],
     ];
 
     /**
      * @param \Closure(): LookupRepository $lookups
      * @param \Closure(): ItemRepository $items
+     * @param \Closure(): ItemPdfExporter $pdf
      */
     public function __construct(
         private \Closure $lookups,
         private \Closure $items,
-        private bool $allowWrites
+        private bool $allowWrites,
+        private \Closure $pdf
     ) {
     }
 
@@ -136,6 +141,16 @@ final class ItemCreatorController
             throw HttpException::notFound("No item with ID '$id'.");
         }
         return Response::noContent();
+    }
+
+    /** The item's stat block as a PDF page in the corebook's style. Any trailing segment is accepted. */
+    public function exportItemToPdf(Request $request, string ...$rest): Response
+    {
+        $block = $request->jsonPayload('statBlock');
+        $pdf = ($this->pdf)()->export($block);
+
+        $name = trim((string) ($block['name'] ?? '')) ?: 'item';
+        return Response::download($pdf, 'application/pdf', $name . '.pdf');
     }
 
     /** The C# route was exportitemtocvs/download; any trailing segment is accepted. */

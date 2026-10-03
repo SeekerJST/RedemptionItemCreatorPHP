@@ -147,6 +147,25 @@ check('blank limit rows are skipped', substr_count($body, 'No Far Range') === 1 
 [$status, $getBody] = call('GET', "$base/exportitemtocvs/download?item=" . rawurlencode(json_encode($item)));
 check('GET ?item= export (the C# contract) matches POST', $status === 200 && $getBody === $body);
 
+echo "PDF export\n";
+$statBlock = [
+    'name' => 'Smoke Test Blaster', 'description' => 'A test blaster, with "quotes" & <angle brackets>.',
+    'category' => 'Weapons: Firearms', 'size' => 'Small', 'cr' => 2, 'cc' => 3,
+    'sections' => [
+        ['title' => 'COMBAT', 'entries' => [['label' => 'Attack', 'value' => 'Energy Ranged (Firefight) 4x'], ['label' => 'Body Track', 'value' => '10']]],
+        ['title' => 'EFFECTS', 'entries' => [['label' => 'Tags', 'value' => '[Harder, Better, Faster, Stronger]']]],
+    ],
+];
+[$status, $body, $headers] = call('POST', "$base/exportitemtopdf/download", json_encode($statBlock));
+check('exportitemtopdf returns a PDF attachment', $status === 200 && strpos($headers['content-type'] ?? '', 'application/pdf') === 0
+    && strncmp($body, '%PDF-', 5) === 0 && strpos($headers['content-disposition'] ?? '', 'Smoke Test Blaster.pdf') !== false, "HTTP $status " . substr($body, 0, 200));
+[$status, $body] = call('POST', "$base/exportitemtopdf/download", json_encode(['name' => 'X', 'sections' => [['title' => 'NONSENSE', 'entries' => []]]]));
+check('a stat block section the book does not have is a 400', $status === 400 && strpos($body, 'COMBAT') !== false, "HTTP $status $body");
+[$status] = call('POST', "$base/exportitemtopdf/download", json_encode(['sections' => []]));
+check('a stat block without a name is a 400', $status === 400);
+[$status, , $headers] = call('GET', "$base/exportitemtopdf/download");
+check('exportitemtopdf takes POST only', $status === 405 && ($headers['allow'] ?? '') === 'POST');
+
 echo "Public (read-only) items\n";
 $config = require __DIR__ . '/../config/config.php';
 $db = $config['db'];

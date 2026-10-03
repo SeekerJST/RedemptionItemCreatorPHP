@@ -45,6 +45,11 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `src/Repository/LookupRepository.php` | Read-only reference tables (`itemsize`, `skills`, `attribute`, `attributescale`). |
 | `src/Repository/ItemRepository.php` | Item CRUD across `item` + 5 child tables, in transactions. |
 | `src/Export/ItemCsvExporter.php` | CSV sheet export. |
+| `src/Export/ItemPdfExporter.php` | PDF export: checks the client's stat block and lays it out like the corebook (name bar, Size/CR/CC box, section bands), rendered by Dompdf. Font metrics cache in the system temp dir. |
+| `lib/dompdf/` | Dompdf 3.1.6, vendored from its release zip (it bundles its dependencies and `autoload.inc.php`; LGPL-2.1). |
+| `lib/pdf-fonts/` | The PDF's fonts: Andada Pro (static Regular/Bold/Italic, from huertatipografica/Andada-Pro) and Asimovian (from google/fonts), with their OFL licenses. |
+| `client/src/domain/statBlock.js` | An item as the book prints it: COMBAT, POWER, CAPABILITIES, EFFECTS, SOFTWARE sections of "Label: value" entries (the PDF export's input). |
+| `client/src/domain/exportJson.js` | The JSON export (`redemption-item`, version 1). |
 | `src/Http/` | `Request`, `Response`, `HttpException`. |
 | `config/config.example.php` | Template for `config.php` (`db`, `allow_writes`, `debug`). |
 | `client/src/App.jsx` | Layout only: loads lookups, holds the item state (`useReducer`), derives the summary, renders the three panels. |
@@ -98,6 +103,7 @@ Routes match the C# API and are case-insensitive.
 | PUT | `itemcreator/updateitem/{id}` | Replaces all child rows |
 | DELETE | `itemcreator/deleteitem/{id}` | 204 |
 | GET/POST | `itemcreator/exportitemtocvs/download` | CSV attachment |
+| POST | `itemcreator/exportitemtopdf/download` | PDF attachment, from a stat block (`domain/statBlock.js`) |
 
 The item JSON goes in the request body. The C# style `?Item=` / `?item=` query
 parameter still works.

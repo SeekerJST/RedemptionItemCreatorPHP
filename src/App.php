@@ -6,6 +6,7 @@ namespace SilentSpirits\ItemCreator;
 use PDO;
 use PDOException;
 use SilentSpirits\ItemCreator\Controller\ItemCreatorController;
+use SilentSpirits\ItemCreator\Export\ItemPdfExporter;
 use SilentSpirits\ItemCreator\Http\HttpException;
 use SilentSpirits\ItemCreator\Http\Request;
 use SilentSpirits\ItemCreator\Http\Response;
@@ -18,8 +19,11 @@ final class App
 {
     private const CONTROLLER_SEGMENT = 'itemcreator';
 
-    /** @param array<string, mixed> $config */
-    private function __construct(private array $config)
+    /**
+     * @param array<string, mixed> $config
+     * @param string $root the project root (src/, lib/, config/, and Fonts/ live here)
+     */
+    private function __construct(private array $config, private string $root)
     {
     }
 
@@ -29,7 +33,7 @@ final class App
         try {
             $config = self::loadConfig($root);
             $debug = (bool) ($config['debug'] ?? false);
-            $response = (new self($config))->handle(Request::fromGlobals());
+            $response = (new self($config, $root))->handle(Request::fromGlobals());
         } catch (HttpException $e) {
             $response = Response::problem($e->getStatus(), $e->getTitle(), $e->getMessage())
                 ->withHeaders($e->getHeaders());
@@ -86,10 +90,12 @@ final class App
         };
         $lookups = static fn (): LookupRepository => new LookupRepository($db());
 
+        $root = $this->root;
         return new ItemCreatorController(
             $lookups,
             static fn (): ItemRepository => new ItemRepository($db(), $lookups()),
-            (bool) ($this->config['allow_writes'] ?? false)
+            (bool) ($this->config['allow_writes'] ?? false),
+            static fn (): ItemPdfExporter => new ItemPdfExporter($root)
         );
     }
 

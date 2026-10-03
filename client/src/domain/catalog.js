@@ -28,9 +28,9 @@ const SKILL_NAMES = [
 export const catalogLookups = {
     // The `itemsize` table (spec §3).
     sizes: [
-        ['TINY', 25, 10, 0], ['SMALL', 50, 25, 0], ['MEDIUM', 100, 50, 1],
-        ['LARGE', 300, 100, 3], ['HUGE', 600, 200, 6], ['COLOSSAL', 1200, 400, 9],
-    ].map(([SizeName, BasePoints, IncrementPoints, BaseCR], i) => ({ ItemSizeID: i + 1, SizeName, BasePoints, IncrementPoints, BaseCR })),
+        ['TINY', 25, 10, 0, 1], ['SMALL', 50, 25, 0, 5], ['MEDIUM', 100, 50, 1, 10],
+        ['LARGE', 300, 100, 3, 50], ['HUGE', 600, 200, 6, 200], ['COLOSSAL', 1200, 400, 9, 500],
+    ].map(([SizeName, BasePoints, IncrementPoints, BaseCR, BaseBody], i) => ({ ItemSizeID: i + 1, SizeName, BasePoints, IncrementPoints, BaseCR, BaseBody })),
     attributes: ATTRIBUTE_NAMES.map((AttributeName) => ({ AttributeID: ATTRIBUTE_ID.get(AttributeName), AttributeName })),
     skills: SKILL_NAMES.map((skillName, i) => ({ skillID: i + 1, skillName })),
 };
