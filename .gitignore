@@ -21,3 +21,7 @@ obj/
 desktop.ini
 Thumbs.db
 *.log
+
+# Font files: licensed separately (Galexica: ePub license only), so they are deployed
+# to the server directly rather than committed. See docs/project_guide.md.
+Fonts/
