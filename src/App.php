@@ -5,6 +5,10 @@ namespace SilentSpirits\ItemCreator;
 
 use PDO;
 use PDOException;
+use SilentSpirits\ItemCreator\Auth\Mailer;
+use SilentSpirits\ItemCreator\Auth\Session;
+use SilentSpirits\ItemCreator\Auth\UserRepository;
+use SilentSpirits\ItemCreator\Controller\AuthController;
 use SilentSpirits\ItemCreator\Controller\ItemCreatorController;
 use SilentSpirits\ItemCreator\Export\ItemPdfExporter;
 use SilentSpirits\ItemCreator\Http\HttpException;
@@ -66,9 +70,20 @@ final class App
         $action = strtolower($segments[$start + 1]);
         $rest = array_slice($segments, $start + 2);
 
-        $route = ItemCreatorController::ROUTES[$action] ?? null;
+        // Accounts live under .../itemcreator/auth/{action}; everything else is the item API.
+        if ($action === 'auth') {
+            $sub = strtolower($rest[0] ?? '');
+            $route = AuthController::ROUTES[$sub] ?? null;
+            $rest = array_slice($rest, 1);
+            $target = fn (): object => $this->auth();
+            $label = "auth/$sub";
+        } else {
+            $route = ItemCreatorController::ROUTES[$action] ?? null;
+            $target = fn (): object => $this->controller();
+            $label = $segments[$start + 1];
+        }
         if ($route === null) {
-            throw HttpException::notFound("Unknown action '{$segments[$start + 1]}'.");
+            throw HttpException::notFound("Unknown action '$label'.");
         }
 
         [$methods, $handler] = $route;
@@ -78,24 +93,52 @@ final class App
             throw HttpException::methodNotAllowed($methods);
         }
 
-        return $this->controller()->$handler($request, ...$rest);
+        // Cross-site request forgery: a request that changes something must carry the
+        // X-SSGS-Request header. Another site can make the browser send a form here (with the
+        // session cookie), but it can't add a custom header without a CORS preflight, which
+        // this API never allows.
+        if ($method !== 'GET' && $request->header('X-SSGS-Request') === null) {
+            throw HttpException::forbidden('Missing the X-SSGS-Request header (required on requests that change something).');
+        }
+
+        return $target()->$handler($request, ...$rest);
+    }
+
+    private ?PDO $pdo = null;
+    private ?Session $session = null;
+    private ?AuthController $auth = null;
+
+    private function db(): PDO
+    {
+        // Connect lazily: routing errors (404/405) shouldn't need a database.
+        return $this->pdo ??= Database::connect($this->config['db']);
+    }
+
+    private function auth(): AuthController
+    {
+        $root = $this->root;
+        $mail = (array) ($this->config['mail'] ?? []);
+        return $this->auth ??= new AuthController(
+            fn (): UserRepository => new UserRepository($this->db()),
+            $this->session ??= new Session((array) ($this->config['session'] ?? [])),
+            static fn (): Mailer => new Mailer($mail, $root),
+            (string) ($this->config['app_url'] ?? '/')
+        );
     }
 
     private function controller(): ItemCreatorController
     {
-        // Connect lazily: routing errors (404/405) shouldn't need a database.
-        $pdo = null;
-        $db = function () use (&$pdo): PDO {
-            return $pdo ??= Database::connect($this->config['db']);
-        };
-        $lookups = static fn (): LookupRepository => new LookupRepository($db());
+        $lookups = fn (): LookupRepository => new LookupRepository($this->db());
 
         $root = $this->root;
         return new ItemCreatorController(
             $lookups,
-            static fn (): ItemRepository => new ItemRepository($db(), $lookups()),
+            fn (): ItemRepository => new ItemRepository($this->db(), $lookups()),
+            // allow_writes: the site-wide switch for saving items (false = read-only, e.g. during
+            // maintenance). With it on, saving still takes a signed-in, verified account.
             (bool) ($this->config['allow_writes'] ?? false),
-            static fn (): ItemPdfExporter => new ItemPdfExporter($root)
+            static fn (): ItemPdfExporter => new ItemPdfExporter($root),
+            $this->auth()
         );
     }
 

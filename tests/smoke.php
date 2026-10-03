@@ -8,19 +8,41 @@ declare(strict_types=1);
  *   php -S localhost:5135 -t public dev/router.php     (in one terminal)
  *   php tests/smoke.php [http://localhost:5135]        (in another)
  *
- * Needs allow_writes => true in config/config.php. The public-item checks also use the
- * database settings there: no API route can publish an item, so the test flips IsPublic
- * on its own throwaway item directly.
+ * Needs allow_writes => true in config/config.php, and its database settings: the test creates
+ * its own throwaway accounts (smoke-*@example.invalid) directly in the database, signs in as
+ * them, and removes them at the end. It also flips IsPublic on its own item (no API route can
+ * publish one). The account checks read the emailed links from the mail log, so the server
+ * must use mail transport 'log' (the local default).
  */
 $base = rtrim($argv[1] ?? 'http://localhost:5135', '/') . '/itemcreator';
 $failures = 0;
 
-/** @return array{0: int, 1: string, 2: array<string, string>} status, body, headers */
-function call(string $method, string $url, ?string $body = null): array
+/** Cookie jars, one per account the test acts as ('anon' has none). as() switches between them. */
+$jars = ['anon' => []];
+$as = 'anon';
+function as_(string $who): void
 {
+    global $jars, $as;
+    $jars[$who] ??= [];
+    $as = $who;
+}
+
+/**
+ * A request as the current account (its session cookie), with the X-SSGS-Request header that
+ * requests changing something need, unless $csrfHeader is false.
+ *
+ * @return array{0: int, 1: string, 2: array<string, string>} status, body, headers
+ */
+function call(string $method, string $url, ?string $body = null, bool $csrfHeader = true): array
+{
+    global $jars, $as;
+    $header = "Content-Type: application/json\r\n" . ($csrfHeader ? "X-SSGS-Request: 1\r\n" : '');
+    if ($jars[$as] !== []) {
+        $header .= 'Cookie: ' . implode('; ', array_map(static fn ($k, $v) => "$k=$v", array_keys($jars[$as]), $jars[$as])) . "\r\n";
+    }
     $context = stream_context_create(['http' => [
         'method' => $method,
-        'header' => "Content-Type: application/json\r\n",
+        'header' => $header,
         'content' => $body ?? '',
         'ignore_errors' => true, // return 4xx/5xx bodies instead of failing
     ]]);
@@ -34,9 +56,33 @@ function call(string $method, string $url, ?string $body = null): array
         } elseif (strpos($line, ':') !== false) {
             [$name, $value] = explode(':', $line, 2);
             $headers[strtolower(trim($name))] = trim($value);
+            if (strcasecmp(trim($name), 'Set-Cookie') === 0 && $as !== 'anon') {
+                [$pair] = explode(';', trim($value), 2);
+                [$k, $v] = array_pad(explode('=', $pair, 2), 2, '');
+                if ($v === '' || stripos($value, 'expires=Thu, 01 Jan 1970') !== false || preg_match('/expires=[^;]*19[0-9]{2}/i', $value)) {
+                    unset($jars[$as][$k]);
+                } else {
+                    $jars[$as][$k] = $v;
+                }
+            }
         }
     }
     return [$status, $responseBody, $headers];
+}
+
+/** The newest logged email to $to, as text ('' if none), from the server's mail log. */
+function lastMail(string $to): string
+{
+    global $mailDir;
+    $files = glob($mailDir . '/*.txt') ?: [];
+    usort($files, static fn ($a, $b) => filemtime($b) <=> filemtime($a) ?: strcmp($b, $a));
+    foreach ($files as $file) {
+        $text = (string) file_get_contents($file);
+        if (stripos($text, "To: $to\n") === 0) {
+            return $text;
+        }
+    }
+    return '';
 }
 
 function check(string $label, bool $ok, string $extra = ''): void
@@ -76,6 +122,30 @@ $item = [
     'tagList' => [['id' => 1, 'TagDesc' => 'Harder, Better, Faster, Stronger', 'TagRank' => 1, 'TagFree' => false, 'BuildPoints' => 5]],
 ];
 
+// ---- test accounts: A owns the items, B is someone else, C hasn't confirmed their email ----
+$config = require __DIR__ . '/../config/config.php';
+$db = $config['db'];
+$pdo = new PDO(
+    sprintf('mysql:host=%s;port=%d;dbname=%s;charset=utf8mb4', $db['host'], $db['port'] ?? 3306, $db['name']),
+    $db['user'],
+    $db['pass'],
+    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+);
+$mailDir = $config['mail']['log_dir'] ?? (sys_get_temp_dir() . '/itemcreator-mail');
+$cleanUp = static function () use ($pdo): void {
+    $pdo->exec("DELETE i FROM item i JOIN users u ON u.UserID = i.OwnerUserID WHERE u.Email LIKE 'smoke-%@example.invalid'");
+    $pdo->exec("DELETE FROM login_attempts WHERE Email LIKE 'smoke-%@example.invalid'");
+    $pdo->exec("DELETE FROM users WHERE Email LIKE 'smoke-%@example.invalid'");
+};
+$cleanUp(); // leftovers from an interrupted run
+$password = 'smoke test password';
+foreach (['a' => true, 'b' => true, 'c' => false] as $who => $verified) {
+    $pdo->prepare('INSERT INTO users (Email, DisplayName, PasswordHash, EmailVerifiedAt) VALUES (?, ?, ?, ' . ($verified ? 'UTC_TIMESTAMP()' : 'NULL') . ')')
+        ->execute(["smoke-$who@example.invalid", 'Smoke ' . strtoupper($who), password_hash($password, PASSWORD_DEFAULT)]);
+    as_($who);
+    call('POST', "$base/auth/login", json_encode(['email' => "smoke-$who@example.invalid", 'password' => $password]));
+}
+
 echo "Lookups\n";
 [$status, $body] = call('GET', "$base/getitemsizes/");
 $sizes = json_decode($body, true);
@@ -86,6 +156,15 @@ foreach (['getitemsizesds', 'getskillsds', 'getitemattributesds', 'getattributes
 }
 
 echo "Create\n";
+as_('anon');
+[$status] = call('POST', "$base/createitem", json_encode($item));
+check('saving an item takes a signed-in account (401)', $status === 401, "HTTP $status");
+as_('c');
+[$status, $body] = call('POST', "$base/createitem", json_encode($item));
+check('... with a confirmed email (403)', $status === 403 && strpos($body, 'Confirm your email') !== false, "HTTP $status $body");
+as_('a');
+[$status] = call('POST', "$base/createitem", json_encode($item), false);
+check('a change without the X-SSGS-Request header is refused (403)', $status === 403, "HTTP $status");
 [$status, $body] = call('POST', "$base/createitem", json_encode($item));
 $created = json_decode($body, true);
 $id = $created['itemID'] ?? null;
@@ -98,7 +177,16 @@ echo "Read\n";
 [$status, $body] = call('GET', "$base/getitem/$id");
 $read = json_decode($body, true);
 [, $body] = call('GET', "$base/getallitems");
-check('getallitems lists the new private item while writes are on', in_array($id, array_column(json_decode($body, true) ?? [], 'itemID'), true), $body);
+check('getallitems lists your own private item', in_array($id, array_column(json_decode($body, true) ?? [], 'itemID'), true), $body);
+as_('b');
+[, $listB] = call('GET', "$base/getallitems");
+[$statusB] = call('GET', "$base/getitem/$id");
+as_('anon');
+[, $listAnon] = call('GET', "$base/getallitems");
+as_('a');
+check("someone else's private item isn't listed, signed in or not",
+    !in_array($id, array_column(json_decode($listB, true) ?? [], 'itemID'), true) && !in_array($id, array_column(json_decode($listAnon, true) ?? [], 'itemID'), true));
+check("someone else's private item is a 404, not a 403 (it doesn't leak that it exists)", $statusB === 404, "HTTP $statusB");
 check('getitem returns the item',$status === 200 && ($read['itemName'] ?? null) === 'Smoke Test Blaster', "HTTP $status $body");
 check('size comes back by name', ($read['itemSize'] ?? null) === 'SMALL');
 check('CostRating is saved', ($read['CostRating'] ?? null) === 2);
@@ -131,6 +219,13 @@ check('update replaced name, size, and child rows',
     && ($reread['description'] ?? null) === 'Now with more blast.'
     && count($reread['attributeList']) === 1
     && $reread['tagList'] === [], $body);
+as_('b');
+[$status] = call('PUT', "$base/updateitem/$id", json_encode($update));
+[$statusDelete] = call('DELETE', "$base/deleteitem/$id");
+as_('a');
+check("someone else's private item can't be updated or deleted (404)", $status === 404 && $statusDelete === 404, "HTTP $status / $statusDelete");
+[, $body] = call('GET', "$base/getitem/$id");
+check('... and is unchanged', (json_decode($body, true)['itemName'] ?? null) === 'Smoke Test Blaster Mk II', $body);
 [$status] = call('PUT', "$base/updateitem/not-$id", json_encode($update));
 check('updateitem rejects a URL ID that differs from the body', $status === 400);
 
@@ -167,14 +262,6 @@ check('a stat block without a name is a 400', $status === 400);
 check('exportitemtopdf takes POST only', $status === 405 && ($headers['allow'] ?? '') === 'POST');
 
 echo "Public (read-only) items\n";
-$config = require __DIR__ . '/../config/config.php';
-$db = $config['db'];
-$pdo = new PDO(
-    sprintf('mysql:host=%s;port=%d;dbname=%s;charset=utf8mb4', $db['host'], $db['port'] ?? 3306, $db['name']),
-    $db['user'],
-    $db['pass'],
-    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-);
 $setPublic = static fn (int $flag) => $pdo->prepare('UPDATE item SET IsPublic = ? WHERE ItemID = ?')->execute([$flag, $id]);
 $setPublic(1);
 [, $body] = call('GET', "$base/getitem/$id");
@@ -221,6 +308,56 @@ check('sub-rows nested two deep are a 400', $status === 400 && strpos($body, 'tw
 check('wrong method is a 405 with Allow', $status === 405 && ($headers['allow'] ?? '') === 'POST');
 [$status] = call('GET', "$base/nosuchaction");
 check('unknown action is a 404', $status === 404);
+
+echo "Accounts\n";
+as_('d');
+$email = 'smoke-d@example.invalid';
+[$status, $body] = call('GET', "$base/auth/me");
+check('auth/me: nobody signed in', $status === 200 && json_decode($body, true) === ['user' => null], $body);
+[$status, $body] = call('POST', "$base/auth/register", json_encode(['email' => 'not an email', 'password' => 'long enough pass', 'displayName' => 'D']));
+check('register rejects a bad email (400)', $status === 400, "HTTP $status $body");
+[$status, $body] = call('POST', "$base/auth/register", json_encode(['email' => $email, 'password' => 'short', 'displayName' => 'D']));
+check('register rejects a short password (400)', $status === 400 && strpos($body, 'at least') !== false, "HTTP $status $body");
+[$status, $body] = call('POST', "$base/auth/register", json_encode(['email' => strtoupper($email), 'password' => 'smoke register pass', 'displayName' => 'Smoke D']));
+check('register: 202 and a confirmation email', $status === 202 && preg_match('/verify=([0-9a-f]{64})/', lastMail($email), $m) === 1, "HTTP $status $body");
+$token = $m[1] ?? '';
+[$status, $body] = call('POST', "$base/auth/register", json_encode(['email' => 'smoke-a@example.invalid', 'password' => 'smoke register pass', 'displayName' => 'X']));
+check('register answers the same for an email that already has an account', $status === 202 && strpos(lastMail('smoke-a@example.invalid'), 'already have one') !== false, "HTTP $status $body");
+[$status, $body] = call('POST', "$base/auth/verifyemail", json_encode(['token' => $token]));
+$user = json_decode($body, true)['user'] ?? [];
+check('verifyemail confirms the email and signs in', $status === 200 && ($user['verified'] ?? false) === true && ($user['email'] ?? '') === $email && !isset($user['passwordHash']), "HTTP $status $body");
+[$status] = call('POST', "$base/auth/verifyemail", json_encode(['token' => $token]));
+check('a confirmation link works once', $status === 400, "HTTP $status");
+[$status, $body] = call('POST', "$base/auth/updateprofile", json_encode(['displayName' => '  Smoke   Dee  ']));
+check('updateprofile changes the display name (tidied)', $status === 200 && (json_decode($body, true)['user']['displayName'] ?? '') === 'Smoke Dee', "HTTP $status $body");
+[$status] = call('POST', "$base/auth/changepassword", json_encode(['currentPassword' => 'wrong', 'newPassword' => 'smoke changed pass']));
+check('changepassword needs the current password', $status === 400, "HTTP $status");
+[$status] = call('POST', "$base/auth/changepassword", json_encode(['currentPassword' => 'smoke register pass', 'newPassword' => 'smoke changed pass']));
+check('changepassword', $status === 200, "HTTP $status");
+[$status, $body] = call('POST', "$base/auth/logout", '{}');
+[, $me] = call('GET', "$base/auth/me");
+check('logout ends the session', $status === 200 && json_decode($me, true) === ['user' => null], $me);
+[$status] = call('POST', "$base/auth/login", json_encode(['email' => $email, 'password' => 'smoke register pass']));
+check('the old password no longer works (401)', $status === 401, "HTTP $status");
+[$status, $body] = call('POST', "$base/auth/forgotpassword", json_encode(['email' => 'smoke-nobody@example.invalid']));
+check('forgotpassword answers the same for an unknown email', $status === 202, "HTTP $status");
+[$status] = call('POST', "$base/auth/forgotpassword", json_encode(['email' => $email]));
+check('forgotpassword: 202 and a reset email', $status === 202 && preg_match('/reset=([0-9a-f]{64})/', lastMail($email), $m) === 1, "HTTP $status");
+[$status, $body] = call('POST', "$base/auth/resetpassword", json_encode(['token' => $m[1] ?? '', 'password' => 'smoke reset pass!']));
+check('resetpassword sets the password and signs in', $status === 200 && (json_decode($body, true)['user']['email'] ?? '') === $email, "HTTP $status $body");
+call('POST', "$base/auth/logout", '{}');
+[$status] = call('POST', "$base/auth/login", json_encode(['email' => $email, 'password' => 'smoke reset pass!']));
+check('signing in with the new password works', $status === 200, "HTTP $status");
+call('POST', "$base/auth/logout", '{}');
+$statuses = [];
+for ($i = 0; $i < 6; $i++) {
+    [$statuses[]] = call('POST', "$base/auth/login", json_encode(['email' => $email, 'password' => 'not the password']));
+}
+check('five wrong passwords, then 429 with Retry-After', array_slice($statuses, 0, 5) === [401, 401, 401, 401, 401] && $statuses[5] === 429, implode(',', $statuses));
+[$status] = call('POST', "$base/auth/login", json_encode(['email' => $email, 'password' => 'smoke reset pass!']));
+check('... and the right password is refused too until it passes', $status === 429, "HTTP $status");
+
+$cleanUp();
 
 echo $failures === 0 ? "\nAll checks passed.\n" : "\n$failures check(s) failed.\n";
 exit($failures === 0 ? 0 : 1);

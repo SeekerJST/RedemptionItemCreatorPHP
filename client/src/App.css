@@ -97,6 +97,136 @@ span.nav_user {
     color: var(--rd-ivory);
 }
 
+span.nav_unverified {
+    color: var(--rd-ember);
+    font-family: var(--rd-font-mono);
+    font-size: 0.85em;
+}
+
+/* A confirmation link's result, under the nav bar. */
+p.nav_notice {
+    width: 1713px;
+    margin: 8px 0 0;
+    text-align: right;
+}
+
+p.nav_notice.ok {
+    color: var(--rd-ok);
+}
+
+p.nav_notice.error {
+    color: #ff8a80;
+    font-weight: bold;
+}
+
+/* ---- the account panel: drops from the nav bar's right end, over the panels ------------ */
+
+.account_panel {
+    --rd-cut: 22px;
+    /* Opaque: it sits over the panels' text. */
+    --rd-panel-fill: linear-gradient(180deg, var(--rd-panel-hi), var(--rd-panel-lo));
+    position: absolute;
+    z-index: 20;
+    top: 74px;
+    left: calc(1713px - 360px);
+    box-sizing: border-box;
+    width: 360px;
+    padding: 18px 24px 22px;
+    text-align: left;
+}
+
+.account_panel h2,
+.account_panel h3 {
+    margin: 0 0 10px;
+}
+
+.account_panel h3 {
+    margin-top: 18px;
+    font-size: 1em;
+}
+
+label.account_field {
+    display: block;
+    margin-bottom: 10px;
+}
+
+label.account_field span {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--rd-steel);
+    font-size: 0.9em;
+}
+
+label.account_field input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px 7px;
+    font-size: 14px;
+}
+
+p.account_note {
+    margin: 0 0 12px;
+    color: var(--rd-steel);
+    font-size: 0.9em;
+}
+
+form.account_unverified p {
+    margin: 0 0 6px;
+    color: var(--rd-ember);
+}
+
+.account_actions {
+    text-align: right;
+}
+
+p.account_message {
+    margin: 4px 0 8px;
+}
+
+p.account_message.ok {
+    color: var(--rd-ok);
+}
+
+p.account_message.error {
+    color: #ff8a80;
+    font-weight: bold;
+}
+
+p.account_links {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0 0;
+}
+
+button.account_link {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--rd-gold-bright);
+    font: inherit;
+    font-size: 0.9em;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+button.account_close {
+    position: absolute;
+    top: 6px;
+    right: 26px;
+    padding: 0 4px;
+    border: none;
+    background: none;
+    color: var(--rd-steel);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+button.account_close:hover,
+button.account_link:hover {
+    color: var(--rd-gold);
+}
+
 /* "Panel.02": top left, since the top-right corner is cut. */
 .panel_title {
     position: absolute;

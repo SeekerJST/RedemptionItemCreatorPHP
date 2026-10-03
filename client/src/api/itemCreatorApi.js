@@ -2,8 +2,15 @@
 
 const BASE = 'itemcreator';
 
-async function request(path, options = {}) {
-    const response = await fetch(`${BASE}/${path}`, options);
+/**
+ * A call to the API. Requests that change something carry the X-SSGS-Request header, which the
+ * API requires on them (another site can't add it, so it can't make the browser change things
+ * here using the sign-in cookie). Exported for authApi.js.
+ */
+export async function request(path, options = {}) {
+    const method = (options.method ?? 'GET').toUpperCase();
+    const headers = method === 'GET' ? options.headers : { ...options.headers, 'X-SSGS-Request': '1' };
+    const response = await fetch(`${BASE}/${path}`, { ...options, headers, credentials: 'same-origin' });
     if (!response.ok) {
         // Error bodies are RFC 7807 problem JSON: { title, status, detail }.
         const problem = await response.json().catch(() => null);

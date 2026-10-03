@@ -40,7 +40,10 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `public/.htaccess` | Sends `itemcreator/*` to `api/index.php`; everything else falls back to the React `index.html`. |
 | `public/api/index.php` | Front controller. Finds `src/` via `ITEMCREATOR_ROOT` (SetEnv), or next to `public/` by default. |
 | `src/App.php` | Loads config, routes `/itemcreator/{action}/...`, turns exceptions into RFC 7807 JSON problems. Connects to the DB lazily. |
-| `src/Controller/ItemCreatorController.php` | One method per C# action. `ROUTES` maps action → HTTP method → handler. |
+| `src/Controller/ItemCreatorController.php` | One method per C# action. `ROUTES` maps action → HTTP method → handler. Checks who may see and change each item (through `AuthController`). |
+| `src/Controller/AuthController.php` | Accounts under `itemcreator/auth/{action}`: register, confirm email, sign in/out, forgot/reset password, profile, change password. Also `currentUser()` / `requireVerifiedUser()` for the item routes. |
+| `src/Auth/` | `Session` (the `SSGS_SESSION` cookie, started only when needed), `UserRepository` (`users`, one-time `user_tokens` stored as SHA-256, `login_attempts` for rate limiting), `Mailer` (PHPMailer over SMTP, or `log` transport: writes each email to a file). |
+| `lib/phpmailer/` | PHPMailer 7.1.1, vendored (`src/` only; LGPL-2.1). |
 | `src/Domain/Item.php` | Item model. `fromArray()` accepts any key casing and numeric strings; `toArray()` emits the shape the client builds. |
 | `src/Repository/LookupRepository.php` | Read-only reference tables (`itemsize`, `skills`, `attribute`, `attributescale`). |
 | `src/Repository/ItemRepository.php` | Item CRUD across `item` + 5 child tables, in transactions. |
@@ -51,19 +54,20 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `client/src/domain/statBlock.js` | An item as the book prints it: COMBAT, POWER, CAPABILITIES, EFFECTS, SOFTWARE sections of "Label: value" entries (the PDF export's input). |
 | `client/src/domain/exportJson.js` | The JSON export (`redemption-item`, version 1). |
 | `src/Http/` | `Request`, `Response`, `HttpException`. |
-| `config/config.example.php` | Template for `config.php` (`db`, `allow_writes`, `debug`). |
+| `config/config.example.php` | Template for `config.php` (`db`, `allow_writes`, `app_url`, `mail`, `session`, `debug`). The real `config.php` holds the DB and mailbox passwords and is gitignored. |
 | `client/src/App.jsx` | Layout only: loads lookups, holds the item state (`useReducer`), derives the summary, renders the three panels. |
 | `client/src/domain/` | Pure logic, no React. `constants.js` (UI constants and attribute IDs), `costs.js` (row BP), `summary.js` (everything Panel 3 shows), `item.js` (item reducer and the API payload), `ruleRows.js` (item rows → rules rows), `inventory.js` (the Inventory tree by category). |
 | `client/src/domain/rules/` | **The item creation rules** (docs/item_creation_rules.md) as code: one entry per attribute (cost, grades, rank meaning, power, allowed sub-rows), cost curves, sizes, Cost Rating, power budget. `*.test.js` beside them; the Frigate fixture is `frigate.test.js`. |
 | `client/src/styles/theme.css` | **The Redemption theme**, meant to be shared with SystemGeneratorLive and the site: colors, fonts, and `rd-` classes (`.rd-panel` gold cut-corner frame, `.rd-title`, `.rd-heading`, `.rd-button`, `.rd-field`). Matches the corebook cover via the Roll20 sheet. |
-| `client/src/components/NavBar.jsx` | The site navigation bar across the top: SilentSpirits logo (`client/icons/SSGSLogo.png`), Redemption › Gear Creator, and Login / Profile / Logout. Takes `user`, `onLogin`, `onLogout`, `onProfile`; with no login yet, [Login] is disabled. Link targets are `NAV_LINKS`: the logo goes to https://www.silentspiritsgames.com/ (which this site will replace); Redemption to the site root for now. |
+| `client/src/components/NavBar.jsx` | The site navigation bar across the top: SilentSpirits logo (`client/icons/SSGSLogo.png`), Redemption › Gear Creator, and Login / Profile / Logout. Takes `user` (undefined while loading), `onLogin`, `onLogout`, `onProfile`; shows "unconfirmed" beside an account whose email isn't confirmed. Link targets are `NAV_LINKS`: the logo goes to https://www.silentspiritsgames.com/ (which this site will replace); Redemption to the site root for now. |
 | `client/src/components/EditableGrid.jsx` | SVAR grid + sidebar editor used by all three sections. Displays rows owned by React state; with `tree`, nests attribute sub-rows by `parentId`. Contains the SVAR workarounds. |
 | `client/src/components/` | `ItemEditor` (Panel 2), `ItemHeader`, `Section`, `LimitCounts`, `gridColumns.js`, `summary/*` (Panel 3 pieces). |
-| `client/src/api/`, `client/src/hooks/` | `itemCreatorApi.js` (fetch wrappers), `useLookups.js` (loads reference data once). |
+| `client/src/api/`, `client/src/hooks/` | `itemCreatorApi.js` (fetch wrappers; `request()` adds the `X-SSGS-Request` header to non-GET calls), `authApi.js` (the `auth/` routes), `useLookups.js` (loads reference data once), `useAuth.js` (who's signed in; handles the emailed `?verify=` and `?reset=` links), `useInventory.js` (reloads when the user changes). |
+| `client/src/components/AccountPanel.jsx` | The account panel that drops from the nav bar: sign in, create an account, forgot/reset password, and Profile (display name, change password, resend the confirmation email). |
 | `dev/router.php` | Router for PHP's built-in server; stands in for `.htaccess` locally. |
 | `index.php` (root) | Only there so Visual Studio's F5 (built-in server, no router) can reach the API. |
 | `db/migrations/` | Numbered SQL scripts. Run each one once, in order, on every existing database. A new database (e.g. the first Dreamhost one) is created from the schema file instead, which already includes them. |
-| `tests/smoke.php` | End-to-end test (51 checks) against a running server. |
+| `tests/smoke.php` | End-to-end test (79 checks) against a running server: items, ownership, and accounts. Makes and removes its own `smoke-*@example.invalid` accounts. |
 | `db/seed/` | `catalog.json` (the equipment catalog as app items, generated) and `import_catalog.php` (loads it as public items). |
 | `docs/catalog_tools/` | The catalog's source: `items.py` (data), `costs.py` (helpers: catalog text plus app rows), `gen.py` (the markdown), `gen_errata*.py` (errata files), `gen_catalog_json.py` (`db/seed/catalog.json`). |
 | `client/scripts/price-catalog.mjs` | Prices `catalog.json` with the app's rules (`npm run price-catalog`). |
@@ -198,7 +202,10 @@ parameter still works.
 **Working:**
 - The full API is ported and verified against the running C# API: lookups are
   byte-identical, CSV output matches apart from fixes, and items saved by the C# version load correctly.
-- The smoke test passes all 51 checks.
+- The smoke test passes all 79 checks.
+- **Accounts** (2026-10-03, migration 007): email + password sign-up with email confirmation,
+  sign in/out, forgot/reset password, profile. Saving takes a signed-in account with a confirmed
+  email; each saved item belongs to its creator, who alone (or an admin) can see, change, or delete it.
 - **Save, load, and delete** (Phase 4): [New]/[Save]/[Delete] in Panel 2, and the Inventory panel
   lists saved items and loads one on click. Sub-rows, implementations, and row order are saved
   (migration 004, applied to the local DB).
@@ -214,9 +221,10 @@ parameter still works.
   Redemption-class Frigate (built as the catalog has it: 1,416 BP, CR 10). Panel 3 lists rule problems and highlights the rows involved.
 
 **Not done yet:**
-- There's no authentication. Write endpoints are controlled by the `allow_writes` config flag.
-- Nothing in the UI sets `IsPublic`: new items are private (0), so with writes off they
-  don't appear in `getallitems`. Private items aren't limited to their creator yet (that needs login).
+- No Google / Microsoft (or Apple) sign-in yet: email + password only.
+- Nothing in the UI sets `IsPublic` or a user's `Role`: new items are private, and admins are
+  made by setting `users.Role = 'admin'` in the DB. The admin panel is still to come.
+- Real email has only been tested with the `log` transport locally, not through Dreamhost's SMTP.
 - The catalog (103 items) is imported locally as public items; Dreamhost needs it after the schema.
 - Terran vs Shohan Force Fields (§9 #16) aren't modelled: that needs the faction/tech-base field,
   which is out of scope for now.
@@ -226,18 +234,21 @@ parameter still works.
 
 ## Decisions
 
-- **Writes during the pre-login period.** Login is planned as part of the site revamp.
-  Until then, item entries still have to get into the DB, either by keeping
-  `allow_writes` on in production or by writing rows directly. Not settled yet.
-  Leaving writes on means anyone can create, edit, or delete items.
-- **Public and private items** (2026-09-29). Public items (the catalog, to start) can be loaded
-  read-only by anyone; [Copy] makes an editable private copy. Private items are editable and, once
-  login exists, visible only to their creator. Everything a player saves starts private. An **admin
-  panel** will manage which items are public; that's a few iterations off.
-- **`getallitems` lists private items while writes are on** (2026-09-25). With writes on,
-  anyone can already load, edit, or delete any item by ID, so hiding private items protects
-  nothing, and new items (`IsPublic = 0`) have to show up in the Inventory to be reopened.
-  With writes off it's public items only, as before. Revisit with login.
+- **Accounts** (2026-10-03). Open sign-up, confirmed by email; email + password first, Google and
+  Microsoft sign-in later (Apple only if wanted: it needs the paid developer program). Mail goes
+  through the no-reply@silentspiritsgames.com mailbox on Dreamhost (PHPMailer, vendored like Dompdf).
+  `allow_writes` is now only a site-wide read-only switch.
+- **Account security choices.** Passwords: `password_hash` (bcrypt), 10+ characters. Emailed links
+  are random 256-bit tokens, stored only as their SHA-256, single use (confirm: 48 hours, reset: 1 hour).
+  Register and forgot-password give the same answer whether or not the email has an account, and
+  sign-in takes as long for an unknown email, so none of them reveal who has one. Sign-in is limited
+  to 5 failures per email and 20 per IP in 15 minutes. Cross-site requests are blocked by requiring
+  the `X-SSGS-Request` header on every non-GET request (plus a SameSite=Lax cookie).
+- **Public and private items** (2026-09-29, ownership 2026-10-03). Public items (the catalog, to
+  start) can be loaded read-only by anyone; [Copy] makes an editable private copy. Private items
+  belong to the account that saved them (`item.OwnerUserID`) and only it, or an admin, can see,
+  change, or delete them; to anyone else they're a 404, so their existence doesn't leak. The
+  catalog's items have no owner. An **admin panel** will manage which items are public.
 - **Rank goes into the DB as a nullable INT.** Rank will never be non-numeric. Done in migration 001.
 - **Same URL surface as the C# API,** so the React ports over unchanged. A cleaner
   REST scheme can come later along with the React rework.
@@ -266,8 +277,8 @@ Behavior kept from the old code, but worth confirming:
 1. **Commit the schema to the repo.** There's no schema or seed file yet, so the DB can't
    be rebuilt from source. Add a schema dump (after migration 004) plus the lookup-table
    seed data (`itemsize`, `attribute`, `attributescale`, `skills`, ...).
-2. **Decide on writes before deploying** (see Decisions). If writes stay on, consider a
-   stopgap such as a shared-secret header or HTTP basic auth on the write routes.
+2. **Send a real email** through Dreamhost's SMTP (transport `'smtp'`) before deploying, to a
+   mailbox you choose, and check it isn't marked as spam (SPF/DKIM for silentspiritsgames.com).
 3. **Deploy to Dreamhost** following `README.md`: `public/` into the web folder, `src/` +
    `config/` outside it, `SetEnv ITEMCREATOR_ROOT`. Nothing is deployed there yet, so the
    Dreamhost DB is created fresh from the schema and seed files in step 1.
@@ -275,7 +286,9 @@ Behavior kept from the old code, but worth confirming:
 5. **Attacks summary:** list each attack with its sub-rows (multiplier, ammo) in Panel 3,
    which the old code was working toward.
 6. **Catalog import on Dreamhost**, once the schema and seed files exist (step 1).
-7. **Login / authentication** as part of the SilentSpirits revamp, shared with SystemGeneratorLive.
+7. **Google and Microsoft sign-in** (OAuth / OpenID Connect): needs app registrations in Google
+   Cloud and Microsoft Entra, then a `users`-linked identities table. Share accounts with
+   SystemGeneratorLive (same `SSGS_SESSION` cookie name).
 8. **Merge planning with SystemGeneratorLive.** Shared layout and styling, a shared DB
    config approach (SystemGeneratorLive uses `db_config.php` variables; this project
    uses `config/config.php` returning an array), and a common site shell.

@@ -13,10 +13,10 @@ const NAV_LINKS = {
 
 /**
  * The site's navigation bar, across the top of the three panels:
- *   [SilentSpirits logo] Redemption › Gear Creator          [Login] or [Profile] [Logout]
+ *   [SilentSpirits logo] Redemption › Gear Creator          [Login] or name [Profile] [Logout]
  *
- * user: the signed-in user ({ name }) or null. There's no login yet (it comes with the
- * SilentSpirits site), so without onLogin the [Login] button is shown but disabled.
+ * user: the signed-in user ({ displayName, verified }), null for nobody, or undefined while
+ * that's still loading (no buttons yet).
  */
 export default function NavBar({ user = null, onLogin, onLogout, onProfile }) {
     return (
@@ -30,19 +30,17 @@ export default function NavBar({ user = null, onLogin, onLogout, onProfile }) {
                 <span className="nav_tool" aria-current="page">Gear Creator</span>
             </div>
             <div className="nav_right">
-                {user ? (
+                {user === undefined ? null : user ? (
                     <>
-                        <span className="nav_user">{user.name}</span>
+                        <span className="nav_user">{user.displayName}</span>
+                        {!user.verified && (
+                            <span className="nav_unverified" title="Confirm your email to save items: see [Profile]">unconfirmed</span>
+                        )}
                         <Button type="primary" onClick={onProfile}>[Profile]</Button>
                         <Button type="primary" onClick={onLogout}>[Logout]</Button>
                     </>
                 ) : (
-                    <Button
-                        type="primary"
-                        disabled={!onLogin}
-                        title={onLogin ? 'Sign in' : 'Accounts are coming with the SilentSpirits site'}
-                        onClick={onLogin}
-                    >
+                    <Button type="primary" title="Sign in, or create an account" onClick={onLogin}>
                         [Login]
                     </Button>
                 )}

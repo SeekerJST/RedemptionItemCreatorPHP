@@ -17,15 +17,24 @@ GET {{host}}/getitemattributesds
 ###
 GET {{host}}/getattributescaleds
 
-### Items with IsPublic = 1
+### Public items, plus your own private ones when signed in
 GET {{host}}/getallitems
 
 ### One item with all its rows
 GET {{host}}/getitem/82a73ad3-9c7c-470b-a6a5-45a88a5a7a31
 
+### Sign in first: saving takes a confirmed account. The session cookie is kept for the requests below.
+# Every request that isn't a GET needs the X-SSGS-Request header.
+POST {{host}}/auth/login
+Content-Type: application/json
+X-SSGS-Request: 1
+
+{ "email": "you@example.com", "password": "your password" }
+
 ### Create (returns 201 and the item with its new itemID)
 POST {{host}}/createitem
 Content-Type: application/json
+X-SSGS-Request: 1
 
 {
   "itemName": "Security Gun v3",
@@ -44,6 +53,7 @@ Content-Type: application/json
 ### Update: replaces the item and all its rows (paste an ID from the create response)
 PUT {{host}}/updateitem/PASTE-ITEM-ID
 Content-Type: application/json
+X-SSGS-Request: 1
 
 {
   "itemName": "Security Gun v3 (renamed)",
@@ -55,10 +65,12 @@ Content-Type: application/json
 
 ### Delete (204)
 DELETE {{host}}/deleteitem/PASTE-ITEM-ID
+X-SSGS-Request: 1
 
 ### CSV export. POST a body; GET ?item=<url-encoded json> also works (what App.jsx does today)
 POST {{host}}/exportitemtocvs/download
 Content-Type: application/json
+X-SSGS-Request: 1
 
 {
   "itemName": "Export Test",

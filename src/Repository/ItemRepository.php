@@ -24,19 +24,20 @@ final class ItemRepository
     }
 
     /**
-     * @param bool $includePrivate also list items with IsPublic = 0
-     * @return list<array<string, mixed>> item summaries, by name
+     * @param ?int $userId the signed-in user: their private items are listed too
+     * @return list<array<string, mixed>> item summaries, by category and name
      */
-    public function listItems(bool $includePrivate): array
+    public function listItems(?int $userId): array
     {
         $stmt = $this->db->prepare(
             'SELECT i.ItemID, i.ItemName, i.Category, s.SizeName, i.CostRating, i.IsPublic
                FROM item i
                LEFT JOIN itemsize s ON s.ItemSizeID = i.ItemSize
-              WHERE i.IsPublic = 1 OR ?
+              WHERE i.IsPublic = 1 OR (? IS NOT NULL AND i.OwnerUserID = ?)
               ORDER BY i.Category, i.ItemName'
         );
-        $stmt->bindValue(1, (int) $includePrivate, PDO::PARAM_INT);
+        $stmt->bindValue(1, $userId, $userId === null ? PDO::PARAM_NULL : PDO::PARAM_INT);
+        $stmt->bindValue(2, $userId, $userId === null ? PDO::PARAM_NULL : PDO::PARAM_INT);
         $stmt->execute();
 
         return array_map(static fn (array $r): array => [
@@ -52,7 +53,7 @@ final class ItemRepository
     public function find(string $itemId): ?Item
     {
         $stmt = $this->db->prepare(
-            'SELECT i.ItemID, i.ItemName, i.Category, i.Description, s.SizeName, i.CostRating, i.IsPublic
+            'SELECT i.ItemID, i.ItemName, i.Category, i.Description, s.SizeName, i.CostRating, i.IsPublic, i.OwnerUserID
                FROM item i
                LEFT JOIN itemsize s ON s.ItemSizeID = i.ItemSize
               WHERE i.ItemID = ?'
@@ -71,6 +72,7 @@ final class ItemRepository
         $item->category = (string) $row['Category'];
         $item->description = (string) $row['Description'];
         $item->isPublic = (bool) $row['IsPublic'];
+        $item->ownerUserId = $row['OwnerUserID'] !== null ? (int) $row['OwnerUserID'] : null;
 
         // Rows saved before migration 004 have no SortOrder; they keep their id order.
         $attributeSql = 'SELECT * FROM itemattribute WHERE ItemID = ? ORDER BY SortOrder IS NULL, SortOrder, ItemAttributeID';
@@ -119,15 +121,15 @@ final class ItemRepository
         return $item;
     }
 
-    /** @return string the new ItemID. New items are always private (IsPublic = 0). */
-    public function create(Item $item): string
+    /** @return string the new ItemID. New items are always private (IsPublic = 0) and owned by $ownerUserId. */
+    public function create(Item $item, int $ownerUserId): string
     {
         $sizeId = $this->sizeId($item->itemSize);
         $itemId = self::uuid4();
 
-        $this->transaction(function () use ($item, $itemId, $sizeId): void {
-            $this->db->prepare('INSERT INTO item (ItemID, ItemName, Category, Description, ItemSize, CostRating, IsPublic) VALUES (?, ?, ?, ?, ?, ?, 0)')
-                ->execute([$itemId, $item->itemName, self::nullIfEmpty($item->category), $item->description, $sizeId, $item->costRating]);
+        $this->transaction(function () use ($item, $itemId, $sizeId, $ownerUserId): void {
+            $this->db->prepare('INSERT INTO item (ItemID, ItemName, Category, Description, ItemSize, CostRating, IsPublic, OwnerUserID) VALUES (?, ?, ?, ?, ?, ?, 0, ?)')
+                ->execute([$itemId, $item->itemName, self::nullIfEmpty($item->category), $item->description, $sizeId, $item->costRating, $ownerUserId]);
             $this->insertChildren($itemId, $item);
         });
 
@@ -135,16 +137,17 @@ final class ItemRepository
     }
 
     /**
-     * @return bool false when no item has that ID
+     * @param array{id: int, admin: bool} $writer who's changing it
+     * @return bool false when no item has that ID (or it's someone else's private item)
      * @throws HttpException 403 for a public item
      */
-    public function update(Item $item): bool
+    public function update(Item $item, array $writer): bool
     {
         $itemId = (string) $item->itemId;
         $sizeId = $this->sizeId($item->itemSize);
 
-        return $this->transaction(function () use ($item, $itemId, $sizeId): bool {
-            if (!$this->lockWritable($itemId)) {
+        return $this->transaction(function () use ($item, $itemId, $sizeId, $writer): bool {
+            if (!$this->lockWritable($itemId, $writer)) {
                 return false;
             }
             $this->db->prepare('UPDATE item SET ItemName = ?, Category = ?, Description = ?, ItemSize = ?, CostRating = ? WHERE ItemID = ?')
@@ -156,13 +159,14 @@ final class ItemRepository
     }
 
     /**
-     * @return bool false when no item has that ID
+     * @param array{id: int, admin: bool} $writer who's deleting it
+     * @return bool false when no item has that ID (or it's someone else's private item)
      * @throws HttpException 403 for a public item
      */
-    public function delete(string $itemId): bool
+    public function delete(string $itemId, array $writer): bool
     {
-        return $this->transaction(function () use ($itemId): bool {
-            if (!$this->lockWritable($itemId)) {
+        return $this->transaction(function () use ($itemId, $writer): bool {
+            if (!$this->lockWritable($itemId, $writer)) {
                 return false;
             }
             $this->deleteChildren($itemId);
@@ -216,23 +220,27 @@ final class ItemRepository
     }
 
     /**
-     * Locks the item row for the rest of the transaction.
+     * Locks the item row for the rest of the transaction, if $writer may change it: it must be
+     * private, and theirs (or they're an admin).
      *
-     * @return bool false when no item has that ID
+     * @param array{id: int, admin: bool} $writer
+     * @return bool false when no item has that ID, or it's someone else's private item (reported as
+     *              missing, so it doesn't leak that it exists)
      * @throws HttpException 403 if the item is public (read-only)
      */
-    private function lockWritable(string $itemId): bool
+    private function lockWritable(string $itemId, array $writer): bool
     {
-        $stmt = $this->db->prepare('SELECT IsPublic FROM item WHERE ItemID = ? FOR UPDATE');
+        $stmt = $this->db->prepare('SELECT IsPublic, OwnerUserID FROM item WHERE ItemID = ? FOR UPDATE');
         $stmt->execute([$itemId]);
-        $isPublic = $stmt->fetchColumn();
-        if ($isPublic === false) {
+        $row = $stmt->fetch();
+        if ($row === false) {
             return false;
         }
-        if ((int) $isPublic === 1) {
+        if ((int) $row['IsPublic'] === 1) {
             throw HttpException::forbidden("Item '$itemId' is public and read-only. Copy it to make changes.");
         }
-        return true;
+        $owner = $row['OwnerUserID'] !== null ? (int) $row['OwnerUserID'] : null;
+        return $writer['admin'] || $owner === $writer['id'];
     }
 
     private function deleteChildren(string $itemId): void

@@ -27,6 +27,18 @@ final class HttpException extends RuntimeException
         return new self(400, 'Bad Request', $detail);
     }
 
+    /** Not signed in (or the session has ended). */
+    public static function unauthorized(string $detail): self
+    {
+        return new self(401, 'Unauthorized', $detail);
+    }
+
+    /** Too many attempts in a short time (sign-in rate limiting). */
+    public static function tooManyRequests(string $detail, int $retryAfterSeconds): self
+    {
+        return new self(429, 'Too Many Requests', $detail, ['Retry-After' => (string) $retryAfterSeconds]);
+    }
+
     public static function forbidden(string $detail): self
     {
         return new self(403, 'Forbidden', $detail);

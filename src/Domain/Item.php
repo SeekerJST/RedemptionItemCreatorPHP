@@ -34,6 +34,9 @@ final class Item
      */
     public bool $isPublic = false;
 
+    /** The account that saved it (null: the catalog and other system items). Set by the database only. */
+    public ?int $ownerUserId = null;
+
     /**
      * In editor order. parentId: the id of the row this one sits under (null = top level).
      * implementation: the client's rule key, e.g. "kinetic" (null = the rule's default).

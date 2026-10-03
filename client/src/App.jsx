@@ -1,6 +1,8 @@
 import { useMemo, useReducer, useState } from 'react';
 import Starfield from 'react-starfield';
+import { signOut } from './api/authApi.js';
 import { deleteItem, downloadItemCsv, downloadItemPdf, fetchItem, saveFile, saveItem } from './api/itemCreatorApi.js';
+import AccountPanel from './components/AccountPanel.jsx';
 import Inventory from './components/Inventory.jsx';
 import NavBar from './components/NavBar.jsx';
 import ItemEditor from './components/ItemEditor.jsx';
@@ -11,23 +13,61 @@ import { knownCategories } from './domain/inventory.js';
 import { buildStatBlock } from './domain/statBlock.js';
 import { createInitialItem, itemReducer, toApiItem } from './domain/item.js';
 import { summarizeItem } from './domain/summary.js';
+import { useAuth } from './hooks/useAuth.js';
 import { useInventory } from './hooks/useInventory.js';
 import { useLookups } from './hooks/useLookups.js';
 import './App.css';
 
 export default function App() {
     const { lookups, error } = useLookups();
+    const { user, setUser, notice, resetToken, clearLink } = useAuth();
+    /** The account panel's form ('signIn', 'register', 'forgot', 'reset', 'profile'), or null when closed. */
+    const [account, setAccount] = useState(resetToken ? 'reset' : null);
+
+    const closeAccount = () => {
+        setAccount(null);
+        clearLink();
+    };
+    const logout = async () => {
+        closeAccount();
+        try {
+            await signOut();
+        } finally {
+            setUser(null);
+        }
+    };
 
     return (
         <div>
             <Starfield starCount={1000} starColor={[255, 255, 255]} speedFactor={0.01} backgroundColor="black" />
             <header className="panel_header">
-                <NavBar />
+                <NavBar
+                    user={user}
+                    onLogin={() => setAccount('signIn')}
+                    onProfile={() => setAccount('profile')}
+                    onLogout={logout}
+                />
+                {notice && (
+                    <p className={`nav_notice ${notice.kind}`} role={notice.kind === 'error' ? 'alert' : 'status'}>
+                        {notice.text}{' '}
+                        <button type="button" className="account_link" onClick={clearLink}>Dismiss</button>
+                    </p>
+                )}
+                {account && (
+                    <AccountPanel
+                        mode={account}
+                        user={user}
+                        resetToken={resetToken}
+                        onMode={setAccount}
+                        onUserChange={setUser}
+                        onClose={closeAccount}
+                    />
+                )}
             </header>
 
             <div className="panel_body">
                 {lookups ? (
-                    <GearCreator lookups={lookups} />
+                    <GearCreator lookups={lookups} user={user} />
                 ) : (
                     <Panel title="Panel.02" size="large">
                         <p role={error ? 'alert' : 'status'}>
@@ -40,11 +80,15 @@ export default function App() {
     );
 }
 
-/** The three panels, once the reference data has loaded. */
-function GearCreator({ lookups }) {
+/**
+ * The three panels, once the reference data has loaded.
+ * user: who's signed in (see useAuth); saving takes a signed-in account with a confirmed email.
+ */
+function GearCreator({ lookups, user }) {
     const [item, dispatch] = useReducer(itemReducer, undefined, createInitialItem);
     const summary = useMemo(() => summarizeItem(item, lookups), [item, lookups]);
-    const inventory = useInventory();
+    // Reloaded when someone signs in or out: the list includes the signed-in user's own items.
+    const inventory = useInventory(user?.id ?? null);
     const [status, setStatus] = useState(null);
     /** A pending question before something that would lose work: { message, actionLabel, run }. */
     const [confirm, setConfirm] = useState(null);
@@ -129,7 +173,11 @@ function GearCreator({ lookups }) {
         );
 
     let saveHint = null;
-    if (!item.name.trim()) {
+    if (!user) {
+        saveHint = 'Sign in ([Login], top right) to save items';
+    } else if (!user.verified) {
+        saveHint = 'Confirm your email to save items: see [Profile]';
+    } else if (!item.name.trim()) {
         saveHint = 'Give the item a name to save it';
     } else if (!item.size) {
         saveHint = 'Choose an item size to save it';

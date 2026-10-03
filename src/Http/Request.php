@@ -10,13 +10,23 @@ final class Request
     /**
      * @param string[] $segments decoded, non-empty path segments
      * @param array<string, mixed> $query
+     * @param array<string, string> $headers request headers, names lowercased
+     * @param string $clientIp the caller's address (REMOTE_ADDR; not proxy headers, which callers can forge)
      */
     public function __construct(
         public string $method,
         public array $segments,
         public array $query,
-        private string $rawBody
+        private string $rawBody,
+        public array $headers = [],
+        public string $clientIp = ''
     ) {
+    }
+
+    /** A request header, by case-insensitive name. */
+    public function header(string $name): ?string
+    {
+        return $this->headers[strtolower($name)] ?? null;
     }
 
     public static function fromGlobals(): self
@@ -27,11 +37,23 @@ final class Request
             static fn (string $s): bool => $s !== ''
         ));
 
+        $headers = [];
+        foreach ($_SERVER as $key => $value) {
+            if (strncmp((string) $key, 'HTTP_', 5) === 0 && is_string($value)) {
+                $headers[strtolower(str_replace('_', '-', substr((string) $key, 5)))] = $value;
+            }
+        }
+        if (isset($_SERVER['CONTENT_TYPE'])) {
+            $headers['content-type'] = (string) $_SERVER['CONTENT_TYPE'];
+        }
+
         return new self(
             strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET'),
             $segments,
             $_GET,
-            (string) file_get_contents('php://input')
+            (string) file_get_contents('php://input'),
+            $headers,
+            (string) ($_SERVER['REMOTE_ADDR'] ?? '')
         );
     }
 

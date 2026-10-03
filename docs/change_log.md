@@ -3,6 +3,25 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-10-03 (2): Accounts
+
+- **Sign-up, sign-in, and profiles** (email + password). [Login] in the nav bar opens an account panel:
+  sign in, create an account, or reset a forgotten password. New accounts get an email with a link
+  to confirm the address (48 hours); reset links last an hour. Signed in, the bar shows your name,
+  [Profile] (display name, change password, resend the confirmation), and [Logout].
+- **Saving takes a confirmed account,** and each saved item is its creator's: only they (or an
+  admin) see it in the Inventory or can open, change, or delete it. The catalog stays public to all.
+  [Save]'s tooltip says why when it's disabled.
+- **Security:** bcrypt passwords; single-use emailed tokens stored hashed; same answers whether or
+  not an email has an account; 5 failed sign-ins per email (20 per IP) per 15 minutes; every
+  request that changes something must carry the `X-SSGS-Request` header (blocks cross-site forgery).
+- **Email** goes through PHPMailer (vendored in `lib/phpmailer/`) and the no-reply mailbox, set in
+  `config.php`'s `mail` block. Locally the `log` transport writes emails to files instead.
+- **`db/migrations/007_users_and_ownership.sql`:** `users`, `user_tokens`, `login_attempts`, and
+  `item.OwnerUserID` (applied locally). `allow_writes` is now just a site-wide read-only switch.
+- **Smoke test:** 79 checks, now signing in as its own throwaway accounts, with checks for ownership,
+  the CSRF header, and every account route.
+
 ## 2026-10-03: Navigation bar; PDF box and Panel 2 touches
 
 - **Navigation bar** (`components/NavBar.jsx`): the top bar now spans the three panels (1,713px, lined up with

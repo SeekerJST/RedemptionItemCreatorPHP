@@ -2,10 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { fetchItemList } from '../api/itemCreatorApi.js';
 
 /**
- * The saved-item list for the Inventory panel.
+ * The saved-item list for the Inventory panel: the public catalog, plus the signed-in user's own.
+ * @param {number | null} userId who's signed in; the list reloads when it changes
  * @returns {{ items: object[] | null, error: string | null, refresh: () => void }} items is null until loaded
  */
-export function useInventory() {
+export function useInventory(userId = null) {
     const [state, setState] = useState({ items: null, error: null });
     const [version, setVersion] = useState(0);
 
@@ -19,7 +20,7 @@ export function useInventory() {
                 }
             });
         return () => controller.abort();
-    }, [version]);
+    }, [version, userId]);
 
     const refresh = useCallback(() => setVersion((v) => v + 1), []);
     return { ...state, refresh };
