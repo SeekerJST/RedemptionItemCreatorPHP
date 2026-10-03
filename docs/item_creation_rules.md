@@ -885,7 +885,7 @@ Listed so the code can make each one a single named constant or function, easy t
 | Force Field power | One slot for the entire Force Field track | §5.13, §5.22 |
 | Manufacture power | One slot of the Manufacture's grade | §5.22 |
 | Antimatter "+1 CR" | Provisioning, not build: antimatter fuel bought in Port costs +1 CR over baseline. No effect on BP or item CR. | §5.22 |
-| Task TN cap | A Task's TN can't exceed the running Computer's TN | §5.26, §9 |
+| Task TN cap | A Task's TN can't exceed the running Computer's TN. **Since 2026-09-27** this holds for an item's built-in Tasks; a program's Tasks run at the lower of their TN and the computer's (below). | §5.26, §9 |
 | Coil discount | Same discount as the Charge Resource (4 / 8 / 12 BP per rank) | §5.22, §5.24 |
 | Melee feed | Melee Attacks need no feed (no Power Slot, no ammunition) | §5.3, §9 |
 | Plain Communication | Kept alongside the book's implementations, at 5 / 15 / 30 | §5.7 |
@@ -893,6 +893,31 @@ Listed so the code can make each one a single named constant or function, easy t
 | Attack model | Attack = 2x at the base cost. Each Attack Multiplier rank adds 1x (rank 1 = 3x) and costs the upgrade above 2x. | §5.3 |
 | Anti-Missile | Its own attribute: the only 1x attack. Cost stays half the Attack base. | §5.3, §9 |
 | Launchers | Bought in increments of 4 (1 Power Slot per increment) | §5.16 |
+
+### Resolved by PJ (2026-09-27 to 2026-10-02)
+
+| Date | Question | Ruling | Where |
+|---|---|---|---|
+| 09-27 | Plasma Bleed above the free amount | Costs the difference between the full Bleed and the free Bleed | §5.3 |
+| 09-27 | Ranges across combat scales | Far range at one scale is Short range at the next (Firefight Far = Battlefield Short) | §5.12 |
+| 09-27 | A larger-scale attack on smaller targets | Counts as an area attack by default; "no area attacks" against them is a legitimate limitation | §5.12 |
+| 09-27 | Force Field Regeneration grade | Always Major (Shohan only) | §5.23, §9 |
+| 09-27 | Software and computers | Program size sets the required computer **grade**; a program's Tasks run at the lower of their TN and the computer's (errata p209-212) | §3, §5.8, §9 #23 |
+| 09-28 | Modifiers covering several skills | Grade by breadth: Minor 1 skill (10 BP/rank), Moderate 2 (20), Major 3+ or a class of skills (30) | §5.20 |
+| 09-28 | Key Personnel | A Moderate limitation | §6 |
+| 09-28 | Minor Reaction Drive | A jet pack: works on a planet or in microgravity | §5.10 |
+| 09-28 | The catalog vs the Workbench example | The catalog's numbers win (the Redemption fixture is 1,416 BP) | §10 |
+| 09-29 | Class Modifiers and the +4 cap | Left loose: only skills a Modifier names are checked; a class is left to the table | §5.20 |
+| 09-29 | Rail (Kinetic) weapon power | Two implementations: Kinetic (built in: Ammunition + a Power Slot), Kinetic (self-powered) (hand weapons: Ammunition only) (errata p210) | §5.3, §5.22 |
+| 09-29 | Plasma power | Plasma draws 2 slots per mount even with Ammunition; Plasma (self-powered) needs special ammunition instead, built in as a Moderate limitation (takes a slot, refunds nothing) | §5.3, §5.22, §9 |
+| 09-29 | Abilities | Detection, Discern, and Initiative are Abilities; Modifiers can target them | §5.20 |
+| 09-30 | Items with no power of their own | Draw their slots from the host (a note, not a shortfall); a Slave limitation still means they need the right Link | §5.22 |
+| 09-30 | One-Time Use attacks | Need no feed: the item is its own charge | §5.22, §9 |
+| 09-30 | Drives without Fuel | A Drive needs no Fuel when a Coil, Environmental, or Hyperspace Tap supply runs it; a Biological Drive (legs, wings) needs none | §5.10, §9 |
+| 09-30 | Software's computer | Shown as "Requires a Minor/Moderate/Major Computer to run" by size; Tiny-Medium programs carry at most 2 Tasks | §9 #23 |
+| 09-30 | Skill specialties | Engineering, Science, and Profession always take a specialty, e.g. Engineering (Starship); a Minor Modifier can also target something that isn't a skill (Other) | §5.20 |
+| 10-02 | Psi Link power | 1 slot while a Psionic casts through it, plus 1 per committed effect (the psionics rules, p275, so no errata). The slot's grade is the effect's Scale, so the design counts 1 Minor slot | §5.18, §5.22 |
+| 10-02 | Weapon Link power | Powers the weapon it carries: 1 slot of its grade per Link by default; some weapons (self-powered Kinetic) need none | §5.18, §5.22 |
 
 ### Still open
 
