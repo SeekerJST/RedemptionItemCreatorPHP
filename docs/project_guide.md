@@ -224,7 +224,8 @@ parameter still works.
 - No Google / Microsoft (or Apple) sign-in yet: email + password only.
 - Nothing in the UI sets `IsPublic` or a user's `Role`: new items are private, and admins are
   made by setting `users.Role = 'admin'` in the DB. The admin panel is still to come.
-- Real email has only been tested with the `log` transport locally, not through Dreamhost's SMTP.
+- Real email works through Dreamhost's SMTP (2026-10-03: a confirmation email reached Gmail and its link
+  confirmed the account). Spam-folder placement (SPF/DKIM) hasn't been checked across providers yet.
 - The catalog (103 items) is imported locally as public items; Dreamhost needs it after the schema.
 - Terran vs Shohan Force Fields (§9 #16) aren't modelled: that needs the faction/tech-base field,
   which is out of scope for now.
@@ -277,8 +278,8 @@ Behavior kept from the old code, but worth confirming:
 1. **Commit the schema to the repo.** There's no schema or seed file yet, so the DB can't
    be rebuilt from source. Add a schema dump (after migration 004) plus the lookup-table
    seed data (`itemsize`, `attribute`, `attributescale`, `skills`, ...).
-2. **Send a real email** through Dreamhost's SMTP (transport `'smtp'`) before deploying, to a
-   mailbox you choose, and check it isn't marked as spam (SPF/DKIM for silentspiritsgames.com).
+2. **Check email deliverability** before deploying: SPF/DKIM for silentspiritsgames.com, so
+   confirmation and reset emails don't land in spam.
 3. **Deploy to Dreamhost** following `README.md`: `public/` into the web folder, `src/` +
    `config/` outside it, `SetEnv ITEMCREATOR_ROOT`. Nothing is deployed there yet, so the
    Dreamhost DB is created fresh from the schema and seed files in step 1.
