@@ -336,16 +336,18 @@ span.system_span {
 
 /* ---- Panel 3: the build summary --------------------------------------------------- */
 
+/* [Export CSV] and the "Build Summary" title: placed like Panel 2's toolbar, low and far enough
+   in to clear the panel's cut top-right corner. */
 div.breakdown-right {
     text-align: right;
     margin-right: 16px;
-    margin-top: 6px;
+    margin-top: 18px;
 }
 
+/* No top margin of its own: [Export CSV]'s margin already moves their shared row down. */
 div.breakdown-left {
     text-align: left;
     margin-left: 50px;
-    margin-top: 6px;
     position: absolute;
 }
 
