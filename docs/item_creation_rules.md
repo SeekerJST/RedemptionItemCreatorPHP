@@ -512,7 +512,7 @@ Lets the item host and operate smaller modular items. Repeatable, mixed grades a
 |---|---|
 | Data | Hard, unlimited-bandwidth connection. Can't be hacked without physical access. |
 | Psi | Lets a Psionic draw on the item's Power Supply. Uses **1 Power Slot** while the Psionic casts through it, **plus 1 per committed (sustained) effect**; the slot's grade is the effect's Scale (the psionics rules, p275). |
-| Weapon | Modular mount that accepts a separately built Attack. Built-in Attacks (e.g. turrets) don't need one. |
+| Weapon | Modular mount that accepts a separately built Attack. Built-in Attacks (e.g. turrets) don't need one. **Powers the weapon it carries: uses 1 Power Slot of its grade per Link** by default; some weapons (self-powered Kinetic) need none **[Ruling 2026-10-02]**. |
 | **Refueling** **[Errata p215]** | Docking connection that transfers fuel to a linked craft up to the Link's max size. **Draws 1 Power Slot of its grade** while in use. |
 
 ### 5.19 Manufacture — 25 / 50 / 100 BP
@@ -606,6 +606,7 @@ the lowest higher grade with spare slots.
 | Force Field | 1 for the whole Force Field track, grade = Force Field grade |
 | Gravity Control | 1 per unit, grade = its own grade **[Ruling]** |
 | Manufacture | 1, grade = Manufacture grade **[Ruling]** |
+| Weapon Link | 1 per Link, grade = the Link's grade (it powers the weapon it carries) **[Ruling 2026-10-02]** |
 | Psi Link | 1 while a Psionic casts through it, plus 1 per committed effect (p275). The effect's Scale sets the slot's grade and is picked in play, so the app counts the design's 1 slot as **Minor** (any slot can power it) and leaves committed effects to play. Strain Threshold per rank applies. |
 
 Higher-grade slots may power lower-grade consumers (ruling above).
@@ -827,6 +828,7 @@ Free effects: Plasma → Counter (Shields), Bleed 4 (floor(8/2)).
 | p213 | Reactionless drives don't expel reaction mass | §5.10 |
 | p213 | **[New 2026-09-30]** Drives need no Fuel when a Coil, Environmental, or Hyperspace Tap Power Supply runs them; Biological Drives need none. | §5.10, §9 |
 | p210 | **[New 2026-09-30]** Attacks on a One-Time Use item need no feed. | §5.22, §9 |
+| p215 | **[New 2026-10-02]** A Weapon Link uses 1 Power Slot of its grade per Link (it powers the weapon it carries); some weapons need none. | §5.18, §5.22 |
 | p216 | **[New 2026-09-30]** An item with no Power Supply or Drive of its own draws its Power Slots from its host (a Slave limitation still means it needs the right Link). | §5.22 |
 | p216 | **[New 2026-09-25]** Power Supplies may go on an item one size smaller than the table first listed: Moderate on Small (was Medium). Major stays Large, except that a Hyperspace Tap or a Coil stack can fit a Major Power Supply in a Medium item. | §5.22, §9 |
 | p217 | **[New 2026-09-25]** A Fuel Resource can feed Drives and Power Supplies of its own grade or lower (a larger tank can feed a smaller drive). | §5.24, §9 |
@@ -842,7 +844,7 @@ complete list is in `errata.csv` / `errata.sql`, and each item's errata are in `
 | p226 | Psionic Light Armor | Fuel 10 Days / Combat turns (not 1 Day) |
 | p227 | Riot/LEO Armor, Psi Variant | Fuel 10 Days / Combat turns |
 | p227 | Standard Powered Armor | Battlefield armor (not Firefight) |
-| p228 | Kavacha Powered Armor | Battlefield armor (not Firefight) |
+| p228 | Kavacha Powered Armor | Battlefield armor (not Firefight). **[New 2026-10-02]** A-350: Moderate Coil 2 (its Weapon Links draw power), [High Security 2]; CR 4 unchanged |
 | p231 | Wellpoint Armory Stormguard 9MP | Ammo CR 1 (not "3x") |
 | p232 | Plasma Carbine | 5x multiplier (errata 2026-09-27; first 4x); ammo CR 1 (was 5x); loses Area, gains Counter: Armor. **[New 2026-09-29]** Self-powered Plasma replaces its Prerequisite (special ammunition) limitation; Bleed 3 (2 free + 1 bought). CR 2 unchanged |
 | p234 | Light Plasma Cannon | Ammo CR 1 |
@@ -858,6 +860,7 @@ complete list is in `errata.csv` / `errata.sql`, and each item's errata are in `
 | p268 | Tse Blade | 5x multiplier |
 | p263 | Havenite Lilith Carrier | **[New 2026-09-30]** Engineering (Starship) +3 (was Engineering +3; Engineering takes a specialty) |
 | p268 | Shohan Personal Armor | Battlefield armor (not Firefight). **[New 2026-09-29]** Weapons +2 covers Melee and Heavy Weapons (Moderate Modifier); Target On Your Back is a Major limitation. CR 5 unchanged |
+| p271 | Resistance Lumber Mech | **[New 2026-10-02]** Total Power Slots: 3 Minor (2 used: its 2 Weapon Links), 3 Moderate (0 used) |
 | p269 | Shohan War Drone | Body 80, Armor 5 |
 
 ---

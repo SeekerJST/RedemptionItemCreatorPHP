@@ -154,7 +154,7 @@
      "Implementation": "psi",
      "catalogRow": 4,
      "BuildPoints": 5,
-     "PowerSlots": 0
+     "PowerSlots": 1
     }
    ],
    "tagList": [],
@@ -696,7 +696,7 @@
      "Implementation": "psi",
      "catalogRow": 4,
      "BuildPoints": 5,
-     "PowerSlots": 0
+     "PowerSlots": 1
     },
     {
      "id": 6,
@@ -908,7 +908,7 @@
      "Implementation": "weapon",
      "catalogRow": 4,
      "BuildPoints": 5,
-     "PowerSlots": 0
+     "PowerSlots": 1
     },
     {
      "id": 6,
@@ -920,7 +920,7 @@
      "Implementation": "psi",
      "catalogRow": 5,
      "BuildPoints": 15,
-     "PowerSlots": 0
+     "PowerSlots": 1
     },
     {
      "id": 7,
@@ -1024,7 +1024,7 @@
    "printedCR": 4,
    "printedCC": 10,
    "extra": {},
-   "catalogBP": 292,
+   "catalogBP": 297,
    "catalogCR": 4,
    "catalogRows": [
     [
@@ -1044,8 +1044,8 @@
     ],
     [
      "Power Supply",
-     "Moderate Coil rank 1",
-     10
+     "Moderate Coil rank 2",
+     20
     ],
     [
      "Resource",
@@ -1099,8 +1099,8 @@
     ],
     [
      "Tag",
-     "[High Security] 3",
-     15
+     "[High Security] 2",
+     10
     ],
     [
      "Tag",
@@ -1156,10 +1156,10 @@
      "AttributeSystem": "Power",
      "attribute": "Power Supply",
      "Scale": "2",
-     "Rank": 1,
+     "Rank": 2,
      "Implementation": "coil",
      "catalogRow": 3,
-     "BuildPoints": 10,
+     "BuildPoints": 20,
      "PowerSlots": 0
     },
     {
@@ -1184,7 +1184,7 @@
      "Implementation": "weapon",
      "catalogRow": 5,
      "BuildPoints": 10,
-     "PowerSlots": 0
+     "PowerSlots": 2
     },
     {
      "id": 7,
@@ -1196,7 +1196,7 @@
      "Implementation": "psi",
      "catalogRow": 6,
      "BuildPoints": 15,
-     "PowerSlots": 0
+     "PowerSlots": 1
     },
     {
      "id": 8,
@@ -1283,10 +1283,10 @@
     {
      "id": 2,
      "TagDesc": "High Security",
-     "TagRank": "3",
+     "TagRank": "2",
      "TagFree": false,
      "catalogRow": 14,
-     "BuildPoints": 15
+     "BuildPoints": 10
     },
     {
      "id": 3,
@@ -1493,7 +1493,7 @@
      "Implementation": "weapon",
      "catalogRow": 5,
      "BuildPoints": 5,
-     "PowerSlots": 0
+     "PowerSlots": 1
     },
     {
      "id": 7,
@@ -1517,7 +1517,7 @@
      "Implementation": "psi",
      "catalogRow": 7,
      "BuildPoints": 15,
-     "PowerSlots": 0
+     "PowerSlots": 1
     },
     {
      "id": 9,
@@ -4133,7 +4133,7 @@
      "Implementation": "psi",
      "catalogRow": 0,
      "BuildPoints": 50,
-     "PowerSlots": 0
+     "PowerSlots": 1
     },
     {
      "id": 2,
@@ -7803,7 +7803,7 @@
      "Implementation": "weapon",
      "catalogRow": 10,
      "BuildPoints": 30,
-     "PowerSlots": 0
+     "PowerSlots": 2
     },
     {
      "id": 13,
@@ -8098,7 +8098,7 @@
      "Implementation": "weapon",
      "catalogRow": 11,
      "BuildPoints": 45,
-     "PowerSlots": 0
+     "PowerSlots": 3
     },
     {
      "id": 14,
@@ -8458,7 +8458,7 @@
      "Implementation": "weapon",
      "catalogRow": 11,
      "BuildPoints": 10,
-     "PowerSlots": 0
+     "PowerSlots": 2
     },
     {
      "id": 14,
@@ -9704,7 +9704,7 @@
      "Implementation": "psi",
      "catalogRow": 4,
      "BuildPoints": 50,
-     "PowerSlots": 0
+     "PowerSlots": 1
     },
     {
      "id": 5,
@@ -11588,7 +11588,7 @@
      "Implementation": "weapon",
      "catalogRow": 9,
      "BuildPoints": 10,
-     "PowerSlots": 0
+     "PowerSlots": 2
     },
     {
      "id": 12,
@@ -18398,7 +18398,7 @@
      "Implementation": "weapon",
      "catalogRow": 15,
      "BuildPoints": 50,
-     "PowerSlots": 0
+     "PowerSlots": 1
     },
     {
      "id": 17,
@@ -21052,7 +21052,7 @@
      "Implementation": "weapon",
      "catalogRow": 6,
      "BuildPoints": 30,
-     "PowerSlots": 0
+     "PowerSlots": 2
     },
     {
      "id": 8,
@@ -22856,7 +22856,7 @@
      "Implementation": "weapon",
      "catalogRow": 8,
      "BuildPoints": 10,
-     "PowerSlots": 0
+     "PowerSlots": 2
     },
     {
      "id": 11,

@@ -24,6 +24,7 @@ P213: A Drive needs no Fuel Resource when it can run from its item's own Power S
 P214: Hangar: "multiple items" means 3 items, or 4 if crammed in. For example, a Major Hangar on a Huge ship holds 3 Large craft (4 crammed), and a Moderate Hangar holds 3 items two sizes smaller (4 crammed).
 P214: Launchers are bought in sets of 4 (one set draws 1 Power Slot and costs 4 × the per-launcher price: 20 / 40 / 60 BP). Ships printing launcher counts that are not multiples of 4 are corrected by errata (Standard Assault Shuttle, Dragon, Conventional Frigate, Redemption, Havenite Marauder). A Magazine does not have to match the launcher count.
 P215: Add a Link type, Refueling: a docking connection that transfers fuel to a linked craft of up to the Link's maximum size. Each Refueling Link draws 1 Power Slot of its grade while in use. (The Fleet Auxiliary's three Major Refueling Links account for 3 of its 4 used Power Slots.)
+P215: A Weapon Link powers the weapon it carries, so by default each Weapon Link uses 1 Power Slot of its grade. Some weapons need none, such as self-powered Kinetic (rail) weapons.
 P216: A Moderate Power Supply may be installed on a Small item (the table lists Medium). Major Power Supplies still require a Large item, except that the compact Hyperspace Tap and Coil implementations can squeeze a Major Power Supply into a Medium item.
 P216: An item with no Power Supply or Drive of its own, such as a weapon module or a G3P, draws the Power Slots it uses from the host it is mounted on or plugged into. Its stat block lists them as its power requirement. A Slave limitation still means it needs a Link of the right type to work, not just a power connection.
 P217: A Fuel Resource can feed Drives and Power Supplies of its own grade or lower. A larger fuel tank can feed a smaller drive (for example, Major Fuel can feed a Moderate Reaction Drive), but never the reverse.
@@ -45,6 +46,7 @@ P227: Standard Powered Armor possesses Battlefield, not Firefight level armor.
 P227: Riot/LEO Armor is a Small item, not Medium, and its Armor Rating is 4 (Firefight), not 3.
 P227: Riot/LEO Armor, Psi Variant is a Small item, not Medium. It has Life Support: Minor (the rebreather its limitation refers to), gains the Tag [Mental Block], and its Strain Threshold is 10, not 5.
 P228: Kavacha Powered Armor possesses Battlefield, not Firefight level armor. This applies to both the A-350 Marine Engagement Suit and the A-350SR Marine Reconnaissance Suit.
+P228: The Kavacha-class A-350 Marine Engagement Suit's Power Supply is Moderate Coil 2, not 1: its two Weapon Links power the weapons they carry, so it uses 4 of its 6 Moderate slots (Force Field, Psi Link, and the two Weapon Links). [High Security] is rank 2, not 3. Cost Rating unchanged (4).
 P229: The Knife gains Limitation: Usage Restriction (Firefight targets only; useless against Battlefield or hull armor), Minor.
 P229: The Flight Pack gains Modifier: Pilot +2. [Turn Your Head to Steer] is a Free Tag and [A Leap of Faith] is rank 3. Its Usage Restriction is a Moderate limitation. Its Cost Rating is 0 and its Character Creation cost is 0 (was CR 1, CC 1).
 P229: The Bolt-on Thruster Pack gains Modifier: Pilot +2 and Life Support: Minor (extending suit operations in space). Its fuel is 3 Moderate Fuel, not Minor.
@@ -159,6 +161,7 @@ P269: Shohan War Drone's Body increases to 80, armor increases to 5.
 P269: The War Drone (Cerberus)'s Brain is Moderate rank 4 (20 target), not rank 3, so it can run its Combat 20 Task.
 P271: The Resistance Lumber Mech's Body Track is 70, not 80. Its Coil Power Supply uses 2 Moderate Charge, not Fuel. [Kinetic Feedback Control Rig] is a Free Tag (free Skill switch from Drive to Athletics).
 P271: The Resistance Lumber Mech's Total Power Slots read 3 Minor (0 used), 3 Moderate (1 used), not 2 Minor.
+P271: The Resistance Lumber Mech's two Minor Weapon Links each use a Power Slot, so its Total Power Slots read 3 Minor (2 used), 3 Moderate (0 used), not 3 Minor (0 used), 3 Moderate (1 used).
 Psionics
 
 P278: Astral Projection costs 1 strain per round or scene that the character maintains the projection.

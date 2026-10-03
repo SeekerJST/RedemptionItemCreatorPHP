@@ -90,7 +90,9 @@ export function powerSupplyMinSize(grade, implementation) {
 }
 
 /**
- * Spec §5.18. Refueling draws 1 Power Slot of its grade per Link while in use (errata p215).
+ * Spec §5.18. A Weapon Link powers the weapon it carries, so it uses 1 Power Slot of its grade per
+ * Link by default (ruling 2026-10-02; some weapons, like self-powered Kinetic ones, need none).
+ * Refueling draws 1 Power Slot of its grade per Link while in use (errata p215).
  * Psi draws 1 Power Slot per Link while a psion casts through it, plus 1 more per committed
  * (sustained) effect (the psionics rules, p275). The slot's grade is the effect's scale, picked in
  * play, so the design counts the lowest: 1 Minor slot, which any slot can power. Committed
@@ -100,7 +102,7 @@ export const LINK_IMPLEMENTATIONS = {
     general: { name: 'Link' },
     data: { name: 'Data' },
     psi: { name: 'Psi', drawsPower: true, slotGrade: GRADE.MINOR },
-    weapon: { name: 'Weapon' },
+    weapon: { name: 'Weapon', drawsPower: true },
     refueling: { name: 'Refueling', drawsPower: true },
 };
 

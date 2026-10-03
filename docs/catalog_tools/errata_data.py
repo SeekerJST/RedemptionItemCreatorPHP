@@ -259,4 +259,11 @@ e(IC,216,None,'Power: host-powered items','clarification',D10,'An item with no P
   [(None,'Items without their own power','Not enough Power Slots','draw their slots from the host')])
 e(G,263,None,'Havenite Lilith Carrier: Engineering','clarification',D10,"The Havenite Lilith Carrier's Engineering +3 Modifier is Engineering (Starship) +3. Engineering, Science, and Profession always take a specialty.",
   [('Havenite Lilith Carrier','Modifier','Engineering +3','Engineering (Starship) +3')])
+D11='2026-10-02'
+e(IC,215,None,'Link: Weapon power','rule',D11,'A Weapon Link powers the weapon it carries, so by default each Weapon Link uses 1 Power Slot of its grade. Some weapons need none, such as self-powered Kinetic (rail) weapons.',
+  [(None,'Weapon Link power','none','1 Power Slot of its grade per Link (by default)')])
+e(G,228,None,'Kavacha-class A-350 Marine Engagement Suit: power','stat',D11,"The Kavacha-class A-350 Marine Engagement Suit's Power Supply is Moderate Coil 2, not 1: its two Weapon Links power the weapons they carry, so it uses 4 of its 6 Moderate slots (Force Field, Psi Link, and the two Weapon Links). [High Security] is rank 2, not 3. Cost Rating unchanged (4).",
+  [('Kavacha-class A-350 Marine Engagement Suit','Power Supply','Moderate Coil 1','Moderate Coil 2'),('Kavacha-class A-350 Marine Engagement Suit','Tag rank: [High Security]','3','2'),('Kavacha-class A-350 Marine Engagement Suit','Total Power Slots','3 Moderate (2 used)','6 Moderate (4 used)')])
+e(G,271,None,'Resistance Lumber Mech: Weapon Link power','typo',D11,"The Resistance Lumber Mech's two Minor Weapon Links each use a Power Slot, so its Total Power Slots read 3 Minor (2 used), 3 Moderate (0 used), not 3 Minor (0 used), 3 Moderate (1 used).",
+  [('Resistance Lumber Mech','Total Power Slots','3 Minor (0 used), 3 Moderate (1 used)','3 Minor (2 used), 3 Moderate (0 used)')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))

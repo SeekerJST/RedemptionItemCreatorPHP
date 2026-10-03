@@ -3,6 +3,17 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-10-02 (5): Weapon Links use a Power Slot
+
+- **A Weapon Link powers the weapon it carries,** so it uses 1 Power Slot of its grade per Link by default
+  (ruling 2026-10-02; errata entry added). The Standard Powered Armor now shows the book's "3 Moderate (2 used)".
+- **Kavacha-class A-350 Marine Engagement Suit:** its two Weapon Links put it at 4 slots on a 3-slot Coil, so its
+  Coil is rank 2 (6 Moderate, 4 used) and [High Security] drops to rank 2: 297 BP, CR 4 unchanged (PJ).
+- **Resistance Lumber Mech:** its two Minor Weapon Links now use 2 of its Ground Drive's Minor slots: 3 Minor (2 used),
+  3 Moderate (0 used). A new errata entry replaces the 2026-09-28 one (0 / 1 used).
+- The catalog's Power notes for the 9 items with Weapon or Psi Links now say what the app counts.
+- All four errata documents, the catalog, and catalog.json regenerated; re-imported locally.
+
 ## 2026-10-02 (4): Psi Links use a Power Slot
 
 - **A Psi Link draws 1 Power Slot** while a Psionic casts through it, plus 1 per committed effect (the psionics

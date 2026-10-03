@@ -85,7 +85,7 @@ alongside an XP cost.
 | [Riot/LEO Armor](#riotleo-armor) | Small | 106 | 2 | 2 | ✔ |
 | [Riot/LEO Armor, Psi Variant](#riotleo-armor-psi-variant) | Small | 104 | 2 | 2 | ✔ |
 | [Standard Powered Armor](#standard-powered-armor) | Medium | 214 | 3 | 3 | ✔ |
-| [Kavacha-class A-350 Marine Engagement Suit](#kavacha-class-a-350-marine-engagement-suit) | Medium | 292 | 4 | 4 | ✔ |
+| [Kavacha-class A-350 Marine Engagement Suit](#kavacha-class-a-350-marine-engagement-suit) | Medium | 297 | 4 | 4 | ✔ |
 | [Kavacha-class A-350SR Marine Reconnaissance Suit](#kavacha-class-a-350sr-marine-reconnaissance-suit) | Medium | 257 | 4 | 4 | ✔ |
 | [Flight Pack](#flight-pack) | Small | 30 | 0 | 0 | ✔ |
 | [Bolt-on Thruster Pack](#bolt-on-thruster-pack) | Small | 85 | 1 | 1 | ✔ |
@@ -387,13 +387,15 @@ Description: "The standard infantry armor of the Terran Sphere and other Fourth 
 
 **Formula CR:** 3 ✔ matches printed
 
-**Power:** 3 Moderate slots; 2 used.
+**Power:** 3 Moderate; 2 used (Psi Link 1, Weapon Link 1). OK.
 
 #### Kavacha-class A-350 Marine Engagement Suit
 
 p. 228 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
 
 Description: "The Kavacha-class suit represents the Terran Sphere’s most advanced personal defense technology, adding Force Fields to powered armor’s already significant benefits. Though it doesn’t put its wearer on even terms with a Shohan Soldier, it does give squads of marines a fighting chance against them in combat."
+
+> **Errata** (new, 2026-10-02) p228: Power Supply is Moderate Coil 2 (was 1): its two Weapon Links power the weapons they carry, so it uses 4 Moderate slots (Force Field, Psi Link, 2 Weapon Links) of 6. [High Security] is rank 2 (was 3). CR 4 unchanged.
 
 > **Errata** p228: Armor is Battlefield, not Firefight.
 
@@ -402,7 +404,7 @@ Description: "The Kavacha-class suit represents the Terran Sphere’s most advan
 | Armor Rating | Battlefield, rank 4 | 110 |
 | Body Track | 35 (default 10 + 5×5) | 25 |
 | Force Field | Minor ×3 (track 30) | 45 |
-| Power Supply | Moderate Coil rank 1 | 10 |
+| Power Supply | Moderate Coil rank 2 | 20 |
 | Resource | Charge, Moderate ×1 | 8 |
 | Link | Minor Weapon ×2 | 10 |
 | Link | Moderate Psi | 15 |
@@ -413,14 +415,14 @@ Description: "The Kavacha-class suit represents the Terran Sphere’s most advan
 | Modifier | Athletics +2 | 20 |
 | Modifier | Detection +2 | 20 |
 | Tag | [Shohan Killer] | 5 |
-| Tag | [High Security] 3 | 15 |
+| Tag | [High Security] 2 | 10 |
 | Tag | [Coordinated Fire] | 5 |
 | Limitation | Major: Restricted Technology (Property of the Terran Sphere Marines) | −50 |
-| **Total** | | **292** |
+| **Total** | | **297** |
 
 **Formula CR:** 4 ✔ matches printed
 
-**Power:** 3 Moderate slots; 2 used (Force Field 1, Psi Link 1).
+**Power:** 6 Moderate (Coil ×2); 4 used (Force Field 1, Psi Link 1, Weapon Links 2). OK.
 
 - Terran Force Field (reverse-engineered): Minor is allowed.
 
@@ -455,7 +457,7 @@ Description: "A lighter version of the Kavacha-class powered armor suit with int
 
 **Formula CR:** 4 ✔ matches printed
 
-**Power:** 3 Moderate slots; 2 used.
+**Power:** 3 Moderate; 3 used (Force Field 1, Psi Link 1, Weapon Link 1). OK.
 
 #### Flight Pack
 
@@ -1503,7 +1505,7 @@ Description: "While open ground combat is relatively rare in the Fourth Populati
 
 **Formula CR:** 4 ✔ matches printed
 
-**Power:** 6 Moderate slots; 3 used (2 rail cannons + Anti-Missile). OK.
+**Power:** 6 Moderate; 5 used (2 rail cannons, Anti-Missile, 2 Weapon Links). OK.
 
 #### Attack Hovercraft
 
@@ -1543,7 +1545,7 @@ Description: "A militarized version of the same technologies that make up the Co
 
 **Formula CR:** 4 ✔ matches printed
 
-**Power:** 3 Minor (Air Drive; 0 used) + 6 Moderate (Fusion ×2; 2 used, 4 spare for its 3 Weapon Links). OK.
+**Power:** 3 Minor (Air Drive; 0 used) + 6 Moderate (Fusion ×2; 5 used: 2 rail cannons, 3 Weapon Links). OK.
 
 **Check:**
 
@@ -1584,7 +1586,7 @@ Description: "While powered armor dominates TSN urban ground engagements, not al
 
 **Formula CR:** 4 ✔ matches printed
 
-**Power:** 3 Minor (Ground Drive; 0 used) + 6 Moderate (Fusion ×2; 2 used, 4 spare for its 2 Weapon Links). OK.
+**Power:** 3 Minor (Ground Drive; 2 used: 2 Weapon Links) + 6 Moderate (Fusion ×2; 2 used: 2 rail cannons). OK.
 
 
 ### Space: Probes and Drones
@@ -1741,7 +1743,7 @@ Description: "Telekinesis offers an ideal way to move light cargo and passenger 
 
 **Formula CR:** 3 ✔ matches printed
 
-**Power:** 3 Major slots; 0 used.
+**Power:** 3 Major (Coil); 1 used (Psi Link, counted as Minor). OK.
 
 **Check:**
 
@@ -1948,7 +1950,7 @@ Description: "A light warship designed for escort work or raiding. Countless var
 
 **Formula CR:** 5 ✔ matches printed
 
-**Power:** 6 Major (Gravitic Drive + Fusion; 2 used: main battery, Anti-Missile) + 3 Moderate (Reaction Drive; 0 used). OK.
+**Power:** 6 Major (Gravitic Drive + Fusion; 2 used: main battery, Anti-Missile) + 3 Moderate (Reaction Drive; 2 used: 2 Minor Weapon Links). OK.
 
 **Check:**
 
@@ -3222,7 +3224,7 @@ Description: "Artemis III’s security forces started the Shohan occupation with
 
 **Formula CR:** 4 ✔ matches printed
 
-**Power:** 3 Minor (Ground Drive; 0 used) + 3 Moderate (Coil; 1 used). OK.
+**Power:** 3 Minor (Ground Drive; 2 used: 2 Weapon Links) + 3 Moderate (Coil; 0 used). OK.
 
 - [Kinetic Feedback Control Rig]: switch from Drive to Athletics.
 
