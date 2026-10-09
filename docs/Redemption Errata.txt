@@ -202,6 +202,7 @@ P102: Anomalous is a Power Supply implementation (Auxiliary Armor). It costs the
 P104-105: The printed CR and CC for the Agni Variable Yield Rounds, High Impact Explosive Charge, Incendiary Charge, Plasma Breaching Charge and Grav Grenade are for a batch of 10. A single item is 1 CR less (see the core errata for p225, group pricing).
 P105: The Grav Grenade is a Tiny item, not Small.
 P106: The Peltast STA Launcher's Body Track is 25, not 30.
+P106: The Flare Rifle gains Far Ranged (Minor), as the Flare Pistol has. Its Coil runs on 2 ranks of Minor Charge (20 combat rounds), not Fuel. CR 3 is unchanged.
 P107: The Field Kit's Personal Supplies 3 are a Moderate Resource (rank 3).
 P109: The Resistance Chem Kit's Power Supply is a Moderate Coil (rank 1), not Minor, so it can power its Moderate Manufacture, with 1 Moderate Charge (10 days), not 2. Its Soft Serve limitation is Moderate. Total Power Slots: 3 Moderate (1 used). Cost Rating 1, Character Creation cost 1 (was CR 0, CC 0).
 P110: The TK-Tac T09-HK's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 9 Moderate: its Moderate Coil is rank 1. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 3, not Minor 3.

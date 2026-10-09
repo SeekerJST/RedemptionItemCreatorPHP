@@ -497,14 +497,14 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Manual Reload — -10
 - Limitation: Minor: 1 Shot Per Round — -10
 
-## Haven & Auxiliaries (6 of 7 match)
+## Haven & Auxiliaries (7 of 7 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
 | Auxiliary Armor (Stage 1) | 102 | Medium | 163 | 2 | 2 | OK |
 | Auxiliary Armor (Stage 2) | 103 | Medium | 208 | 3 | 3 | OK |
 | Auxiliary Armor (Stage 3) | 103 | Medium | 273 | 4 | 4 | OK |
-| Flare Rifle | 106 | Small | 113 | 2 | 3 | +12 |
+| Flare Rifle | 106 | Small | 133 | 3 | 3 | OK |
 | Volcano-class | 121 | Huge | 1501 | 10 | 10 | OK |
 | Marauder (Force Field Revision) | 122 | Large | 766 | 7 | 7 | OK |
 | Haven Hyperspace Carrier (Lilith Refit) | 123 | Huge | 1633 | 11 | 11 | OK |
@@ -561,11 +561,12 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: You're The Only One For Me — -20
 - Limitation: Moderate: Sold Your Soul to the Shohan — -20
 
-### Flare Rifle (p106, Small): 113 BP, CR 2; target 3
-*'Fuel 2' with a Coil read as Minor Charge 2.*
+### Flare Rifle (p106, Small): 133 BP, CR 3; target 3
+*'Fuel 2' with a Coil read as Minor Charge 2. Approved 10-08: adds Far Ranged (Minor), as the Flare Pistol has.*
 
 - Attack: Flare (Firefight) 5x — 70
 - Counter: Armor — 20
+- Far Ranged: Minor (Firefight to Battlefield) — 20
 - Power Supply: Minor Coil rank 1 — 5
 - Resource: Charge, Minor ×2 — 8
 - Modifier: Firearms +2 — 20

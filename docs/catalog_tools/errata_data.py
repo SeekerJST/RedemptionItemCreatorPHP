@@ -400,4 +400,6 @@ e(DA,109,None,'Resistance Chem Kit','stat',D15,"The Resistance Chem Kit's Power 
   [('Resistance Chem Kit','Power Supply','Minor Coil 1','Moderate Coil 1'),('Resistance Chem Kit','Resource: Charge','2 (20 days)','1 Moderate (10 days)'),('Resistance Chem Kit','Power Slots','3 (1 used)','3 Moderate (1 used)'),('Resistance Chem Kit','Limitation grade: Soft Serve','Minor','Moderate'),('Resistance Chem Kit','CR','0','1'),('Resistance Chem Kit','CC','0','1')])
 e(DA,112,None,'Resistance Scout Mech','stat',D15,"The Resistance Scout Mech's two Weapon Links are Moderate, not Minor, so it can carry Battlefield weapons. Each Link uses a Moderate Power Slot: Total Power Slots 3 Moderate (2 used), 3 Minor (0 used). CR 4 is unchanged.",
   [('Resistance Scout Mech','Link: Weapon','2 Minor','2 Moderate'),('Resistance Scout Mech','Power Slots','3 Moderate (0 used), 3 Minor (0 used)','3 Moderate (2 used), 3 Minor (0 used)')])
+e(DA,106,None,'Flare Rifle','stat',D15,"The Flare Rifle gains Far Ranged (Minor), as the Flare Pistol has. Its Coil runs on 2 ranks of Minor Charge (20 combat rounds), not Fuel. CR 3 is unchanged.",
+  [('Flare Rifle','Far Ranged','none','Minor'),('Flare Rifle','Resource','Fuel 2','Charge: Minor x2')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))
