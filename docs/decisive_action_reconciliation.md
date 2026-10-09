@@ -666,14 +666,14 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Key Personnel (Oracle) — -20
 - Limitation: Major: Usage Restriction (Sold Your Soul to the Shohan) — -50
 
-## Covert (1 of 5 match)
+## Covert (2 of 5 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
 | Surveillance Drone | 125 | Tiny | 58 | 3 | 3 | OK |
 | Disguise Kit | 125 | Small | 68 | 0 | 1 | +7 |
 | "White Noise" Generator | 126 | Tiny | 30 | 0 | 1 | +5 |
-| Entry Tools | 126 | Small | 127 | 3 | 1 | -28 |
+| Entry Tools | 126 | Small | 93 | 1 | 1 | OK |
 | Concealable Plasma Torch | 126 | Tiny | 18 | 0 | 1 | +17 |
 
 ### Surveillance Drone (p125, Tiny): 58 BP, CR 3; target 3
@@ -702,14 +702,15 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Counter: Recording — 20
 - Tag: [An Ordinary Conversation] 2 — 10
 
-### Entry Tools (p126, Small): 127 BP, CR 3; target 1
+### Entry Tools (p126, Small): 93 BP, CR 1; target 1
+*Approved 10-08: no Computers 12 Task (it works mechanical locks unassisted; the Computers +2 Modifier helps a skilled user with electronic ones); Presumption of Guilt is Moderate (printed Minor).*
 
 - Computer: Minor rank 2 (TN 16) — 6
-- Tasks: Engineering (Security) 16, Computers 12 — 56
+- Tasks: Engineering (Security) 16 — 32
 - Modifier: Computers +2 — 20
 - Modifier: Engineering (Security) +4 — 40
 - Tag: [The Master's Key] 3 — 15
-- Limitation: Minor: Presumption of Guilt — -10
+- Limitation: Moderate: Presumption of Guilt — -20
 
 ### Concealable Plasma Torch (p126, Tiny): 18 BP, CR 0; target 1
 
