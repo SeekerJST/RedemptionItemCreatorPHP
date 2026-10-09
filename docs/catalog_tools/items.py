@@ -67,10 +67,11 @@ item("Sniper Rifle","Weapons: Firearms",232,"Small",3,6,[attack('Firefight',5,[]
  errata=["(new, 2026-09-26) p232: Attack 5x (was 4x)."],
  power="3 Minor slots; 1 used.")
 # ---------- Grenade / heavy
-item("Explosive Grenade","Weapons: Grenades",233,"Small",1,0,[attack('Firefight',6,[]),area(),counter('Armor'),lim('Major','One-Time Use'),lim('Minor','Hungry (1 shot per grenade)')],
- errata=["(new, 2026-09-26) p233: Attack 6x (was 5x)."],
- flags=["No implementation is given (\"Ranged 5x\"). Costed as Energy; as Kinetic it would be 6 BP cheaper. The CR is the same either way.",
-        "CC 0 at CR 1 breaks the usual CR→CC pattern (CR 1 → CC 1). Possibly deliberate for consumables; sidearm ammo does the same."])
+item("Explosive Grenade","Weapons: Grenades",233,"Small",1,0,[attack('Firefight',5,[]),area(),counter('Armor'),lim('Major','One-Time Use'),lim('Minor','Hungry (1 shot per grenade)')],
+
+ flags=["Priced per 10: the printed CR 1 / CC 0 is for a box of 10 (+1 CR over one grenade, CR 0). The 2026-09-26 erratum raising it to 6x is withdrawn; the book's 5x is right.","No implementation is given (\"Ranged 5x\"). Costed as Energy; as Kinetic it would be 6 BP cheaper. The CR is the same either way.",
+        "Hungry: fired from a launcher or vehicle kinetic weapon, a grenade takes 10 rounds of its magazine."],
+ extra={'Sold per':'10 (+1 CR over one)'})
 item("Tactical Railgun","Weapons: Heavy",233,"Small",2,3,[attack('Battlefield',4,['Kinetic']),area(),res('Moderate','Ammunition',4),lim('Moderate','Hungry (10 shots/round)'),mod('Heavy Weapons',2)],
  errata=["(new, 2026-09-26) p233: Size is Small (was Medium). Its Hungry limitation is Moderate (was treated as Minor). Attack stays 4x."],
  flags=["The Suit-Mounted Tactical Weapon template (p234) shrinks its weapons to Small. The railgun is now Small already, so for it the template only adds the power requirement and the Slave limitation."],
@@ -274,7 +275,7 @@ item("Tse Blade","Shohan: Battlefield",268,"Small",4,10,[attack('Battlefield',5,
  power="3 Moderate; 2 used (both attacks). OK.")
 item("Shohan Personal Armor","Shohan: Battlefield",268,"Medium",5,15,[armor('Battlefield',4),body('Medium',45),regen('Moderate',4,'Biological'),ff('Minor',3),regen('Major',4,'Force Field'),ps('Moderate','Hyperspace Tap'),link('Moderate','Weapon',2),radio('Moderate'),computer('Minor',3),ls('Minor'),mod('Athletics',1),mod('Detection',2),mod('Weapons (Melee, Heavy Weapons)',2,2),lim('Minor',UR+' (Weapons +2 applies only to weapons on its Weapon Links)'),tag('The Armor Just Ate the Table'),lim('Moderate','Malfunction [Emergent Altered]'),lim('Major','Target On Your Back (visibly wearing enemy armor; not concealable)')],
  errata=["(new, 2026-09-29) p268: Weapons +2 covers two skills, Melee and Heavy Weapons (a Tse Blade combo), costed as a Moderate Modifier. Target On Your Back is a Major limitation, not Moderate: anyone wearing it is visibly in the other side's armor.","(new, 2026-09-28) p268: Body Track 45 (was 40).","(new, 2026-09-28) p268: Its 2 Weapon Links are Moderate. Its Weapons +2 Modifier works only with weapons on those Links (Usage Restriction, Minor). Computer is Minor rank 3 (was Moderate). Athletics +1 (was +2).","p268: Armor is Battlefield, not Firefight.","(new, 2026-09-27) p268: Regeneration grades are Biological 4 at Moderate (4 Body per scene) and Force Field 4 at Major (per round). [Emergent Altered] is a Moderate limitation (Malfunction), and the armor has a second Moderate limitation, Target On Your Back."],
- power="3 Moderate (Hyperspace Tap); 3 used (Force Field 1, a weapon on each Weapon Link 1 + 1). OK.")
+ power="3 Moderate (Hyperspace Tap); 2 used (Force Field 1, Force Field Regeneration 1; Biological Regeneration uses none). Its Weapon Links carry self-powered Shohan weapons (Tse Blade, Flare Pistol), which draw nothing (ruling 2026-10-05).")
 item("War Drone (Cerberus)","Shohan: Battlefield",269,"Medium",None,None,[attack('Battlefield',5,['Flare'],2,'Attack (heavy flare gun)'),area(),counter('Armor'),attack('Battlefield',4,['Tse','Melee'],label='Attack (Tse claws)'),counter('Armor',True),lim('Minor',UR+' (no area attacks against Firefight targets)'),armor('Battlefield',5),body('Medium',80),regen('Moderate',5,'Biological'),ff('Minor',6),regen('Major',4,'Force Field'),ps('Moderate','Hyperspace Tap',2),computer('Moderate',4,'Brain'),tasks([('Athletics',17),('Combat',20),('Stealth',18),('Tactics',18)],True),tag('Seek And Destroy',3),tag('Faster than He Looks',2),tag('Unrelenting Pursuit')],
  errata=["(new, 2026-09-28) p269: Computer is a Moderate Brain rank 4 (20 target), not rank 3, to run its Combat 20 Task.","p269: Body 80, Armor 5 (was lower)."],
  flags=["Regeneration grade not given. Force Field Regeneration is Major (Shohan rule); Biological/Mechanical costed as Moderate."],
@@ -282,7 +283,7 @@ item("War Drone (Cerberus)","Shohan: Battlefield",269,"Medium",None,None,[attack
 item("Shohan Deployment Pod","Shohan: Battlefield",269,"Large",None,None,[attack('Battlefield',4,['Flare'],3,'Attack (heavy flare gun)'),area(),counter('Armor'),armor('Space',4),body('Large',150),regen('Moderate',3,'Mechanical'),ff('Moderate',5),regen('Major',4,'Force Field'),drive('Moderate','Reactionless'),lim('Major','One-Time Use (drive)'),ps('Moderate','Hyperspace Tap',2),hypercomm(),hangar('Major'),tag("They're Here"),tag('Rapid Fire',3)],
  notes=["The Hangar is a Hyperspace Teleport Platform: it can bring down many Medium items from distant storage."])
 item("Shohan Destroyer","Shohan: Spacecraft",270,"Huge",None,None,[attack('Space',7,['Flare'],4,'Attack (heavy flare cannon array)'),counter('Armor'),counter('Missiles'),armor('Space',6),body('Huge',250),regen('Moderate',1,'Mechanical'),ff('Major',3),regen('Major',6,'Force Field'),drive('Moderate','Reactionless'),drive('Major','Jump'),maneuver('Major',4),ps('Major','Hyperspace Tap',2),radio('Moderate'),hypercomm(),computer('Major',4),tasks([('Electronic Warfare',20),('Gunnery',20),('Piloting',20),('Tactics',18)]),tag('Go to Rapid Fire',3),tag('A Hawk Amongst Sparrows',3)],
- notes=["[Disoriented] comes with the Jump Drive; it isn't a bought Malfunction."],power="3 Moderate, 9 Major (Jump Drive's tap 3 + 2 taps 6). 7 Major used.")
+ notes=["[Disoriented] comes with the Jump Drive; it isn't a bought Malfunction."],power="3 Moderate, 9 Major (Jump Drive's tap 3 + 2 taps 6). 7 Major used: 4 arrays, Force Field 1, Force Field Regeneration 1, Mechanical Regeneration 1 (ruling 2026-10-05).")
 item("Shohan Dreadnought","Shohan: Spacecraft",270,"Colossal",None,None,[attack('Space',13,['Hyperspace'],label='Attack (hyper cannon)'),other('Area','Small Sudden (free, Hyperspace)',0,A('Area',None,1,sub=True)),counter('Armor',True),lim('Minor',UR+' (cannot be fired more than once per round)'),attack('Space',4,['Flare'],5,'Attack (heavy flare cannon array)'),counter('Armor'),counter('Missiles'),armor('Space',11),body('Colossal',500),ff('Major',5),regen('Major',10,'Force Field'),drive('Moderate','Reactionless'),drive('Major','Jump'),ps('Major','Hyperspace Tap',4),radio('Moderate'),hypercomm(),computer('Major',4),tasks([('Computer Subversion',20),('Gunnery',20),('Piloting',20),('Tactics',20)]),tag('Turret Fire',3),tag('An Ancient Doom',3),tag("You're Never Safe")],
  notes=["The hyper cannon's Counter: Armor and Area: Small Sudden come free with the Hyperspace implementation; they're printed so a GM or player can see what the cannon does without looking it up."])
 # ---------- Resistance
@@ -293,3 +294,73 @@ item("Resistance Lumber Mech","Resistance Technology",271,"Medium",4,10,[armor('
 item("Resistance Variable Laser Array","Resistance Technology",271,"Small",1,1,[attack('Battlefield',4,[]),counter('Shields'),counter('Armor'),ps('Moderate','Coil'),res('Moderate','Charge',1),mod('Heavy Weapons',1),lim('Moderate','Prerequisite (Hard Detection check to lock on; visual contact; Force Field targets may break the lock with a sustained Meditate check)')],
  errata=["(new, 2026-09-25) p216: Moderate Power Supplies are allowed on Small items, so this is now legal."],
  notes=["Alternate form SUIT-MOUNTED VLA: drop the Power Supply and Charge, draw 1 Moderate slot from the host, add Limitation: Slave (unit with a Weapon Link)."],power="3 Moderate; 1 used.")
+
+# ---------- New Detroit (supplement setting doc): militia gear
+item("Ranger Armor","New Detroit: Militia Gear","New Detroit","Medium",3,6,[armor('Firefight',2),body('Medium',25),ff('Minor',3),drive('Minor','Ground (exoskeleton assist)'),maneuver('Minor',2),ps('Minor','Coil'),res('Minor','Charge',2),link('Minor','Psi'),link('Minor','Weapon'),link('Minor','Armor'),radio('Minor'),computer('Minor',3),ls('Minor'),lim('Minor',UR+' (life support filters last 6 hours)'),mod('Athletics',2),mod('Stealth',3),mod('Firearms',1),tag("Nobody's Here",3,True),lim('Minor','Prototype Tech (a depleted Force Field recharges only halfway; full if the wearer goes another round unhit, or spends 1 AP)')],
+ notes=["Terran Force Field (Minor; no Regeneration). [Nobody's Here 3] is a Free Tag, condemned against Detection.","Armor Link: holds an Armor Kit. The kit's Armor Rating applies by default; aimed shots can use the suit's own rating."],
+ power="3 Minor (Coil) + 3 Minor (exoskeleton Drive); 3 used (Force Field, Psi Link, Weapon Link). The Drive's slots cover a 2-slot weapon such as the Plasma Thrower. OK.")
+item("Armor Kit (Ranger)","New Detroit: Militia Gear","New Detroit","Small",1,1,[armor('Battlefield',3)],
+ notes=["Fits Ranger Armor's Armor Link."])
+item("Plasma Thrower","New Detroit: Militia Gear","New Detroit","Small",2,3,[attack('Firefight',5,['Plasma'],label='Attack (Plasma Blast)'),counter('Shields',True),bleed('Minor',2,True),counter('Armor'),attack('Firefight',2,['Plasma'],label='Attack (Plasma Stream)'),counter('Shields',True),bleed('Moderate',4),area(),lim('Minor','Hungry (Plasma Stream)'),lim('Minor',UR+' (Short range only)'),res('Minor','Ammunition',3),tag('Burn!'),lim('Moderate','Slave (draws 2 Power Slots from a host power supply)'),lim('Moderate','Malfunction [Fire Has No Friends]')],
+ notes=["Two modes of one weapon: Plasma Blast (5x, free Bleed Minor 2, Counter: Armor) and Plasma Stream (Bleed Moderate 4, Area: Small Sustained, Hungry). The Stream's Moderate Bleed doesn't match a Firefight attack's free (Minor) Bleed, so it's paid in full.","[Burn!]: spend an AP to edit the fire into an adjacent Zone; everyone there or moving through makes a new defensive roll against the attack's margin of success or is set ablaze.","[Fire Has No Friends]: when consequenced, the GM picks a new Zone for the fire to spread to; same defensive roll as [Burn!]."],
+ power="Draws 2 Minor slots from its host: one Plasma mount, shared by both modes.")
+item("Acoustic Bomb","New Detroit: Militia Gear","New Detroit","Small",1,1,[attack('Firefight',4,[],label='Attack (sonic blast)'),area('Medium'),counter('Shields'),tag("Can't Hear Myself Think",3,True),tag('Reverberation',3,True),lim('Major','One-Time Use'),lim('Moderate',UR+' (requires an atmosphere)')],
+ errata=["(change, 2026-10-04) New Detroit doc: the requires-an-atmosphere Usage Restriction is Moderate (was Minor), offsetting the Medium area's 40 BP under the Area-size rule."],
+ notes=["Area: Medium Sudden. Counter: Shields (Force Fields).","[Can't Hear Myself Think 3] (Free): condemned against the target's next action. [Reverberation 3] (Free edit): the next attack against an affected target gains Counter: Shields.","One-Time Use: its attack needs no feed."],
+ power="None needed (One-Time Use).")
+
+# ---------- Deployment Companion (supplement), p36: equipment
+item("Plasma Cutter","Deployment Companion: Equipment","Deployment Companion p36","Small",2,3,[attack('Firefight',5,['Plasma','Melee']),counter('Shields',True),bleed_plasma('Minor',2,3),ps('Minor','Coil'),res('Minor','Charge',6),tag('Can Opener',3,True)],
+ errata=["(new, 2026-10-04) Deployment Companion p36: [Can Opener 3] (Free), not [Can Opener 2]."],
+ notes=["Plasma Bleed x3: the free Bleed at the attack's scale."])
+
+item("Sentinel Package","Deployment Companion: Equipment","Deployment Companion p37","Tiny",2,3,[ni('Minor'),radio('Minor'),computer('Minor',1),tag('Eyes in the Back of My Head'),mod('Detection',2),mod('Firearms and Heavy Weapons (Linked Weapons)',1,2)],
+ errata=["(new, 2026-10-04) Deployment Companion p37: \"Linked Weapons +1\" is a Modifier to Firearms and Heavy Weapons (two skills: Moderate, 20 BP per rank)."])
+
+item("Helping Hand","Deployment Companion: Equipment","Deployment Companion p37","Small",1,1,[ni('Minor'),link('Minor','Data'),link('Minor','Psi'),ps('Minor','Coil'),res('Minor','Charge',2),mod('Manual Dexterity (class)',2,3),tag('Need A Hand?'),lim('Minor',UR+' (Manual Dexterity bonus only where an extra hand is useful)')],
+ errata=["(new, 2026-10-04) Deployment Companion p37: Manual Dexterity +2 is a Major Modifier (a class); adds a Minor limitation: only in situations where an extra hand is useful."],
+ notes=["Power Supply (Coil Stack): rank 1, 3 Minor slots; the Psi Link uses 1 while in use."])
+
+item("Foamer","Deployment Companion: Equipment","Deployment Companion p36","Small",1,1,[attack('Firefight',3,['Kinetic (self-powered)']),area(),res('Minor','Ammunition',4),tag('A Messy Arrest',3,True),lim('Minor',UR+' (subdual damage only; cannot be modified to deal lethal damage)')],
+ errata=["(new, 2026-10-04) Deployment Companion p36: [A Messy Arrest 3] (Free), not [A Messy Arrest]; Ammo 40, not 30."],
+ notes=["Area (Sustained): Small. Subdual x3."])
+
+item("Stunner","Deployment Companion: Equipment","Deployment Companion p36","Small",0,0,[attack('Firefight',4,[]),ps('Minor','Coil'),res('Minor','Charge',3),tag("Feelin' Twitchy"),lim('Minor',UR+' (subdual damage only)'),lim('Minor',UR+' (Short range only)')],
+ errata=["(new, 2026-10-04) Deployment Companion: CR 0, CC 0 (printed CR 1, CC 1)."],
+ notes=["Energy (Firefight), Subdual x4, Charge 30."])
+
+item("Flare Pistol","Deployment Companion: Equipment","Deployment Companion p39","Small",4,10,[attack('Firefight',4,['Flare']),counter('Armor'),counter('Shields'),far('Minor'),other('Area','Sudden: Small (optional mode)',20,A('Area', None, 1, sub=True, size='small')),other('Area','Sustained: Small (optional mode)',20,A('Area', None, 1, sub=True, size='small')),ps('Moderate','Hyperspace Tap'),lim('Minor','One Area Attack Per Round'),lim('Moderate','Malfunction [Emergent Altered]'),mod('Firearms',3)],
+ errata=["(new, 2026-10-04) Deployment Companion: adds Counter: Force Fields and Far Ranged (Minor); Firearms +3 (was +2)."],
+ notes=["Two optional area modes: Area (Sudden) Small or Area (Sustained) Small, one per round.","Far Ranged (Minor): can engage Battlefield-scale targets.","Uses 1 Power Slot of the Tap's 3."],
+ flags=["The book prints \"Moderate Hyperspace Tap: 3 Minor Power Slots\"; a rank-1 Moderate supply gives 3 Moderate slots. Left as printed (no cost effect)."])
+
+item("Xn Control Rig","Deployment Companion: Bioware","Deployment Companion p36","Small",2,3,[ni('Major'),computer('Minor',2,'Quantum'),ps('Moderate','Coil'),res('Moderate','Charge',2),radio('Minor'),tasks([('Mind Control',16),('Intrusion Detection',16)]),tag('Psionic Emulation'),tag('Under Your Skin'),tag('Pulling at Your Heartstrings'),tag('Babble'),lim('Moderate',"Skill Ban (victim's Psionic Skills)"),lim('Moderate','Skill Restriction (Mind Control, victim only)')],
+ errata=["(new, 2026-10-04) Deployment Companion p36: power is a Moderate Coil (rank 1, Strain 10) with 2 Moderate Charge; the Broad Spectrum Communications Array is Minor."],
+ notes=["Advanced Neural Interface = Major Neural Interface. Quantum Processor = Minor Quantum Computer rank 2 (TN 16).","XP 22: when installed, the Hive pays the XP cost."])
+
+item("Cybernetic Conversion","Deployment Companion: Bioware","Deployment Companion p37","Medium",2,3,[armor('Firefight',4),body('Medium',40),ls('Minor'),computer('Minor',5),ni('Major'),ps('Minor','Coil'),res('Minor','Charge',3),tag('Harder, Faster, Better, Stronger'),tag('More Machine Than Man'),lim('Moderate','[Dear God, What is That Thing?]'),mod('Athletics',2),mod('Firearms',1),mod('Computers',1)],
+ notes=["Advanced Neural Interface = Major Neural Interface. Power Supply (Coil Stack): 3 Minor slots, Charge 3.","XP 33."])
+
+item("Shohan Drone Destroyer","Deployment Companion: Starships","Deployment Companion p37","Huge",None,None,[attack('Space',7,['Flare'],2,'Attack (heavy flare cannon array)'),counter('Armor'),counter('Missiles'),armor('Space',6),body('Huge',250),regen('Major',1,'Mechanical'),ff('Major',3),regen('Major',6,'Force Field'),drive('Moderate','Reactionless'),drive('Major','Jump'),maneuver('Major',3),ps('Major','Hyperspace Tap',2),radio('Moderate'),hypercomm(),computer('Major',4),tasks([('Electronic Warfare',20),('Gunnery',20),('Piloting',20),('Tactics',18),('Detection',18)]),cargo('Major'),hangar('Major',2),manuf('Major'),tag('Go to Rapid Fire',3),tag('Queen Bee',3)],
+ notes=["[Disoriented] comes with the Jump Drive; it isn't a bought Malfunction.","Hangars carry eight Shohan Drones; Manufacture can build more given time.","CR N/A (Shohan)."],
+ power="3 Moderate (0 used), 9 Major (Jump Drive's tap 3 + 2 taps 6; 6 used: 2 arrays, Force Field 1, Force Field Regeneration 1, Mechanical Regeneration 1, Manufacture 1). OK.")
+
+item("Shohan Drone","Deployment Companion: Starships","Deployment Companion p39","Medium",None,None,[attack('Space',6,['Flare'],label='Attack (heavy flare cannon)'),counter('Armor'),counter('Missiles'),body('Medium',50),ff('Moderate',3),drive('Moderate','Reactionless'),maneuver('Moderate',4),ps('Major','Hyperspace Tap'),hypercomm(),computer('Minor',3),tasks([('Pilot',18),('Gunnery',18),('Detection',18),('Anti-intrusion',18)]),tag('Slippery Devil'),tag('Punching Up'),lim('Moderate','Vulnerable: Anti-Missile Weapons')],
+ errata=["(new, 2026-10-05) Deployment Companion p39: Force Field Moderate 3 (Track 60), not Minor 3; Power Slots 3 Moderate (1 used), 3 Major (1 used)."],
+ notes=["Armor Rating 0. Carried eight to a Drone Destroyer.","CR N/A (Shohan)."],
+ power="3 Moderate (Reactionless Drive; 1 used: Force Field), 3 Major (Hyperspace Tap; 1 used: Attack). OK.")
+
+# Phantom Mk. II: the core Phantom with the Companion's printed changes.
+_ph=[x for x in I if x['name'].startswith('Phantom')][0]
+item("Phantom Mk. II","Deployment Companion: Starships","Deployment Companion p37","Large",8,36,
+ [r for r in _ph['rows'] if not (r[0].startswith('Armor Rating') or 'Tangle' in r[1])]+[armor('Space',2,True),res('Major','Tangle',4),ff('Moderate',3)],
+ notes=["The core Phantom refit: Moderate Force Field 3 (+60 Force Field Track), Shrouded Hull Armor 2 (was 3), Tangle 4 (was 5; 40 days / combat rounds). CR and CC unchanged from the core Phantom.","Terran Force Field (Moderate grade, covers up to Large). Uses 1 Moderate Power Slot; the Moderate Reaction and Air Drives supply 6."])
+
+# ---------- Deployment Companion (supplement), p36: grenades (prices per 10: +1 CR over one)
+GREN=[lim('Minor','Hungry (fired from a launcher or vehicle kinetic weapon, takes 10 rounds of its magazine)'),lim('Major','One-Time Use')]
+item("Foam Grenade","Deployment Companion: Grenades","Deployment Companion p36","Small",1,1,[attack('Firefight',6,[]),area(),lim('Minor',UR+' (subdual damage only)')]+GREN,
+ errata=["(new, 2026-10-04) Deployment Companion p36: Attack x6, not x5 (a box of 10 lands on the printed CR 1)."],extra={'Sold per':'10 (+1 CR over one)'})
+item("Flashbang","Deployment Companion: Grenades","Deployment Companion p36","Small",0,0,[attack1x('Firefight'),area(),tag('Deaf and Distracted',3,True),tag('Flat Footed',2,True)]+GREN,
+ errata=["(new, 2026-10-04) Deployment Companion p36: a 1x attack; [Deaf and Distracted 3] is Free; adds [Flat Footed 2] (Free)."],extra={'Sold per':'10 (+1 CR over one)'},notes=["A 1x attack: no damage. Everyone in the Area: Small Sudden makes a new Cover roll; [Deaf and Distracted 3] (Free) is condemned against that roll, and [Flat Footed 2] (Free) against their Movement checks, for a round."])
+item("Incendiary Grenade","Deployment Companion: Grenades","Deployment Companion p36","Small",1,1,[attack('Firefight',4,[]),area(),bleed('Minor',4),tag('Firestarter',2)]+GREN,
+ extra={'Sold per':'10 (+1 CR over one)'},notes=["Bleed (Fire) 4, Minor."])

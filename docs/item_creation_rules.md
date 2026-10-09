@@ -94,6 +94,12 @@ everywhere CR is stored or displayed.
 Rating and Wealth. Total BP itself may go negative (limitations can refund more than the
 attributes cost); only the CR is clamped.
 
+**[Ruling 2026-10-04] Group pricing (economic rule).** Items priced "per 10" (grenades, sidearm
+ammunition, missiles) are sold in groups: a group of 10 costs **+1 CR** over a single item. The
+Workbench CR is always for **one** item; the group's +1 is applied when buying, not in the build.
+Store a `groupSize` (e.g. 10) on such items and show both: "CR 0 (one), CR 1 per 10". The corebook's
+Explosive Grenade prints CR 1 for a box of 10; one grenade (5x) is CR 0.
+
 For reference, the CR each size reaches at 0 BP:
 
 | Size | Tiny | Small | Medium | Large | Huge | Colossal |
@@ -127,10 +133,11 @@ multiple of 5 — **no rounding is ever needed.**
 The book's tables stop at rank 5 (or 6x). Nothing in the rules caps these; extrapolate
 with the formula unless a cap is listed below.
 
-### 5.1 Area — 20 BP (flat)
+### 5.1 Area — 20 BP per size step
 
 - A sub-feature that adds an area effect to another feature (area attack, dispersal system…).
 - Sudden or sustained (see Combat chapter).
+- **[Ruling 2026-10-04]** Cost by area size: Small 20, Medium 40, Large 60, Huge 80, Colossal 100 (20 BP per step). Rank = steps (Small = 1). An item with two area modes pays for each.
 - **Melee Attacks can never gain Area. [Errata p210]**
 
 ### 5.2 Armor Rating — variable BP
@@ -190,12 +197,16 @@ Melee and Flare + Melee are unusual but legal.
 |---|---|---|---|
 | **Energy** | none | Lasers, particle cannons. No special rules. | All |
 | **Kinetic** | Multiplier upgrades cost 10% less, rounded up | Fires solid projectiles; needs an Ammunition Resource bought separately. Two implementations **[Ruling 2026-09-29]**: **Kinetic** (built into or slaved to a host: ship and vehicle guns, suit or Weapon Link mounts) also draws a Power Slot; **Kinetic (self-powered)** (hand weapons such as gauss pistols and rifles) draws none, since each round carries its own power **[Errata p210]**. | All |
-| **Melee** | Everything (base and upgrades) costs half | Attacks are ranged by default; this limits to melee. **Can never take Area. [Errata p210]** | All |
-| **Anti-Missile** | Half of base cost (5 / 10 / 20); **1x** **[Ruling 2026-09-23]** | Its own attribute: the only 1x attack. Only targets missiles. Cannot take a multiplier. | All |
+| **Melee** | Everything (base and upgrades) costs half | Attacks are ranged by default; this limits to melee. **Can never take Area. [Errata p210]** **[Ruling 2026-10-05]** Hand-to-hand weapons only: an emplaced charge or grenade marked Melee is *contact-delivered*, pays full price, and may take Area (Decisive Action's demolition and breaching charges). | All |
+| **Anti-Missile** | Half of base cost (5 / 10 / 20); **1x** **[Ruling 2026-09-23]** | Its own attribute. Only targets missiles. Cannot take a multiplier. One kind of 1x attack (below). | All |
+| **1x attack** **[Ruling 2026-10-04]** | Half of base cost (5 / 10 / 20) | Does **no damage**; it delivers an effect: Tags imposed on targets, Counters, or (as the Anti-Missile) missile interception. Can take Area. Cannot take a multiplier. Example: the Flashbang (Deployment Companion): Firefight 1x, Area, Free Tags [Deaf and Distracted 3] and [Flat Footed 2]. Needs a feed like any Attack (none on a One-Time Use item). | All |
 | **Plasma** | none to BP | Uses **2× the Power Slots**. Gains **Counter (Shields)** free. Applies a free **Bleed** of `floor(m / 2)` damage/round; its magnitude matches the Attack's scale (Firefight → Minor, Battlefield → Moderate, Space → Major).  **[Ruling]** Extra Bleed damage above the free amount costs the difference between the full Bleed cost and the free Bleed **[Ruling 2026-09-27]**. Plasma draws its 2 slots per mount even with Ammunition (the Light Plasma Cannon uses both). **Plasma (self-powered)** **[Ruling 2026-09-29]** (hand weapons, e.g. the Plasma Carbine) needs special ammunition (an Ammunition Resource) instead of Power Slots; that requirement is built in as a **Moderate limitation** that takes one of the two Moderate slots but refunds no BP. | All (Terran Sphere tech) |
 | **Flare** | none | Energy variant. Cover Tags cannot be condemned against it. | Shohan only |
 | **Tse** | none | Melee only. Gains **Counter (Armor)** free. | Shohan only; cannot be manufactured by the Fourth Population |
 | **Hyperspace** | none | Gains **Counter (Armor)** and **Area: Small Sudden** free **[Errata p210]**; both are printed in the stat block as reminders. Only known example: the Dreadnought's Hyper Cannon. | Shohan only |
+| **Pyre** **[Ruling 2026-10-05]** | **+70 BP** over the normal Attack cost | Battlefield scale only. Includes **Counter (Armor)** (20), **Force Field Overload** (20: when a Pyre hit depletes a Force Field, it bursts as a Small Sudden Area around the target at ½ the multiplier, rounded up; the target is unaffected) and **Aggravated Assault** (30: Regeneration can't restore damage it caused, and armor it reduced can't be restored, until a Standard Engineering or Medicine roll succeeds). Every Pyre weapon carries **[Time Heals No Wounds 3]**, bought as a Tag (may be Free). Decisive Action's "Exotic (80/90/110)" is a placeholder, not a cost. | Relics of the War of the Ancients only; cannot be manufactured |
+| **Gravitic** **[Ruling 2026-10-08]** | **+5 BP** over the normal Attack cost | Every hit applies **[Flattened]** (rank = margin of success; freely consequenced against movement and evasion, condemned against attacks, invokable by attackers; lasts a round), priced as a standard Tag. **Must buy Area.** No benefit from Coordinated Fire. (Decisive Action p84: Gravitic Pulsers.) | Terran Sphere (Project Leapfrog) |
+| **Grav Blades** **[Ruling 2026-10-08]** | **75 BP flat**, Major only; then buys multipliers as an Attack | Replaces the ship's Gravitic Drive and still works as one (FTL and in-system maneuvering). Hits push or pull the target; can counter missiles and kinetic rounds (core p194). Attacks are Sustained; no Coordinated Fire or Counter: Armor. (Decisive Action p84.) | Terran Sphere (Project Leapfrog) |
 
 Resulting costs:
 ```
@@ -432,6 +443,7 @@ Body; repeatable.
 |---|---|---|
 | Shohan | Built into the gear and its unique power supply; very hard to salvage/transfer. | Shohan |
 | Terran | **Cannot be Major grade.** **Cannot take Regeneration.** Same BP cost as Shohan. | Terran Sphere |
+| Lamellar Matrix **[Ruling 2026-10-08]** | Terran field made of many small overlapping fields (Decisive Action p85). Same BP cost. **May be Major grade** (covers up to Colossal). Once its Track is at 25% or below, **aimed shots bypass it**. **Cannot take Regeneration.** (Redemption Aegis Refit.) | Terran Sphere (Project Leapfrog) |
 
 Combat note **[Errata p183]**: Terran psionics using force fields leave a gap while
 using powers; aimed or area attacks can bypass the field during that time.
@@ -477,6 +489,7 @@ Missiles themselves are separate Kinetic Attack items.
 - **[Ruling 2026-09-23] Launchers are bought in increments of 4,** matching the power use:
   one increment = 4 launchers = 1 Power Slot, costing 20 / 40 / 60 BP.
 - **Disposable** (single-shot): no Power or Resource needed; destroyed on use.
+- **[Ruling 2026-10-06] Space-scale missile chassis:** a Space missile is built on a Moderate Reaction Drive (25) plus a Major Coil Power Supply (40), with no Charge or Fuel (it only lasts one round). Stat blocks assume the chassis and don't print it. Missiles are sold per 10 (+1 CR). Battlefield missiles (Small STA/S rounds) don't carry it.
 
 ### 5.17 Life Support — 5 / 20 / 40 BP
 
@@ -514,6 +527,7 @@ Lets the item host and operate smaller modular items. Repeatable, mixed grades a
 | Psi | Lets a Psionic draw on the item's Power Supply. Uses **1 Power Slot** while the Psionic casts through it, **plus 1 per committed (sustained) effect**; the slot's grade is the effect's Scale (the psionics rules, p275). |
 | Weapon | Modular mount that accepts a separately built Attack. Built-in Attacks (e.g. turrets) don't need one. **Powers the weapon it carries: uses 1 Power Slot of its grade per Link** by default; some weapons (self-powered Kinetic) need none **[Ruling 2026-10-02]**. |
 | **Refueling** **[Errata p215]** | Docking connection that transfers fuel to a linked craft up to the Link's max size. **Draws 1 Power Slot of its grade** while in use. |
+| **Armor** **[Ruling 2026-10-03]** | Holds a separately built **armor kit** up to the Link's max size (e.g. the Armor Kit (Ranger) on Ranger Armor). The kit's Armor Rating (and its scale) applies by default; an **aimed shot** can target the host's own Armor Rating instead. The kit is its own item with its own CR. **Uses no Power Slot.** |
 
 ### 5.19 Manufacture — 25 / 50 / 100 BP
 
@@ -606,14 +620,19 @@ the lowest higher grade with spare slots.
 | Force Field | 1 for the whole Force Field track, grade = Force Field grade |
 | Gravity Control | 1 per unit, grade = its own grade **[Ruling]** |
 | Manufacture | 1, grade = Manufacture grade **[Ruling]** |
-| Weapon Link | 1 per Link, grade = the Link's grade (it powers the weapon it carries) **[Ruling 2026-10-02]** |
+| Weapon Link | 1 per Link, grade = the Link's grade (it powers the weapon it carries) **[Ruling 2026-10-02]**. **0** when the carried weapon has its own Power Supply (Shohan Tse Blade, Flare Pistol) or is self-powered Kinetic **[Ruling 2026-10-05]** |
 | Psi Link | 1 while a Psionic casts through it, plus 1 per committed effect (p275). The effect's Scale sets the slot's grade and is picked in play, so the app counts the design's 1 slot as **Minor** (any slot can power it) and leaves committed effects to play. Strain Threshold per rank applies. |
+| Armor Link | 0 (holds passive plating) **[Ruling 2026-10-03]** |
+| Regeneration: Force Field or Mechanical | 1 each, grade = the item's Force Field grade (else its top Attack scale) **[Ruling 2026-10-05]** |
+| Regeneration: Biological | 0 (living tissue heals itself) **[Ruling 2026-10-05]** |
 
 Higher-grade slots may power lower-grade consumers (ruling above).
 
 ### 5.23 Regeneration — variable BP
 
 Repairs a depletable Track (Body, Force Field) automatically.
+
+**Power [Ruling 2026-10-05]:** Force Field and Mechanical Regeneration each use 1 Power Slot (grade = the Force Field's grade); Biological Regeneration uses none. This reproduces every printed Shohan power line (War Drone 5, Deployment Pod 6, Destroyer 7, Drone Destroyer 6).
 
 | Grade | Frequency | 1 pt | 2 | 3 | 4 | 5 |
 |---|---|---:|---:|---:|---:|---:|
@@ -678,7 +697,7 @@ taskBP = 2 × TN              // halved if the item's Computer is a Brain
 
 | Grade | BP refund | Max per design | Examples |
 |---|---:|---:|---|
-| Minor | 10 | 3 | **Hungry** (uses a whole Resource rank per use, e.g. a burst-fire area attack); **Usage Restriction** (fails under a plausible condition, like rain) |
+| Minor | 10 | 3 | **Hungry** (uses a whole Resource rank per use, e.g. a burst-fire area attack; on a grenade, firing it from a launcher or vehicle kinetic weapon takes 10 rounds of that weapon's magazine **[Ruling 2026-10-04]**); **Usage Restriction** (fails under a plausible condition, like rain) |
 | Moderate | 20 | 2 | **Malfunction** (failed rolls can produce Drawback Tags); **Prerequisite** (needs rails, a satellite network…); **Slave** (must be mounted on / controlled by bigger equipment); **Crew Requirement**; **Partial Armor** (aimed shots bypass armor); **Key Personnel** (needs a specific crew member, e.g. a Navigator) **[Ruling 2026-09-28]** |
 | Major | 50 | 1 | **One-Time Use** (needs an overhaul, Hard Engineering, before reuse); **Restricted Technology** (heavily regulated; severe reprisals) |
 
@@ -736,7 +755,7 @@ costToPay  = max(1, modifiedCR − baseCR)     // in CR terms, resolved via Inco
 
 Hard errors (the rules forbid it):
 
-1. Attack multiplier ≥ 2x. Anti-Missile is exactly 1x. **[Ruling 2026-09-23]**
+1. Attack multiplier ≥ 2x, except a 1x attack (no damage; Anti-Missile or effect-only), which is exactly 1x. **[Ruling 2026-09-23, 2026-10-04]**
 2. Melee Attack + Area. **[Errata p210]** Melee + Anti-Missile. **[Ruling]**
 3. Tse on a non-Melee Attack.
 4. Every Attack has a feed: ammo/clip Resource **or** Power Slot(s), except on a One-Time Use item **[Ruling 2026-09-30]**. Resources can be shared, so several Attacks (a weapon's modes) can use one Ammunition row. Kinetic needs Ammunition.
@@ -824,11 +843,16 @@ Free effects: Plasma → Counter (Shields), Bleed 4 (floor(8/2)).
 | p185 | Armor reduction (Coordinated Fire / Counter Armor) lasts until end of round | §5.9 |
 | p210 | Turret rule: pay the base cost again per extra gunner | §5.3 |
 | p210 | Melee Attacks can never gain Area | §5.1, §5.3, §9 |
+| p210 | **[New 2026-10-05]** Contact charges: an emplaced charge or grenade marked Melee pays full price (no Melee half price). | §5.3 |
+| p210 | **[New 2026-10-04]** Area costs 20 BP per size step (Small 20, Medium 40, Large 60…). | §5.1 |
 | p212 | Counter (Armor): −1 unaimed, −2 aimed; −1 carries to other attackers | §5.9 |
 | p213 | Reactionless drives don't expel reaction mass | §5.10 |
 | p213 | **[New 2026-09-30]** Drives need no Fuel when a Coil, Environmental, or Hyperspace Tap Power Supply runs them; Biological Drives need none. | §5.10, §9 |
 | p210 | **[New 2026-09-30]** Attacks on a One-Time Use item need no feed. | §5.22, §9 |
 | p215 | **[New 2026-10-02]** A Weapon Link uses 1 Power Slot of its grade per Link (it powers the weapon it carries); some weapons need none. | §5.18, §5.22 |
+| p214 | **[New 2026-10-05]** Force Field and Mechanical Regeneration each use 1 Power Slot at the Force Field's grade; Biological Regeneration uses none. | §5.22, §5.23 |
+| p215 | **[New 2026-10-05]** A Weapon Link carrying a weapon with its own Power Supply uses no Power Slot. | §5.18, §5.22 |
+| p215 | **[New 2026-10-03]** New Link type, **Armor**: holds a separately built armor kit; the kit's Armor Rating applies by default, aimed shots can use the host's. No Power Slot. (New Detroit: Ranger Armor and Armor Kit.) | §5.18, §5.22 |
 | p216 | **[New 2026-09-30]** An item with no Power Supply or Drive of its own draws its Power Slots from its host (a Slave limitation still means it needs the right Link). | §5.22 |
 | p216 | **[New 2026-09-25]** Power Supplies may go on an item one size smaller than the table first listed: Moderate on Small (was Medium). Major stays Large, except that a Hyperspace Tap or a Coil stack can fit a Major Power Supply in a Medium item. | §5.22, §9 |
 | p217 | **[New 2026-09-25]** A Fuel Resource can feed Drives and Power Supplies of its own grade or lower (a larger tank can feed a smaller drive). | §5.24, §9 |
@@ -918,6 +942,18 @@ Listed so the code can make each one a single named constant or function, easy t
 | 09-30 | Skill specialties | Engineering, Science, and Profession always take a specialty, e.g. Engineering (Starship); a Minor Modifier can also target something that isn't a skill (Other) | §5.20 |
 | 10-02 | Psi Link power | 1 slot while a Psionic casts through it, plus 1 per committed effect (the psionics rules, p275, so no errata). The slot's grade is the effect's Scale, so the design counts 1 Minor slot | §5.18, §5.22 |
 | 10-02 | Weapon Link power | Powers the weapon it carries: 1 slot of its grade per Link by default; some weapons (self-powered Kinetic) need none | §5.18, §5.22 |
+| 10-03 | Armor Link | A new Link type for add-on armor kits: the kit's rating by default, the host's on an aimed shot; no Power Slot | §5.18, §5.22 |
+| 10-04 | Group pricing | A group of 10 ("per 10" items) costs +1 CR over one; the build CR is for one item | §4 |
+| 10-04 | 1x attacks | Any no-damage attack that delivers an effect is 1x at half the Attack base (the Anti-Missile is one) | §5.3, §9 |
+| 10-08 | Lamellar Matrix | Terran Force Field implementation allowed at Major; aimed shots bypass at ≤25% Track; no Regeneration | §5.13 |
+| 10-08 | Gravitic attacks, Grav Blades | Gravitic = Attack cost + 5 ([Flattened]); Grav Blades Major 75 BP, replace the Gravitic Drive | §5.3 |
+| 10-06 | Space missile chassis | Space missiles assume a Moderate Reaction Drive + Major Coil (no Charge/Fuel); Hyper Missile 285 BP CR 4, Grav Missile (7x) 265 BP CR 4 | §5.16 |
+| 10-05 | Pyre attacks | Decisive Action prints Pyre as a placeholder "Exotic" attack; Pyre is its own implementation at +70 over the Battlefield Attack cost (Pyre Lance 175 BP, CR 5) | §5.3 |
+| 10-05 | Contact charges | Decisive Action's charges print "Melee" but only match at full price; Melee half price is for hand-to-hand weapons. Charges and special rounds are sold per 10 (+1 CR) | §4, §5.3 |
+| 10-05 | Regeneration power | Book's Shohan power lines count Force Field and Mechanical Regeneration; Biological doesn't. Shohan Personal Armor (2 used) and Shohan Drone (2 used) corrected | §5.22, §5.23 |
+| 10-05 | Weapon Link with self-powered weapon | Draws no slot (Shohan weapons carry their own Hyperspace Taps) | §5.22 |
+| 10-04 | Area size | The book prices Area at a flat 20 BP; each size step past Small costs another 20 | §5.1 |
+| 10-04 | Hungry on grenades | Fired from a launcher or vehicle kinetic weapon, a grenade takes 10 rounds of that magazine | §6 |
 
 ### Still open
 

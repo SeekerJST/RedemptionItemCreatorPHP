@@ -13,7 +13,9 @@ W("""-- Redemption errata: structured data for MySQL 8
 --   errata         One row per errata entry (one line of the text file).
 --     ErrataID       Position in book order. Renumbered when entries are added, so always
 --                    reload the whole script; don't reference these IDs from other tables.
---     Section        Combat | Item Creation | Gear | Psionics
+--     Section        Combat | Item Creation | Gear | Psionics (core book chapters), or a
+--                    supplement's name (Deployment Companion, Decisive Action). Supplement page numbers are
+--                    that book's own pages.
 --     PageStart      Book page (PageEnd is set only for ranges, e.g. 226-271).
 --     Subject        Rule or item the entry is about (human label).
 --     ErrataType     rule | stat | clarification | replacement | typo

@@ -5,6 +5,8 @@ E=[]
 def e(section,p1,p2,subject,kind,added,text,changes=()):
     E.append(dict(section=section,p1=p1,p2=p2,subject=subject,kind=kind,added=added,text=text,changes=list(changes)))
 C='Combat'; IC='Item Creation'; G='Gear'; P='Psionics'
+DC='Deployment Companion'  # supplement: page numbers are the Companion's own
+DA='Decisive Action'  # supplement: page numbers are Decisive Action's own
 e(C,183,None,'Plasma Attacks','rule',O,'Plasma Weapon Attacks should be +2 Multiplier versus shields, not "Double Damage" as described here. This brings it in line with the description for Counter: Shields on P212.',
   [(None,'Effect against Force Fields','Double Damage','+2 Weapon Multiplier')])
 e(C,183,None,'Terran psionic Force Fields','rule',O,"Terran Sphere psionics using force fields circumvent the restriction on Psionic effects by having a gap in their force field's protection. This means that their force fields may be bypassed by aimed or area attacks that happen while they are using their powers. Normally this vulnerability only lasts for the Psionics turn, leaving them vulnerable to sustained attacks, but ongoing effects require the gap to remain open and exploitable.")
@@ -50,7 +52,6 @@ e(G,231,None,'Security Gauss Rifle','stat',D6,"The Security Gauss Rifle's single
 e(G,232,None,'Plasma Carbine','stat',O,'The Plasma Carbine has the following changes: Weapon multiplier increases to 4x from 3x, Ammo cost is CR 1, not 5x, and it loses the Area attack attribute, to be replaced with Counter: Armor.',
   [('Plasma Carbine','Weapon Multiplier','3x','4x'),('Plasma Carbine','Ammunition cost','5x','CR 1'),('Plasma Carbine','Area','Small Sudden','none'),('Plasma Carbine','Counter','none','Armor')])
 e(G,232,None,'Sniper Rifle','stat',D6,"The Sniper Rifle's attack increases to 5x from 4x.",[('Sniper Rifle','Weapon Multiplier','4x','5x')])
-e(G,233,None,'Explosive Grenade','stat',D6,"The Explosive Grenade's attack increases to 6x from 5x.",[('Explosive Grenade','Weapon Multiplier','5x','6x')])
 e(G,233,None,'Tactical Railgun','stat',D6,'The Tactical Railgun is a Small item, not Medium. Its Hungry limitation is a Moderate limitation. Its attack remains 4x.',
   [('Tactical Railgun','Size','Medium','Small'),('Tactical Railgun','Limitation grade: Hungry','Minor','Moderate')])
 e(G,234,None,'Light Plasma Cannon','stat',O,'Light Plasma cannon ammo now costs CR 1.',[('Light Plasma Cannon','Ammunition cost','5x','CR 1')])
@@ -125,7 +126,7 @@ e(IC,209,212,'Software: required computer','rule',D7,'Software no longer require
 e(G,271,None,'Resistance Lumber Mech','stat',D7,"The Resistance Lumber Mech's Body Track is 70, not 80. Its Coil Power Supply uses 2 Moderate Charge, not Fuel. [Kinetic Feedback Control Rig] is a Free Tag (free Skill switch from Drive to Athletics).",
   [('Resistance Lumber Mech','Body Track','80','70'),('Resistance Lumber Mech','Resource','2 Moderate Fuel','2 Moderate Charge'),('Resistance Lumber Mech','Tag type: [Kinetic Feedback Control Rig]','Standard','Free')])
 # keep book order: section, then page (stable)
-_order={'Combat':0,'Item Creation':1,'Gear':2,'Psionics':3}
+_order={'Combat':0,'Item Creation':1,'Gear':2,'Psionics':3,'Deployment Companion':4,'Decisive Action':5}
 e(G,226,None,'Standard Light Armor','stat',D7,"Standard Light Armor's Cost Rating is 0, not 2 (its CC is already 0).",
   [('Standard Light Armor','CR','2','0')])
 e(G,226,None,'Psionic Light Armor','stat',D7,"Psionic Light Armor's Cost Rating is 0 and its Character Creation cost is 0 (was CR 1, CC 1). Its stats are unchanged.",
@@ -266,4 +267,64 @@ e(G,228,None,'Kavacha-class A-350 Marine Engagement Suit: power','stat',D11,"The
   [('Kavacha-class A-350 Marine Engagement Suit','Power Supply','Moderate Coil 1','Moderate Coil 2'),('Kavacha-class A-350 Marine Engagement Suit','Tag rank: [High Security]','3','2'),('Kavacha-class A-350 Marine Engagement Suit','Total Power Slots','3 Moderate (2 used)','6 Moderate (4 used)')])
 e(G,271,None,'Resistance Lumber Mech: Weapon Link power','typo',D11,"The Resistance Lumber Mech's two Minor Weapon Links each use a Power Slot, so its Total Power Slots read 3 Minor (2 used), 3 Moderate (0 used), not 3 Minor (0 used), 3 Moderate (1 used).",
   [('Resistance Lumber Mech','Total Power Slots','3 Minor (0 used), 3 Moderate (1 used)','3 Minor (2 used), 3 Moderate (0 used)')])
+e(IC,215,None,'Link: Armor','rule','2026-10-03','Add a Link type, Armor: it holds a separately built armor kit up to the Link\'s maximum size. The kit\'s Armor Rating applies by default; an aimed shot can target the host\'s own Armor Rating instead. An Armor Link uses no Power Slot. (First used by the New Detroit militia\'s Ranger Armor and its Armor Kit.)',[(None,'Link types','Data, Psi, Weapon, Refueling','adds Armor (no Power Slot)')])
+e(G,225,None,'Prices per 10 (groups)','clarification','2026-10-04','Items priced "per 10" (grenades, sidearm ammunition, missiles) are sold in groups: a group of 10 costs +1 CR over a single item. This is an economic rule, not a build cost; an item\'s Workbench CR is for one. (The Explosive Grenade\'s printed CR 1 is a box of 10; one grenade is CR 0 at its printed 5x.)',[(None,'Group pricing','unstated','a group of 10 is +1 CR over one item')])
+e(IC,210,None,'Attack: 1x attacks','rule','2026-10-04','A 1x attack does no damage; it delivers an effect (Tags, Counters, or missile interception) and costs half the Attack base (5 / 10 / 20). The Anti-Missile is one example; the Deployment Companion\'s Flashbang is another.',[(None,'1x attacks','Anti-Missile only','any no-damage attack delivering an effect, half the base cost')])
+e(IC,218,None,'Limitation: Hungry on grenades','clarification','2026-10-04','A grenade\'s Hungry limitation means that when it is fired from a launcher or a vehicle\'s kinetic weapon, it takes 10 rounds (one Resource rank) of that weapon\'s magazine.',[(None,'Hungry (grenades)','1 shot per grenade','takes 10 rounds of a launching weapon\'s magazine')])
+D10='2026-10-04'
+e(DC,36,None,'Grenades: prices per 10','clarification',D10,'"All prices per 10" means the printed CR and CC buy a group of 10 grenades. A single grenade is 1 CR less (see the core errata for p225, group pricing).',
+  [(None,'Grenade CR/CC','unstated','printed values are for a group of 10; one grenade is -1 CR')])
+e(DC,36,None,'Foam Grenade','stat',D10,"The Foam Grenade's Attack is x6, not x5.",
+  [('Foam Grenade','Attack','(Firefight) Subdual x5','(Firefight) Subdual x6')])
+e(DC,36,None,'Flashbang','stat',D10,"The Flashbang's Attack is a 1x Firefight attack: it does no damage. Everyone in the Area (Sudden): Small makes a new Cover roll. [Deaf and Distracted 3] is a Free Tag, condemned against that Cover roll, and the Flashbang adds [Flat Footed 2] as a Free Tag, condemned against affected targets' Movement checks. Both last for a round.",
+  [('Flashbang','Attack','(unstated)','1x (Firefight), no damage'),('Flashbang','Tag type: [Deaf and Distracted 3]','Standard','Free'),('Flashbang','Tags','[Deaf and Distracted 3]','adds [Flat Footed 2] (Free)')])
+e(DC,36,None,'Plasma Cutter','stat',D10,"The Plasma Cutter's Tag is [Can Opener 3], a Free Tag, not [Can Opener 2].",
+  [('Plasma Cutter','Tag rank: [Can Opener]','2','3'),('Plasma Cutter','Tag type: [Can Opener]','Standard','Free')])
+e(DC,37,None,'Sentinel Package','clarification',D10,'The Sentinel Package\'s "Linked Weapons +1" Modifier applies to Firearms and Heavy Weapons. It covers two skills, so it is a Moderate Modifier.',
+  [('Sentinel Package','Modifier: Linked Weapons +1','unstated skills','Firearms and Heavy Weapons +1 (Moderate)')])
+e(DC,37,None,'Helping Hand','stat',D10,"The Helping Hand's Manual Dexterity +2 is a Major Modifier (Manual Dexterity covers a class of skills). It gains a Minor limitation: the bonus applies only in situations where an extra hand is useful.",
+  [('Helping Hand','Modifier grade: Manual Dexterity +2','Minor (one skill)','Major (class)'),('Helping Hand','Limitations','none','Minor: only where an extra hand is useful')])
+e(DC,36,None,'Foamer','stat',D10,"The Foamer's Tag is [A Messy Arrest 3], a Free Tag, and it carries 40 rounds of ammunition, not 30.",
+  [('Foamer','Tag: [A Messy Arrest]','Standard, rank 1','Free, rank 3'),('Foamer','Ammo','30','40')])
+e(DC,36,None,'Stunner','stat',D10,"The Stunner's Cost Rating is 0 and its Character Creation cost is 0 (was CR 1, CC 1). Its stats are unchanged.",
+  [('Stunner','CR','1','0'),('Stunner','CC','1','0')])
+e(IC,210,None,'Area: size','rule',D10,'Area costs 20 BP for a Small area. Each size step larger costs another 20 BP: Medium 40, Large 60, Huge 80, Colossal 100.',
+  [(None,'Area cost','20 BP (any size)','20 BP per size step (Small 20, Medium 40, Large 60)')])
+e(DC,39,None,'Flare Pistol','stat',D10,"The Flare Pistol gains Counter: Force Fields and Far Ranged (Minor), and its Firearms Modifier is +3, not +2.",
+  [('Flare Pistol','Counters','Armor','Armor, Force Fields'),('Flare Pistol','Far Ranged','none','Minor'),('Flare Pistol','Modifier: Firearms','+2','+3')])
+e(DC,36,None,'Xn Control Rig','clarification',D10,"The Xn Control Rig's power is a Moderate Coil Power Supply (rank 1, which gives its Strain 10) with 2 ranks of Moderate Charge. Its Broad Spectrum Communications Array is a Minor Communication attribute.",
+  [('Xn Control Rig','Power Supply','unstated','Moderate Coil, rank 1 (Strain 10), Charge: Moderate x2'),('Xn Control Rig','Communication grade','unstated','Minor')])
+D11='2026-10-05'
+e(IC,214,None,'Regeneration: power','rule',D11,"Force Field Regeneration and Mechanical Regeneration each use 1 Power Slot, of the same grade as the item's Force Field (or its Attacks' scale if it has none). Biological Regeneration uses no Power Slot. (A Force Field itself uses 1 slot, as written on p214.)",
+  [(None,'Regeneration power','unstated','Force Field and Mechanical: 1 slot each; Biological: none')])
+e(IC,215,None,'Link: Weapon (self-powered weapons)','clarification',D11,"A Weapon Link carrying a weapon that has its own Power Supply (such as a Shohan Tse Blade or Flare Pistol) uses no Power Slot, the same as a self-powered Kinetic weapon.",
+  [(None,'Weapon Link power','1 slot per Link','none when the carried weapon has its own Power Supply')])
+e(G,268,None,'Shohan Personal Armor','stat',D11,"Shohan Personal Armor uses 2 of its 3 Moderate Power Slots (Force Field 1, Force Field Regeneration 1); its Weapon Links carry self-powered Shohan weapons.",
+  [('Shohan Personal Armor','Power Slots used','3','2')])
+e(DC,39,None,'Shohan Drone','stat',D11,"The Shohan Drone's Force Field is Moderate 3 (Track 60), not Minor 3. Its Power Slots are 3 Moderate (1 used: Force Field) and 3 Major (1 used: Attack), not 3 Moderate (0 used), 3 Major (1 used).",
+  [('Shohan Drone','Force Field grade','Minor 3','Moderate 3 (Track 60)'),('Shohan Drone','Power Slots used','3 Moderate (0 used), 3 Major (1 used)','3 Moderate (1 used), 3 Major (1 used)')])
+e(IC,210,None,'Attack: contact charges','rule',D11,'An emplaced charge or grenade whose Attack is marked Melee is delivered by contact. It does not get the Melee half price, which applies only to hand-to-hand weapons. (Decisive Action\'s breaching and demolition charges.)',
+  [(None,'Melee half price','any Melee Attack','hand-to-hand weapons only; contact charges pay full price')])
+e(DA,105,106,'Charges, grenades and special rounds: prices per 10','clarification',D11,"The printed CR and CC for the Agni Variable Yield Rounds, High Impact Explosive Charge, Incendiary Charge, Plasma Breaching Charge and Grav Grenade are for a batch of 10. A single item is 1 CR less (see the core errata for p225, group pricing).",
+  [(None,'Charge/round CR','unstated','printed values are for a batch of 10; one is -1 CR')])
+e(DA,106,None,'Grav Grenade','stat',D11,'The Grav Grenade is a Tiny item, not Small.',
+  [('Grav Grenade','Size','Small','Tiny')])
+D12='2026-10-06'
+e(DA,120,None,'The Artemis','stat',D12,"The Artemis has 6 Major Fusion power supply ranks (not 4 reactors), Manufacture (Major), and Maneuver 4 (Major) as standard, not optional; its drives are as printed (Major Jump, Major Gravitic, Moderate Reaction). Total Power Slots: 24 Major (5 used: Launchers 3, Anti-Missile 1, Manufacture 1), 3 Moderate (0 used). Cost Rating 14, Character Creation cost 105 (was CR 15, CC 120; the printed CR used the old round-to-nearest rule).",
+  [('The Artemis','Power Supply','4 Major Fusion','6 Major Fusion'),('The Artemis','Manufacture','none','Major'),('The Artemis','Maneuver','4 (Major, optional)','4 (Major)'),('The Artemis','Power Slots','12 Major (10 used), 3 Moderate (0 used)','24 Major (5 used), 3 Moderate (0 used)'),('The Artemis','CR','15','14'),('The Artemis','CC','120','105')])
+e(IC,216,None,'Missiles: Space-scale chassis','rule',D12,"A Space-scale missile is built on a chassis of a Moderate Reaction Drive and a Major Coil Power Supply, with no Charge or Fuel (it only has to last one round). Missile stat blocks assume the chassis and don't print it.",
+  [(None,'Space missile chassis','unstated','Moderate Reaction Drive + Major Coil, no Charge/Fuel')])
+e(DA,125,None,'Grav Missile','stat',D12,"The Grav Missile is a Medium item with a 7x attack, not 8x, and costs 5 CR per 10 missiles, not 3 (CR 4 each).",
+  [('Grav Missile','Attack','Grav (Space) 8x','Grav (Space) 7x'),('Grav Missile','CR','3 per 10','5 per 10 (4 each)')])
+e(DA,125,None,'Hyper Missile','stat',D12,"The Hyper Missile's Restricted Technology is a Moderate limitation, not Major. It is a Medium item (CR 4 each; the printed 5 CR per 10 is unchanged).",
+  [('Hyper Missile','Limitation: Restricted Technology','Major','Moderate')])
+D13='2026-10-08'
+e(DA,84,None,'Gravitic attacks','rule',D13,"Gravitic is an Attack implementation costing the normal Attack cost +5 BP: every hit applies [Flattened] (rank = margin of success; freely consequenced against movement and evasion, condemned against attacks, invokable by attackers; lasts a round), priced as a standard Tag. A Gravitic attack must buy Area and does not benefit from Coordinated Fire. (Gravitic Pulsers, Grav Grenade, Grav STA Missile, Grav Missile.)",
+  [(None,'Gravitic attack cost','10 / 20 / 40 BP base','Attack cost + 5 (includes [Flattened])')])
+e(DA,84,None,'Grav Blades','rule',D13,"Grav Blades are Major only and cost 75 BP. They replace the ship's Gravitic Drive and still work as one (including as an FTL drive and for in-system maneuvering), and may buy Weapon Multipliers like an Attack. Hits can push or pull the target; they can counter missiles and kinetic rounds (core p194); attacks are Sustained and gain no Coordinated Fire or Counter: Armor.",
+  [(None,'Grav Blades','unstated','Major, 75 BP, replaces Gravitic Drive, buys multipliers')])
+e(DA,124,None,'Redemption Aegis Refit (Option 2)','stat',D13,"Option 2 of the Redemption Aegis Refit keeps the Redemption's 6 Major Magazine (60 shots), not 4 (40 shots).",
+  [('Redemption Aegis Refit (Option 2)','Magazine','4 Major (40 shots)','6 Major (60 shots)')])
+e(DA,85,None,'Force Field: Lamellar Matrix','rule',D13,"The Lamellar Matrix is a Terran Force Field implementation at the normal Force Field costs. Unlike other Terran fields it may be Major grade (covering up to Colossal). Once its Track is at 25% or below, aimed shots bypass it. It cannot take Regeneration. (Used by the Redemption Aegis Refit.)",
+  [(None,'Terran Force Field grade','Minor or Moderate only','Lamellar Matrix may be Major')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))

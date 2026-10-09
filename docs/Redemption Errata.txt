@@ -15,6 +15,9 @@ P210: Melee attacks can never gain the Area attribute.
 P210: Rail (Kinetic Ranged) weapons integrated into an item (ship and vehicle weapons, and units slaved to a host such as suit-mounted or Weapon Link weapons) draw a Power Slot like any other Attack, in addition to their Ammunition. Standalone rail weapons (hand weapons such as gauss pistols and rifles) need no Power Supply: the power is built into the casing of each round, and this is already included in their Ammunition.
 P210: The Hyperspace implementation (the Shohan Dreadnought's hyper cannon, the only such attack in the game) includes Counter: Armor and Area: Small Sudden at no extra cost. Both are printed in the cannon's stat block so its effects can be read without looking up the implementation.
 P210: An Attack on a One-Time Use item, such as a grenade, needs no feed (no Power Slot and no Ammunition): the item is its own charge.
+P210: A 1x attack does no damage; it delivers an effect (Tags, Counters, or missile interception) and costs half the Attack base (5 / 10 / 20). The Anti-Missile is one example; the Deployment Companion's Flashbang is another.
+P210: Area costs 20 BP for a Small area. Each size step larger costs another 20 BP: Medium 40, Large 60, Huge 80, Colossal 100.
+P210: An emplaced charge or grenade whose Attack is marked Melee is delivered by contact. It does not get the Melee half price, which applies only to hand-to-hand weapons. (Decisive Action's breaching and demolition charges.)
 P211: A Plasma Attack's free Bleed (half its Weapon Multiplier, at the grade matching the Attack's scale) can be increased. Additional Bleed damage costs the difference between the full Bleed cost and the free Bleed.
 P211: Plasma has a self-powered implementation for hand weapons. Instead of drawing 2 Power Slots per mount, it needs special ammunition (an Ammunition Resource). That requirement is built into the implementation as a Moderate limitation: it takes one of the two Moderate limitation slots but refunds no Build Points. Plasma weapons built into or slaved to a host still draw 2 Power Slots per mount, with or without ammunition. Kinetic (rail) weapons split the same way (p210): Kinetic draws a Power Slot plus Ammunition, Kinetic (self-powered) uses Ammunition only.
 P212: Counter Armor no longer can bypass non-partial armor on an aimed attack. Instead on an unaimed attack it will reduce armor by 1. Aimed attacks will grant an additional 1 armor reduction for the attack, bringing the aimed attack to -2 armor. However, the armor reduction contributed to other attacks remains at -1 armor.
@@ -23,17 +26,23 @@ P213: Reactionless drives should not expel Reaction Mass.
 P213: A Drive needs no Fuel Resource when it can run from its item's own Power Supply and that supply burns no Fuel: a Coil (battery), Environmental, or Hyperspace Tap supply. A creature's legs, wings, or fins are a Biological Drive, which needs no Fuel either. Light Sail and Jump drives are unchanged.
 P214: Hangar: "multiple items" means 3 items, or 4 if crammed in. For example, a Major Hangar on a Huge ship holds 3 Large craft (4 crammed), and a Moderate Hangar holds 3 items two sizes smaller (4 crammed).
 P214: Launchers are bought in sets of 4 (one set draws 1 Power Slot and costs 4 × the per-launcher price: 20 / 40 / 60 BP). Ships printing launcher counts that are not multiples of 4 are corrected by errata (Standard Assault Shuttle, Dragon, Conventional Frigate, Redemption, Havenite Marauder). A Magazine does not have to match the launcher count.
+P214: Force Field Regeneration and Mechanical Regeneration each use 1 Power Slot, of the same grade as the item's Force Field (or its Attacks' scale if it has none). Biological Regeneration uses no Power Slot. (A Force Field itself uses 1 slot, as written on p214.)
 P215: Add a Link type, Refueling: a docking connection that transfers fuel to a linked craft of up to the Link's maximum size. Each Refueling Link draws 1 Power Slot of its grade while in use. (The Fleet Auxiliary's three Major Refueling Links account for 3 of its 4 used Power Slots.)
 P215: A Weapon Link powers the weapon it carries, so by default each Weapon Link uses 1 Power Slot of its grade. Some weapons need none, such as self-powered Kinetic (rail) weapons.
+P215: Add a Link type, Armor: it holds a separately built armor kit up to the Link's maximum size. The kit's Armor Rating applies by default; an aimed shot can target the host's own Armor Rating instead. An Armor Link uses no Power Slot. (First used by the New Detroit militia's Ranger Armor and its Armor Kit.)
+P215: A Weapon Link carrying a weapon that has its own Power Supply (such as a Shohan Tse Blade or Flare Pistol) uses no Power Slot, the same as a self-powered Kinetic weapon.
 P216: A Moderate Power Supply may be installed on a Small item (the table lists Medium). Major Power Supplies still require a Large item, except that the compact Hyperspace Tap and Coil implementations can squeeze a Major Power Supply into a Medium item.
 P216: An item with no Power Supply or Drive of its own, such as a weapon module or a G3P, draws the Power Slots it uses from the host it is mounted on or plugged into. Its stat block lists them as its power requirement. A Slave limitation still means it needs a Link of the right type to work, not just a power connection.
+P216: A Space-scale missile is built on a chassis of a Moderate Reaction Drive and a Major Coil Power Supply, with no Charge or Fuel (it only has to last one round). Missile stat blocks assume the chassis and don't print it.
 P217: A Fuel Resource can feed Drives and Power Supplies of its own grade or lower. A larger fuel tank can feed a smaller drive (for example, Major Fuel can feed a Moderate Reaction Drive), but never the reverse.
 P217: Shohan Force Field Regeneration is always Major grade (regenerates every round).
 P217-218: Key Personnel (the item needs a specific crew member, such as a Navigator) is a Moderate limitation. A Modifier covering several skills is costed per skill (10 BP × rank × number of skills). A Minor Reaction Drive is a jet pack that works on a planet or in microgravity.
 P217-218: The grade of a Modifier is how many skills it covers: Minor for one skill (10 BP per rank), Moderate for two (20 BP per rank), and Major for three or more, or a whole class of skills such as "Weapons" or "Technical Skills" (30 BP per rank). This replaces costing multi-skill Modifiers per skill. The +4 limit per skill still applies; how a class Modifier stacks with others is left to the table.
+P218: A grenade's Hungry limitation means that when it is fired from a launcher or a vehicle's kinetic weapon, it takes 10 rounds (one Resource rank) of that weapon's magazine.
 Gear
 
 P225: Update the Quick Reference table to match the errata: Standard Light Armor CR 0, CC 0; Psionic Light Armor CR 0, CC 0; Flight Pack CR 0, CC 0; Personal Psi Link CR 1, CC 1; Stealth FTL Recon Drone CR 6, CC 21; Factory Freighter CR 9, CC 45; Tse Blade CR 4, CC 10. Replace the Programs "Min" column (minimum computer rank) with the required computer grade: Minor for all eight programs.
+P225: Items priced "per 10" (grenades, sidearm ammunition, missiles) are sold in groups: a group of 10 costs +1 CR over a single item. This is an economic rule, not a build cost; an item's Workbench CR is for one. (The Explosive Grenade's printed CR 1 is a box of 10; one grenade is CR 0 at its printed 5x.)
 P226-271: Equipment Modifiers listed for "Sidearms" should read "Firearms". Sidearms is an earlier name for the personal weapon skill.
 P226-271: Several stat blocks printed an Armor or Attack Multiplier rank as the final value, leaving out the base rank, so the printed Armor Rating or Weapon Multiplier is one step too low. The affected items are corrected individually below.
 P226: Psionic Light Armor's fuel should read 10 Days/Combat turns instead of "1 Day".
@@ -60,7 +69,6 @@ P232: The Sniper Rifle's attack increases to 5x from 4x.
 P232: The Plasma Carbine's attack increases to 5x from 4x. Its Bleed is 4 (Minor): 2 free from the Plasma implementation plus 2 bought.
 P232: Delete "Upkeep: 1" from the Plasma Carbine. Upkeep, a recurring maintenance cost, was phased out of the rules; this listing is a leftover.
 P232: The Plasma Carbine's attack is self-powered Plasma. Its special ammunition requirement is built into that implementation, replacing the separate Prerequisite (special ammunition) limitation, and its Bleed is 3 (Minor): 2 free from Plasma plus 1 bought. Cost Rating unchanged (2).
-P233: The Explosive Grenade's attack increases to 6x from 5x.
 P233: The Tactical Railgun is a Small item, not Medium. Its Hungry limitation is a Moderate limitation. Its attack remains 4x.
 P233: The Tactical Missile Rack gains Limitation: Slave (Moderate). It is a module mounted on and powered by a host unit.
 P234: Light Plasma cannon ammo now costs CR 1.
@@ -157,6 +165,7 @@ P268: The Tse Blade's [Flexible Geometry Blade] is a Free Tag. [Where Did You Ge
 P268: Shohan Personal Armor's Regeneration grades are Biological 4 at Moderate (4 Body per scene) and Force Field 4 at Major (every round). [Emergent Altered] is a Moderate limitation (Malfunction), and the armor has a second Moderate limitation, Target On Your Back.
 P268: The Shohan Personal Armor's 2 Weapon Links are Moderate. Its Weapons +2 Modifier works only with weapons fitted to those Links (Limitation: Usage Restriction, Minor). Its Computer is Minor rank 3 (18 target), not Moderate, its Athletics Modifier is +1, not +2, and its Body Track is 45, not 40. Total Power Slots: 3 Moderate, 3 used (Force Field and one weapon on each Link).
 P268: The Shohan Personal Armor's Weapons +2 Modifier covers two skills, Melee and Heavy Weapons (pairing with a Tse Blade), and is costed as a Moderate Modifier. Target On Your Back is a Major limitation, not Moderate: the armor can't be concealed, and anyone wearing it is visibly in the other side's armor. Cost Rating unchanged (5).
+P268: Shohan Personal Armor uses 2 of its 3 Moderate Power Slots (Force Field 1, Force Field Regeneration 1); its Weapon Links carry self-powered Shohan weapons.
 P269: Shohan War Drone's Body increases to 80, armor increases to 5.
 P269: The War Drone (Cerberus)'s Brain is Moderate rank 4 (20 target), not rank 3, so it can run its Combat 20 Task.
 P271: The Resistance Lumber Mech's Body Track is 70, not 80. Its Coil Power Supply uses 2 Moderate Charge, not Fuel. [Kinetic Feedback Control Rig] is a Free Tag (free Skill switch from Drive to Athletics).
@@ -167,3 +176,27 @@ Psionics
 P278: Astral Projection costs 1 strain per round or scene that the character maintains the projection.
 P285: Necromantic attunements may be sacrificed to gain strain at 10 points for every rank of the attunement.
 P285: Necromancers may shunt damage to their strain track at a 1 to 1 ratio, previously this was 3 strain for every point of damage.
+Deployment Companion
+
+P36: "All prices per 10" means the printed CR and CC buy a group of 10 grenades. A single grenade is 1 CR less (see the core errata for p225, group pricing).
+P36: The Foam Grenade's Attack is x6, not x5.
+P36: The Flashbang's Attack is a 1x Firefight attack: it does no damage. Everyone in the Area (Sudden): Small makes a new Cover roll. [Deaf and Distracted 3] is a Free Tag, condemned against that Cover roll, and the Flashbang adds [Flat Footed 2] as a Free Tag, condemned against affected targets' Movement checks. Both last for a round.
+P36: The Plasma Cutter's Tag is [Can Opener 3], a Free Tag, not [Can Opener 2].
+P36: The Foamer's Tag is [A Messy Arrest 3], a Free Tag, and it carries 40 rounds of ammunition, not 30.
+P36: The Stunner's Cost Rating is 0 and its Character Creation cost is 0 (was CR 1, CC 1). Its stats are unchanged.
+P36: The Xn Control Rig's power is a Moderate Coil Power Supply (rank 1, which gives its Strain 10) with 2 ranks of Moderate Charge. Its Broad Spectrum Communications Array is a Minor Communication attribute.
+P37: The Sentinel Package's "Linked Weapons +1" Modifier applies to Firearms and Heavy Weapons. It covers two skills, so it is a Moderate Modifier.
+P37: The Helping Hand's Manual Dexterity +2 is a Major Modifier (Manual Dexterity covers a class of skills). It gains a Minor limitation: the bonus applies only in situations where an extra hand is useful.
+P39: The Flare Pistol gains Counter: Force Fields and Far Ranged (Minor), and its Firearms Modifier is +3, not +2.
+P39: The Shohan Drone's Force Field is Moderate 3 (Track 60), not Minor 3. Its Power Slots are 3 Moderate (1 used: Force Field) and 3 Major (1 used: Attack), not 3 Moderate (0 used), 3 Major (1 used).
+Decisive Action
+
+P84: Gravitic is an Attack implementation costing the normal Attack cost +5 BP: every hit applies [Flattened] (rank = margin of success; freely consequenced against movement and evasion, condemned against attacks, invokable by attackers; lasts a round), priced as a standard Tag. A Gravitic attack must buy Area and does not benefit from Coordinated Fire. (Gravitic Pulsers, Grav Grenade, Grav STA Missile, Grav Missile.)
+P84: Grav Blades are Major only and cost 75 BP. They replace the ship's Gravitic Drive and still work as one (including as an FTL drive and for in-system maneuvering), and may buy Weapon Multipliers like an Attack. Hits can push or pull the target; they can counter missiles and kinetic rounds (core p194); attacks are Sustained and gain no Coordinated Fire or Counter: Armor.
+P85: The Lamellar Matrix is a Terran Force Field implementation at the normal Force Field costs. Unlike other Terran fields it may be Major grade (covering up to Colossal). Once its Track is at 25% or below, aimed shots bypass it. It cannot take Regeneration. (Used by the Redemption Aegis Refit.)
+P105-106: The printed CR and CC for the Agni Variable Yield Rounds, High Impact Explosive Charge, Incendiary Charge, Plasma Breaching Charge and Grav Grenade are for a batch of 10. A single item is 1 CR less (see the core errata for p225, group pricing).
+P106: The Grav Grenade is a Tiny item, not Small.
+P120: The Artemis has 6 Major Fusion power supply ranks (not 4 reactors), Manufacture (Major), and Maneuver 4 (Major) as standard, not optional; its drives are as printed (Major Jump, Major Gravitic, Moderate Reaction). Total Power Slots: 24 Major (5 used: Launchers 3, Anti-Missile 1, Manufacture 1), 3 Moderate (0 used). Cost Rating 14, Character Creation cost 105 (was CR 15, CC 120; the printed CR used the old round-to-nearest rule).
+P124: Option 2 of the Redemption Aegis Refit keeps the Redemption's 6 Major Magazine (60 shots), not 4 (40 shots).
+P125: The Grav Missile is a Medium item with a 7x attack, not 8x, and costs 5 CR per 10 missiles, not 3 (CR 4 each).
+P125: The Hyper Missile's Restricted Technology is a Moderate limitation, not Major. It is a Medium item (CR 4 each; the printed 5 CR per 10 is unchanged).

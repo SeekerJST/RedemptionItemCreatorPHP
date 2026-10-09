@@ -66,7 +66,7 @@ def export(it):
     out = {
         'itemName': it['name'], 'itemSize': it['size'].upper(), 'category': it['cat'],
         'description': DESC.get(it['name'], ''), 'page': it['page'],
-        'printedCR': it['cr'], 'printedCC': it['cc'], 'extra': it['extra'],
+        'printedCR': it['cr'], 'printedCC': it['cc'], 'extra': it['extra'], 'groupSize': 10 if it['extra'].get('Sold per') else None,
         'catalogBP': sum(bp for _, _, bp in it['rows']), 'catalogCR': None,
         'catalogRows': [list(row) for row in it['rows']],
         'attributeList': [], 'tagList': [], 'limitList': [], 'modifierList': [], 'taskList': [], 'notes': [],

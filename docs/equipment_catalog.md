@@ -101,7 +101,7 @@ alongside an XP cost.
 | [Security Gauss Rifle](#security-gauss-rifle) | Small | 91 | 1 | 1 | ✔ |
 | [Plasma Carbine](#plasma-carbine) | Small | 115 | 2 | 2 | ✔ |
 | [Sniper Rifle](#sniper-rifle) | Small | 134 | 3 | 3 | ✔ |
-| [Explosive Grenade](#explosive-grenade) | Small | 90 | 1 | 1 | ✔ |
+| [Explosive Grenade](#explosive-grenade) | Small | 50 | 1 | 1 | ✔ |
 | [Tactical Railgun](#tactical-railgun) | Small | 107 | 2 | 2 | ✔ |
 | [Tactical Missile Rack](#tactical-missile-rack) | Medium | 140 | 1 | 1 | ✔ |
 | [Light Plasma Cannon](#light-plasma-cannon) | Medium | 150 | 2 | 2 | ✔ |
@@ -182,8 +182,26 @@ alongside an XP cost.
 | [Shohan Dreadnought](#shohan-dreadnought) | Colossal | 2,503 | 12 | — | — |
 | [Resistance Lumber Mech](#resistance-lumber-mech) | Medium | 296 | 4 | 4 | ✔ |
 | [Resistance Variable Laser Array](#resistance-variable-laser-array) | Small | 98 | 1 | 1 | ✔ |
+| [Ranger Armor](#ranger-armor) | Medium | 225 | 3 | 3 | ✔ |
+| [Armor Kit (Ranger)](#armor-kit-ranger) | Small | 80 | 1 | 1 | ✔ |
+| [Plasma Thrower](#plasma-thrower) | Small | 120 | 2 | 2 | ✔ |
+| [Acoustic Bomb](#acoustic-bomb) | Small | 90 | 1 | 1 | ✔ |
+| [Plasma Cutter](#plasma-cutter) | Small | 104 | 2 | 2 | ✔ |
+| [Sentinel Package](#sentinel-package) | Tiny | 54 | 2 | 2 | ✔ |
+| [Helping Hand](#helping-hand) | Small | 81 | 1 | 1 | ✔ |
+| [Foamer](#foamer) | Small | 79 | 1 | 1 | ✔ |
+| [Stunner](#stunner) | Small | 42 | 0 | 0 | ✔ |
+| [Flare Pistol](#flare-pistol) | Small | 150 | 4 | 4 | ✔ |
+| [Xn Control Rig](#xn-control-rig) | Small | 123 | 2 | 2 | ✔ |
+| [Cybernetic Conversion](#cybernetic-conversion) | Medium | 187 | 2 | 2 | ✔ |
+| [Shohan Drone Destroyer](#shohan-drone-destroyer) | Huge | 1,505 | 10 | — | — |
+| [Shohan Drone](#shohan-drone) | Medium | 553 | 10 | — | — |
+| [Phantom Mk. II](#phantom-mk-ii) | Large | 871 | 8 | 8 | ✔ |
+| [Foam Grenade](#foam-grenade) | Small | 60 | 1 | 1 | ✔ |
+| [Flashbang](#flashbang) | Small | 15 | 0 | 0 | ✔ |
+| [Incendiary Grenade](#incendiary-grenade) | Small | 45 | 1 | 1 | ✔ |
 
-**98 match, 0 differ.** Every item now matches its printed or errata CR.
+**114 match, 0 differ.** Every item now matches its printed or errata CR.
 
 
 ---
@@ -764,27 +782,26 @@ Description: "A time-honored method for eliminating foes at long range, updated 
 
 #### Explosive Grenade
 
-p. 233 · **Size:** Small · **Printed CR:** 1 · **CC:** 0
+p. 233 · **Size:** Small · **Printed CR:** 1 · **CC:** 0 · **Sold per:** 10 (+1 CR over one)
 
 Description: ""
 
-> **Errata** (new, 2026-09-26) p233: Attack 6x (was 5x).
-
 | Row | Detail | BP |
 |---|---|---:|
-| Attack | Energy (Firefight) 6x | 110 |
+| Attack | Energy (Firefight) 5x | 70 |
 | Area |  | 20 |
 | Counter | Armor | 20 |
 | Limitation | Major: One-Time Use | −50 |
 | Limitation | Minor: Hungry (1 shot per grenade) | −10 |
-| **Total** | | **90** |
+| **Total** | | **50** |
 
-**Formula CR:** 1 ✔ matches printed
+**Formula CR:** 1 (one: 0; per 10: +1) ✔ matches printed
 
 **Check:**
 
+- Priced per 10: the printed CR 1 / CC 0 is for a box of 10 (+1 CR over one grenade, CR 0). The 2026-09-26 erratum raising it to 6x is withdrawn; the book's 5x is right.
 - No implementation is given ("Ranged 5x"). Costed as Energy; as Kinetic it would be 6 BP cheaper. The CR is the same either way.
-- CC 0 at CR 1 breaks the usual CR→CC pattern (CR 1 → CC 1). Possibly deliberate for consumables; sidearm ammo does the same.
+- Hungry: fired from a launcher or vehicle kinetic weapon, a grenade takes 10 rounds of its magazine.
 
 
 ### Weapons: Heavy
@@ -3047,7 +3064,7 @@ Description: "The standard Shohan soldier’s armor."
 
 **Formula CR:** 5 ✔ matches printed
 
-**Power:** 3 Moderate (Hyperspace Tap); 3 used (Force Field 1, a weapon on each Weapon Link 1 + 1). OK.
+**Power:** 3 Moderate (Hyperspace Tap); 2 used (Force Field 1, Force Field Regeneration 1; Biological Regeneration uses none). Its Weapon Links carry self-powered Shohan weapons (Tse Blade, Flare Pistol), which draw nothing (ruling 2026-10-05).
 
 #### War Drone (Cerberus)
 
@@ -3150,7 +3167,7 @@ Description: "Combining the maneuverability of a cruiser with the firepower of a
 
 **Formula CR:** 9
 
-**Power:** 3 Moderate, 9 Major (Jump Drive's tap 3 + 2 taps 6). 7 Major used.
+**Power:** 3 Moderate, 9 Major (Jump Drive's tap 3 + 2 taps 6). 7 Major used: 4 arrays, Force Field 1, Force Field Regeneration 1, Mechanical Regeneration 1 (ruling 2026-10-05).
 
 - [Disoriented] comes with the Jump Drive; it isn't a bought Malfunction.
 
@@ -3252,6 +3269,506 @@ Description: "Artemis III’s Resistance forces includes some of the Colony’s 
 **Power:** 3 Moderate; 1 used.
 
 - Alternate form SUIT-MOUNTED VLA: drop the Power Supply and Charge, draw 1 Moderate slot from the host, add Limitation: Slave (unit with a Weapon Link).
+
+
+### New Detroit: Militia Gear
+
+#### Ranger Armor
+
+Source: New Detroit · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
+
+Description: "Designed by the Wellpoint Armory subsidiary on planet, this enhanced armor suit is adapted to the resources available to the militias. Because they are largely cut off from outside supply, the ability to construct modern protective materials is limited. Instead, the Ranger Armor focuses on stealth, mobility, and force fields which were just starting to be developed by the Terran Sphere when the colony lost contact. However, their force field technology is somewhat more primitive than the version that the Terran Sphere would eventually field. While the suit has a low innate armor, the designers did include an attachment system to add additional armor plating as material becomes available. The suit contains a limited life support system, mainly intended to protect the users operating in the Blue Zones."
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Firefight, rank 2 | 30 |
+| Body Track | 25 (default 10 + 3×5) | 15 |
+| Force Field | Minor ×3 (track 30) | 45 |
+| Drive | Minor Ground (exoskeleton assist) | 10 |
+| Maneuver | rank 2 at Minor grade | 10 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×2 | 8 |
+| Link | Minor Psi | 5 |
+| Link | Minor Weapon | 5 |
+| Link | Minor Armor | 5 |
+| Communication | Minor Radio | 3 |
+| Computer | Minor rank 3 (TN 18) | 9 |
+| Life Support | Minor ×1 | 5 |
+| Limitation | Minor: Usage Restriction (life support filters last 6 hours) | −10 |
+| Modifier | Athletics +2 | 20 |
+| Modifier | Stealth +3 | 30 |
+| Modifier | Firearms +1 | 10 |
+| Tag | [Nobody's Here] 3 (Free) | 30 |
+| Limitation | Minor: Prototype Tech (a depleted Force Field recharges only halfway; full if the wearer goes another round unhit, or spends 1 AP) | −10 |
+| **Total** | | **225** |
+
+**Formula CR:** 3 ✔ matches printed
+
+**Power:** 3 Minor (Coil) + 3 Minor (exoskeleton Drive); 3 used (Force Field, Psi Link, Weapon Link). The Drive's slots cover a 2-slot weapon such as the Plasma Thrower. OK.
+
+- Terran Force Field (Minor; no Regeneration). [Nobody's Here 3] is a Free Tag, condemned against Detection.
+- Armor Link: holds an Armor Kit. The kit's Armor Rating applies by default; aimed shots can use the suit's own rating.
+
+#### Armor Kit (Ranger)
+
+Source: New Detroit · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: "A set of reinforced plates that can be inserted into Ranger Armor to increase its armor rating."
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Battlefield, rank 3 | 80 |
+| **Total** | | **80** |
+
+**Formula CR:** 1 ✔ matches printed
+
+- Fits Ranger Armor's Armor Link.
+
+#### Plasma Thrower
+
+Source: New Detroit · **Size:** Small · **Printed CR:** 2 · **CC:** 3
+
+Description: "Infantry level plasma weaponry was still on the drawing board when New Detroit fell. The local weapon designers have done their best, but the lack of materials and access to the knowledge base of broader research community has hindered their efforts. The end result is the Plasma thrower; a short range weapon with two modes: a continuous burning stream or a single heavy blast."
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (Plasma Blast) | Plasma (Firefight) 5x | 70 |
+| Counter | Shields (free) | 0 |
+| Bleed | Minor 2 (free, Plasma) | 0 |
+| Counter | Armor | 20 |
+| Attack (Plasma Stream) | Plasma (Firefight) 2x | 10 |
+| Counter | Shields (free) | 0 |
+| Bleed | Moderate 4 | 40 |
+| Area |  | 20 |
+| Limitation | Minor: Hungry (Plasma Stream) | −10 |
+| Limitation | Minor: Usage Restriction (Short range only) | −10 |
+| Resource | Ammunition, Minor ×3 | 15 |
+| Tag | [Burn!] | 5 |
+| Limitation | Moderate: Slave (draws 2 Power Slots from a host power supply) | −20 |
+| Limitation | Moderate: Malfunction [Fire Has No Friends] | −20 |
+| **Total** | | **120** |
+
+**Formula CR:** 2 ✔ matches printed
+
+**Power:** Draws 2 Minor slots from its host: one Plasma mount, shared by both modes.
+
+- Two modes of one weapon: Plasma Blast (5x, free Bleed Minor 2, Counter: Armor) and Plasma Stream (Bleed Moderate 4, Area: Small Sustained, Hungry). The Stream's Moderate Bleed doesn't match a Firefight attack's free (Minor) Bleed, so it's paid in full.
+- [Burn!]: spend an AP to edit the fire into an adjacent Zone; everyone there or moving through makes a new defensive roll against the attack's margin of success or is set ablaze.
+- [Fire Has No Friends]: when consequenced, the GM picks a new Zone for the fire to spread to; same defensive roll as [Burn!].
+
+#### Acoustic Bomb
+
+Source: New Detroit · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: "Acoustic deterrents have long been used to scare away nocturnal pests on New Detroit. Militias initially found success with the technology against the various beasts of the Blue Zones, but have unexpectedly discovered that the sound waves used in the technology can place additional stress on a force field operating in an atmosphere."
+
+> **Errata** (change, 2026-10-04) New Detroit doc: the requires-an-atmosphere Usage Restriction is Moderate (was Minor), offsetting the Medium area's 40 BP under the Area-size rule.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (sonic blast) | Energy (Firefight) 4x | 40 |
+| Area | Medium | 40 |
+| Counter | Shields | 20 |
+| Tag | [Can't Hear Myself Think] 3 (Free) | 30 |
+| Tag | [Reverberation] 3 (Free) | 30 |
+| Limitation | Major: One-Time Use | −50 |
+| Limitation | Moderate: Usage Restriction (requires an atmosphere) | −20 |
+| **Total** | | **90** |
+
+**Formula CR:** 1 ✔ matches printed
+
+**Power:** None needed (One-Time Use).
+
+- Area: Medium Sudden. Counter: Shields (Force Fields).
+- [Can't Hear Myself Think 3] (Free): condemned against the target's next action. [Reverberation 3] (Free edit): the next attack against an affected target gains Counter: Shields.
+- One-Time Use: its attack needs no feed.
+
+
+### Deployment Companion: Equipment
+
+#### Plasma Cutter
+
+Source: Deployment Companion p36 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
+
+Description: "Boarding parties use the plasma cutter's short, high-intensity plasma stream to cut through hatches and other obstacles."
+
+> **Errata** (new, 2026-10-04) Deployment Companion p36: [Can Opener 3] (Free), not [Can Opener 2].
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Plasma/Melee (Firefight) 5x | 35 |
+| Counter | Shields (free) | 0 |
+| Bleed | Minor 3 (Plasma: 2 free + 1 bought) | 10 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×6 | 24 |
+| Tag | [Can Opener] 3 (Free) | 30 |
+| **Total** | | **104** |
+
+**Formula CR:** 2 ✔ matches printed
+
+- Plasma Bleed x3: the free Bleed at the attack's scale.
+
+#### Sentinel Package
+
+Source: Deployment Companion p37 · **Size:** Tiny · **Printed CR:** 2 · **CC:** 3
+
+Description: "This multispectrum sensor package is popular with bodyguards and other sentries throughout the Fourth Population."
+
+> **Errata** (new, 2026-10-04) Deployment Companion p37: "Linked Weapons +1" is a Modifier to Firearms and Heavy Weapons (two skills: Moderate, 20 BP per rank).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Neural Interface | Minor | 3 |
+| Communication | Minor Radio | 3 |
+| Computer | Minor rank 1 (TN 14) | 3 |
+| Tag | [Eyes in the Back of My Head] | 5 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Firearms and Heavy Weapons (Linked Weapons) +1 (counted ×2 skills) | 20 |
+| **Total** | | **54** |
+
+**Formula CR:** 2 ✔ matches printed
+
+#### Helping Hand
+
+Source: Deployment Companion p37 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: "An extra limb. Depending on the owner's preferences, this could be anything from a prehensile tail to an additional arm. All variations require attachment to the recipient's spinal column or central nervous system for leverage and neural links."
+
+> **Errata** (new, 2026-10-04) Deployment Companion p37: Manual Dexterity +2 is a Major Modifier (a class); adds a Minor limitation: only in situations where an extra hand is useful.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Neural Interface | Minor | 3 |
+| Link | Minor Data | 5 |
+| Link | Minor Psi | 5 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×2 | 8 |
+| Modifier | Manual Dexterity (class) +2 (counted ×3 skills) | 60 |
+| Tag | [Need A Hand?] | 5 |
+| Limitation | Minor: Usage Restriction (Manual Dexterity bonus only where an extra hand is useful) | −10 |
+| **Total** | | **81** |
+
+**Formula CR:** 1 ✔ matches printed
+
+- Power Supply (Coil Stack): rank 1, 3 Minor slots; the Psi Link uses 1 while in use.
+
+#### Foamer
+
+Source: Deployment Companion p36 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: "Frequently used in law enforcement, Foamers spray a quick-congealing, air-permeable foam that entangles and traps a target."
+
+> **Errata** (new, 2026-10-04) Deployment Companion p36: [A Messy Arrest 3] (Free), not [A Messy Arrest]; Ammo 40, not 30.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Kinetic (self-powered) (Firefight) 3x | 19 |
+| Area |  | 20 |
+| Resource | Ammunition, Minor ×4 | 20 |
+| Tag | [A Messy Arrest] 3 (Free) | 30 |
+| Limitation | Minor: Usage Restriction (subdual damage only; cannot be modified to deal lethal damage) | −10 |
+| **Total** | | **79** |
+
+**Formula CR:** 1 ✔ matches printed
+
+- Area (Sustained): Small. Subdual x3.
+
+#### Stunner
+
+Source: Deployment Companion p36 · **Size:** Small · **Printed CR:** 0 · **CC:** 0
+
+Description: "A personal defense weapon with a smart selector system capable of applying incapacitating electric currents to many Fourth Population races and other organisms."
+
+> **Errata** (new, 2026-10-04) Deployment Companion: CR 0, CC 0 (printed CR 1, CC 1).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Energy (Firefight) 4x | 40 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×3 | 12 |
+| Tag | [Feelin' Twitchy] | 5 |
+| Limitation | Minor: Usage Restriction (subdual damage only) | −10 |
+| Limitation | Minor: Usage Restriction (Short range only) | −10 |
+| **Total** | | **42** |
+
+**Formula CR:** 0 ✔ matches printed
+
+- Energy (Firefight), Subdual x4, Charge 30.
+
+#### Flare Pistol
+
+Source: Deployment Companion p39 · **Size:** Small · **Printed CR:** 4 · **CC:** 10
+
+Description: "TSN Marines and Artemis III resistance forces recently encountered a new Shohan weapon. The Flare Pistol, as Nav Int has tentatively named it, is a dedicated ranged infantry weapon that marks the first deviation from the Shohan's standard equipment since the start of The War."
+
+> **Errata** (new, 2026-10-04) Deployment Companion: adds Counter: Force Fields and Far Ranged (Minor); Firearms +3 (was +2).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Flare (Firefight) 4x | 40 |
+| Counter | Armor | 20 |
+| Counter | Shields | 20 |
+| Far Ranged | Minor (Firefight to Battlefield) | 20 |
+| Area | Sudden: Small (optional mode) | 20 |
+| Area | Sustained: Small (optional mode) | 20 |
+| Power Supply | Moderate Hyperspace Tap rank 1 | 10 |
+| Limitation | Minor: One Area Attack Per Round | −10 |
+| Limitation | Moderate: Malfunction [Emergent Altered] | −20 |
+| Modifier | Firearms +3 | 30 |
+| **Total** | | **150** |
+
+**Formula CR:** 4 ✔ matches printed
+
+- Two optional area modes: Area (Sudden) Small or Area (Sustained) Small, one per round.
+- Far Ranged (Minor): can engage Battlefield-scale targets.
+- Uses 1 Power Slot of the Tap's 3.
+
+**Check:**
+
+- The book prints "Moderate Hyperspace Tap: 3 Minor Power Slots"; a rank-1 Moderate supply gives 3 Moderate slots. Left as printed (no cost effect).
+
+
+### Deployment Companion: Bioware
+
+#### Xn Control Rig
+
+Source: Deployment Companion p36 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
+
+Description: "The technology underlying James Xn, this implant replaces most of the victim's cranium and either weaves or hijacks a neural interface into the victim's brain, subverting them for the Hive. When installed, the Hive pays the XP Cost."
+
+> **Errata** (new, 2026-10-04) Deployment Companion p36: power is a Moderate Coil (rank 1, Strain 10) with 2 Moderate Charge; the Broad Spectrum Communications Array is Minor.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Neural Interface | Major | 10 |
+| Computer | Minor Quantum rank 2 (TN 16) | 40 |
+| Power Supply | Moderate Coil rank 1 | 10 |
+| Resource | Charge, Moderate ×2 | 16 |
+| Communication | Minor Radio | 3 |
+| Tasks | Mind Control 16, Intrusion Detection 16 | 64 |
+| Tag | [Psionic Emulation] | 5 |
+| Tag | [Under Your Skin] | 5 |
+| Tag | [Pulling at Your Heartstrings] | 5 |
+| Tag | [Babble] | 5 |
+| Limitation | Moderate: Skill Ban (victim's Psionic Skills) | −20 |
+| Limitation | Moderate: Skill Restriction (Mind Control, victim only) | −20 |
+| **Total** | | **123** |
+
+**Formula CR:** 2 ✔ matches printed
+
+- Advanced Neural Interface = Major Neural Interface. Quantum Processor = Minor Quantum Computer rank 2 (TN 16).
+- XP 22: when installed, the Hive pays the XP cost.
+
+#### Cybernetic Conversion
+
+Source: Deployment Companion p37 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
+
+Description: "Whether due to massive injuries or a desire to exceed their mortal frames, some in the Fourth Population have exchanged their organic bodies for metal and plastic. While not technically illegal in the Sphere, they may face problems due to weapon restrictions on many worlds."
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Firefight, rank 4 | 80 |
+| Body Track | 40 (default 10 + 6×5) | 30 |
+| Life Support | Minor ×1 | 5 |
+| Computer | Minor rank 5 (TN 22) | 15 |
+| Neural Interface | Major | 10 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×3 | 12 |
+| Tag | [Harder, Faster, Better, Stronger] | 5 |
+| Tag | [More Machine Than Man] | 5 |
+| Limitation | Moderate: [Dear God, What is That Thing?] | −20 |
+| Modifier | Athletics +2 | 20 |
+| Modifier | Firearms +1 | 10 |
+| Modifier | Computers +1 | 10 |
+| **Total** | | **187** |
+
+**Formula CR:** 2 ✔ matches printed
+
+- Advanced Neural Interface = Major Neural Interface. Power Supply (Coil Stack): 3 Minor slots, Charge 3.
+- XP 33.
+
+
+### Deployment Companion: Starships
+
+#### Shohan Drone Destroyer
+
+Source: Deployment Companion p37 · **Size:** Huge · **Printed CR:** — · **CC:** —
+
+Description: "As part of their own efforts to counter the TSN's recent improvements, the Shohan are fielding a new Destroyer-class hull. These ships trade some of the Destroyer's hallmark maneuverability and firepower for hangar space sufficient to store and launch eight drones. Fleet intelligence believes that the Drone Destroyer also has limited capacity to produce additional drones if given enough time. These ships are usually tasked with protecting Dreadnoughts from TSN flanking maneuvers."
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (heavy flare cannon array) | Flare (Space) 7x ×2 mounts (+40 each extra) | 230 |
+| Counter | Armor | 20 |
+| Counter | Missiles | 20 |
+| Armor Rating | Space, rank 6 | 230 |
+| Body Track | 250 (default 200 + 1×50) | 20 |
+| Regeneration | Mechanical 1, Major grade | 15 |
+| Force Field | Major ×3 (track 150) | 75 |
+| Regeneration | Force Field 6, Major grade | 90 |
+| Drive | Moderate Reactionless | 25 |
+| Drive | Major Jump | 50 |
+| Maneuver | rank 3 at Major grade | 60 |
+| Power Supply | Major Hyperspace Tap rank 2 | 80 |
+| Communication | Moderate Radio | 13 |
+| Communication | Major Hypercomms | 25 |
+| Computer | Major rank 4 (TN 20) | 80 |
+| Tasks | Electronic Warfare 20, Gunnery 20, Piloting 20, Tactics 18, Detection 18 | 192 |
+| Cargo | Major ×1 | 30 |
+| Hangar | Major ×2 | 120 |
+| Manufacture | Major | 100 |
+| Tag | [Go to Rapid Fire] 3 | 15 |
+| Tag | [Queen Bee] 3 | 15 |
+| **Total** | | **1,505** |
+
+**Formula CR:** 10
+
+**Power:** 3 Moderate (0 used), 9 Major (Jump Drive's tap 3 + 2 taps 6; 6 used: 2 arrays, Force Field 1, Force Field Regeneration 1, Mechanical Regeneration 1, Manufacture 1). OK.
+
+- [Disoriented] comes with the Jump Drive; it isn't a bought Malfunction.
+- Hangars carry eight Shohan Drones; Manufacture can build more given time.
+- CR N/A (Shohan).
+
+#### Shohan Drone
+
+Source: Deployment Companion p39 · **Size:** Medium · **Printed CR:** — · **CC:** —
+
+Description: "While mounting formidable weaponry for such a small platform, Shohan drones are still fairly fragile craft. Similar in size to the Autonomous Kill Vehicles familiar to the Fourth Population, they mount weaponry comparable to an Escort-class hull, and appear aimed at countering Dragons and, in larger deployments, Defiances."
+
+> **Errata** (new, 2026-10-05) Deployment Companion p39: Force Field Moderate 3 (Track 60), not Minor 3; Power Slots 3 Moderate (1 used), 3 Major (1 used).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (heavy flare cannon) | Flare (Space) 6x | 140 |
+| Counter | Armor | 20 |
+| Counter | Missiles | 20 |
+| Body Track | 50 (default 10 + 8×5) | 40 |
+| Force Field | Moderate ×3 (track 60) | 60 |
+| Drive | Moderate Reactionless | 25 |
+| Maneuver | rank 4 at Moderate grade | 40 |
+| Power Supply | Major Hyperspace Tap rank 1 | 40 |
+| Communication | Major Hypercomms | 25 |
+| Computer | Minor rank 3 (TN 18) | 9 |
+| Tasks | Pilot 18, Gunnery 18, Detection 18, Anti-intrusion 18 | 144 |
+| Tag | [Slippery Devil] | 5 |
+| Tag | [Punching Up] | 5 |
+| Limitation | Moderate: Vulnerable: Anti-Missile Weapons | −20 |
+| **Total** | | **553** |
+
+**Formula CR:** 10
+
+**Power:** 3 Moderate (Reactionless Drive; 1 used: Force Field), 3 Major (Hyperspace Tap; 1 used: Attack). OK.
+
+- Armor Rating 0. Carried eight to a Drone Destroyer.
+- CR N/A (Shohan).
+
+#### Phantom Mk. II
+
+Source: Deployment Companion p37 · **Size:** Large · **Printed CR:** 8 · **CC:** 36
+
+Description: "The original Phantom-class was deployed just before Project Leapfrog's breakthroughs in Force Field technology. The Mark II refit seeks to rectify this, exchanging lighter armor and a slightly reduced supply of Tangle for a protective Force Field."
+
+| Row | Detail | BP |
+|---|---|---:|
+| Launcher | Space ×4, 1 increment | 60 |
+| Resource | Magazine, Major ×4 | 60 |
+| Limitation | Minor: Usage Restriction (no combat reload) | −10 |
+| Body Track | 110 (default 50 + 3×20) | 30 |
+| Limitation | Minor: Usage Restriction (hull shroud does not work during atmospheric re-entry) | −10 |
+| Drive | Major Gravitic (modified in-system) | 50 |
+| Limitation | Minor: Hungry (1 Fuel/round for in-system maneuvers) | −10 |
+| Drive | Moderate Reaction | 25 |
+| Drive | Moderate Air | 25 |
+| Drive | Minor Sea/Submersible | 10 |
+| Maneuver | rank 4 at Moderate grade | 40 |
+| Resource | Fuel, Major ×7 | 105 |
+| Communication | Moderate Radio | 13 |
+| Communication | Moderate Laser Link | 13 |
+| Communication | Major Ansible | 30 |
+| Computer | Moderate rank 3 (TN 18) | 15 |
+| Manufacture | Major | 100 |
+| Cargo | Major ×1 | 30 |
+| Life Support | Moderate ×1 | 20 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Gunnery +1 | 10 |
+| Tag | [Marines on Ice] | 5 |
+| Tag | [The High Dive] | 5 |
+| Tag | [Now You See Me, Now You Don't] 2 | 10 |
+| Tag | [High Security] 3 | 15 |
+| Limitation | Moderate: Crew Requirement (2 skeleton, 5 full) | −20 |
+| Armor Rating (Shrouded Hull) | Space, rank 2 | 130 |
+| Resource | Tangle, Major ×4 | 40 |
+| Force Field | Moderate ×3 (track 60) | 60 |
+| **Total** | | **871** |
+
+**Formula CR:** 8 ✔ matches printed
+
+- The core Phantom refit: Moderate Force Field 3 (+60 Force Field Track), Shrouded Hull Armor 2 (was 3), Tangle 4 (was 5; 40 days / combat rounds). CR and CC unchanged from the core Phantom.
+- Terran Force Field (Moderate grade, covers up to Large). Uses 1 Moderate Power Slot; the Moderate Reaction and Air Drives supply 6.
+
+
+### Deployment Companion: Grenades
+
+#### Foam Grenade
+
+Source: Deployment Companion p36 · **Size:** Small · **Printed CR:** 1 · **CC:** 1 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+> **Errata** (new, 2026-10-04) Deployment Companion p36: Attack x6, not x5 (a box of 10 lands on the printed CR 1).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Energy (Firefight) 6x | 110 |
+| Area |  | 20 |
+| Limitation | Minor: Usage Restriction (subdual damage only) | −10 |
+| Limitation | Minor: Hungry (fired from a launcher or vehicle kinetic weapon, takes 10 rounds of its magazine) | −10 |
+| Limitation | Major: One-Time Use | −50 |
+| **Total** | | **60** |
+
+**Formula CR:** 1 (one: 0; per 10: +1) ✔ matches printed
+
+#### Flashbang
+
+Source: Deployment Companion p36 · **Size:** Small · **Printed CR:** 0 · **CC:** 0 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+> **Errata** (new, 2026-10-04) Deployment Companion p36: a 1x attack; [Deaf and Distracted 3] is Free; adds [Flat Footed 2] (Free).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (1x) | Firefight 1x (no damage; delivers its effect) | 5 |
+| Area |  | 20 |
+| Tag | [Deaf and Distracted] 3 (Free) | 30 |
+| Tag | [Flat Footed] 2 (Free) | 20 |
+| Limitation | Minor: Hungry (fired from a launcher or vehicle kinetic weapon, takes 10 rounds of its magazine) | −10 |
+| Limitation | Major: One-Time Use | −50 |
+| **Total** | | **15** |
+
+**Formula CR:** 0 (one: −1; per 10: +1) ✔ matches printed
+
+- A 1x attack: no damage. Everyone in the Area: Small Sudden makes a new Cover roll; [Deaf and Distracted 3] (Free) is condemned against that roll, and [Flat Footed 2] (Free) against their Movement checks, for a round.
+
+#### Incendiary Grenade
+
+Source: Deployment Companion p36 · **Size:** Small · **Printed CR:** 1 · **CC:** 1 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Energy (Firefight) 4x | 40 |
+| Area |  | 20 |
+| Bleed | Minor 4 | 35 |
+| Tag | [Firestarter] 2 | 10 |
+| Limitation | Minor: Hungry (fired from a launcher or vehicle kinetic weapon, takes 10 rounds of its magazine) | −10 |
+| Limitation | Major: One-Time Use | −50 |
+| **Total** | | **45** |
+
+**Formula CR:** 1 (one: 0; per 10: +1) ✔ matches printed
+
+- Bleed (Fire) 4, Minor.
 
 
 ### Consumables priced per 10 (not costed with the formula)

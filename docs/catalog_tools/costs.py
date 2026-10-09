@@ -57,7 +57,14 @@ def attack(scale,m,impl,mounts=1,label=None):
 def am(scale,n=1):
     b=[10,20,40][SC[scale]]//2
     return Row("Anti-Missile", f"{scale} 1x"+(f" ×{n}" if n>1 else ""), b*n, A('Anti-Missile', SN[scale], n))
-def area(): return Row("Area","",20, A('Area', None, 1, sub=True))
+# Far Ranged: Minor (Firefight -> Battlefield) 20 BP, Moderate (Battlefield -> Space) 40 BP. No Major.
+def far(grade):
+    return Row("Far Ranged",{'Minor':'Minor (Firefight to Battlefield)','Moderate':'Moderate (Battlefield to Space)'}[grade],[20,40][G[grade]], A('Far Ranged', GN[grade], 1, sub=True))
+AREA_STEPS={'Small':1,'Medium':2,'Large':3,'Huge':4,'Colossal':5}
+# [Ruling 2026-10-04] Area is 20 BP for Small; each size step larger costs another 20 (rank = steps).
+def area(size='Small'):
+    n=AREA_STEPS[size]
+    return Row("Area","" if size=='Small' else size,20*n, A('Area', None, n, sub=True, size=size.lower()))
 COUNTER_IMPL = {'Armor': 'armor', 'Shields': 'shields', 'Missiles': 'missiles', 'Detection': 'detection',
                 'Disabling': 'disabling', 'Strike': 'strike'}
 def counter(k,free=False): return Row("Counter",k+(" (free)" if free else ""),0 if free else 20, A('Counter', None, 1, COUNTER_IMPL.get(k, 'general'), sub=True))
@@ -101,7 +108,7 @@ def launchers(scale,n):
     return Row("Launcher",d,inc*4*per, A('Launchers', SN[scale], inc))
 def ls(grade,n=1): return Row("Life Support",f"{grade} ×{n}",n*[5,20,40][G[grade]], A('Life Support', GN[grade], n, 'standard'))
 def eco(grade): return Row("Life Support",f"Artificial Ecology, {grade}",[15,30,60][G[grade]], A('Life Support', GN[grade], 1, 'artificialEcology'))
-LINK_IMPL = {'Data': 'data', 'Psi': 'psi', 'Weapon': 'weapon', 'Refueling': 'refueling'}
+LINK_IMPL = {'Data': 'data', 'Psi': 'psi', 'Weapon': 'weapon', 'Refueling': 'refueling', 'Armor': 'armor'}
 def link(grade,kind,n=1): return Row("Link",f"{grade} {kind}"+(f" ×{n}" if n>1 else ""),n*[5,15,50][G[grade]], A('Link', GN[grade], n, LINK_IMPL.get(kind) or LINK_IMPL[kind.split(' (')[0]]))
 def manuf(grade,n=1): return Row("Manufacture",f"{grade}"+(f" ×{n}" if n>1 else ""),n*[25,50,100][G[grade]], A('Manufacture', GN[grade], n))
 # Modifier grade = how many skills it covers (ruling 2026-09-28): Minor 1, Moderate 2, Major 3+.
@@ -128,3 +135,9 @@ def cc_of(cr): return 0 if cr<=0 else cr*(cr+1)//2
 def bleed_plasma(mag,free_d,total_d):
     base=[5,10,20][G[mag]]
     return Row("Bleed",f"{mag} {total_d} (Plasma: {free_d} free + {total_d-free_d} bought)",cB(base,total_d)-cB(base,free_d), A('Bleed', GN[mag], total_d, sub=True))
+
+# A 1x attack (ruling 2026-10-04): no damage; it delivers its Tags, Counters or interception.
+# Costs half the Attack base, like the Anti-Missile (5 / 10 / 20).
+def attack1x(scale,label='Attack (1x)'):
+    b=[10,20,40][SC[scale]]//2
+    return Row(label, f"{scale} 1x (no damage; delivers its effect)", b, A('Attack (1x)', SN[scale], 1, label=label))

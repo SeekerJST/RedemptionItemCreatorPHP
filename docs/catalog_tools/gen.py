@@ -89,7 +89,7 @@ n_ok=n_diff=0; big=[]
 for it in I:
     if not it['compute']:
         W(f"| [{it['name']}](#{slug(it['name'])}) | {it['size']} | — | — | {fmt(it['cr'])} | not costed |"); continue
-    bp=sum(r[2] for r in it['rows'] if isinstance(r[2],int)); c=cr_of(it['size'],bp); it['bp']=bp; it['calc']=c
+    bp=sum(r[2] for r in it['rows'] if isinstance(r[2],int)); c=cr_of(it['size'],bp)+(1 if it['extra'].get('Sold per') else 0); it['bp']=bp; it['calc']=c
     if it['cr'] is None: d='—'
     else:
         dd=c-it['cr']; d='✔' if dd==0 else f"{dd:+d}".replace('-','−')
@@ -135,7 +135,7 @@ for it in I:
     if it['cat']!=cat:
         cat=it['cat']; W(f"\n### {cat}\n")
     W(f"#### {it['name']}\n")
-    hdr=[f"p. {it['page']}",f"**Size:** {it['size']}",f"**Printed CR:** {fmt(it['cr'])}",f"**CC:** {fmt(it['cc'])}"]
+    hdr=[f"p. {it['page']}" if isinstance(it['page'],int) else f"Source: {it['page']}",f"**Size:** {it['size']}",f"**Printed CR:** {fmt(it['cr'])}",f"**CC:** {fmt(it['cc'])}"]
     for k,v in it['extra'].items(): hdr.append(f"**{k}:** {v}")
     W(" · ".join(hdr)+"\n")
     _d=DESC.get(it['name'],'').replace('"','\\"')
@@ -146,7 +146,7 @@ for it in I:
         W(f"| {n} | {d.replace('|','/')} | {fmt(bp) if isinstance(bp,int) else bp} |")
     if it['compute']:
         W(f"| **Total** | | **{it['bp']:,}** |")
-        W(f"\n**Formula CR:** {fmt(it['calc'])}"+("" if it['cr'] is None else (" ✔ matches printed" if it['calc']==it['cr'] else f" (printed {fmt(it['cr'])})"))+"\n")
+        W(f"\n**Formula CR:** {fmt(it['calc'])}"+(f" (one: {fmt(it['calc']-1)}; per 10: +1)" if it['extra'].get('Sold per') else "")+("" if it['cr'] is None else (" ✔ matches printed" if it['calc']==it['cr'] else f" (printed {fmt(it['cr'])})"))+"\n")
     else:
         W("\n**Not costed** (see Check).\n")
     if it['power']: W(f"**Power:** {it['power']}\n")

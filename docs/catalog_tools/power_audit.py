@@ -10,7 +10,7 @@ def audit(it):
             av[GI[w[0]]]+=3*r
         elif lab=='Drive' and w and w[0] in GI: av[GI[w[0]]]+=3
         elif lab.startswith('Attack'):
-            m=re.search(r'\((Firefight|Battlefield|Space)\)',d); g=SCG[m.group(1)]
+            m=re.search(r'\(?(Firefight|Battlefield|Space)\)?',d); g=SCG[m.group(1)]
             n=int(re.search(r'×(\d+) mounts',d).group(1)) if 'mounts' in d else 1
             impl=d.split(' (')[0]
             if 'self-powered' in d: notes.append(f'self-powered ({lab}): no power counted')
@@ -23,6 +23,10 @@ def audit(it):
         elif lab=='Launcher':
             g=SCG[w[0]]; n=int(re.search(r'(\d+) increment',d).group(1)); use[g]+=n
         elif lab=='Force Field': use[GI[w[0]]]+=1
+        elif lab=='Regeneration' and ('Force Field' in d or 'Mechanical' in d):
+            # ruling 2026-10-05: FF and Mechanical Regeneration draw 1 slot at the Force Field's grade (else the item's top attack scale)
+            ffg=[GI[r[1].split()[0]] for r in it['rows'] if r[0]=='Force Field']
+            use[ffg[0] if ffg else 2]+=1
         elif lab=='Manufacture':
             n=int(re.search(r'×(\d+)',d).group(1)) if '×' in d else 1; use[GI[w[0]]]+=n
         elif lab=='Gravity Control': use[GI[w[0]]]+=1
@@ -40,6 +44,7 @@ for it in items.I:
     if not it['compute'] if 'compute' in it else False: continue
     av,use,short,links,notes=audit(it)
     if host(it): continue
+    if any(r[0]=='Limitation' and 'One-Time Use' in r[1] and '(drive)' not in r[1] for r in it['rows']): continue  # p210: One-Time Use attacks need no feed
     if sum(use)==0 and not links: continue
     tot_spare=sum(av)-sum(use)
     flag=[]
