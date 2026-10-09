@@ -17,6 +17,7 @@ import {
     validateItem,
 } from './rules/index.js';
 import { impliedLimitations } from './rules/attacks.js';
+import { SOURCES, sourceEnabled } from './rules/sources.js';
 import { FORCE_FIELD } from './rules/protection.js';
 import { bodyPurchase, sizeOrdinal } from './rules/sizes.js';
 import { LIMIT_CAPS } from './rules/validate.js';
@@ -26,8 +27,10 @@ const sum = (values) => values.reduce((total, value) => total + value, 0);
 /**
  * @param {object} item state from itemReducer
  * @param {object} lookups from useLookups
+ * @param {{sources?: Record<string, boolean>}} [options] sources: the optional content switched on
+ *        (useOptionalSources); left out, everything counts as on (e.g. the catalog parity test)
  */
-export function summarizeItem(item, lookups) {
+export function summarizeItem(item, lookups, { sources } = {}) {
     const sizeRow = lookups.sizes.find((s) => s.SizeName === item.size) ?? null;
     const size = sizeOrdinal(item.size);
     const related = relatedRuleRows(item.attributes, lookups.attributes);
@@ -37,8 +40,11 @@ export function summarizeItem(item, lookups) {
         item.attributes.map((a) => [a.id, lookups.attributes.find((l) => l.AttributeID === a.AttributeName)?.AttributeName ?? '?'])
     );
 
-    // A One-Time Use item's attacks need no feed (ruling 2026-09-30).
-    const selfContained = selfContainedAttacks(item.limits);
+    // A One-Time Use item's attacks need no feed (ruling 2026-09-30); nor does anything on an item
+    // sold per 10, such as a missile (ruling 2026-10-09).
+    const soldInGroups = (item.groupSize ?? 0) > 1;
+    const selfContained = soldInGroups || selfContainedAttacks(item.limits);
+    const all = related.map((entry) => entry.row);
 
     // Per-row cost and power. Costs round to the nearest whole number, halves up.
     const attributeCosts = new Map(
@@ -46,7 +52,7 @@ export function summarizeItem(item, lookups) {
             entry.row.id,
             {
                 buildPoints: Math.round(rowCost(entry.row, { size, parent: entry.parent, children: entry.children, siblings: entry.siblings })),
-                power: rowPower(entry, size, { selfContained }),
+                power: rowPower(entry, size, { selfContained, all }),
             },
         ])
     );
@@ -75,7 +81,11 @@ export function summarizeItem(item, lookups) {
             specialtyMissing: row.specialtyMissing,
         })),
         nameOf: (id) => nameById.get(id),
+        selfContained: soldInGroups,
     });
+    if (sources) {
+        issues.push(...switchedOffContent(related, sources, nameById));
+    }
 
     const attributeSystems = effectiveSystems(item.attributes);
     const builtInLimits = impliedLimitations(related.map((entry) => entry.row));
@@ -89,6 +99,9 @@ export function summarizeItem(item, lookups) {
         limitBP,
         totalBP,
         costRating: costRating(totalBP, sizeRow), // null until a size is chosen
+        /** Items sold per 10: a group costs +1 CR over one (ruling 2026-10-04). Null otherwise. */
+        groupSize: soldInGroups ? item.groupSize : null,
+        groupCostRating: soldInGroups && sizeRow ? costRating(totalBP, sizeRow) + 1 : null,
         tagCosts,
         attributeCosts,
         limitCosts,
@@ -204,6 +217,34 @@ function structure(related, sizeRow, size) {
 }
 
 /** The most serious issue on each grid row, keyed "section:id" (e.g. "attributes:3"). */
+/**
+ * Rows using optional content that's switched off (a Grav Blades row, a Gravitic attack): one
+ * warning per source, naming what uses it. The item still costs and saves normally.
+ */
+function switchedOffContent(related, sources, nameById) {
+    const bySource = new Map();
+    for (const { row } of related) {
+        const rule = ATTRIBUTE_RULES[row.key];
+        const implementation = rule?.implementations?.[row.implementation];
+        for (const [source, label] of [
+            [rule?.source, nameById.get(row.id) ?? rule?.name],
+            [implementation?.source, implementation?.name],
+        ]) {
+            if (source && !sourceEnabled(source, sources)) {
+                const entry = bySource.get(source) ?? { labels: new Set(), rows: [] };
+                entry.labels.add(label);
+                entry.rows.push({ section: 'attributes', id: row.id });
+                bySource.set(source, entry);
+            }
+        }
+    }
+    return [...bySource].map(([source, { labels, rows }]) => ({
+        severity: 'warning',
+        message: `Uses ${SOURCES[source].name} content (${[...labels].join(', ')}), which is switched off: turn it on in the Inventory panel to pick it in the editor.`,
+        rows,
+    }));
+}
+
 function rowStatus(issues) {
     const status = new Map();
     for (const issue of issues) {

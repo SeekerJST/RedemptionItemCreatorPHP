@@ -20,7 +20,7 @@ const READ_ONLY_HINT = 'Public items are read-only: copy it to make changes';
  * Panel 2: the item's name, category, and size, and its Tags, Attributes, and Limitations grids.
  * A public item (item.isPublic) is shown read-only. categories: suggestions for the Category field.
  */
-export default function ItemEditor({ item, dispatch, summary, lookups, categories, toolbar, status, confirm, onCancelConfirm }) {
+export default function ItemEditor({ item, dispatch, summary, lookups, sources, categories, toolbar, status, confirm, onCancelConfirm }) {
     const readOnly = item.isPublic;
     const columnsForAttributes = useMemo(() => attributeColumns(), []);
     const [selectedAttributeId, setSelectedAttributeId] = useState(null);
@@ -101,9 +101,9 @@ export default function ItemEditor({ item, dispatch, summary, lookups, categorie
     const editorColumnsForAttribute = useCallback(
         (row) => {
             const parent = row.parentId != null ? item.attributes.find((p) => p.id === row.parentId) : null;
-            return attributeEditorColumns(lookups.attributes, row, keyOf(row.AttributeName), parent ? keyOf(parent.AttributeName) : null);
+            return attributeEditorColumns(lookups.attributes, row, keyOf(row.AttributeName), parent ? keyOf(parent.AttributeName) : null, sources);
         },
-        [lookups.attributes, item.attributes, keyOf]
+        [lookups.attributes, item.attributes, keyOf, sources]
     );
 
     // Callbacks shared by the three sections; `section` is the key in the item state.
@@ -140,6 +140,8 @@ export default function ItemEditor({ item, dispatch, summary, lookups, categorie
                 onNameChange={(name) => dispatch({ type: 'setName', name })}
                 onCategoryChange={(category) => dispatch({ type: 'setCategory', category })}
                 onSizeChange={(size) => dispatch({ type: 'setSize', size })}
+                groupSize={item.groupSize}
+                onGroupSizeChange={(groupSize) => dispatch({ type: 'setGroupSize', groupSize })}
                 toolbar={toolbar}
                 status={status}
                 confirm={confirm}

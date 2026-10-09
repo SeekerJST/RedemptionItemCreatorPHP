@@ -4,6 +4,7 @@
 import { SCALES, SYSTEMS, TAG_RANKS } from '../domain/constants.js';
 import { ATTRIBUTE_RULES, GRADE_NAMES, SCALE_NAMES, resolveAttributeName } from '../domain/rules/index.js';
 import { RANK } from '../domain/rules/common.js';
+import { sourceEnabled } from '../domain/rules/sources.js';
 
 const select = (options) => ({
     editor: { type: 'richselect', config: { template: (option) => option.label } },
@@ -41,13 +42,16 @@ const attributeSelect = (attributes) => ({
  * that can stand alone (not an Attack Multiplier). The row's current attribute is always
  * kept, so an existing (invalid) choice still shows; validation flags it.
  */
-function attributesFor(attributes, parentKey, currentAttributeId) {
+function attributesFor(attributes, parentKey, currentAttributeId, sources) {
     const allowed = parentKey ? ATTRIBUTE_RULES[parentKey]?.children ?? [] : null;
     return attributes.filter((a) => {
         if (a.AttributeID === Number(currentAttributeId)) {
             return true;
         }
         const key = resolveAttributeName(a.AttributeName)?.key;
+        if (!sourceEnabled(ATTRIBUTE_RULES[key]?.source, sources)) {
+            return false; // optional content that's switched off (e.g. Decisive Action's Grav Blades)
+        }
         return allowed ? allowed.includes(key) : !ATTRIBUTE_RULES[key]?.subRowOnly;
     });
 }
@@ -101,15 +105,19 @@ const RANK_LABELS = {
  * @param {object} row the row being edited (with any unsaved Attribute choice)
  * @param {string|null} key the row's rule key (null if the rules don't know the attribute)
  * @param {string|null} parentKey the parent row's rule key, for a sub-row
+ * @param {Record<string, boolean>} [sources] optional content switched on (useOptionalSources);
+ *        attributes and implementations from a source that's off aren't offered (the row's own
+ *        choice still shows)
  */
-export function attributeEditorColumns(attributes, row, key, parentKey = null) {
+export function attributeEditorColumns(attributes, row, key, parentKey = null, sources = undefined) {
     const rule = ATTRIBUTE_RULES[key];
-    const columns = [systemColumn, attributeSelect(attributesFor(attributes, parentKey, row.AttributeName))];
+    const columns = [systemColumn, attributeSelect(attributesFor(attributes, parentKey, row.AttributeName, sources))];
 
     // Communication's implementations come from its name ("Communication (Radio)"), not a field.
     if (rule?.implementations && key !== 'communication') {
         const options = Object.entries(rule.implementations)
             .filter(([, implementation]) => !implementation.meleeOnly || parentKey === 'attackMelee')
+            .filter(([id, implementation]) => id === row.Implementation || sourceEnabled(implementation.source, sources))
             .map(([id, implementation]) => ({ id, label: implementation.name }));
         columns.push({ id: 'Implementation', header: key === 'resource' ? 'Type' : 'Implementation', ...select(options) });
     }

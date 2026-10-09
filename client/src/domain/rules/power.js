@@ -1,9 +1,9 @@
 // Power Slots (item_creation_rules.md §5.22, rulings 2026-09-23).
 
+import { ATTACK_KEYS } from './attacks.js';
 import { ATTRIBUTE_RULES } from './registry.js';
 
 const GRADES_HIGH_TO_LOW = [3, 2, 1];
-const ATTACK_KEYS = new Set(['attack', 'attackMelee', 'antiMissile']);
 
 /**
  * True if the item's attacks need no feed: a One-Time Use item (a grenade) is its own charge
@@ -19,13 +19,13 @@ export function selfContainedAttacks(limits = []) {
  * (Shared load like a Force Field track shows on every row; the budget counts it once.)
  * @param {{row, parent, children}} entry from withRelations()
  */
-export function rowPower({ row, parent, children }, size = null, { selfContained = false } = {}) {
+export function rowPower({ row, parent, children }, size = null, { selfContained = false, all = [] } = {}) {
     const rule = ATTRIBUTE_RULES[row.key];
     if (!rule?.power || (selfContained && ATTACK_KEYS.has(row.key))) {
         return { provides: 0, uses: 0 };
     }
     const implementation = row.implementation ?? rule.defaultImplementation ?? null;
-    const { provides = [], uses = [] } = rule.power({ ...row, implementation }, { size, parent, children });
+    const { provides = [], uses = [] } = rule.power({ ...row, implementation }, { size, parent, children, all });
     const total = (list) => list.reduce((sum, { slots }) => sum + slots, 0);
     return { provides: total(provides), uses: total(uses) };
 }
@@ -47,6 +47,7 @@ export function powerBudget(related, size = null, { selfContained = false } = {}
     const available = { 1: 0, 2: 0, 3: 0 };
     const used = { 1: 0, 2: 0, 3: 0 };
     const shared = new Set();
+    const all = related.map((entry) => entry.row);
 
     for (const { row, parent, children } of related) {
         const rule = ATTRIBUTE_RULES[row.key];
@@ -54,7 +55,7 @@ export function powerBudget(related, size = null, { selfContained = false } = {}
             continue;
         }
         const implementation = row.implementation ?? rule.defaultImplementation ?? null;
-        const { provides = [], uses = [] } = rule.power({ ...row, implementation }, { size, parent, children });
+        const { provides = [], uses = [] } = rule.power({ ...row, implementation }, { size, parent, children, all });
 
         for (const { grade, slots } of provides) {
             if (grade in available) available[grade] += slots;

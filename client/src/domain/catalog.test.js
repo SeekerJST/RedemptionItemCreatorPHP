@@ -12,7 +12,7 @@ describe('catalog parity', () => {
     const results = new Map(catalog.items.map((entry) => [entry.itemName, compareCatalogEntry(entry)]));
 
     it('exports every costed catalog item', () => {
-        expect(results.size).toBe(103);
+        expect(results.size).toBe(182);
     });
 
     describe.each([...results.keys()])('%s', (name) => {

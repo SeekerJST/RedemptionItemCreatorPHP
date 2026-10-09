@@ -11,6 +11,8 @@ tagList, limitList, modifierList, taskList), except that attribute rows name the
     catalogRow    on each attribute/tag/limit row: the index of the catalog row it came from
     catalogBP     the catalog's total; catalogCR its formula CR; printedCR/printedCC the book's
     notes         anything the export couldn't carry over exactly
+    source        the book: Core, Deployment Companion, New Detroit, or Decisive Action (the app's
+                  optional-content switch hides Decisive Action items unless it's on)
 
 client/src/domain/catalog.test.js costs every item with the app's rules and compares.
 """
@@ -51,6 +53,7 @@ SYSTEMS = {
     'Computer': 'Electronics', 'Task': 'Electronics', 'Neural Interface': 'Electronics', 'Link': 'Electronics',
     'Life Support': 'Support', 'Cargo': 'Support', 'Hangar': 'Support', 'Manufacture': 'Support',
     'Gravity Control': 'Support', 'Modifier': 'Modifiers',
+    'Grav Blades': 'Propulsion', 'Psi-Resonant Materials': 'Effects',
 }
 
 
@@ -62,9 +65,18 @@ def attack_system(label):
     return inner[:1].upper() + inner[1:]
 
 
+SOURCES = ('Deployment Companion', 'New Detroit', 'Decisive Action')
+
+
+def source_of(it):
+    """The book an item comes from: 'Core' (a page number), or the supplement its page names."""
+    page = str(it['page'])
+    return next((name for name in SOURCES if page.startswith(name)), 'Core')
+
+
 def export(it):
     out = {
-        'itemName': it['name'], 'itemSize': it['size'].upper(), 'category': it['cat'],
+        'itemName': it['name'], 'itemSize': it['size'].upper(), 'category': it['cat'], 'source': source_of(it),
         'description': DESC.get(it['name'], ''), 'page': it['page'],
         'printedCR': it['cr'], 'printedCC': it['cc'], 'extra': it['extra'], 'groupSize': 10 if it['extra'].get('Sold per') else None,
         'catalogBP': sum(bp for _, _, bp in it['rows']), 'catalogCR': None,

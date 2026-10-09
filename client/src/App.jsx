@@ -15,6 +15,7 @@ import { createInitialItem, itemReducer, toApiItem } from './domain/item.js';
 import { summarizeItem } from './domain/summary.js';
 import { useAuth } from './hooks/useAuth.js';
 import { useInventory } from './hooks/useInventory.js';
+import { useOptionalSources } from './hooks/useOptionalSources.js';
 import { useLookups } from './hooks/useLookups.js';
 import './App.css';
 
@@ -86,7 +87,9 @@ export default function App() {
  */
 function GearCreator({ lookups, user }) {
     const [item, dispatch] = useReducer(itemReducer, undefined, createInitialItem);
-    const summary = useMemo(() => summarizeItem(item, lookups), [item, lookups]);
+    // Optional content (Decisive Action): off by default; hides its gear and picker entries.
+    const { sources, setSource } = useOptionalSources();
+    const summary = useMemo(() => summarizeItem(item, lookups, { sources }), [item, lookups, sources]);
     // Reloaded when someone signs in or out: the list includes the signed-in user's own items.
     const inventory = useInventory(user?.id ?? null);
     const [status, setStatus] = useState(null);
@@ -186,7 +189,14 @@ function GearCreator({ lookups, user }) {
     return (
         <>
             <Panel title="Panel.01" size="small">
-                <Inventory items={inventory.items} error={inventory.error} currentId={item.itemId} onOpen={open} />
+                <Inventory
+                    items={inventory.items}
+                    error={inventory.error}
+                    currentId={item.itemId}
+                    onOpen={open}
+                    sources={sources}
+                    onSourceChange={setSource}
+                />
             </Panel>
             <Panel title="Panel.02" size="large" className="editor_panel">
                 <ItemEditor
@@ -194,6 +204,7 @@ function GearCreator({ lookups, user }) {
                     dispatch={dispatch}
                     summary={summary}
                     lookups={lookups}
+                    sources={sources}
                     categories={categories}
                     toolbar={{
                         onNew: startNew,

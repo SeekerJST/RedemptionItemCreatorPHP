@@ -5,12 +5,14 @@
 // anything: the player decides.
 
 import { MULTIPLIER_IMPLEMENTATIONS, impliedLimitations } from './attacks.js';
+import { selfContainedAttacks } from './power.js';
 import { ATTRIBUTE_RULES } from './registry.js';
 import { GRADE_NAMES, SCALE_NAMES } from './common.js';
 import { FORCE_FIELD } from './protection.js';
 import {
     COMPUTER_TASK_LIMIT,
     DRIVE_IMPLEMENTATIONS,
+    LAUNCHER_IMPLEMENTATIONS,
     LIFE_SUPPORT_IMPLEMENTATIONS,
     POWER_SUPPLY_IMPLEMENTATIONS,
     computerTargetNumber,
@@ -34,7 +36,7 @@ const LIMIT_GRADE_NAMES = { 1: 'Minor', 2: 'Moderate', 3: 'Major' };
  * @returns {Array<{severity: 'error'|'warning', message: string, rows: Array<{section: string, id: number}>}>}
  *          rows: the grid rows the issue is about (to highlight), possibly none
  */
-export function validateItem({ related, size, power, limits = [], modifiers = [], nameOf }) {
+export function validateItem({ related, size, power, limits = [], modifiers = [], nameOf, selfContained: selfContainedItem = false }) {
     const issues = [];
     /** rowIds: one id or an array; they're attribute rows unless another section is given. */
     const add = (severity) => (message, rowIds = [], section = 'attributes') =>
@@ -47,6 +49,9 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
     const has = (predicate) => all.some(predicate);
     const hasResource = (...types) =>
         has((row) => row.key === 'resource' && types.includes(row.implementation ?? 'general'));
+    // A One-Time Use item (a grenade, a charge) is its own charge: its attacks need no feed (ruling 2026-09-30).
+    // So is an item sold per 10 (a missile, a round): its Power Supply and Drive need none either (2026-10-09).
+    const selfContained = selfContainedItem || selfContainedAttacks(limits);
 
     if (size == null) {
         warning('Choose an item size: the budget, Cost Rating, and Body depend on it.');
@@ -90,12 +95,30 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
         if (row.key === 'attackMultiplier' && implementation === 'tse' && parent && parent.key !== 'attackMelee') {
             error('Tse is melee only: put it under an Attack (Melee).', row.id);
         }
+        const multiplierKind = row.key === 'attackMultiplier' ? MULTIPLIER_IMPLEMENTATIONS[implementation] : null;
+        if (multiplierKind?.scales && parent && !multiplierKind.scales.includes(parent.grade)) {
+            error(`${multiplierKind.name} attacks are ${multiplierKind.scales.map((g) => SCALE_NAMES[g]).join(' or ')} only.`, [row.id, parent.id]);
+        }
+        // Gravitic attacks must buy Area (Decisive Action p83).
+        if (multiplierKind?.needsArea && parent && !related.some((e) => e.row.parentId === parent.id && e.row.key === 'area')) {
+            error(`A ${multiplierKind.name} attack must buy Area.`, [row.id, parent.id]);
+        }
+        // Lamellar Matrix fields can't take Regeneration (Decisive Action p84).
+        if (row.key === 'regeneration' && parent?.key === 'forceField' && parent.implementation === 'lamellarMatrix') {
+            error("A Lamellar Matrix Force Field can't take Regeneration.", row.id);
+        }
+        // An implementation limited to some grades (Light Sail, Jump, Hyperspace Portal).
+        const allowedGrades = rule.implementations?.[implementation]?.grades;
+        if (allowedGrades && rule.gradeKind !== 'none' && !allowedGrades.includes(row.grade) && row.key !== 'drive') {
+            error(`${rule.implementations[implementation].name} is ${allowedGrades.map((g) => GRADE_NAMES[g]).join(' or ')} only.`, row.id);
+        }
 
         const isKinetic =
             ['attack', 'attackMelee'].includes(row.key) &&
             children.some((c) => c.key === 'attackMultiplier' && MULTIPLIER_IMPLEMENTATIONS[c.implementation]?.needsAmmunition);
         // Resources can be shared: a weapon's modes, or a vehicle's guns, can draw on one Ammunition row.
-        if (isKinetic && !hasResource('ammunition', 'general')) {
+        // A big gun's Magazine is its ammunition too.
+        if (isKinetic && !selfContained && !hasResource('ammunition', 'magazine', 'general')) {
             const fed = children.find((c) => c.key === 'attackMultiplier' && MULTIPLIER_IMPLEMENTATIONS[c.implementation]?.needsAmmunition);
             error(`${name(row)} is ${MULTIPLIER_IMPLEMENTATIONS[fed.implementation].name}: it needs an Ammunition Resource.`, row.id);
         }
@@ -183,10 +206,16 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
         }
     }
 
+    // ---- Psi-Resonant Materials (Decisive Action p97): must also buy Area and a Major Bleed ----
+    const resonant = all.find((row) => row.key === 'psiResonantMaterials');
+    if (resonant && !(has((row) => row.key === 'area') && has((row) => row.key === 'bleed' && row.grade === 3))) {
+        error('Psi-Resonant Materials need the item to buy Area and a Major Bleed.', resonant.id);
+    }
+
     // ---- item-level feeds (Resources can be shared, so any on the item counts) --------------
-    const firstOf = (key) => all.find((row) => row.key === key);
-    if (firstOf('launchers') && !hasResource('magazine', 'general')) {
-        error('Launchers need a Magazine Resource.', firstOf('launchers').id);
+    const fedLaunchers = all.find((row) => row.key === 'launchers' && !LAUNCHER_IMPLEMENTATIONS[row.implementation]?.noMagazine);
+    if (fedLaunchers && !hasResource('magazine', 'general')) {
+        error('Launchers need a Magazine Resource (box launchers don\'t: they\'re reloaded by hand).', fedLaunchers.id);
     }
     const ansible = all.find((row) => row.key === 'communication' && row.implementation === 'ansible');
     if (ansible && !hasResource('tangle', 'general')) {
@@ -197,12 +226,12 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
     // A Drive needs no Fuel if it can run from a Power Supply that burns none (Coil, Environmental,
     // Hyperspace Tap), or if its type needs none (Light Sail, Jump, Biological).
     const drivesRunOnSupply = has((row) => row.key === 'powerSupply' && POWER_SUPPLY_IMPLEMENTATIONS[row.implementation]?.runsDrives);
-    const needsFuel = (row) => row.key === 'drive' && !drivesRunOnSupply && !DRIVE_IMPLEMENTATIONS[row.implementation]?.noFuel;
+    const needsFuel = (row) => row.key === 'drive' && !selfContained && !drivesRunOnSupply && !DRIVE_IMPLEMENTATIONS[row.implementation]?.noFuel;
     const fuelled = all.find(needsFuel);
     if (fuelled && !hasResource('fuel', 'general')) {
         error('Drives need a Fuel Resource (unless it\'s a Light Sail, Jump, or Biological drive, or runs from a Coil, Environmental, or Hyperspace Tap Power Supply).', fuelled.id);
     }
-    const supplyFeed = (row) => (row.key === 'powerSupply' ? POWER_SUPPLY_IMPLEMENTATIONS[row.implementation]?.feed : null);
+    const supplyFeed = (row) => (row.key === 'powerSupply' && !selfContained ? POWER_SUPPLY_IMPLEMENTATIONS[row.implementation]?.feed : null);
     for (const supply of all.filter((row) => supplyFeed(row))) {
         const feed = supplyFeed(supply);
         if (!hasResource(feed, 'general')) {
@@ -240,7 +269,7 @@ export function validateItem({ related, size, power, limits = [], modifiers = []
                     const rule = ATTRIBUTE_RULES[row.key];
                     if (!rule?.power) return false;
                     const implementation = row.implementation ?? rule.defaultImplementation ?? null;
-                    const { uses = [] } = rule.power({ ...row, implementation }, { size, parent, children });
+                    const { uses = [] } = rule.power({ ...row, implementation }, { size, parent, children, all: related.map((e) => e.row) });
                     return uses.some((use) => use.grade === grade && use.slots > 0);
                 })
                 .map(({ row }) => row.id);

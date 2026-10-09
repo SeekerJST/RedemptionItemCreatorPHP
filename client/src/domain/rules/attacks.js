@@ -4,7 +4,8 @@
 //   Attack             2x at the base cost; Rank = mounts (1 + extra turrets)
 //   └ Attack Multiplier  Rank k = (2 + k)x; costs the Curve A upgrade above 2x
 //   Attack (Melee)     everything costs half; never takes Area
-//   Anti-Missile       the only 1x attack; half the base; no multiplier
+//   Anti-Missile       1x, only targets missiles; half the base; no multiplier
+//   Attack (1x)        no damage, delivers an effect (Tags, Counters); half the base (ruling 2026-10-04)
 
 import { ALL_GRADES, GRADE, RANK, priceFor } from './common.js';
 import { curveAUpgrade } from './curves.js';
@@ -29,6 +30,12 @@ export const MULTIPLIER_IMPLEMENTATIONS = {
     flare: { name: 'Flare' },
     hyperspace: { name: 'Hyperspace', freeCounter: 'armor', freeArea: true },
     tse: { name: 'Tse', meleeOnly: true, freeCounter: 'armor' },
+    // Decisive Action. surcharge: BP on top of the Multiplier's upgrade, never halved.
+    // Gravitic (p83): every hit applies [Flattened]; the attack must buy Area (ruling 2026-10-08).
+    gravitic: { name: 'Gravitic', surcharge: 5, needsArea: true, source: 'decisiveAction' },
+    // Pyre (p94): Battlefield only; includes Counter: Armor, Force Field Overload and Aggravated
+    // Assault, and must carry [Time Heals No Wounds 3] (ruling 2026-10-05).
+    pyre: { name: 'Pyre', surcharge: 70, scales: [GRADE.MODERATE], source: 'decisiveAction' },
 };
 
 /**
@@ -45,6 +52,9 @@ export function attackFreeEffects(attack, siblings = []) {
 }
 
 const ATTACK_CHILDREN = ['attackMultiplier', 'farRanged', 'counter', 'bleed', 'resource', 'modifier'];
+
+/** Every attack attribute: they share feed rules (a One-Time Use item's attacks need none). */
+export const ATTACK_KEYS = new Set(['attack', 'attackMelee', 'attack1x', 'antiMissile']);
 
 /** The implementation chosen on an Attack's Multiplier sub-row, if it has one. */
 export function attackImplementation(children = []) {
@@ -113,8 +123,9 @@ export function impliedLimitations(rows) {
  */
 export function multiplierCost(steps, implementation, underMelee) {
     const upgrade = curveAUpgrade(steps);
-    const factor = (MULTIPLIER_IMPLEMENTATIONS[implementation]?.upgradeFactor ?? 1) * (underMelee ? 0.5 : 1);
-    return Math.ceil(upgrade * factor);
+    const kind = MULTIPLIER_IMPLEMENTATIONS[implementation];
+    const factor = (kind?.upgradeFactor ?? 1) * (underMelee ? 0.5 : 1);
+    return Math.ceil(upgrade * factor) + (kind?.surcharge ?? 0);
 }
 
 export const attackRules = {
@@ -150,6 +161,17 @@ export const attackRules = {
         subRowOnly: true, // only ever under an Attack or Attack (Melee)
         cost: (row, ctx) => multiplierCost(row.rank, row.implementation, ctx.parent?.key === 'attackMelee'),
         children: [],
+    },
+
+    /** No damage: it delivers its Tags, Counters or interception (ruling 2026-10-04). Exactly 1x. */
+    attack1x: {
+        name: 'Attack (1x)',
+        gradeKind: 'scale',
+        grades: ALL_GRADES,
+        rank: { min: 1, meaning: RANK.MOUNTS },
+        cost: (row) => (priceFor(ATTACK_BASE, row.grade) / 2) * row.rank,
+        power: (row) => ({ uses: [{ grade: row.grade, slots: row.rank }] }),
+        children: ['farRanged', 'counter', 'area', 'resource', 'modifier'],
     },
 
     antiMissile: {

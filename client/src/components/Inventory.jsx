@@ -1,12 +1,21 @@
 import { useEffect, useMemo, useState } from 'react';
 import { groupInventory, pathKeys } from '../domain/inventory.js';
+import { SOURCES, itemSourceKey, sourceEnabled } from '../domain/rules/sources.js';
 
 /**
  * Panel 1: the saved items as a tree by category (group, then subgroup). Clicking an item
  * loads it into the editor. Groups start collapsed; the open item's branch expands itself.
+ *
+ * sources / onSourceChange(key, on): the optional content switches (useOptionalSources). Items from
+ * a source that's off (the Decisive Action catalog) are left out of the tree.
  */
-export default function Inventory({ items, error, currentId, onOpen }) {
-    const tree = useMemo(() => groupInventory(items ?? []), [items]);
+export default function Inventory({ items, error, currentId, onOpen, sources = {}, onSourceChange }) {
+    const shown = useMemo(
+        () => (items ?? []).filter((entry) => sourceEnabled(itemSourceKey(entry.source), sources)),
+        [items, sources]
+    );
+    const hidden = (items?.length ?? 0) - shown.length;
+    const tree = useMemo(() => groupInventory(shown), [shown]);
     const [expanded, setExpanded] = useState(() => new Set());
 
     // Show the open item: expand its group (and subgroup) whenever it changes.
@@ -65,6 +74,18 @@ export default function Inventory({ items, error, currentId, onOpen }) {
     return (
         <div className="inventory">
             <p>Inventory</p>
+            {onSourceChange && (
+                <fieldset className="inventory_sources">
+                    <legend>Optional content</legend>
+                    {Object.entries(SOURCES).map(([key, source]) => (
+                        <label key={key} title={source.description}>
+                            <input type="checkbox" checked={Boolean(sources[key])} onChange={(e) => onSourceChange(key, e.target.checked)} />{' '}
+                            {source.name}
+                        </label>
+                    ))}
+                    {hidden > 0 && <span className="inventory_note"> {hidden} item{hidden === 1 ? '' : 's'} hidden</span>}
+                </fieldset>
+            )}
             {error && <p role="alert" className="inventory_note">Couldn't load saved items: {error}</p>}
             {!error && items === null && <p role="status" className="inventory_note">Loading...</p>}
             {items?.length === 0 && <p className="inventory_note">No saved items yet.</p>}

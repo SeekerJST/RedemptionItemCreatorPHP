@@ -12,7 +12,7 @@ const ATTRIBUTE_NAMES = [
     'Communication', 'Communication (Ansible)', 'Communication (Hypercomms)', 'Communication (Laser Link)',
     'Communication (Radio)', 'Computer', 'Counter', 'Drive', 'Far Ranged', 'Force Field', 'Gravity Control', 'Hangar',
     'Launchers', 'Life Support', 'Link', 'Maneuver', 'Manufacture', 'Modifier', 'Neural Interface', 'Power Supply',
-    'Regeneration', 'Resource', 'Shrouded Hull', 'Task',
+    'Regeneration', 'Resource', 'Shrouded Hull', 'Task', 'Attack (1x)', 'Grav Blades', 'Psi-Resonant Materials',
 ];
 const ATTRIBUTE_ID = new Map(ATTRIBUTE_NAMES.map((name, i) => [name, i + 1]));
 

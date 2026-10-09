@@ -75,6 +75,12 @@ export default function BuildSummary({ item, dispatch, summary, skills, exports 
                     <tr>
                         <td className="panel_table_left">Cost Rating Increment: </td>
                         <td className="panel_table_right">{summary.incrementPoints}</td>
+                        {summary.groupCostRating != null && (
+                            <>
+                                <td className="panel_table_left" title="Sold per 10: a group of 10 costs +1 CR">Cost Rating per 10:</td>
+                                <td className="panel_table_right">{summary.groupCostRating}</td>
+                            </>
+                        )}
                     </tr>
                     <tr>
                         <td colSpan={4}>

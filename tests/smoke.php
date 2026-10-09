@@ -70,15 +70,19 @@ function call(string $method, string $url, ?string $body = null, bool $csrfHeade
     return [$status, $responseBody, $headers];
 }
 
-/** The newest logged email to $to, as text ('' if none), from the server's mail log. */
-function lastMail(string $to): string
+/**
+ * The newest logged email to $to that contains $containing, as text ('' if none), from the server's
+ * mail log. File times only resolve to the second, so emails sent in the same second can't be told
+ * apart by age: $containing picks the one wanted (e.g. 'reset=').
+ */
+function lastMail(string $to, string $containing = ''): string
 {
     global $mailDir;
     $files = glob($mailDir . '/*.txt') ?: [];
     usort($files, static fn ($a, $b) => filemtime($b) <=> filemtime($a) ?: strcmp($b, $a));
     foreach ($files as $file) {
         $text = (string) file_get_contents($file);
-        if (stripos($text, "To: $to\n") === 0) {
+        if (stripos($text, "To: $to\n") === 0 && ($containing === '' || strpos($text, $containing) !== false)) {
             return $text;
         }
     }
@@ -319,10 +323,10 @@ check('register rejects a bad email (400)', $status === 400, "HTTP $status $body
 [$status, $body] = call('POST', "$base/auth/register", json_encode(['email' => $email, 'password' => 'short', 'displayName' => 'D']));
 check('register rejects a short password (400)', $status === 400 && strpos($body, 'at least') !== false, "HTTP $status $body");
 [$status, $body] = call('POST', "$base/auth/register", json_encode(['email' => strtoupper($email), 'password' => 'smoke register pass', 'displayName' => 'Smoke D']));
-check('register: 202 and a confirmation email', $status === 202 && preg_match('/verify=([0-9a-f]{64})/', lastMail($email), $m) === 1, "HTTP $status $body");
+check('register: 202 and a confirmation email', $status === 202 && preg_match('/verify=([0-9a-f]{64})/', lastMail($email, 'verify='), $m) === 1, "HTTP $status $body");
 $token = $m[1] ?? '';
 [$status, $body] = call('POST', "$base/auth/register", json_encode(['email' => 'smoke-a@example.invalid', 'password' => 'smoke register pass', 'displayName' => 'X']));
-check('register answers the same for an email that already has an account', $status === 202 && strpos(lastMail('smoke-a@example.invalid'), 'already have one') !== false, "HTTP $status $body");
+check('register answers the same for an email that already has an account', $status === 202 && lastMail('smoke-a@example.invalid', 'already have one') !== '', "HTTP $status $body");
 [$status, $body] = call('POST', "$base/auth/verifyemail", json_encode(['token' => $token]));
 $user = json_decode($body, true)['user'] ?? [];
 check('verifyemail confirms the email and signs in', $status === 200 && ($user['verified'] ?? false) === true && ($user['email'] ?? '') === $email && !isset($user['passwordHash']), "HTTP $status $body");
@@ -342,7 +346,7 @@ check('the old password no longer works (401)', $status === 401, "HTTP $status")
 [$status, $body] = call('POST', "$base/auth/forgotpassword", json_encode(['email' => 'smoke-nobody@example.invalid']));
 check('forgotpassword answers the same for an unknown email', $status === 202, "HTTP $status");
 [$status] = call('POST', "$base/auth/forgotpassword", json_encode(['email' => $email]));
-check('forgotpassword: 202 and a reset email', $status === 202 && preg_match('/reset=([0-9a-f]{64})/', lastMail($email), $m) === 1, "HTTP $status");
+check('forgotpassword: 202 and a reset email', $status === 202 && preg_match('/reset=([0-9a-f]{64})/', lastMail($email, 'reset='), $m) === 1, "HTTP $status");
 [$status, $body] = call('POST', "$base/auth/resetpassword", json_encode(['token' => $m[1] ?? '', 'password' => 'smoke reset pass!']));
 check('resetpassword sets the password and signs in', $status === 200 && (json_decode($body, true)['user']['email'] ?? '') === $email, "HTTP $status $body");
 call('POST', "$base/auth/logout", '{}');

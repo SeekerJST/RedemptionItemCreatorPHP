@@ -27,6 +27,9 @@ final class Item
     public string $category = '';
     public string $description = '';
 
+    /** Sold in groups (10 for rounds, grenades, missiles); a group costs +1 CR. Null = sold singly. */
+    public ?int $groupSize = null;
+
     /**
      * Public items are read-only through the API (the catalog, for now); players copy them to
      * make changes. Only the database sets this: fromArray() ignores it, so a client can't
@@ -36,6 +39,13 @@ final class Item
 
     /** The account that saved it (null: the catalog and other system items). Set by the database only. */
     public ?int $ownerUserId = null;
+
+    /**
+     * The book a catalog item comes from ('Deployment Companion', 'New Detroit', 'Decisive Action');
+     * null for the core book and for players' own items. Set by the catalog importer only, so the
+     * client can show or hide optional content (Decisive Action); fromArray() ignores it.
+     */
+    public ?string $source = null;
 
     /**
      * In editor order. parentId: the id of the row this one sits under (null = top level).
@@ -69,6 +79,8 @@ final class Item
         $item->costRating = self::int($data, 'costrating', 'CostRating');
         $item->category = trim(self::str($data, 'category', 'category') ?? '');
         $item->description = trim(self::str($data, 'description', 'description') ?? '');
+        $groupSize = self::int($data, 'groupsize', 'groupSize');
+        $item->groupSize = $groupSize !== null && $groupSize > 1 ? $groupSize : null;
 
         foreach (self::list($data, 'attributelist') as $i => $row) {
             $where = "attributeList[$i]";
@@ -136,6 +148,8 @@ final class Item
             'category' => $this->category,
             'description' => $this->description,
             'IsPublic' => $this->isPublic,
+            'source' => $this->source,
+            'groupSize' => $this->groupSize,
             'modifierList' => array_map(static fn (array $m): array => [
                 'modifierID' => self::MODIFIER_PREFIX . $m['id'],
                 'modifierName' => $m['name'],

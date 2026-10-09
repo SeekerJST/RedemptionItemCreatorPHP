@@ -100,6 +100,10 @@ Workbench CR is always for **one** item; the group's +1 is applied when buying, 
 Store a `groupSize` (e.g. 10) on such items and show both: "CR 0 (one), CR 1 per 10". The corebook's
 Explosive Grenade prints CR 1 for a box of 10; one grenade (5x) is CR 0.
 
+**[Ruling 2026-10-09] An item sold per 10 is its own charge,** like a One-Time Use item: its attacks
+need no Ammunition or Power Slot, and its Power Supply and Drive need no Fuel or Charge (a missile
+only has to last one round). The app stores this as the item's group size ("Sold per 10").
+
 For reference, the CR each size reaches at 0 BP:
 
 | Size | Tiny | Small | Medium | Large | Huge | Colossal |
@@ -494,6 +498,9 @@ Missiles themselves are separate Kinetic Attack items.
 - **[Ruling 2026-09-23] Launchers are bought in increments of 4,** matching the power use:
   one increment = 4 launchers = 1 Power Slot, costing 20 / 40 / 60 BP.
 - **Disposable** (single-shot): no Power or Resource needed; destroyed on use.
+- **[Ruling 2026-10-09] Box launchers** (implementation): one missile each, reloaded by hand. Same cost
+  and power; they need **no Magazine**. Decisive Action's Peltast STA Launcher fires separately bought
+  STA/S missiles from 8 of them.
 - **[Ruling 2026-10-06] Space-scale missile chassis:** a Space missile is built on a Moderate Reaction Drive (25) plus a Major Coil Power Supply (40), with no Charge or Fuel (it only lasts one round). Stat blocks assume the chassis and don't print it. Missiles are sold per 10 (+1 CR). Battlefield missiles (Small STA/S rounds) don't carry it.
 
 ### 5.17 Life Support — 5 / 20 / 40 BP
@@ -515,6 +522,10 @@ Missiles themselves are separate Kinetic Attack items.
 | Minor | 12 | Large | 15 |
 | Moderate | 100 | Huge | 30 |
 | Major | 1,000 | Colossal | 60 |
+
+**[Ruling 2026-10-09] Shohan Artificial Ecology** (implementation; Decisive Action): more efficient
+than the Terran kind, at the same cost and capacity it fits one size smaller: Minor Medium, Moderate
+Large, Major Huge (the Prometheus).
 
 ### 5.18 Link — 5 / 15 / 50 BP
 
@@ -978,6 +989,9 @@ Listed so the code can make each one a single named constant or function, easy t
 | 10-05 | Weapon Link with self-powered weapon | Draws no slot (Shohan weapons carry their own Hyperspace Taps) | §5.22 |
 | 10-04 | Area size | The book prices Area at a flat 20 BP; each size step past Small costs another 20 | §5.1 |
 | 10-04 | Hungry on grenades | Fired from a launcher or vehicle kinetic weapon, a grenade takes 10 rounds of that magazine | §6 |
+| 10-09 | Items sold per 10 | Self-contained like One-Time Use: no Ammunition, Power Slot, Fuel or Charge needed (the STA/S, Grav and Hyper Missiles) | §4, §9 |
+| 10-09 | Box launchers | A Launcher implementation: one shot each, manual reload, no Magazine (the Peltast) | §5.16 |
+| 10-09 | Shohan Artificial Ecology | Same cost and capacity, one size smaller than the Terran kind (the Prometheus) | §5.17 |
 | 10-08 | Decisive Action implementations | Anomalous Power Supply, Arboreal Drive and Force Field Link cost as their grade; Counter: Recording 20; Hyperspace Portal 60 (as a Major Hangar); Psi-Resonant Materials 75 / 150 / 300 | §5.9, §5.10, §5.15, §5.18, §5.22, §5.27 |
 | 10-08 | Plasma Bleeds printed below the free Bleed | Decisive Action's plasma guns that print a smaller Bleed (TK-Tac HK, Wyvern, Syren, Vigilance, Troop Carrier) get the free Plasma Bleed instead: errata, no BP | §5.3 |
 | 10-08 | Decisive Action power lines | Set to what the build gives: TK-Tac HK 3 Minor + 3 Moderate (printed 9 Moderate); Troop Carrier 3 Minor + 3 Moderate (printed 3 Major); Marauder FF CC 28 for CR 7 (printed 21) | §5.22 |

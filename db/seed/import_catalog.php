@@ -81,6 +81,9 @@ foreach ($json['items'] as $i => $entry) {
     try {
         $item = Item::fromArray($entry);
         $item->assertSavable();
+        // The book it comes from; core items stay NULL (see migration 008).
+        $source = (string) ($entry['source'] ?? 'Core');
+        $item->source = $source === 'Core' ? null : $source;
     } catch (HttpException $e) {
         $problems[] = "$name: " . $e->getMessage();
         continue;

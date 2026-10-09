@@ -57,6 +57,8 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `config/config.example.php` | Template for `config.php` (`db`, `allow_writes`, `app_url`, `mail`, `session`, `debug`). The real `config.php` holds the DB and mailbox passwords and is gitignored. |
 | `client/src/App.jsx` | Layout only: loads lookups, holds the item state (`useReducer`), derives the summary, renders the three panels. |
 | `client/src/domain/` | Pure logic, no React. `constants.js` (UI constants and attribute IDs), `costs.js` (row BP), `summary.js` (everything Panel 3 shows), `item.js` (item reducer and the API payload), `ruleRows.js` (item rows → rules rows), `inventory.js` (the Inventory tree by category). |
+| `client/src/domain/rules/sources.js` | Optional content: `SOURCES` (Decisive Action), `sourceEnabled()`. Rules, implementations, and catalog items from a supplement carry `source`; the app hides them unless the user switches that source on. |
+| `client/src/hooks/useOptionalSources.js` | The optional-content switches (off by default), remembered in the browser. The switch is at the top of the Inventory panel. |
 | `client/src/domain/rules/` | **The item creation rules** (docs/item_creation_rules.md) as code: one entry per attribute (cost, grades, rank meaning, power, allowed sub-rows), cost curves, sizes, Cost Rating, power budget. `*.test.js` beside them; the Frigate fixture is `frigate.test.js`. |
 | `client/src/styles/theme.css` | **The Redemption theme**, meant to be shared with SystemGeneratorLive and the site: colors, fonts, and `rd-` classes (`.rd-panel` gold cut-corner frame, `.rd-title`, `.rd-heading`, `.rd-button`, `.rd-field`). Matches the corebook cover via the Roll20 sheet. |
 | `client/src/components/NavBar.jsx` | The site navigation bar across the top: SilentSpirits logo (`client/icons/SSGSLogo.png`), Redemption › Gear Creator, and Login / Profile / Logout. Takes `user` (undefined while loading), `onLogin`, `onLogout`, `onProfile`; shows "unconfirmed" beside an account whose email isn't confirmed. Link targets are `NAV_LINKS`: the logo goes to https://www.silentspiritsgames.com/ (which this site will replace); Redemption to the site root for now. |
@@ -68,7 +70,8 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `index.php` (root) | Only there so Visual Studio's F5 (built-in server, no router) can reach the API. |
 | `db/migrations/` | Numbered SQL scripts. Run each one once, in order, on every existing database. A new database (e.g. the first Dreamhost one) is created from the schema file instead, which already includes them. |
 | `tests/smoke.php` | End-to-end test (79 checks) against a running server: items, ownership, and accounts. Makes and removes its own `smoke-*@example.invalid` accounts. |
-| `db/seed/` | `catalog.json` (the equipment catalog as app items, generated) and `import_catalog.php` (loads it as public items). |
+| `db/seed/` | `catalog.json` (the equipment catalog as app items, generated: 182 items from the core book, the Deployment Companion, New Detroit, and Decisive Action, each with its `source` and `groupSize`) and `import_catalog.php` (loads it as public items, with `item.Source` and `item.GroupSize`). |
+| `docs/catalog_tools/da.py` | Decisive Action's gear, built row by row; adds each item to the catalog (`items.py` imports it) and feeds `decisive_action_reconciliation.md` (`da_report.py`). |
 | `docs/catalog_tools/` | The catalog's source: `items.py` (data), `costs.py` (helpers: catalog text plus app rows), `gen.py` (the markdown), `gen_errata*.py` (errata files), `gen_catalog_json.py` (`db/seed/catalog.json`). |
 | `client/scripts/price-catalog.mjs` | Prices `catalog.json` with the app's rules (`npm run price-catalog`). |
 | `api.http` | Sample requests for Visual Studio's HTTP editor. |
@@ -203,6 +206,11 @@ parameter still works.
 - The full API is ported and verified against the running C# API: lookups are
   byte-identical, CSV output matches apart from fixes, and items saved by the C# version load correctly.
 - The smoke test passes all 79 checks.
+- **Decisive Action** (2026-10-09, migration 008): its 61 items are in the catalog, and the app
+  prices all 182 catalog items exactly. New rules in the engine: Area by size steps, 1x attacks,
+  Gravitic and Pyre attacks, Grav Blades, Psi-Resonant Materials, Lamellar Matrix, box launchers,
+  Shohan Artificial Ecology, Regeneration power, items sold per 10. Its content is **optional**:
+  hidden unless the user switches it on in the Inventory panel.
 - **Accounts** (2026-10-03, migration 007): email + password sign-up with email confirmation,
   sign in/out, forgot/reset password, profile. Saving takes a signed-in account with a confirmed
   email; each saved item belongs to its creator, who alone (or an admin) can see, change, or delete it.
@@ -235,6 +243,9 @@ parameter still works.
 
 ## Decisions
 
+- **Supplements as optional content** (2026-10-09). Decisive Action's gear, attributes, and
+  implementations are possibilities rather than core: off by default, switched on per browser. Core
+  rulings made while reconciling it (Area by size, 1x attacks, group pricing) apply everywhere.
 - **Accounts** (2026-10-03). Open sign-up, confirmed by email; email + password first, Google and
   Microsoft sign-in later (Apple only if wanted: it needs the paid developer program). Mail goes
   through the no-reply@silentspiritsgames.com mailbox on Dreamhost (PHPMailer, vendored like Dompdf).

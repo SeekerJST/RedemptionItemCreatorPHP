@@ -66,7 +66,7 @@ def area(size='Small'):
     n=AREA_STEPS[size]
     return Row("Area","" if size=='Small' else size,20*n, A('Area', None, n, sub=True, size=size.lower()))
 COUNTER_IMPL = {'Armor': 'armor', 'Shields': 'shields', 'Missiles': 'missiles', 'Detection': 'detection',
-                'Disabling': 'disabling', 'Strike': 'strike'}
+                'Disabling': 'disabling', 'Strike': 'strike', 'Recording': 'recording'}
 def counter(k,free=False): return Row("Counter",k+(" (free)" if free else ""),0 if free else 20, A('Counter', None, 1, COUNTER_IMPL.get(k, 'general'), sub=True))
 def bleed(mag,d,free=False): return Row("Bleed",f"{mag} {d}"+(" (free, Plasma)" if free else ""),0 if free else cB([5,10,20][G[mag]],d), A('Bleed', GN[mag], d, sub=True))
 def body(size,total):
@@ -96,31 +96,38 @@ def tasks(lst,brain=False):
                {'group': [A('Task', None, t, sub=True, task=n) for n, t in lst]})
 DRIVE_IMPL = {'Air': 'air', 'Ground': 'ground', 'Sea': 'sea', 'Sea/Submersible': 'sea', 'Reaction': 'reaction',
               'Reactionless': 'reactionless', 'Gravitic': 'gravitic', 'Light Sail': 'lightSail', 'Jump': 'jump',
-              'Land (legs)': 'biological'}
+              'Land (legs)': 'biological', 'Arboreal': 'arboreal'}
 def drive_impl(text):
     # "Gravitic (modified in-system)" is a Gravitic drive with a note.
     return DRIVE_IMPL.get(text) or DRIVE_IMPL[text.split(' (')[0]]
 def drive(grade,impl): return Row("Drive",f"{grade} {impl}",15 if impl=='Light Sail' else [10,25,50][G[grade]], A('Drive', GN[grade], 1, drive_impl(impl)))
 def maneuver(grade,r): return Row("Maneuver",f"rank {r} at {grade} grade",r*[5,10,20][G[grade]], A('Maneuver', GN[grade], r, sub=True))
-def launchers(scale,n):
+def launchers(scale,n,box=False):
+    # box: one-shot box launchers, reloaded by hand, so they need no Magazine (ruling 2026-10-09).
     inc=-(-n//4); per=[5,10,15][SC[scale]]
-    d=f"{scale} ×{n}"+("" if n%4==0 else f" (book count; builder buys increments of 4 → {inc*4})")+f", {inc} increment{'s' if inc>1 else ''}"
-    return Row("Launcher",d,inc*4*per, A('Launchers', SN[scale], inc))
+    d=f"{scale} ×{n}"+(" box (one shot each, manual reload)" if box else "")+("" if n%4==0 else f" (book count; builder buys increments of 4 → {inc*4})")+f", {inc} increment{'s' if inc>1 else ''}"
+    return Row("Launcher",d,inc*4*per, A('Launchers', SN[scale], inc, 'box' if box else None))
 def ls(grade,n=1): return Row("Life Support",f"{grade} ×{n}",n*[5,20,40][G[grade]], A('Life Support', GN[grade], n, 'standard'))
-def eco(grade): return Row("Life Support",f"Artificial Ecology, {grade}",[15,30,60][G[grade]], A('Life Support', GN[grade], 1, 'artificialEcology'))
-LINK_IMPL = {'Data': 'data', 'Psi': 'psi', 'Weapon': 'weapon', 'Refueling': 'refueling', 'Armor': 'armor'}
+def eco(grade,shohan=False):
+    # Shohan Artificial Ecology (ruling 2026-10-09): more efficient, so it fits one size smaller.
+    return Row("Life Support",f"{'Shohan ' if shohan else ''}Artificial Ecology, {grade}",[15,30,60][G[grade]],
+               A('Life Support', GN[grade], 1, 'shohanArtificialEcology' if shohan else 'artificialEcology'))
+LINK_IMPL = {'Data': 'data', 'Psi': 'psi', 'Weapon': 'weapon', 'Refueling': 'refueling', 'Armor': 'armor',
+             'Force Field': 'forceField', 'Weapon (self-powered weapon)': 'weaponSelfPowered'}
 def link(grade,kind,n=1): return Row("Link",f"{grade} {kind}"+(f" ×{n}" if n>1 else ""),n*[5,15,50][G[grade]], A('Link', GN[grade], n, LINK_IMPL.get(kind) or LINK_IMPL[kind.split(' (')[0]]))
 def manuf(grade,n=1): return Row("Manufacture",f"{grade}"+(f" ×{n}" if n>1 else ""),n*[25,50,100][G[grade]], A('Manufacture', GN[grade], n))
 # Modifier grade = how many skills it covers (ruling 2026-09-28): Minor 1, Moderate 2, Major 3+.
 def mod(skill,r,n=1): return Row("Modifier",f"{skill} +{r}"+(f" (counted ×{n} skills)" if n>1 else ""),10*r*n, A('Modifier', min(n, 3), r, skill=skill))
 def ni(grade): return Row("Neural Interface",grade,[3,5,10][G[grade]], A('Neural Interface', GN[grade]))
-PS_IMPL = {'Fusion': 'fusion', 'Antimatter': 'antimatter', 'Coil': 'coil', 'Environmental': 'environmental', 'Hyperspace Tap': 'hyperspaceTap'}
+PS_IMPL = {'Fusion': 'fusion', 'Antimatter': 'antimatter', 'Coil': 'coil', 'Environmental': 'environmental', 'Hyperspace Tap': 'hyperspaceTap',
+           'Anomalous': 'anomalous'}
 def ps(grade,impl,r=1): return Row("Power Supply",f"{grade} {impl} rank {r}",r*[5,10,40][G[grade]], A('Power Supply', GN[grade], r, PS_IMPL.get(impl) or PS_IMPL[impl.split(' (')[0]]))
+RES_IMPL = {'Personal Supplies': 'personalSupplies'}
 def res(grade,kind,r):
     per=[5,10,15][G[grade]]
     if kind=='Charge': per=[4,8,12][G[grade]]
     if kind=='Tangle': per=10
-    return Row("Resource",f"{kind}, {grade} ×{r}",per*r, A('Resource', GN[grade], r, kind.lower(), sub=True))
+    return Row("Resource",f"{kind}, {grade} ×{r}",per*r, A('Resource', GN[grade], r, RES_IMPL.get(kind, kind.lower()), sub=True))
 def grav(grade): return Row("Gravity Control",grade,[10,20,40][G[grade]], A('Gravity Control', GN[grade]))
 def hangar(grade,n=1): return Row("Hangar",f"{grade}"+(f" ×{n}" if n>1 else ""),n*[15,30,60][G[grade]], A('Hangar', GN[grade], n))
 def tag(name,r=1,free=False): return Row("Tag",f"[{name}]"+(f" {r}" if r>1 else "")+(" (Free)" if free else ""),r*(10 if free else 5), {'tag': name, 'rank': r, 'free': free})
@@ -141,3 +148,48 @@ def bleed_plasma(mag,free_d,total_d):
 def attack1x(scale,label='Attack (1x)'):
     b=[10,20,40][SC[scale]]//2
     return Row(label, f"{scale} 1x (no damage; delivers its effect)", b, A('Attack (1x)', SN[scale], 1, label=label))
+
+# ---- Decisive Action (rulings 2026-10-05 to 2026-10-08) ---------------------------------------
+# Attacks follow the app's shape: an Attack (rank = mounts) plus an Attack Multiplier sub-row that
+# carries the implementation; the implementation's surcharge is part of the Multiplier's cost.
+
+def _impl_attack(scale, m, key, surcharge, melee=False, label=None):
+    base = [10, 20, 40][SC[scale]]; up = 5 * (m - 2) * (m - 1)
+    c = (base + up) // 2 if melee else base + up
+    c += surcharge
+    name = 'Attack (Melee)' if melee else 'Attack'
+    kids = [A('Attack Multiplier', SN[scale], m - 2, key, sub=True)]
+    return c, A(name, SN[scale], 1, children=kids, label=label, multiplier=m)
+
+def gravitic(scale, m, melee=False, label=None):
+    """Gravitic (DA p83): the Attack cost + 5 ([Flattened] on every hit); must buy Area."""
+    c, spec = _impl_attack(scale, m, 'gravitic', 5, melee, label)
+    return Row(label or 'Attack', f"Gravitic{' Melee' if melee else ''} ({scale}) {m}x (+5 [Flattened])", c, spec)
+
+def pyre(m, label=None):
+    """Pyre (DA p94): Battlefield only; the Attack cost + 70 (Counter: Armor, Force Field Overload,
+    Aggravated Assault). Must carry [Time Heals No Wounds 3], bought as a Tag."""
+    c, spec = _impl_attack('Battlefield', m, 'pyre', 70, label=label)
+    return Row(label or 'Attack', f"Pyre (Battlefield) {m}x: {c - 70} + 70 (Counter: Armor, Force Field Overload, Aggravated Assault)", c, spec)
+
+def blades():
+    """Grav Blades (DA p83): Major only, 75 BP; replace the Gravitic Drive and still work as one."""
+    return Row('Grav Blades', 'Major (replaces the Gravitic Drive), 1x', 75, A('Grav Blades', 3, 1))
+
+def arboreal(grade='Minor'): return drive(grade, 'Arboreal')
+def anomalous(grade='Minor', r=1): return ps(grade, 'Anomalous', r)
+def portal():
+    """Hyperspace Portal (DA p128): priced as a Major Hangar, like the Deployment Pod's teleport platform."""
+    return Row('Hyperspace Portal', 'Major (priced as a Major Hangar)', 60, A('Hangar', 3, 1, 'hyperspacePortal'))
+def fflink(grade='Major'): return link(grade, 'Force Field')
+def flightpack(): return drive('Minor', 'Reaction')
+def jump(): return drive('Major', 'Jump')
+
+def free_area(note='Small Sudden (free, Hyperspace)'):
+    """The Area a Hyperspace Attack includes free (errata p210)."""
+    return Row('Area', note, 0, A('Area', None, 1, sub=True, size='small'))
+
+def lamellar(grade, n):
+    """Lamellar Matrix (DA p84): a Terran Force Field implementation at the normal costs; may be Major."""
+    row = ff(grade, n)
+    return Row('Force Field', row[1] + ', Lamellar Matrix', row[2], dict(row.spec, impl='lamellarMatrix'))

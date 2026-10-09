@@ -73,7 +73,7 @@ Routes match the C# API (case-insensitive), so the React client didn't need chan
 | GET | `itemcreator/getskillsds` | `skills` rows, by name |
 | GET | `itemcreator/getitemattributesds` | `attribute` rows, by name |
 | GET | `itemcreator/getattributescaleds` | `attributescale` rows |
-| GET | `itemcreator/getallitems` | summaries of the public items, plus the signed-in user's own private ones |
+| GET | `itemcreator/getallitems` | summaries of the public items, plus the signed-in user's own private ones; each has `source` (the book, null for core) |
 | GET | `itemcreator/getitem/{id}` | full item; 404 if missing or someone else's private item |
 | POST | `itemcreator/createitem` | 201 + item with new `itemID`, owned by the caller; 401 signed out, 403 email not confirmed |
 | PUT | `itemcreator/updateitem/{id}` | 200 + item; replaces all child rows; 404 if missing or not yours; 403 if public |
@@ -132,7 +132,8 @@ work; Google and Microsoft sign-in are planned; there's no admin panel for makin
 1. Create the Dreamhost DB from the committed schema and seed files (not written yet; see
    next step 2 in `docs/project_guide.md`). They include every migration so far. After that,
    run any newer `db/migrations/*.sql` on it, in order (on an existing DB, that includes
-   `007_users_and_ownership.sql`: the accounts tables). Then load the catalog:
+   `007_users_and_ownership.sql`: the accounts tables, and `008_decisive_action.sql`: new attributes,
+   `item.Source` and `item.GroupSize`). Then load the catalog:
    `php db/seed/import_catalog.php` (needs `config/config.php`; see `docs/project_guide.md`).
 2. Run `npm run build` in `client/`.
 3. Upload the contents of `public/` to the web folder (e.g. `~/silentspiritsgames.com/itemcreator/`).

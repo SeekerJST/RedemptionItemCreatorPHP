@@ -411,4 +411,25 @@ e(DA,126,None,'Concealable Plasma Torch','stat',D15,"The Concealable Plasma Torc
 D16='2026-10-09'
 e(DA,114,None,'Phantom Mk. 3','stat',D16,"The Phantom Mk. 3's Grav Blades keep the Phantom's Hungry limitation (1 Fuel per round for in-system maneuvers), and it carries Restricted Technology (Property of the Terran Sphere) as a Major limitation. It has no Laser Link (the core Phantom's errata p255 doesn't carry over), and its Air Drive is Minor as printed. CR 8 is unchanged.",
   [('Phantom Mk. 3','Limitation','none','Minor: Hungry (1 Fuel/round for in-system maneuvers)'),('Phantom Mk. 3','Limitation','none','Major: Restricted Technology (Property of the Terran Sphere)')])
+D16='2026-10-09'
+e(DA,106,None,'Peltast STA Launcher: box launchers','stat',D16,"The Peltast STA Launcher's 8 launchers are one-shot box launchers, reloaded by hand: each holds one STA/S missile (bought separately), so it needs no Magazine.",
+  [('Peltast STA Launcher','Launchers','8 (Battlefield)','8 box launchers (Battlefield; one shot each, manual reload)')])
+e(DA,114,None,'Syren: Force Field','stat',D16,"The Syren's Force Field is Moderate 2 (Track 40), not 30: a Minor field only covers items up to Medium. CR 6 is unchanged.",
+  [('Syren','Force Field','30 (Minor 3)','Moderate 2 (Track 40)')])
+e(DA,115,None,'Farstrider Refit','stat',D16,"The Farstrider Refit's Major Coil runs on 1 Major Charge (10 jumps or combat rounds).",
+  [('Farstrider Refit','Resource: Charge','none','Major x1')])
+e(DA,120,None,'The Prometheus: Shohan Artificial Ecology','stat',D16,"The Prometheus's Artificial Ecology is a Shohan one, which is more efficient: a Major Shohan Artificial Ecology (1000 people) fits in a Huge hull.",
+  [('The Prometheus (Refitted Old Soldier)','Life Support','1 Major Artificial Ecology (1000 people)','1 Major Shohan Artificial Ecology (1000 people)')])
+e(DA,122,123,'Unique Fuel (Antimatter): Moderate','stat',D16,"On the Marauder (Force Field Revision) and the Haven Hyperspace Carrier, Unique Fuel (Antimatter) is a Moderate limitation: Sold Your Soul to the Shohan is their one Major limitation. On the Haven Hyperspace Carrier, Key Personnel (Oracle) is a Minor limitation, so it has at most 2 Moderate ones. Their CRs (7 and 11) are unchanged.",
+  [('Marauder (Force Field Revision)','Limitation grade: Unique Fuel (Antimatter)','Major','Moderate'),('Haven Hyperspace Carrier (Lilith Refit)','Limitation grade: Unique Fuel (Antimatter)','Major','Moderate'),('Haven Hyperspace Carrier (Lilith Refit)','Limitation grade: Key Personnel (Oracle)','Moderate','Minor')])
+e(DA,125,None,'Surveillance Drone: power','stat',D16,"The Surveillance Drone's Minor Charge feeds a Minor Coil Power Supply (rank 1; none printed). CR 3 is unchanged.",
+  [('Surveillance Drone','Power Supply','none','Minor Coil 1')])
+e(DA,130,131,'Sentry, Impound and Wobbler Drones: power','stat',D16,"The Sentry, Impound and Wobbler Drones each have a Minor Hyperspace Tap Power Supply (none printed) to run their drives.",
+  [('Sentry Drone','Power Supply','none','Minor Hyperspace Tap'),('Impound Drone','Power Supply','none','Minor Hyperspace Tap'),('Wobbler Drone','Power Supply','none','Minor Hyperspace Tap')])
+e(IC,225,None,'Items sold per 10: self-contained','rule',D16,"An item sold in groups of 10 (rounds, charges, grenades, missiles) is its own charge, like a One-Time Use item: its attacks need no Ammunition or Power Slot, and its Power Supply and Drive need no Fuel or Charge. (Decisive Action's STA/S, Grav and Hyper Missiles.)",
+  [(None,'Feeds on an item sold per 10','as any item','none needed')])
+e(IC,214,None,'Launchers: box launchers','rule',D16,"Box launchers hold one missile each and are reloaded by hand. They cost the same as other launchers and need no Magazine. (Decisive Action's Peltast STA Launcher.)",
+  [(None,'Box launcher magazine','Magazine needed','none (one shot each, manual reload)')])
+e(DA,120,None,'Life Support: Shohan Artificial Ecology','rule',D16,"Shohan Artificial Ecology is more efficient than the Terran kind: at the same cost and capacity, it fits in an item one size smaller (Minor: Medium, Moderate: Large, Major: Huge).",
+  [(None,'Artificial Ecology minimum size (Shohan)','Large / Huge / Colossal','Medium / Large / Huge')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))

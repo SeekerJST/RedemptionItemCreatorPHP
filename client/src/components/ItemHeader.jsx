@@ -21,6 +21,8 @@ export default function ItemHeader({
     onNameChange,
     onCategoryChange,
     onSizeChange,
+    groupSize,
+    onGroupSizeChange,
     toolbar,
     status,
     confirm,
@@ -122,6 +124,15 @@ export default function ItemHeader({
                                     <option key={c} value={c} />
                                 ))}
                             </datalist>
+                            <label className="item_group_size" title="Rounds, grenades and missiles are sold 10 at a time: a group costs +1 CR, and each one is its own charge (no Ammunition, Fuel or Charge needed).">
+                                <input
+                                    type="checkbox"
+                                    checked={groupSize === 10}
+                                    disabled={readOnly}
+                                    onChange={(e) => onGroupSizeChange(e.target.checked ? 10 : null)}
+                                />{' '}
+                                Sold per 10
+                            </label>
                         </td>
                     </tr>
                 </tbody>

@@ -200,8 +200,69 @@ alongside an XP cost.
 | [Foam Grenade](#foam-grenade) | Small | 60 | 1 | 1 | ✔ |
 | [Flashbang](#flashbang) | Small | 15 | 0 | 0 | ✔ |
 | [Incendiary Grenade](#incendiary-grenade) | Small | 45 | 1 | 1 | ✔ |
+| [Light Battle Armor](#light-battle-armor) | Medium | 177 | 2 | 2 | ✔ |
+| [Srivatsa Powered Armor](#srivatsa-powered-armor) | Medium | 348 | 5 | 5 | ✔ |
+| [Agni Variable Yield Rounds](#agni-variable-yield-rounds) | Small | 65 | 1 | 1 | ✔ |
+| [High Impact Explosive Charge](#high-impact-explosive-charge) | Small | 95 | 2 | 2 | ✔ |
+| [Plasma Breaching Charge](#plasma-breaching-charge) | Small | 80 | 2 | 2 | ✔ |
+| [Peltast STA Launcher](#peltast-sta-launcher) | Small | 145 | 3 | 3 | ✔ |
+| [Basic STA/S Missile](#basic-stas-missile) | Small | 110 | 3 | 3 | ✔ |
+| [Plasma STA/S Missile](#plasma-stas-missile) | Small | 140 | 4 | 4 | ✔ |
+| [Scrammer STA/S Missile](#scrammer-stas-missile) | Small | 100 | 3 | 3 | ✔ |
+| [Field Kit](#field-kit) | Small | 82 | 1 | 1 | ✔ |
+| [Force Field Bunker](#force-field-bunker) | Medium | 220 | 3 | 3 | ✔ |
+| [Medipod](#medipod) | Medium | 205 | 3 | 3 | ✔ |
+| [TK-Tac T09-HK (Hunter Killer)](#tk-tac-t09-hk-hunter-killer) | Large | 506 | 5 | 5 | ✔ |
+| [TK-Tac T09-APC](#tk-tac-t09-apc) | Large | 506 | 5 | 5 | ✔ |
+| [Wyvern](#wyvern) | Large | 690 | 6 | 6 | ✔ |
+| [Syren](#syren) | Large | 610 | 6 | 6 | ✔ |
+| [Aerospace Carrier Vehicle/Escort Carrier](#aerospace-carrier-vehicleescort-carrier) | Huge | 1,538 | 10 | 10 | ✔ |
+| [Vigilance-class](#vigilance-class) | Huge | 1,238 | 9 | 9 | ✔ |
+| [Vigilance Range Extension Module](#vigilance-range-extension-module) | Large | 310 | 3 | 3 | ✔ |
+| [Vigilance Missile Module](#vigilance-missile-module) | Large | 340 | 3 | 3 | ✔ |
+| [Vigilance Troop Carrier Module](#vigilance-troop-carrier-module) | Large | 478 | 4 | 4 | ✔ |
+| [Incendiary Charge](#incendiary-charge) | Small | 95 | 2 | 2 | ✔ |
+| [Resistance Chem Kit](#resistance-chem-kit) | Small | 91 | 1 | 1 | ✔ |
+| [Hoverbike Conversion](#hoverbike-conversion) | Medium | 183 | 2 | 2 | ✔ |
+| [Resistance Scout Mech](#resistance-scout-mech) | Medium | 253 | 4 | 4 | ✔ |
+| [Resistance Artillery Mech](#resistance-artillery-mech) | Medium | 324 | 5 | 5 | ✔ |
+| [Auxiliary Armor (Stage 1)](#auxiliary-armor-stage-1) | Medium | 163 | 2 | 2 | ✔ |
+| [Auxiliary Armor (Stage 2)](#auxiliary-armor-stage-2) | Medium | 208 | 3 | 3 | ✔ |
+| [Auxiliary Armor (Stage 3)](#auxiliary-armor-stage-3) | Medium | 273 | 4 | 4 | ✔ |
+| [Flare Rifle](#flare-rifle) | Small | 133 | 3 | 3 | ✔ |
+| [Volcano-class](#volcano-class) | Huge | 1,501 | 10 | 10 | ✔ |
+| [Marauder (Force Field Revision)](#marauder-force-field-revision) | Large | 796 | 7 | 7 | ✔ |
+| [Haven Hyperspace Carrier (Lilith Refit)](#haven-hyperspace-carrier-lilith-refit) | Huge | 1,673 | 11 | 11 | ✔ |
+| [Surveillance Drone](#surveillance-drone) | Tiny | 63 | 3 | 3 | ✔ |
+| [Disguise Kit](#disguise-kit) | Small | 77 | 1 | 1 | ✔ |
+| ["White Noise" Generator](#white-noise-generator) | Tiny | 39 | 1 | 1 | ✔ |
+| [Entry Tools](#entry-tools) | Small | 93 | 1 | 1 | ✔ |
+| [Concealable Plasma Torch](#concealable-plasma-torch) | Tiny | 43 | 1 | 1 | ✔ |
+| [Grav Grenade](#grav-grenade) | Tiny | 40 | 2 | 2 | ✔ |
+| [Grav STA Missile](#grav-sta-missile) | Small | 125 | 4 | 4 | ✔ |
+| [Phantom Mk. 3](#phantom-mk-3) | Large | 848 | 8 | 8 | ✔ |
+| [Farstrider Refit](#farstrider-refit) | Large | 82 | 1 | — | — |
+| [The Artemis (Hyperspace Mothership)](#the-artemis-hyperspace-mothership) | Colossal | 3,538 | 14 | 14 | ✔ |
+| [The Prometheus (Refitted Old Soldier)](#the-prometheus-refitted-old-soldier) | Huge | 1,953 | 12 | — | — |
+| [Redemption Aegis Refit (Option 1)](#redemption-aegis-refit-option-1) | Huge | 1,406 | 10 | 10 | ✔ |
+| [Redemption Aegis Refit (Option 2)](#redemption-aegis-refit-option-2) | Huge | 1,406 | 10 | 10 | ✔ |
+| [Grav Missile](#grav-missile) | Medium | 270 | 5 | 5 | ✔ |
+| [Hyper Missile](#hyper-missile) | Medium | 285 | 5 | 5 | ✔ |
+| [Shohan Stun Field](#shohan-stun-field) | Small | 90 | 1 | 1 | ✔ |
+| [Pyre Lance](#pyre-lance) | Small | 175 | 5 | 5 | ✔ |
+| [Shohan Stealth Armor](#shohan-stealth-armor) | Medium | 302 | 5 | 5 | ✔ |
+| [Breaching Pod](#breaching-pod) | Medium | 393 | 6 | — | — |
+| [Fold Bomb](#fold-bomb) | Small | 120 | 2 | 2 | ✔ |
+| [Flare Drone (Assault)](#flare-drone-assault) | Medium | 527 | 9 | — | — |
+| [Flare Drone (Sniper)](#flare-drone-sniper) | Medium | 527 | 9 | — | — |
+| [Sentry Drone](#sentry-drone) | Medium | 447 | 7 | — | — |
+| [Impound Drone](#impound-drone) | Medium | 538 | 9 | — | — |
+| [Wobbler Drone](#wobbler-drone) | Medium | 497 | 8 | — | — |
+| [Gunboat](#gunboat) | Large | 718 | 7 | — | — |
+| [Shohan Shieldbearer](#shohan-shieldbearer) | Huge | 1,650 | 11 | — | — |
+| [Shohan Lancer](#shohan-lancer) | Large | 1,054 | 10 | — | — |
 
-**114 match, 0 differ.** Every item now matches its printed or errata CR.
+**164 match, 0 differ.** Every item now matches its printed or errata CR.
 
 
 ---
@@ -3049,7 +3110,7 @@ Description: "The standard Shohan soldier’s armor."
 | Force Field | Minor ×3 (track 30) | 45 |
 | Regeneration | Force Field 4, Major grade | 45 |
 | Power Supply | Moderate Hyperspace Tap rank 1 | 10 |
-| Link | Moderate Weapon ×2 | 30 |
+| Link | Moderate Weapon (self-powered weapon) ×2 | 30 |
 | Communication | Moderate Radio | 13 |
 | Computer | Minor rank 3 (TN 18) | 9 |
 | Life Support | Minor ×1 | 5 |
@@ -3769,6 +3830,1772 @@ Description: ""
 **Formula CR:** 1 (one: 0; per 10: +1) ✔ matches printed
 
 - Bleed (Fire) 4, Minor.
+
+
+### Decisive Action: TSA
+
+#### Light Battle Armor
+
+Source: Decisive Action p100 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 25 (default 10 + 3×5) | 15 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×2 | 8 |
+| Cargo | Minor ×1 | 5 |
+| Life Support | Minor ×1 | 5 |
+| Communication | Minor Radio | 3 |
+| Computer | Minor rank 2 (TN 16) | 6 |
+| Modifier | Detection +1 | 10 |
+| Modifier | Stealth +2 | 20 |
+| Modifier | Tactics +1 | 10 |
+| Tag | [Secure Tacnet] 2 | 10 |
+| Tag | [Handle the Heat] 2 | 10 |
+| Limitation | Minor: Usage Restriction (life support only provides rebreather) | −10 |
+| **Total** | | **177** |
+
+**Formula CR:** 2 ✔ matches printed
+
+#### Srivatsa Powered Armor
+
+Source: Decisive Action p101 · **Size:** Medium · **Printed CR:** 5 · **CC:** 15
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p101: The Srivatsa's Power Supply is a Moderate Coil of rank 1 (the 3 Power Slots printed; rank 2 would give 6), and its Tag is [Shohan Killer 2], not 3.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Battlefield, rank 4 | 110 |
+| Body Track | 50 (default 10 + 8×5) | 40 |
+| Force Field | Minor ×5 (track 50) | 75 |
+| Power Supply | Moderate Coil rank 1 | 10 |
+| Resource | Charge, Moderate ×2 | 16 |
+| Drive | Minor Reaction | 10 |
+| Maneuver | rank 2 at Minor grade | 10 |
+| Tag | [Lean Into It] (Free) | 10 |
+| Limitation | Minor: No Long-Range Hops | −10 |
+| Link | Minor Weapon ×2 | 10 |
+| Life Support | Minor ×1 | 5 |
+| Computer | Minor rank 3 (TN 18) | 9 |
+| Communication | Minor Radio | 3 |
+| Modifier | Athletics +2 | 20 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Tactics +1 | 10 |
+| Modifier | Weapons (Firearms, Heavy Weapons) +2 (counted ×2 skills) | 40 |
+| Limitation | Minor: Usage Restriction (Weapons +2 mounted weapons only) | −10 |
+| Tag | [Shohan Killer] 2 | 10 |
+| Tag | [Secure Tacnet] 3 | 15 |
+| Tag | [Coordinated Fire] | 5 |
+| Limitation | Minor: Usage Restriction (no Stealth attempts) | −10 |
+| Limitation | Major: Restricted Technology (Property of the TSA) | −50 |
+| **Total** | | **348** |
+
+**Formula CR:** 5 ✔ matches printed
+
+- Weapons +2 read as Firearms+Heavy Weapons (Moderate) with a Minor 'mounted only' limitation, like the Kavacha. Approved 10-05: Moderate Coil rank 1 (3 slots, as printed; was Coil 2), [Shohan Killer 2] (was 3).
+
+#### Agni Variable Yield Rounds
+
+Source: Decisive Action p104 · **Size:** Small · **Printed CR:** 1 · **CC:** 1 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Bleed | Moderate 3 | 25 |
+| Counter | Shields | 20 |
+| Counter | Armor | 20 |
+| Area |  | 20 |
+| Limitation | Minor: Far Range (ineffective at Far range) | −10 |
+| Limitation | Minor: Hungry | −10 |
+| **Total** | | **65** |
+
+**Formula CR:** 1 (one: 0; per 10: +1) ✔ matches printed
+
+- Add-on for a gauss gun: both modes (Counter: Armor or Area) priced. Sold per 10: printed CR 1 is a batch; one is CR 0. Approved 10-09: the rounds turn a gauss gun's kinetic attack into a plasma one; with no Plasma attack of their own, their Counter: Shields is bought (20).
+
+#### High Impact Explosive Charge
+
+Source: Decisive Action p104 · **Size:** Small · **Printed CR:** 2 · **CC:** 3 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (contact charge) | Kinetic (Battlefield) 6x | 110 |
+| Counter | Armor | 20 |
+| Area |  | 20 |
+| Tag | [The Harder They Fall...] | 5 |
+| Limitation | Major: One-Time Use | −50 |
+| Limitation | Minor: Slave (trigger mechanism) | −10 |
+| **Total** | | **95** |
+
+**Formula CR:** 2 (one: 1; per 10: +1) ✔ matches printed
+
+#### Plasma Breaching Charge
+
+Source: Decisive Action p105 · **Size:** Small · **Printed CR:** 2 · **CC:** 3 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (contact charge) | Plasma (Battlefield) 5x | 80 |
+| Counter | Shields (free) | 0 |
+| Bleed | Minor 4 | 35 |
+| Counter | Armor | 20 |
+| Tag | [Knock, Knock] | 5 |
+| Limitation | Major: One-Time Use | −50 |
+| Limitation | Minor: Slave (trigger mechanism) | −10 |
+| **Total** | | **80** |
+
+**Formula CR:** 2 (one: 1; per 10: +1) ✔ matches printed
+
+- Bleed Minor 4 differs from the free Moderate Plasma Bleed, so it's paid in full.
+
+#### Peltast STA Launcher
+
+Source: Decisive Action p106 · **Size:** Small · **Printed CR:** 3 · **CC:** 6
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p106: The Peltast STA Launcher's Body Track is 25, not 30.
+
+> **Errata** (new, 2026-10-09) Decisive Action p106: The Peltast STA Launcher's 8 launchers are one-shot box launchers, reloaded by hand: each holds one STA/S missile (bought separately), so it needs no Magazine.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Launcher | Battlefield ×8 box (one shot each, manual reload), 2 increments | 80 |
+| Armor Rating | Battlefield, rank 1 | 50 |
+| Body Track | 25 (default 5 + 4×5) | 20 |
+| Modifier | Detection +1 | 10 |
+| Tag | [Eye to the Sky] | 5 |
+| Limitation | Moderate: Slave (powered armor Weapon Link) | −20 |
+| **Total** | | **145** |
+
+**Formula CR:** 3 ✔ matches printed
+
+- Approved 10-09: one-shot box launchers, reloaded by hand, so no Magazine; it fires the separately bought STA/S missiles.
+
+#### Basic STA/S Missile
+
+Source: Decisive Action p106 · **Size:** Small · **Printed CR:** 3 · **CC:** 6 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Kinetic (Battlefield) 6x | 110 |
+| **Total** | | **110** |
+
+**Formula CR:** 3 (one: 2; per 10: +1) ✔ matches printed
+
+- Printed CR 3 per 10 = CR 2 for one.
+
+#### Plasma STA/S Missile
+
+Source: Decisive Action p106 · **Size:** Small · **Printed CR:** 4 · **CC:** 10 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Plasma (Battlefield) 6x | 120 |
+| Counter | Shields (free) | 0 |
+| Bleed | Moderate 3 (free, Plasma) | 0 |
+| Counter | Armor | 20 |
+| **Total** | | **140** |
+
+**Formula CR:** 4 (one: 3; per 10: +1) ✔ matches printed
+
+- Printed CR 4 per 10 = CR 3 for one.
+
+#### Scrammer STA/S Missile
+
+Source: Decisive Action p107 · **Size:** Small · **Printed CR:** 3 · **CC:** 6 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (1x) | Battlefield 1x (no damage; delivers its effect) | 10 |
+| Computer | Minor rank 4 (TN 20) | 12 |
+| Tasks | Blind 20, Disrupt 19 | 78 |
+| **Total** | | **100** |
+
+**Formula CR:** 3 (one: 2; per 10: +1) ✔ matches printed
+
+- Printed CR 3 per 10. Guess: a 1x attack carrying a TN 20 computer.
+
+#### Field Kit
+
+Source: Decisive Action p107 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p107: The Field Kit's Personal Supplies 3 are a Moderate Resource (rank 3).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×3 | 12 |
+| Manufacture | Minor | 25 |
+| Cargo | Minor ×1 | 5 |
+| Resource | Personal Supplies, Moderate ×3 | 30 |
+| Life Support | Minor ×1 | 5 |
+| Tag | [Never Hurts to Have A Spare] | 5 |
+| Tag | [Some Disassembly Required] | 5 |
+| Limitation | Minor: Restricted Technology (Property of the Terran Sphere) | −10 |
+| **Total** | | **82** |
+
+**Formula CR:** 1 ✔ matches printed
+
+#### Force Field Bunker
+
+Source: Decisive Action p108 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 50 (default 10 + 8×5) | 40 |
+| Force Field | Moderate ×4 (track 80) | 80 |
+| Area |  | 20 |
+| Power Supply | Moderate Coil rank 1 | 10 |
+| Resource | Charge, Moderate ×3 | 24 |
+| Computer | Minor rank 1 (TN 14) | 3 |
+| Communication | Minor Radio | 3 |
+| Tag | [Take Cover] 2 | 10 |
+| Limitation | Minor: Partial Armor | −10 |
+| Limitation | Moderate: Hunker Down | −20 |
+| Limitation | Moderate: Restricted Technology (Property of the TSA) | −20 |
+| **Total** | | **220** |
+
+**Formula CR:** 3 ✔ matches printed
+
+#### Medipod
+
+Source: Decisive Action p108 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 50 (default 10 + 8×5) | 40 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×3 | 12 |
+| Computer | Minor rank 1 (TN 14) | 3 |
+| Life Support | Minor ×1 | 5 |
+| Regeneration | Biological 3, Major grade | 30 |
+| Modifier | Medicine (Trauma) +3 | 30 |
+| Tag | [You're Relieved Soldier] 3 (Free) | 30 |
+| Tag | [Do No Harm. Do Know Harm] 2 | 10 |
+| Limitation | Moderate: Partial Armor | −20 |
+| Limitation | Moderate: Restricted Technology (Property of the Terran Sphere) | −20 |
+| **Total** | | **205** |
+
+**Formula CR:** 3 ✔ matches printed
+
+#### TK-Tac T09-HK (Hunter Killer)
+
+Source: Decisive Action p110 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p110: The TK-Tac T09-HK's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 9 Moderate: its Moderate Coil is rank 1. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 3, not Minor 3, and its Heavy Weapons Modifier is +2, not +1. CR 5 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Launcher | Battlefield ×4, 1 increment | 40 |
+| Resource | Magazine, Moderate ×6 | 60 |
+| Attack | Plasma (Battlefield) 6x | 120 |
+| Counter | Shields (free) | 0 |
+| Bleed | Moderate 3 (free, Plasma) | 0 |
+| Life Support | Minor ×2 | 10 |
+| Armor Rating | Battlefield, rank 4 | 110 |
+| Body Track | 150 (default 50 + 5×20) | 50 |
+| Drive | Minor Air | 10 |
+| Maneuver | rank 3 at Minor grade | 15 |
+| Power Supply | Moderate Coil rank 1 | 10 |
+| Resource | Charge, Moderate ×4 | 32 |
+| Link | Moderate Psi | 15 |
+| Neural Interface | Moderate | 5 |
+| Communication | Moderate Radio | 13 |
+| Computer | Minor rank 2 (TN 16) | 6 |
+| Modifier | Heavy Weapons +2 | 20 |
+| Tag | [Drives Like A Dream] 2 (Free) | 20 |
+| Tag | [Take the Fight to the Enemy] 2 | 10 |
+| Limitation | Moderate: Restricted Technology (Property of the Terran Sphere) | −20 |
+| Limitation | Moderate: Crew Requirement (Telekinetic) | −20 |
+| **Total** | | **506** |
+
+**Formula CR:** 5 ✔ matches printed
+
+- Approved 10-08: Bleed is the free Plasma Bleed, Moderate 3 (printed Minor 3); Heavy Weapons +2 (printed +1); power 3 Minor (0 used), 3 Moderate (3 used) (printed 9 Moderate).
+
+#### TK-Tac T09-APC
+
+Source: Decisive Action p111 · **Size:** Large · **Printed CR:** 5 · **CC:** 15
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p111: The TK-Tac T09-APC's troop deck is 2 Major Hangars (it deploys squads), not 2 Major Cargo, and its Life Support for 24 people is Moderate, rank 2.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Launcher | Battlefield ×4, 1 increment | 40 |
+| Resource | Magazine, Moderate ×4 | 40 |
+| Life Support | Moderate ×2 | 40 |
+| Hangar | Major ×2 | 120 |
+| Armor Rating | Battlefield, rank 4 | 110 |
+| Body Track | 150 (default 50 + 5×20) | 50 |
+| Drive | Minor Air | 10 |
+| Maneuver | rank 3 at Minor grade | 15 |
+| Power Supply | Moderate Coil rank 1 | 10 |
+| Resource | Charge, Moderate ×4 | 32 |
+| Link | Moderate Psi | 15 |
+| Neural Interface | Moderate | 5 |
+| Communication | Moderate Radio | 13 |
+| Computer | Minor rank 2 (TN 16) | 6 |
+| Modifier | Heavy Weapons +1 | 10 |
+| Tag | [Drives Like A Dream] 2 (Free) | 20 |
+| Tag | [Take the Fight to the Enemy] 2 | 10 |
+| Limitation | Moderate: Restricted Technology (Property of the Terran Sphere) | −20 |
+| Limitation | Moderate: Crew Requirement (Telekinetic) | −20 |
+| **Total** | | **506** |
+
+**Formula CR:** 5 ✔ matches printed
+
+- Troop Deck = 2 Major Hangars (deploys squads); Life Support Moderate x2 for 24 people.
+
+#### Wyvern
+
+Source: Decisive Action p113 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p113-114: The Wyvern's and Syren's Bleed is their plasma cannon's free Plasma Bleed: Major 3, not Minor 5.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Plasma (Space) 6x | 140 |
+| Counter | Shields (free) | 0 |
+| Bleed | Major 3 (free, Plasma) | 0 |
+| Limitation | Minor: No Long Range | −10 |
+| Launcher | Space ×4, 1 increment | 60 |
+| Resource | Magazine, Major ×4 | 60 |
+| Armor Rating | Space, rank 3 | 110 |
+| Body Track | 90 (default 50 + 2×20) | 20 |
+| Force Field | Moderate ×5 (track 100) | 100 |
+| Drive | Moderate Reaction | 25 |
+| Drive | Minor Reaction | 10 |
+| Maneuver | rank 4 at Moderate grade | 40 |
+| Resource | Fuel, Major ×2 | 30 |
+| Power Supply | Major Fusion rank 1 | 40 |
+| Computer | Minor rank 4 (TN 20) | 12 |
+| Communication | Moderate Radio | 13 |
+| Modifier | Gunnery +1 | 10 |
+| Tag | [High Security] 2 | 10 |
+| Tag | [Shohan Killer] 2 | 10 |
+| Tag | [Coordinated Fire] 2 | 10 |
+| **Total** | | **690** |
+
+**Formula CR:** 6 ✔ matches printed
+
+- Bleed is the free Plasma Bleed, Major 3 (printed Minor 5).
+
+#### Syren
+
+Source: Decisive Action p114 · **Size:** Large · **Printed CR:** 6 · **CC:** 21
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p113-114: The Wyvern's and Syren's Bleed is their plasma cannon's free Plasma Bleed: Major 3, not Minor 5.
+
+> **Errata** (new, 2026-10-09) Decisive Action p114: The Syren's Force Field is Moderate 2 (Track 40), not 30: a Minor field only covers items up to Medium. CR 6 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Plasma (Space) 6x | 140 |
+| Counter | Shields (free) | 0 |
+| Bleed | Major 3 (free, Plasma) | 0 |
+| Limitation | Minor: No Long Range | −10 |
+| Armor Rating | Space, rank 4 | 140 |
+| Body Track | 90 (default 50 + 2×20) | 20 |
+| Force Field | Moderate ×2 (track 40) | 40 |
+| Drive | Moderate Reaction | 25 |
+| Drive | Minor Reaction | 10 |
+| Maneuver | rank 4 at Moderate grade | 40 |
+| Resource | Fuel, Major ×2 | 30 |
+| Power Supply | Major Fusion rank 1 | 40 |
+| Computer | Minor rank 4 (TN 20) | 12 |
+| Communication | Moderate Radio | 13 |
+| Link | Major Psi | 50 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Gunnery +1 | 10 |
+| Tag | [High Security] 2 | 10 |
+| Tag | [Shohan Killer] 2 | 10 |
+| Tag | [Coordinated Fire] 2 | 10 |
+| **Total** | | **610** |
+
+**Formula CR:** 6 ✔ matches printed
+
+- 'Force Fields: 30' read as Minor 3. Bleed is the free Plasma Bleed, Major 3 (printed Minor 5). Approved 10-09: Force Field Moderate 2 (Track 40), since a Minor field only covers up to Medium.
+
+#### Aerospace Carrier Vehicle/Escort Carrier
+
+Source: Decisive Action p115 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Launcher | Space ×4, 1 increment | 60 |
+| Resource | Magazine, Major ×4 | 60 |
+| Anti-Missile | Space 1x | 20 |
+| Armor Rating | Space, rank 4 | 140 |
+| Body Track | 300 (default 200 + 2×50) | 40 |
+| Drive | Major Gravitic | 50 |
+| Drive | Moderate Reaction | 25 |
+| Maneuver | rank 2 at Major grade | 40 |
+| Power Supply | Major Fusion rank 2 | 80 |
+| Resource | Fuel, Major ×30 | 450 |
+| Communication | Moderate Radio | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×4 | 40 |
+| Computer | Major rank 4 (TN 20) | 80 |
+| Manufacture | Moderate | 50 |
+| Cargo | Moderate ×2 | 30 |
+| Hangar | Major ×4 | 240 |
+| Life Support | Major ×2 | 80 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Gunnery +1 | 10 |
+| Tag | [High Security] 3 | 15 |
+| Tag | [Brought Some Friends Along] | 5 |
+| Limitation | Moderate: Crew Requirement (20 skeleton, 200 full) | −20 |
+| Limitation | Moderate: Restricted Technology (Property of the Terran Sphere) | −20 |
+| **Total** | | **1,538** |
+
+**Formula CR:** 10 ✔ matches printed
+
+#### Vigilance-class
+
+Source: Decisive Action p116 · **Size:** Huge · **Printed CR:** 9 · **CC:** 45
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p116: The Vigilance-class's Bleed is its plasma cannon's free Plasma Bleed, Major 3, not Minor 3.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Plasma (Space) 6x | 140 |
+| Counter | Shields (free) | 0 |
+| Bleed | Major 3 (free, Plasma) | 0 |
+| Launcher | Space ×4, 1 increment | 60 |
+| Resource | Magazine, Major ×8 | 120 |
+| Limitation | Minor: No Combat Reload | −10 |
+| Anti-Missile | Space 1x | 20 |
+| Armor Rating (Shrouded Hull) | Space, rank 3 | 150 |
+| Body Track | 300 (default 200 + 2×50) | 40 |
+| Limitation | Minor: Usage Restriction (no maneuvers while shrouded) | −10 |
+| Drive | Major Gravitic | 50 |
+| Drive | Moderate Reaction | 25 |
+| Maneuver | rank 3 at Major grade | 60 |
+| Power Supply | Major Fusion rank 3 | 120 |
+| Resource | Fuel, Major ×11 | 165 |
+| Link | Major Psi | 50 |
+| Communication | Moderate Radio | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×4 | 40 |
+| Computer | Moderate rank 4 (TN 20) | 20 |
+| Cargo | Moderate ×1 | 15 |
+| Hangar | Major | 60 |
+| Life Support | Major ×1 | 40 |
+| Link | Moderate Data (mission module) | 15 |
+| Modifier | Detection +3 | 30 |
+| Modifier | Gunnery +2 | 20 |
+| Tag | [Shohan Killer] 2 | 10 |
+| Tag | [Blink and You'll Miss Me] 2 | 10 |
+| Tag | [High Security] 3 | 15 |
+| Tag | [Make It a Double] 3 (Free) | 30 |
+| Limitation | Moderate: Exposed Equipment | −20 |
+| Limitation | Moderate: Crew Requirement (20 skeleton, 70 full) | −20 |
+| Limitation | Major: Restricted Technology (Property of the Terran Sphere) | −50 |
+| **Total** | | **1,238** |
+
+**Formula CR:** 9 ✔ matches printed
+
+- 'Link: Moderate Item' priced as a Moderate Link (15). Approved 10-08: Bleed is the free Plasma Bleed, Major 3 (printed Minor 3).
+
+#### Vigilance Range Extension Module
+
+Source: Decisive Action p117 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating (Shrouded Hull) | Space, rank 2 | 130 |
+| Body Track | 110 (default 50 + 3×20) | 30 |
+| Resource | Fuel, Major ×5 | 75 |
+| Resource | Tangle, Major ×3 | 30 |
+| Manufacture | Moderate | 50 |
+| Cargo | Moderate ×1 | 15 |
+| Limitation | Moderate: Slave (power supply) | −20 |
+| **Total** | | **310** |
+
+**Formula CR:** 3 ✔ matches printed
+
+#### Vigilance Missile Module
+
+Source: Decisive Action p117 · **Size:** Large · **Printed CR:** 3 · **CC:** 6
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Launcher | Space ×4, 1 increment | 60 |
+| Resource | Magazine, Major ×8 | 120 |
+| Limitation | Minor: No Combat Reload | −10 |
+| Armor Rating (Shrouded Hull) | Space, rank 3 | 150 |
+| Body Track | 110 (default 50 + 3×20) | 30 |
+| Tag | [Target Lock] 2 | 10 |
+| Limitation | Moderate: Slave (power supply) | −20 |
+| **Total** | | **340** |
+
+**Formula CR:** 3 ✔ matches printed
+
+#### Vigilance Troop Carrier Module
+
+Source: Decisive Action p118 · **Size:** Large · **Printed CR:** 4 · **CC:** 10
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p118: The Vigilance Troop Carrier Module's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 3 Major (2 used): its Fusion Power Supply is Moderate. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 2, not Minor 2.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Plasma (Battlefield) 5x | 80 |
+| Counter | Shields (free) | 0 |
+| Bleed | Moderate 2 (free, Plasma) | 0 |
+| Limitation | Minor: Usage Restriction (only after landing) | −10 |
+| Armor Rating (Shrouded Hull) | Space, rank 3 | 150 |
+| Body Track | 110 (default 50 + 3×20) | 30 |
+| Force Field | Moderate ×1 (track 20) | 20 |
+| Drive | Minor Air | 10 |
+| Power Supply | Moderate Fusion rank 1 | 10 |
+| Resource | Fuel, Moderate ×4 | 40 |
+| Communication | Moderate Radio | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×2 | 20 |
+| Computer | Moderate rank 4 (TN 20) | 20 |
+| Cargo | Moderate ×1 | 15 |
+| Life Support | Major ×2 | 80 |
+| Tag | [Like Flying a Brick Wall] 2 (Free) | 20 |
+| Limitation | Major: One-Time Use (cannot return to orbit) | −50 |
+| **Total** | | **478** |
+
+**Formula CR:** 4 ✔ matches printed
+
+- Approved 10-08: Bleed is the free Plasma Bleed, Moderate 2 (printed Minor 2); power 3 Minor (0 used), 3 Moderate (3 used) (printed 3 Major).
+
+
+### Decisive Action: Resistance
+
+#### Incendiary Charge
+
+Source: Decisive Action p104 · **Size:** Small · **Printed CR:** 2 · **CC:** 3 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (contact charge) | Energy (Battlefield) 3x | 30 |
+| Bleed | Minor 6 | 80 |
+| Counter | Shields | 20 |
+| Area |  | 20 |
+| Tag | [Firestorm] | 5 |
+| Limitation | Major: One-Time Use | −50 |
+| Limitation | Minor: Slave (trigger mechanism) | −10 |
+| **Total** | | **95** |
+
+**Formula CR:** 2 (one: 1; per 10: +1) ✔ matches printed
+
+#### Resistance Chem Kit
+
+Source: Decisive Action p109 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p109: The Resistance Chem Kit's Power Supply is a Moderate Coil (rank 1), not Minor, so it can power its Moderate Manufacture, with 1 Moderate Charge (10 days), not 2. Its Soft Serve limitation is Moderate. Total Power Slots: 3 Moderate (1 used). Cost Rating 1, Character Creation cost 1 (was CR 0, CC 0).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Power Supply | Moderate Coil rank 1 | 10 |
+| Resource | Charge, Moderate ×1 | 8 |
+| Manufacture | Moderate | 50 |
+| Computer | Minor rank 2 (TN 16) | 6 |
+| Tasks | Engineering (Chemical) 16 | 32 |
+| Tag | [Better Living] | 5 |
+| Limitation | Moderate: Soft Serve | −20 |
+| **Total** | | **91** |
+
+**Formula CR:** 1 ✔ matches printed
+
+- Approved 10-08: Moderate Coil (powers its Moderate Manufacture; printed Minor), Moderate Charge 1 (printed 2 Minor), Soft Serve Moderate (printed Minor). CR 1, CC 1 (printed CR 0, CC 0).
+
+#### Hoverbike Conversion
+
+Source: Decisive Action p109 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Link | Minor Weapon ×2 | 10 |
+| Armor Rating | Battlefield, rank 2 | 60 |
+| Body Track | 30 (default 10 + 4×5) | 20 |
+| Drive | Minor Air | 10 |
+| Maneuver | rank 3 at Minor grade | 15 |
+| Resource | Charge, Minor ×3 | 12 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Communication | Moderate Radio | 13 |
+| Computer | Minor rank 1 (TN 14) | 3 |
+| Tasks | Pilot 10 | 20 |
+| Tag | [Speed Kills] 3 | 15 |
+| **Total** | | **183** |
+
+**Formula CR:** 2 ✔ matches printed
+
+#### Resistance Scout Mech
+
+Source: Decisive Action p112 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p112: The Resistance Scout Mech's two Weapon Links are Moderate, not Minor, so it can carry Battlefield weapons. Each Link uses a Moderate Power Slot: Total Power Slots 3 Moderate (2 used), 3 Minor (0 used). CR 4 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Link | Moderate Weapon ×2 | 30 |
+| Armor Rating | Battlefield, rank 2 | 60 |
+| Body Track | 40 (default 10 + 6×5) | 30 |
+| Drive | Minor Arboreal | 10 |
+| Maneuver | rank 3 at Minor grade | 15 |
+| Power Supply | Moderate Coil rank 1 | 10 |
+| Resource | Charge, Moderate ×3 | 24 |
+| Communication | Minor Radio | 3 |
+| Computer | Minor rank 2 (TN 16) | 6 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Stealth +4 | 40 |
+| Tag | [Security] 2 | 10 |
+| Tag | [Climbs Like a Monkey] | 5 |
+| Tag | [Kinetic Feedback Control Rig] (Free) | 10 |
+| Limitation | Moderate: Cannot use Maneuver Rating on the ground | −20 |
+| **Total** | | **253** |
+
+**Formula CR:** 4 ✔ matches printed
+
+- Approved 10-08: Moderate Weapon Links (printed Minor), so it can carry Battlefield weapons; power 3 Moderate (2 used: the Links), 3 Minor (0 used).
+
+#### Resistance Artillery Mech
+
+Source: Decisive Action p112 · **Size:** Medium · **Printed CR:** 5 · **CC:** 15
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Kinetic (Battlefield) 5x | 74 |
+| Far Ranged | Moderate (Battlefield to Space) | 40 |
+| Area | Medium | 40 |
+| Resource | Magazine, Moderate ×2 | 20 |
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 40 (default 10 + 6×5) | 30 |
+| Link | Minor Weapon | 5 |
+| Drive | Minor Arboreal | 10 |
+| Power Supply | Moderate Coil rank 1 | 10 |
+| Resource | Charge, Moderate ×2 | 16 |
+| Communication | Minor Radio | 3 |
+| Computer | Minor rank 2 (TN 16) | 6 |
+| Modifier | Detection +1 | 10 |
+| Modifier | Heavy Weapons +2 | 20 |
+| Tag | [Kinetic Feedback Control Rig] (Free) | 10 |
+| Limitation | Minor: Tandem Crew | −10 |
+| Limitation | Moderate: Dedicated Gunner | −20 |
+| Limitation | Minor: Manual Reload | −10 |
+| Limitation | Minor: 1 Shot Per Round | −10 |
+| **Total** | | **324** |
+
+**Formula CR:** 5 ✔ matches printed
+
+- Far Ranged on a Battlefield gun = Moderate (to Space); 'Area: Moderate' read as Medium.
+
+
+### Decisive Action: Haven & Auxiliaries
+
+#### Auxiliary Armor (Stage 1)
+
+Source: Decisive Action p102 · **Size:** Medium · **Printed CR:** 2 · **CC:** 3
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p102-103: Auxiliary Armor's Anomalous Power Supply is Moderate (rank 1), not Minor, with 2 ranks of Moderate Charge (20 days/combat rounds). Its Mechanical Regeneration uses a Power Slot (core errata p214): Stages 1 and 2 have 3 Moderate Power Slots (1 used); Stage 3 has 3 Moderate (2 used: Force Field, Mechanical Regeneration). Every stage has [Hybrid Vigor]: rank 1 at Stage 1, rank 2 at Stages 2 and 3. Stage 2's Detection and Stealth Modifiers are +2, not +1. You're The Only One For Me is a Moderate limitation. Each stage's CR, CC and XP are unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 25 (default 10 + 3×5) | 15 |
+| Regeneration | Mechanical 3, Major grade | 30 |
+| Power Supply | Moderate Anomalous rank 1 | 10 |
+| Resource | Charge, Moderate ×2 | 16 |
+| Computer | Minor rank 3 (TN 18) | 9 |
+| Communication | Minor Radio | 3 |
+| Life Support | Minor ×1 | 5 |
+| Modifier | Athletics +1 | 10 |
+| Tag | [Hybrid Vigor] | 5 |
+| Limitation | Moderate: Sold Your Soul to the Shohan | −20 |
+| **Total** | | **163** |
+
+**Formula CR:** 2 ✔ matches printed
+
+- Approved 10-08 from PJ's build sheet: Moderate Anomalous Power Supply with 2 Moderate Charge (printed Minor; Resource 2), [Hybrid Vigor] from Stage 1.
+
+#### Auxiliary Armor (Stage 2)
+
+Source: Decisive Action p103 · **Size:** Medium · **Printed CR:** 3 · **CC:** 6
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p102-103: Auxiliary Armor's Anomalous Power Supply is Moderate (rank 1), not Minor, with 2 ranks of Moderate Charge (20 days/combat rounds). Its Mechanical Regeneration uses a Power Slot (core errata p214): Stages 1 and 2 have 3 Moderate Power Slots (1 used); Stage 3 has 3 Moderate (2 used: Force Field, Mechanical Regeneration). Every stage has [Hybrid Vigor]: rank 1 at Stage 1, rank 2 at Stages 2 and 3. Stage 2's Detection and Stealth Modifiers are +2, not +1. You're The Only One For Me is a Moderate limitation. Each stage's CR, CC and XP are unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 35 (default 10 + 5×5) | 25 |
+| Regeneration | Mechanical 3, Major grade | 30 |
+| Power Supply | Moderate Anomalous rank 1 | 10 |
+| Resource | Charge, Moderate ×2 | 16 |
+| Computer | Minor rank 3 (TN 18) | 9 |
+| Communication | Minor Radio | 3 |
+| Life Support | Minor ×1 | 5 |
+| Modifier | Athletics +2 | 20 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Stealth +2 | 20 |
+| Tag | [Hybrid Vigor] 2 | 10 |
+| Limitation | Moderate: You're The Only One For Me | −20 |
+| Limitation | Moderate: Sold Your Soul to the Shohan | −20 |
+| **Total** | | **208** |
+
+**Formula CR:** 3 ✔ matches printed
+
+- Approved 10-08: as Stage 1's power; Detection +2 and Stealth +2 (printed +1), [Hybrid Vigor 2] (printed 1), You're The Only One For Me Moderate. CR 3 as printed.
+
+#### Auxiliary Armor (Stage 3)
+
+Source: Decisive Action p103 · **Size:** Medium · **Printed CR:** 4 · **CC:** 10
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p102-103: Auxiliary Armor's Anomalous Power Supply is Moderate (rank 1), not Minor, with 2 ranks of Moderate Charge (20 days/combat rounds). Its Mechanical Regeneration uses a Power Slot (core errata p214): Stages 1 and 2 have 3 Moderate Power Slots (1 used); Stage 3 has 3 Moderate (2 used: Force Field, Mechanical Regeneration). Every stage has [Hybrid Vigor]: rank 1 at Stage 1, rank 2 at Stages 2 and 3. Stage 2's Detection and Stealth Modifiers are +2, not +1. You're The Only One For Me is a Moderate limitation. Each stage's CR, CC and XP are unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 40 (default 10 + 6×5) | 30 |
+| Regeneration | Mechanical 3, Major grade | 30 |
+| Force Field | Minor ×4 (track 40) | 60 |
+| Power Supply | Moderate Anomalous rank 1 | 10 |
+| Resource | Charge, Moderate ×2 | 16 |
+| Computer | Minor rank 3 (TN 18) | 9 |
+| Communication | Minor Radio | 3 |
+| Life Support | Minor ×1 | 5 |
+| Modifier | Athletics +2 | 20 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Stealth +2 | 20 |
+| Tag | [Hybrid Vigor] 2 | 10 |
+| Limitation | Moderate: You're The Only One For Me | −20 |
+| Limitation | Moderate: Sold Your Soul to the Shohan | −20 |
+| **Total** | | **273** |
+
+**Formula CR:** 4 ✔ matches printed
+
+- Approved 10-08: as Stage 1's power; You're The Only One For Me Moderate.
+
+#### Flare Rifle
+
+Source: Decisive Action p106 · **Size:** Small · **Printed CR:** 3 · **CC:** 6
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p106: The Flare Rifle gains Far Ranged (Minor), as the Flare Pistol has. Its Coil runs on 2 ranks of Minor Charge (20 combat rounds), not Fuel. CR 3 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Flare (Firefight) 5x | 70 |
+| Counter | Armor | 20 |
+| Far Ranged | Minor (Firefight to Battlefield) | 20 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×2 | 8 |
+| Modifier | Firearms +2 | 20 |
+| Tag | [Knock the Wings Off a Fly] 2 | 10 |
+| Limitation | Moderate: Sold Your Soul to the Shohan | −20 |
+| **Total** | | **133** |
+
+**Formula CR:** 3 ✔ matches printed
+
+- 'Fuel 2' with a Coil read as Minor Charge 2. Approved 10-08: adds Far Ranged (Minor), as the Flare Pistol has.
+
+#### Volcano-class
+
+Source: Decisive Action p121 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (heavy plasma cannon) | Plasma (Space) 8x ×3 mounts (+40 each extra) | 330 |
+| Counter | Shields (free) | 0 |
+| Bleed | Major 4 (free, Plasma) | 0 |
+| Anti-Missile | Space 1x | 20 |
+| Launcher | Space ×4, 1 increment | 60 |
+| Resource | Magazine, Major ×6 | 90 |
+| Armor Rating | Space, rank 6 | 230 |
+| Body Track | 350 (default 200 + 3×50) | 60 |
+| Drive | Moderate Reaction | 25 |
+| Drive | Major Gravitic | 50 |
+| Maneuver | rank 3 at Major grade | 60 |
+| Power Supply | Major Fusion rank 2 | 80 |
+| Resource | Fuel, Major ×4 | 60 |
+| Communication | Moderate Radio | 13 |
+| Communication | Moderate Laser Link | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×4 | 40 |
+| Computer | Major rank 3 (TN 18) | 60 |
+| Cargo | Major ×2 | 60 |
+| Hangar | Major ×2 | 120 |
+| Life Support | Major ×2 | 80 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Gunnery +2 | 20 |
+| Tag | [High Security] 3 | 15 |
+| Tag | [Stalwart Defender] 3 | 15 |
+| Tag | [A Flurry of Blows] 3 | 15 |
+| Tag | [Shohan Killer] | 5 |
+| Limitation | Moderate: Crew Requirement (20 skeleton, 40 full) | −20 |
+| Limitation | Major: Restricted Technology (Haven Holds Its Own) | −50 |
+| **Total** | | **1,501** |
+
+**Formula CR:** 10 ✔ matches printed
+
+#### Marauder (Force Field Revision)
+
+Source: Decisive Action p122 · **Size:** Large · **Printed CR:** 7 · **CC:** 28
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p122: The Marauder (Force Field Revision) takes the core Marauder's errata (core p263): Armor Rating 4 (Shrouded), not 5, and no Major Gravitic Drive (it travels in a carrier's hangars). Its Computer is Moderate 3 (TN 18), not Major 3. Its Power Slots are 3 Major (3 used: Anti-Missile, Launchers) and 3 Moderate (2 used: Force Field, Force Field Regeneration). Its Character Creation cost is 28, the cost for its CR 7 (printed 21).
+
+> **Errata** (new, 2026-10-09) Decisive Action p122-123: On the Marauder (Force Field Revision) and the Haven Hyperspace Carrier, Unique Fuel (Antimatter) is a Moderate limitation: Sold Your Soul to the Shohan is their one Major limitation. On the Haven Hyperspace Carrier, Key Personnel (Oracle) is a Minor limitation, so it has at most 2 Moderate ones. Their CRs (7 and 11) are unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Anti-Missile | Space 1x | 20 |
+| Launcher | Space ×6 (book count; builder buys increments of 4 → 8), 2 increments | 120 |
+| Resource | Magazine, Major ×6 | 90 |
+| Armor Rating (Shrouded Hull) | Space, rank 4 | 180 |
+| Body Track | 130 (default 50 + 4×20) | 40 |
+| Force Field | Moderate ×3 (track 60) | 60 |
+| Regeneration | Force Field 4, Major grade | 45 |
+| Drive | Moderate Reaction | 25 |
+| Maneuver | rank 4 at Moderate grade | 40 |
+| Power Supply | Major Antimatter rank 1 | 40 |
+| Resource | Fuel, Major ×3 | 45 |
+| Limitation | Moderate: Unique Fuel (Antimatter) | −20 |
+| Computer | Moderate rank 3 (TN 18) | 15 |
+| Communication | Moderate Radio | 13 |
+| Communication | Moderate Laser Link | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×2 | 20 |
+| Life Support | Moderate ×1 | 20 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Gunnery +1 | 10 |
+| Tag | [High Security] 3 | 15 |
+| Tag | [Ambush!] 2 | 10 |
+| Tag | [Go to Rapid Fire] 2 | 10 |
+| Tag | [Cramped Quarters] | 5 |
+| Limitation | Moderate: Crew Requirement (5 skeleton, 10 full) | −20 |
+| Limitation | Major: Sold Your Soul to the Shohan | −50 |
+| **Total** | | **796** |
+
+**Formula CR:** 7 ✔ matches printed
+
+- 6 Launchers priced as 8 (sets of 4). Approved 10-08: the Revision's block with the core Marauder errata applied: Armor 4 (printed 5), no Major Gravitic Drive (it rides in the Lilith's hangars), Moderate Computer 3 (printed Major 3; same TN 18). Power 3 Major (3 used), 3 Moderate (2 used). CC 28 for CR 7 (printed 21). Approved 10-09: Unique Fuel (Antimatter) is Moderate (only one Major limitation; Sold Your Soul keeps Major).
+
+#### Haven Hyperspace Carrier (Lilith Refit)
+
+Source: Decisive Action p123 · **Size:** Huge · **Printed CR:** 11 · **CC:** 66
+
+Description: ""
+
+> **Errata** (new, 2026-10-09) Decisive Action p122-123: On the Marauder (Force Field Revision) and the Haven Hyperspace Carrier, Unique Fuel (Antimatter) is a Moderate limitation: Sold Your Soul to the Shohan is their one Major limitation. On the Haven Hyperspace Carrier, Key Personnel (Oracle) is a Minor limitation, so it has at most 2 Moderate ones. Their CRs (7 and 11) are unchanged.
+
+> **Errata** (new, 2026-10-08) Decisive Action p123: The Haven Hyperspace Carrier is a refit of the Havenite Lilith Carrier (core p263, with its errata) and keeps every system its stat block doesn't list: the 7x heavy particle cannons, Armor Rating 5, Manufacture (Major), 2 Major Cargo, Modifiers (Detection +4, Engineering (Starship) +3, Gunnery +3, Medicine +2) and Tags ([Now You See Me, Now You Don't 2], [Go to Rapid Fire 2], [High Security 3]). Its Power Slots are 12 Major (8 used: 2 cannons, Launchers 2, Anti-Missile, Force Field, Manufacture, Hyperspace Drive). CR 11 and CC 66 are unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (heavy particle cannon) | Energy (Space) 7x ×2 mounts (+40 each extra) | 230 |
+| Launcher | Space ×6 (book count; builder buys increments of 4 → 8), 2 increments | 120 |
+| Resource | Magazine, Major ×6 | 90 |
+| Anti-Missile | Space 1x | 20 |
+| Armor Rating (Shrouded Hull) | Space, rank 5 | 220 |
+| Body Track | 300 (default 200 + 2×50) | 40 |
+| Force Field | Major ×2 (track 100) | 50 |
+| Drive | Major Reaction | 50 |
+| Drive | Major Gravitic | 50 |
+| Drive | Major Jump | 50 |
+| Limitation | Minor: Hyperspace drive requires a Power Slot | −10 |
+| Maneuver | rank 4 at Major grade | 80 |
+| Power Supply | Major Antimatter rank 1 | 40 |
+| Resource | Fuel, Major ×4 | 60 |
+| Limitation | Moderate: Unique Fuel (Antimatter) | −20 |
+| Communication | Moderate Radio | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×5 | 50 |
+| Computer | Moderate rank 3 (TN 18) | 15 |
+| Manufacture | Major | 100 |
+| Cargo | Major ×2 | 60 |
+| Hangar | Major ×3 | 180 |
+| Life Support | Major ×2 | 80 |
+| Modifier | Detection +4 | 40 |
+| Modifier | Engineering (Starship) +3 | 30 |
+| Modifier | Gunnery +3 | 30 |
+| Modifier | Medicine +2 | 20 |
+| Tag | [Now You See Me, Now You Don't] 2 | 10 |
+| Tag | [Go to Rapid Fire] 2 | 10 |
+| Tag | [High Security] 3 | 15 |
+| Limitation | Moderate: Crew Requirement (20 skeleton, 40 full) | −20 |
+| Limitation | Minor: Key Personnel (Oracle) | −10 |
+| Limitation | Major: Usage Restriction (Sold Your Soul to the Shohan) | −50 |
+| **Total** | | **1,673** |
+
+**Formula CR:** 11 ✔ matches printed
+
+- Approved 10-08: the core Havenite Lilith Carrier (with its errata: 7x cannon, Armor 5, Manufacture, Cargo 2, its Modifiers and Tags) plus the refit's changes: Jump Drive, Major Force Field 2, 6 Launchers and Magazine 6, an Antimatter reactor, Key Personnel (Oracle), Sold Your Soul. Power 12 Major (8 used; printed 6 Major, 6 used). Approved 10-09: Unique Fuel (Antimatter) is Moderate (only one Major limitation; Sold Your Soul keeps Major); Key Personnel (Oracle) is Minor (at most 2 Moderate limitations).
+
+
+### Decisive Action: Covert
+
+#### Surveillance Drone
+
+Source: Decisive Action p125 · **Size:** Tiny · **Printed CR:** 3 · **CC:** 6
+
+Description: ""
+
+> **Errata** (new, 2026-10-09) Decisive Action p125: The Surveillance Drone's Minor Charge feeds a Minor Coil Power Supply (rank 1; none printed). CR 3 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Drive | Minor Air | 10 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×1 | 4 |
+| Computer | Minor rank 1 (TN 14) | 3 |
+| Tasks | Pilot 4 | 8 |
+| Communication | Minor Radio | 3 |
+| Neural Interface | Moderate | 5 |
+| Modifier | Detection +1 | 10 |
+| Modifier | Stealth +1 | 10 |
+| Tag | [A Fly on the Wall] | 5 |
+| **Total** | | **63** |
+
+**Formula CR:** 3 ✔ matches printed
+
+- Task: Pilot 4 is likely a typo (Pilot 14?). Approved 10-09: a Minor Coil for its Charge (none printed).
+
+#### Disguise Kit
+
+Source: Decisive Action p125 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p125: The Disguise Kit has a Minor Coil Power Supply (rank 1) with 1 Minor Charge (10 days) to run its hologram projectors, voice modulators and computer. Total Power Slots: 3 Minor (0 used). CR 1 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×1 | 4 |
+| Computer | Minor rank 1 (TN 14) | 3 |
+| Modifier | Persuade +4 | 40 |
+| Modifier | Stealth +2 | 20 |
+| Tag | [Judge This Book by the Cover] 3 | 15 |
+| Limitation | Minor: Mistaken Identity | −10 |
+| **Total** | | **77** |
+
+**Formula CR:** 1 ✔ matches printed
+
+- Approved 10-08: adds a Minor Coil with 1 Minor Charge to run its holograms, voice modulator and computer (no power printed).
+
+#### "White Noise" Generator
+
+Source: Decisive Action p126 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p126: The "White Noise" Generator has a Minor Coil Power Supply (rank 1) with 1 Minor Charge (10 days). Total Power Slots: 3 Minor (0 used). CR 1 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Counter | Recording | 20 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×1 | 4 |
+| Tag | [An Ordinary Conversation] 2 | 10 |
+| **Total** | | **39** |
+
+**Formula CR:** 1 ✔ matches printed
+
+- Approved 10-08: adds a Minor Coil with 1 Minor Charge (its 'lengthy battery life'; no power printed).
+
+#### Entry Tools
+
+Source: Decisive Action p126 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p126: The Entry Tools' computer runs only the Engineering (Security) 16 Task (it works mechanical locks on its own); the Computers 12 Task is removed, and the Computers +2 Modifier still helps a skilled user with electronic locks. Presumption of Guilt is a Moderate limitation. CR 1 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Computer | Minor rank 2 (TN 16) | 6 |
+| Tasks | Engineering (Security) 16 | 32 |
+| Modifier | Computers +2 | 20 |
+| Modifier | Engineering (Security) +4 | 40 |
+| Tag | [The Master's Key] 3 | 15 |
+| Limitation | Moderate: Presumption of Guilt | −20 |
+| **Total** | | **93** |
+
+**Formula CR:** 1 ✔ matches printed
+
+- Approved 10-08: no Computers 12 Task (it works mechanical locks unassisted; the Computers +2 Modifier helps a skilled user with electronic ones); Presumption of Guilt is Moderate (printed Minor).
+
+#### Concealable Plasma Torch
+
+Source: Decisive Action p126 · **Size:** Tiny · **Printed CR:** 1 · **CC:** 1
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p126: The Concealable Plasma Torch's attack is Melee Plasma (Firefight) 3x, not 2x. Its 2 Minor Charge feed a Minor Coil Power Supply (rank 1; none printed). Its Tag is [A Cutting Spark 2], a Free Tag, not [A Cutting Spark 1]. Total Power Slots: 3 Minor (2 used: Plasma). CR 1 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Plasma/Melee (Firefight) 3x | 10 |
+| Counter | Shields (free) | 0 |
+| Power Supply | Minor Coil rank 1 | 5 |
+| Resource | Charge, Minor ×2 | 8 |
+| Tag | [A Cutting Spark] 2 (Free) | 20 |
+| **Total** | | **43** |
+
+**Formula CR:** 1 ✔ matches printed
+
+- Approved 10-08: Plasma 3x (printed 2x), a Minor Coil for its Charge (none printed), [A Cutting Spark 2] Free (printed [A Cutting Spark 1]).
+
+
+### Decisive Action: Experimental
+
+#### Grav Grenade
+
+Source: Decisive Action p105 · **Size:** Tiny · **Printed CR:** 2 · **CC:** 3 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p105: The Grav Grenade is a Tiny item, not Small.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Gravitic (Battlefield) 4x (+5 [Flattened]) | 55 |
+| Area |  | 20 |
+| Tag | [Impact Crater] 3 | 15 |
+| Limitation | Major: One-Time Use | −50 |
+| **Total** | | **40** |
+
+**Formula CR:** 2 (one: 1; per 10: +1) ✔ matches printed
+
+#### Grav STA Missile
+
+Source: Decisive Action p107 · **Size:** Small · **Printed CR:** 4 · **CC:** 10 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Gravitic (Battlefield) 5x (+5 [Flattened]) | 85 |
+| Area | Medium | 40 |
+| **Total** | | **125** |
+
+**Formula CR:** 4 (one: 3; per 10: +1) ✔ matches printed
+
+- Printed CR 4 per 10.
+
+#### Phantom Mk. 3
+
+Source: Decisive Action p114 · **Size:** Large · **Printed CR:** 8 · **CC:** 36
+
+Description: ""
+
+> **Errata** (new, 2026-10-09) Decisive Action p114: The Phantom Mk. 3's Grav Blades keep the Phantom's Hungry limitation (1 Fuel per round for in-system maneuvers), and it carries Restricted Technology (Property of the Terran Sphere) as a Major limitation. It has no Laser Link (the core Phantom's errata p255 doesn't carry over), and its Air Drive is Minor as printed. CR 8 is unchanged.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Launcher | Space ×4, 1 increment | 60 |
+| Resource | Magazine, Major ×4 | 60 |
+| Limitation | Minor: Usage Restriction (no combat reload) | −10 |
+| Armor Rating (Shrouded Hull) | Space, rank 3 | 150 |
+| Body Track | 110 (default 50 + 3×20) | 30 |
+| Limitation | Minor: Usage Restriction (hull shroud does not work during atmospheric re-entry) | −10 |
+| Limitation | Minor: Hungry (1 Fuel/round for in-system maneuvers) | −10 |
+| Drive | Moderate Reaction | 25 |
+| Drive | Minor Air | 10 |
+| Drive | Minor Sea/Submersible | 10 |
+| Maneuver | rank 4 at Moderate grade | 40 |
+| Resource | Fuel, Major ×7 | 105 |
+| Communication | Moderate Radio | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×5 | 50 |
+| Computer | Moderate rank 3 (TN 18) | 15 |
+| Manufacture | Major | 100 |
+| Cargo | Major ×1 | 30 |
+| Life Support | Moderate ×1 | 20 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Gunnery +1 | 10 |
+| Tag | [Marines on Ice] | 5 |
+| Tag | [The High Dive] | 5 |
+| Tag | [Now You See Me, Now You Don't] 2 | 10 |
+| Tag | [High Security] 3 | 15 |
+| Limitation | Moderate: Crew Requirement (2 skeleton, 5 full) | −20 |
+| Grav Blades | Major (replaces the Gravitic Drive), 1x | 75 |
+| Force Field | Moderate ×3 (track 60) | 60 |
+| Limitation | Major: Restricted Technology (Property of the Terran Sphere) | −50 |
+| **Total** | | **848** |
+
+**Formula CR:** 8 ✔ matches printed
+
+- Approved 10-09 from PJ's build sheet: the core Phantom with Grav Blades (75) replacing its Gravitic Drive (keeping the Hungry fuel limitation), Moderate Force Field 3, Minor Air Drive (as printed), no Laser Link (not printed), and Property of the Terran Sphere (Major).
+
+#### Farstrider Refit
+
+Source: Decisive Action p115 · **Size:** Large · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-09) Decisive Action p115: The Farstrider Refit's Major Coil runs on 1 Major Charge (10 jumps or combat rounds).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Power Supply | Major Coil rank 1 | 40 |
+| Resource | Charge, Major ×1 | 12 |
+| Drive | Major Jump | 50 |
+| Limitation | Minor: Hungry (2 Power Slots) | −10 |
+| Limitation | Minor: Sustained Action (Power Drain) | −10 |
+| **Total** | | **82** |
+
+**Formula CR:** 1
+
+- Refit module: printed 'CR: +1' to the escort it goes on. Approved 10-09: 1 Major Charge for its Coil (none printed).
+
+#### The Artemis (Hyperspace Mothership)
+
+Source: Decisive Action p119 · **Size:** Colossal · **Printed CR:** 14 · **CC:** 105
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Launcher | Space ×12, 3 increments | 180 |
+| Resource | Magazine, Major ×24 | 360 |
+| Anti-Missile | Space 1x | 20 |
+| Armor Rating | Space, rank 6 | 230 |
+| Body Track | 800 (default 500 + 6×50) | 120 |
+| Drive | Major Jump | 50 |
+| Drive | Major Gravitic | 50 |
+| Drive | Moderate Reaction | 25 |
+| Power Supply | Major Fusion rank 6 | 240 |
+| Maneuver | rank 4 at Major grade | 80 |
+| Manufacture | Major | 100 |
+| Resource | Fuel, Major ×60 | 900 |
+| Communication | Moderate Radio | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×10 | 100 |
+| Computer | Major rank 4 (TN 20) | 80 |
+| Cargo | Major ×4 | 120 |
+| Hangar | Major ×10 | 600 |
+| Life Support | Artificial Ecology, Major | 60 |
+| Life Support | Artificial Ecology, Major | 60 |
+| Life Support | Artificial Ecology, Major | 60 |
+| Life Support | Artificial Ecology, Major | 60 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Engineering (Starship) +2 | 20 |
+| Modifier | Gunnery +2 | 20 |
+| Tag | [High Security] 3 | 15 |
+| Tag | [Brought Some Friends Along] 3 | 15 |
+| Limitation | Moderate: Crew Requirement (100 skeleton, 400 full) | −20 |
+| Limitation | Moderate: Restricted Technology (Property of the Terran Sphere) | −20 |
+| Limitation | Major: Nothing Like Her Before | −50 |
+| **Total** | | **3,538** |
+
+**Formula CR:** 14 ✔ matches printed
+
+- 4 Major Artificial Ecology (1,000 people each). Approved 10-06 from PJ's build notes: drives as printed (Major Jump, Major Gravitic, Moderate Reaction); adds Manufacture (Major), Power 6 ranks (was 4 reactors) and Maneuver 4 (Major, no longer optional). CR 14, CC 105 (printed 15 came from the old round-to-nearest rule).
+
+#### The Prometheus (Refitted Old Soldier)
+
+Source: Decisive Action p120 · **Size:** Huge · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p120: The Prometheus uses 6 of its 9 Major Power Slots (its Force Field and Mechanical Regeneration each use one).
+
+> **Errata** (new, 2026-10-09) Decisive Action p120: The Prometheus's Artificial Ecology is a Shohan one, which is more efficient: a Major Shohan Artificial Ecology (1000 people) fits in a Huge hull.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (spinal flare cannon) | Flare (Space) 10x | 400 |
+| Counter | Armor | 20 |
+| Limitation | Minor: Usage Restriction (pilot fires with his Maneuver check) | −10 |
+| Attack (flare cannon turrets) | Flare (Space) 7x ×2 mounts (+40 each extra) | 230 |
+| Counter | Armor | 20 |
+| Armor Rating | Space, rank 6 | 230 |
+| Body Track | 350 (default 200 + 3×50) | 60 |
+| Regeneration | Mechanical 2, Major grade | 20 |
+| Force Field | Major ×2 (track 100) | 50 |
+| Regeneration | Force Field 5, Major grade | 65 |
+| Drive | Major Jump | 50 |
+| Drive | Moderate Reactionless | 25 |
+| Maneuver | rank 2 at Major grade | 40 |
+| Power Supply | Major Hyperspace Tap rank 2 | 80 |
+| Communication | Moderate Radio | 13 |
+| Communication | Major Hypercomms | 25 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×4 | 40 |
+| Computer | Major rank 4 (TN 20) | 80 |
+| Manufacture | Moderate | 50 |
+| Hangar | Major ×2 | 120 |
+| Life Support | Shohan Artificial Ecology, Major | 60 |
+| Modifier | Detection +3 | 30 |
+| Modifier | Gunnery +2 | 20 |
+| Tasks | Detection 20, Electronic Warfare 20, Medicine 20, Piloting 20, Tactics 20 | 200 |
+| Tag | [In Our Sights, Dead to Rights] 3 | 15 |
+| Tag | [Top Secret] 3 | 15 |
+| Tag | [Back in My Day…] 3 | 15 |
+| Limitation | Moderate: Disoriented 1 round after jumps | −20 |
+| Limitation | Moderate: Crew Requirement (at least 1 Altered) | −20 |
+| **Total** | | **1,953** |
+
+**Formula CR:** 12
+
+- Approved 10-09: Shohan Artificial Ecology (more efficient: a Major one fits a Huge hull).
+
+#### Redemption Aegis Refit (Option 1)
+
+Source: Decisive Action p124 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (heavy plasma cannon) | Plasma (Space) 8x ×2 mounts (+40 each extra) | 290 |
+| Counter | Shields (free) | 0 |
+| Bleed | Major 4 (free, Plasma) | 0 |
+| Anti-Missile | Space 1x ×2 | 40 |
+| Armor Rating | Space, rank 5 | 180 |
+| Body Track | 350 (default 200 + 3×50) | 60 |
+| Force Field | Major ×2 (track 100), Lamellar Matrix | 50 |
+| Drive | Moderate Reaction | 25 |
+| Drive | Major Gravitic | 50 |
+| Maneuver | rank 3 at Major grade | 60 |
+| Power Supply | Major Fusion rank 2 | 80 |
+| Resource | Fuel, Major ×7 | 105 |
+| Communication | Moderate Radio | 13 |
+| Communication | Moderate Laser Link | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×5 | 50 |
+| Computer | Major rank 3 (TN 18) | 60 |
+| Cargo | Major ×1 | 30 |
+| Life Support | Major ×1 | 40 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Gunnery +2 | 20 |
+| Tag | [Security: High Alert] 3 | 15 |
+| Tag | [All Ahead Full] 3 | 15 |
+| Tag | [Pride of the Fleet] 3 | 15 |
+| Tag | [The One-Two Punch] | 5 |
+| Limitation | Moderate: Crew Requirement (10 skeleton, 20 full) | −20 |
+| Limitation | Major: Restricted Technology (Property of the Terran Sphere Navy) | −50 |
+| Launcher | Space ×6 (book count; builder buys increments of 4 → 8), 2 increments | 120 |
+| Resource | Magazine, Major ×6 | 90 |
+| **Total** | | **1,406** |
+
+**Formula CR:** 10 ✔ matches printed
+
+- Lamellar Matrix Force Field (a Terran implementation, normal costs, may be Major). 6 Launchers priced as 8.
+
+#### Redemption Aegis Refit (Option 2)
+
+Source: Decisive Action p124 · **Size:** Huge · **Printed CR:** 10 · **CC:** 55
+
+Description: ""
+
+> **Errata** (new, 2026-10-08) Decisive Action p124: Option 2 of the Redemption Aegis Refit keeps the Redemption's 6 Major Magazine (60 shots), not 4 (40 shots).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (heavy plasma cannon) | Plasma (Space) 8x ×2 mounts (+40 each extra) | 290 |
+| Counter | Shields (free) | 0 |
+| Bleed | Major 4 (free, Plasma) | 0 |
+| Anti-Missile | Space 1x ×2 | 40 |
+| Armor Rating | Space, rank 5 | 180 |
+| Body Track | 350 (default 200 + 3×50) | 60 |
+| Force Field | Major ×2 (track 100), Lamellar Matrix | 50 |
+| Drive | Moderate Reaction | 25 |
+| Drive | Major Gravitic | 50 |
+| Maneuver | rank 3 at Major grade | 60 |
+| Power Supply | Major Fusion rank 2 | 80 |
+| Resource | Fuel, Major ×7 | 105 |
+| Communication | Moderate Radio | 13 |
+| Communication | Moderate Laser Link | 13 |
+| Communication | Major Ansible | 30 |
+| Resource | Tangle, Major ×5 | 50 |
+| Computer | Major rank 3 (TN 18) | 60 |
+| Cargo | Major ×1 | 30 |
+| Life Support | Major ×1 | 40 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Gunnery +2 | 20 |
+| Tag | [Security: High Alert] 3 | 15 |
+| Tag | [All Ahead Full] 3 | 15 |
+| Tag | [Pride of the Fleet] 3 | 15 |
+| Tag | [The One-Two Punch] | 5 |
+| Limitation | Moderate: Crew Requirement (10 skeleton, 20 full) | −20 |
+| Limitation | Major: Restricted Technology (Property of the Terran Sphere Navy) | −50 |
+| Launcher | Space ×4, 1 increment | 60 |
+| Resource | Magazine, Major ×6 | 90 |
+| Hangar | Major | 60 |
+| **Total** | | **1,406** |
+
+**Formula CR:** 10 ✔ matches printed
+
+- Approved 10-06: Magazine 6 (60 shots, as the core Redemption; printed 40).
+
+#### Grav Missile
+
+Source: Decisive Action p125 · **Size:** Medium · **Printed CR:** 5 · **CC:** 15 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+> **Errata** (new, 2026-10-06) Decisive Action p125: The Grav Missile is a Medium item with a 7x attack, not 8x, and costs 5 CR per 10 missiles, not 3 (CR 4 each).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Gravitic (Space) 7x (+5 [Flattened]) | 195 |
+| Area |  | 20 |
+| Drive | Moderate Reaction | 25 |
+| Power Supply | Major Coil rank 1 | 40 |
+| Limitation | Minor: Slave (free Power Slot from launcher) | −10 |
+| **Total** | | **270** |
+
+**Formula CR:** 5 (one: 4; per 10: +1) ✔ matches printed
+
+- Approved 10-06: Medium (build sheet had Large); 7x (printed 8x) so it stays below the Hyper Missile; missile chassis (Moderate Reaction Drive + Major Coil). CR 4 each, 5 per 10 (printed 3 per 10).
+
+#### Hyper Missile
+
+Source: Decisive Action p125 · **Size:** Medium · **Printed CR:** 5 · **CC:** 15 · **Sold per:** 10 (+1 CR over one)
+
+Description: ""
+
+> **Errata** (new, 2026-10-06) Decisive Action p125: The Hyper Missile's Restricted Technology is a Moderate limitation, not Major. It is a Medium item (CR 4 each; the printed 5 CR per 10 is unchanged).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Hyperspace (Space) 8x | 250 |
+| Counter | Armor (free) | 0 |
+| Area | Small Sudden (free, Hyperspace) | 0 |
+| Drive | Moderate Reaction | 25 |
+| Power Supply | Major Coil rank 1 | 40 |
+| Limitation | Minor: Slave (free Power Slot from launcher) | −10 |
+| Limitation | Moderate: Restricted Technology (Property of the Terran Sphere) | −20 |
+| **Total** | | **285** |
+
+**Formula CR:** 5 (one: 4; per 10: +1) ✔ matches printed
+
+- Approved 10-06: Medium; missile chassis = Moderate Reaction Drive + Major Coil (no Charge or Fuel: lasts one round); Restricted Technology Moderate (printed Major). 5 CR per 10 = CR 4 each.
+
+
+### Decisive Action: Shohan
+
+#### Shohan Stun Field
+
+Source: Decisive Action p127 · **Size:** Small · **Printed CR:** 1 · **CC:** 1
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p127: The Shohan Stun Field's [Seeing Stars 3] is a Free Tag, and its Area is Medium, not Small (its free Hyperspace Area, upgraded one size step).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Hyperspace (Firefight) 5x | 70 |
+| Counter | Armor (free) | 0 |
+| Area | Medium (Small free with Hyperspace; +1 size step) | 20 |
+| Limitation | Minor: Subdual Damage Only | −10 |
+| Tag | [Seeing Stars] 3 (Free) | 30 |
+| Limitation | Minor: Slave (attached to a Shohan weapon) | −10 |
+| Limitation | Minor: Usage Restriction (ineffective against force fields) | −10 |
+| **Total** | | **90** |
+
+**Formula CR:** 1 ✔ matches printed
+
+#### Pyre Lance
+
+Source: Decisive Action p127 · **Size:** Small · **Printed CR:** 5 · **CC:** 15
+
+Description: ""
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Pyre (Battlefield) 5x: 80 + 70 (Counter: Armor, Force Field Overload, Aggravated Assault) | 150 |
+| Tag | [Time Heals No Wounds] 3 (Free) | 30 |
+| Tag | [Point And Shoot] (Free) | 10 |
+| Resource | Magazine, Moderate ×1 | 10 |
+| Regeneration | Mechanical 1, Major grade | 15 |
+| Limitation | Moderate: System Incompatibilities | −20 |
+| Limitation | Moderate: Malfunction [Long Disdained, Ill Maintained 2] | −20 |
+| **Total** | | **175** |
+
+**Formula CR:** 5 ✔ matches printed
+
+- Pyre implementation (ruling 10-05): Battlefield Attack cost + 70 (Counter: Armor 20, Force Field Overload 20, Aggravated Assault 30). 'Combat Regeneration: Ammunition 1' priced as Major Regeneration 1.
+
+#### Shohan Stealth Armor
+
+Source: Decisive Action p128 · **Size:** Medium · **Printed CR:** 5 · **CC:** 15
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p128: Shohan Stealth Armor's Weapon Link is Moderate, not Minor, and its Tag is [Silent Running 3], not [Silent Running]. Its Power Slots are 3 Moderate (3 used: Force Field, Force Field Regeneration, Mechanical Regeneration); the Weapon Link carries a self-powered Shohan weapon.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Armor Rating | Battlefield, rank 2 | 60 |
+| Body Track | 40 (default 10 + 6×5) | 30 |
+| Regeneration | Mechanical 1, Moderate grade | 10 |
+| Force Field | Minor ×3 (track 30) | 45 |
+| Regeneration | Force Field 3, Major grade | 30 |
+| Power Supply | Moderate Hyperspace Tap rank 1 | 10 |
+| Computer | Minor rank 3 (TN 18) | 9 |
+| Communication | Minor Radio | 3 |
+| Life Support | Minor ×1 | 5 |
+| Link | Moderate Weapon (self-powered weapon) | 15 |
+| Modifier | Athletics +2 | 20 |
+| Modifier | Detection +2 | 20 |
+| Modifier | Heavy Weapons +2 | 20 |
+| Modifier | Stealth +3 | 30 |
+| Tag | [Silent Running] 3 | 15 |
+| Limitation | Moderate: Side Effect (Emergent Altered) | −20 |
+| **Total** | | **302** |
+
+**Formula CR:** 5 ✔ matches printed
+
+#### Breaching Pod
+
+Source: Decisive Action p128 · **Size:** Medium · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p128: The Breaching Pod's Power Slots are 3 Major (1 used) and 3 Moderate (2 used: Force Field, Force Field Regeneration).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Tse/Melee (Space) 5x | 50 |
+| Counter | Armor (free) | 0 |
+| Body Track | 20 (default 10 + 2×5) | 10 |
+| Force Field | Moderate ×4 (track 80) | 80 |
+| Regeneration | Force Field 3, Major grade | 30 |
+| Drive | Moderate Reactionless | 25 |
+| Maneuver | rank 3 at Moderate grade | 30 |
+| Power Supply | Major Hyperspace Tap rank 1 | 40 |
+| Communication | Major Hypercomms | 25 |
+| Computer | Minor rank 4 (TN 20) | 12 |
+| Hyperspace Portal | Major (priced as a Major Hangar) | 60 |
+| Tasks | Melee 20, Pilot 18 | 76 |
+| Tag | [Once More Into the Breach] | 5 |
+| Limitation | Major: One-Time Use | −50 |
+| **Total** | | **393** |
+
+**Formula CR:** 6
+
+#### Fold Bomb
+
+Source: Decisive Action p129 · **Size:** Small · **Printed CR:** 2 · **CC:** 3
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p129: The Fold Bomb's Area is Small, not Moderate. Its lingering armor reduction is free (core errata p185).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Energy (Battlefield) 6x | 120 |
+| Counter | Armor | 20 |
+| Area |  | 20 |
+| Persistent Effect | armor stays reduced through the round: core p185 errata, free | 0 |
+| Tag | [Turn Your World Inside-Out] 2 | 10 |
+| Limitation | Major: One-Time Use | −50 |
+| **Total** | | **120** |
+
+**Formula CR:** 2 ✔ matches printed
+
+- 'Force Field' attack type priced as Energy. Approved 10-05: Area Small (printed Moderate); the lingering armor reduction is free (core p185 errata).
+
+#### Flare Drone (Assault)
+
+Source: Decisive Action p129 · **Size:** Medium · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p129-130: The Flare Drones (Assault and Sniper) each have a Moderate Hyperspace Tap Power Supply (none printed) to power their Battlefield gun: 3 Moderate Power Slots (1 used).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Flare (Battlefield) 5x | 80 |
+| Area |  | 20 |
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 30 (default 10 + 4×5) | 20 |
+| Computer | Moderate rank 4 (TN 20) | 20 |
+| Tasks | Athletics 20, Detection 20, Heavy Weapons 20, Pilot 18, Stealth 20, Tactics 18 | 232 |
+| Tag | [Float Like a Butterfly, Sting Like a Shotgun] 2 | 10 |
+| Power Supply | Moderate Hyperspace Tap rank 1 | 10 |
+| Drive | Minor Reaction | 10 |
+| Maneuver | rank 2 at Minor grade | 10 |
+| Drive | Minor Ground | 10 |
+| Communication | Major Hypercomms | 25 |
+| **Total** | | **527** |
+
+**Formula CR:** 9
+
+- Approved 10-05: adds a Moderate Hyperspace Tap (3 Moderate, 1 used) to power its Battlefield gun.
+
+#### Flare Drone (Sniper)
+
+Source: Decisive Action p130 · **Size:** Medium · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p129-130: The Flare Drones (Assault and Sniper) each have a Moderate Hyperspace Tap Power Supply (none printed) to power their Battlefield gun: 3 Moderate Power Slots (1 used).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Flare (Battlefield) 5x | 80 |
+| Counter | Armor | 20 |
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 30 (default 10 + 4×5) | 20 |
+| Computer | Moderate rank 4 (TN 20) | 20 |
+| Tasks | Athletics 20, Detection 20, Heavy Weapons 20, Pilot 18, Stealth 20, Tactics 18 | 232 |
+| Tag | [Precise Eliminations] 2 | 10 |
+| Power Supply | Moderate Hyperspace Tap rank 1 | 10 |
+| Drive | Minor Reaction | 10 |
+| Maneuver | rank 2 at Minor grade | 10 |
+| Drive | Minor Ground | 10 |
+| Communication | Major Hypercomms | 25 |
+| **Total** | | **527** |
+
+**Formula CR:** 9
+
+- Approved 10-05: adds a Moderate Hyperspace Tap (3 Moderate, 1 used).
+
+#### Sentry Drone
+
+Source: Decisive Action p130 · **Size:** Medium · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-09) Decisive Action p130-131: The Sentry, Impound and Wobbler Drones each have a Minor Hyperspace Tap Power Supply (none printed) to run their drives.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Power Supply | Minor Hyperspace Tap rank 1 | 5 |
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 30 (default 10 + 4×5) | 20 |
+| Computer | Moderate rank 5 (TN 22) | 25 |
+| Tasks | Athletics 18, Detection 22, Pilot 16, Stealth 22, Tactics 18 | 192 |
+| Hyperspace Portal | Major (priced as a Major Hangar) | 60 |
+| Tag | [Surprise Attack!] 2 | 10 |
+| Drive | Minor Reaction | 10 |
+| Maneuver | rank 2 at Minor grade | 10 |
+| Drive | Minor Ground | 10 |
+| Communication | Major Hypercomms | 25 |
+| **Total** | | **447** |
+
+**Formula CR:** 7
+
+- Approved 10-09: a Minor Hyperspace Tap to run its drives (no power printed).
+
+#### Impound Drone
+
+Source: Decisive Action p131 · **Size:** Medium · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-09) Decisive Action p130-131: The Sentry, Impound and Wobbler Drones each have a Minor Hyperspace Tap Power Supply (none printed) to run their drives.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Power Supply | Minor Hyperspace Tap rank 1 | 5 |
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 30 (default 10 + 4×5) | 20 |
+| Force Field | Minor ×6 (track 60) | 90 |
+| Computer | Moderate rank 5 (TN 22) | 25 |
+| Tasks | Athletics 18, Detection 21, Melee 20, Pilot 16, Stealth 21, Tactics 18 | 228 |
+| Tag | [Isolate and Remove] 2 | 10 |
+| Tag | [Distract and Detain] 3 (Free) | 30 |
+| Drive | Minor Reaction | 10 |
+| Maneuver | rank 1 at Minor grade | 5 |
+| Drive | Minor Ground | 10 |
+| Communication | Major Hypercomms | 25 |
+| **Total** | | **538** |
+
+**Formula CR:** 9
+
+- Approved 10-09: a Minor Hyperspace Tap to run its drives (no power printed).
+
+#### Wobbler Drone
+
+Source: Decisive Action p131 · **Size:** Medium · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-09) Decisive Action p130-131: The Sentry, Impound and Wobbler Drones each have a Minor Hyperspace Tap Power Supply (none printed) to run their drives.
+
+| Row | Detail | BP |
+|---|---|---:|
+| Power Supply | Minor Hyperspace Tap rank 1 | 5 |
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 40 (default 10 + 6×5) | 30 |
+| Force Field | Minor ×2 (track 20) | 30 |
+| Drive | Minor Reaction | 10 |
+| Drive | Moderate Reaction | 25 |
+| Maneuver | rank 2 at Moderate grade | 20 |
+| Drive | Minor Ground | 10 |
+| Computer | Moderate rank 5 (TN 22) | 25 |
+| Tasks | Athletics 14, Detection 20, Melee 20, Pilot 21, Stealth 18, Tactics 18 | 222 |
+| Communication | Major Hypercomms | 25 |
+| Tag | [Shaken, Not Stirred] 3 | 15 |
+| **Total** | | **497** |
+
+**Formula CR:** 8
+
+- Approved 10-09: a Minor Hyperspace Tap to run its drives (no power printed).
+
+#### Gunboat
+
+Source: Decisive Action p132 · **Size:** Large · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p132: The Gunboat has a Moderate Hyperspace Tap Power Supply (none printed). With its drive it has 6 Moderate Power Slots (4 used: its 2 guns, Force Field, Force Field Regeneration).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Flare (Battlefield) 6x ×2 mounts (+20 each extra) | 140 |
+| Area |  | 20 |
+| Bleed | Minor 4 | 35 |
+| Counter | Armor | 20 |
+| Limitation | Minor: No Far Range | −10 |
+| Armor Rating | Battlefield, rank 3 | 80 |
+| Body Track | 90 (default 50 + 2×20) | 20 |
+| Force Field | Moderate ×5 (track 100) | 100 |
+| Regeneration | Force Field 4, Major grade | 45 |
+| Drive | Moderate Reaction | 25 |
+| Maneuver | rank 3 at Moderate grade | 30 |
+| Computer | Moderate rank 4 (TN 20) | 20 |
+| Tasks | Detection 18, Heavy Weapons 20, Pilot 18, Tactics 18 | 148 |
+| Tag | [Evasive Action!] 2 | 10 |
+| Tag | [The One-Two Punch] 3 | 15 |
+| Tag | [Death From Above] 2 | 10 |
+| Power Supply | Moderate Hyperspace Tap rank 1 | 10 |
+| **Total** | | **718** |
+
+**Formula CR:** 7
+
+- Approved 10-05: adds a Moderate Hyperspace Tap (6 Moderate with the drive; 4 used: 2 guns, Force Field, Force Field Regeneration).
+
+#### Shohan Shieldbearer
+
+Source: Decisive Action p133 · **Size:** Huge · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p133: The Shohan Shieldbearer's Power Slots are 6 Major (5 used: restoration beam, 2 flare cannons, Force Field, Force Field Regeneration).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack (Force Field Restoration Beam) | Energy (Space) 8x | 250 |
+| Attack | Flare (Space) 7x ×2 mounts (+40 each extra) | 230 |
+| Armor Rating | Space, rank 4 | 140 |
+| Body Track | 350 (default 200 + 3×50) | 60 |
+| Force Field | Major ×8 (track 400) | 200 |
+| Area |  | 20 |
+| Regeneration | Force Field 5, Major grade | 65 |
+| Drive | Major Jump | 50 |
+| Drive | Moderate Reactionless | 25 |
+| Maneuver | rank 2 at Major grade | 40 |
+| Power Supply | Major Hyperspace Tap rank 1 | 40 |
+| Communication | Moderate Radio | 13 |
+| Communication | Major Hypercomms | 25 |
+| Computer | Major rank 4 (TN 20) | 80 |
+| Hangar | Major | 60 |
+| Life Support | Major ×2 | 80 |
+| Link | Major Force Field | 50 |
+| Tasks | Detection 17, Electronic Warfare 18, Gunnery 20, Pilot 19, Tactics 17 | 182 |
+| Tag | [A Shot In the Arm] 3 | 15 |
+| Tag | [Safe Harbor] 3 | 15 |
+| Tag | [Sometimes the Best Offense is a Good Defense] 2 | 10 |
+| **Total** | | **1,650** |
+
+**Formula CR:** 11
+
+#### Shohan Lancer
+
+Source: Decisive Action p134 · **Size:** Large · **Printed CR:** — · **CC:** —
+
+Description: ""
+
+> **Errata** (new, 2026-10-05) Decisive Action p134: The Shohan Lancer's Armor Rating 2 is Space scale (no scale printed). Its Power Slots are 6 Major (Hyperspace Tap 3 + Jump Drive 3; 3 used).
+
+| Row | Detail | BP |
+|---|---|---:|
+| Attack | Energy (Space) 10x | 400 |
+| Counter | Armor | 20 |
+| Counter | Shields | 20 |
+| Armor Rating | Space, rank 2 | 90 |
+| Body Track | 150 (default 50 + 5×20) | 50 |
+| Force Field | Major ×2 (track 100) | 50 |
+| Regeneration | Force Field 3, Major grade | 30 |
+| Drive | Major Jump | 50 |
+| Drive | Moderate Reactionless | 25 |
+| Maneuver | rank 3 at Major grade | 60 |
+| Power Supply | Major Hyperspace Tap rank 1 | 40 |
+| Life Support | Minor ×2 | 10 |
+| Computer | Moderate rank 4 (TN 20) | 20 |
+| Tasks | Detection 20, Gunnery 20, Pilot 20, Tactics 17 | 154 |
+| Tag | [Stay On Target] 3 | 15 |
+| Tag | [Can't Shake 'Im!] 3 | 15 |
+| Tag | [When All You've Got Is a Hammer…] | 5 |
+| **Total** | | **1,054** |
+
+**Formula CR:** 10
+
+- Resonance cascade beam priced at its 10x peak. Approved 10-05: Armor 2 is Space; power 6 Major (Tap 3 + Jump Drive 3; 3 used).
 
 
 ### Consumables priced per 10 (not costed with the formula)

@@ -1,6 +1,6 @@
-# Decisive Action: equipment reconciliation (first pass, 2026-10-05)
+# Decisive Action: equipment reconciliation (2026-10-05 to 2026-10-09)
 
-Source: *Decisive Action*, Chapter 6 (Field Kit, pp100–134); new attributes from Chapter 5 (Arms Race). Built with the same Workbench rules, rulings and errata as the core Armory and the Deployment Companion. **Nothing here is in the catalog or errata yet**; this is the review copy.
+Source: *Decisive Action*, Chapter 6 (Field Kit, pp100–134); new attributes from Chapter 5 (Arms Race). Built with the same Workbench rules, rulings and errata as the core Armory and the Deployment Companion. **In the catalog since 2026-10-09** (`equipment_catalog.md`, `db/seed/catalog.json`), with every fix below in the errata; this file stays as the reconciliation record. In the app, Decisive Action content is optional: it shows only with its switch on (Inventory panel).
 
 Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items sold per 10); `+N` = N BP short of the printed CR's band; `-N` = N BP over it. Shohan gear prints CR —, so it has no target.
 
@@ -43,7 +43,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 |---|---:|---|---:|---:|---:|---|
 | Light Battle Armor | 100 | Medium | 177 | 2 | 2 | OK |
 | Srivatsa Powered Armor | 101 | Medium | 348 | 5 | 5 | OK |
-| Agni Variable Yield Rounds | 104 | Small | 45 | 0 | 0 | OK |
+| Agni Variable Yield Rounds | 104 | Small | 65 | 0 | 0 | OK |
 | High Impact Explosive Charge | 104 | Small | 95 | 1 | 1 | OK |
 | Plasma Breaching Charge | 105 | Small | 80 | 1 | 1 | OK |
 | Peltast STA Launcher | 106 | Small | 145 | 3 | 3 | OK |
@@ -56,7 +56,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 | TK-Tac T09-HK (Hunter Killer) | 110 | Large | 506 | 5 | 5 | OK |
 | TK-Tac T09-APC | 111 | Large | 506 | 5 | 5 | OK |
 | Wyvern | 113 | Large | 690 | 6 | 6 | OK |
-| Syren | 114 | Large | 615 | 6 | 6 | OK |
+| Syren | 114 | Large | 610 | 6 | 6 | OK |
 | Aerospace Carrier Vehicle/Escort Carrier | 115 | Huge | 1538 | 10 | 10 | OK |
 | Vigilance-class | 116 | Huge | 1238 | 9 | 9 | OK |
 | Vigilance Range Extension Module | 117 | Large | 310 | 3 | 3 | OK |
@@ -107,11 +107,11 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Usage Restriction (no Stealth attempts) — -10
 - Limitation: Major: Restricted Technology (Property of the TSA) — -50
 
-### Agni Variable Yield Rounds (p104, Small): 45 BP, CR 0; target 0
-*Add-on for a gauss gun: both modes (Counter: Armor or Area) priced. Sold per 10: printed CR 1 is a batch; one is CR 0.*
+### Agni Variable Yield Rounds (p104, Small): 65 BP, CR 0; target 0
+*Add-on for a gauss gun: both modes (Counter: Armor or Area) priced. Sold per 10: printed CR 1 is a batch; one is CR 0. Approved 10-09: the rounds turn a gauss gun's kinetic attack into a plasma one; with no Plasma attack of their own, their Counter: Shields is bought (20).*
 
 - Bleed: Moderate 3 — 25
-- Counter: Shields (free) — 0
+- Counter: Shields — 20
 - Counter: Armor — 20
 - Area:  — 20
 - Limitation: Minor: Far Range (ineffective at Far range) — -10
@@ -138,8 +138,9 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Slave (trigger mechanism) — -10
 
 ### Peltast STA Launcher (p106, Small): 145 BP, CR 3; target 3
+*Approved 10-09: one-shot box launchers, reloaded by hand, so no Magazine; it fires the separately bought STA/S missiles.*
 
-- Launcher: Battlefield ×8, 2 increments — 80
+- Launcher: Battlefield ×8 box (one shot each, manual reload), 2 increments — 80
 - Armor Rating: Battlefield, rank 1 — 50
 - Body Track: 25 (default 5 + 4×5) — 20
 - Modifier: Detection +1 — 10
@@ -280,8 +281,8 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Shohan Killer] 2 — 10
 - Tag: [Coordinated Fire] 2 — 10
 
-### Syren (p114, Large): 615 BP, CR 6; target 6
-*'Force Fields: 30' read as Minor 3. Bleed is the free Plasma Bleed, Major 3 (printed Minor 5).*
+### Syren (p114, Large): 610 BP, CR 6; target 6
+*'Force Fields: 30' read as Minor 3. Bleed is the free Plasma Bleed, Major 3 (printed Minor 5). Approved 10-09: Force Field Moderate 2 (Track 40), since a Minor field only covers up to Medium.*
 
 - Attack: Plasma (Space) 6x — 140
 - Counter: Shields (free) — 0
@@ -289,7 +290,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: No Long Range — -10
 - Armor Rating: Space, rank 4 — 140
 - Body Track: 90 (default 50 + 2×20) — 20
-- Force Field: Minor ×3 (track 30) — 45
+- Force Field: Moderate ×2 (track 40) — 40
 - Drive: Moderate Reaction — 25
 - Drive: Minor Reaction — 10
 - Maneuver: rank 4 at Moderate grade — 40
@@ -506,8 +507,8 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 | Auxiliary Armor (Stage 3) | 103 | Medium | 273 | 4 | 4 | OK |
 | Flare Rifle | 106 | Small | 133 | 3 | 3 | OK |
 | Volcano-class | 121 | Huge | 1501 | 10 | 10 | OK |
-| Marauder (Force Field Revision) | 122 | Large | 766 | 7 | 7 | OK |
-| Haven Hyperspace Carrier (Lilith Refit) | 123 | Huge | 1633 | 11 | 11 | OK |
+| Marauder (Force Field Revision) | 122 | Large | 796 | 7 | 7 | OK |
+| Haven Hyperspace Carrier (Lilith Refit) | 123 | Huge | 1673 | 11 | 11 | OK |
 
 ### Auxiliary Armor (Stage 1) (p102, Medium): 163 BP, CR 2; target 2
 *Approved 10-08 from PJ's build sheet: Moderate Anomalous Power Supply with 2 Moderate Charge (printed Minor; Resource 2), [Hybrid Vigor] from Stage 1.*
@@ -605,8 +606,8 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (20 skeleton, 40 full) — -20
 - Limitation: Major: Restricted Technology (Haven Holds Its Own) — -50
 
-### Marauder (Force Field Revision) (p122, Large): 766 BP, CR 7; target 7
-*6 Launchers priced as 8 (sets of 4). Approved 10-08: the Revision's block with the core Marauder errata applied: Armor 4 (printed 5), no Major Gravitic Drive (it rides in the Lilith's hangars), Moderate Computer 3 (printed Major 3; same TN 18). Power 3 Major (3 used), 3 Moderate (2 used). CC 28 for CR 7 (printed 21).*
+### Marauder (Force Field Revision) (p122, Large): 796 BP, CR 7; target 7
+*6 Launchers priced as 8 (sets of 4). Approved 10-08: the Revision's block with the core Marauder errata applied: Armor 4 (printed 5), no Major Gravitic Drive (it rides in the Lilith's hangars), Moderate Computer 3 (printed Major 3; same TN 18). Power 3 Major (3 used), 3 Moderate (2 used). CC 28 for CR 7 (printed 21). Approved 10-09: Unique Fuel (Antimatter) is Moderate (only one Major limitation; Sold Your Soul keeps Major).*
 
 - Anti-Missile: Space 1x — 20
 - Launcher: Space ×6 (book count; builder buys increments of 4 → 8), 2 increments — 120
@@ -619,7 +620,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Maneuver: rank 4 at Moderate grade — 40
 - Power Supply: Major Antimatter rank 1 — 40
 - Resource: Fuel, Major ×3 — 45
-- Limitation: Major: Unique Fuel (Antimatter) — -50
+- Limitation: Moderate: Unique Fuel (Antimatter) — -20
 - Computer: Moderate rank 3 (TN 18) — 15
 - Communication: Moderate Radio — 13
 - Communication: Moderate Laser Link — 13
@@ -635,8 +636,8 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (5 skeleton, 10 full) — -20
 - Limitation: Major: Sold Your Soul to the Shohan — -50
 
-### Haven Hyperspace Carrier (Lilith Refit) (p123, Huge): 1633 BP, CR 11; target 11
-*Approved 10-08: the core Havenite Lilith Carrier (with its errata: 7x cannon, Armor 5, Manufacture, Cargo 2, its Modifiers and Tags) plus the refit's changes: Jump Drive, Major Force Field 2, 6 Launchers and Magazine 6, an Antimatter reactor, Key Personnel (Oracle), Sold Your Soul. Power 12 Major (8 used; printed 6 Major, 6 used).*
+### Haven Hyperspace Carrier (Lilith Refit) (p123, Huge): 1673 BP, CR 11; target 11
+*Approved 10-08: the core Havenite Lilith Carrier (with its errata: 7x cannon, Armor 5, Manufacture, Cargo 2, its Modifiers and Tags) plus the refit's changes: Jump Drive, Major Force Field 2, 6 Launchers and Magazine 6, an Antimatter reactor, Key Personnel (Oracle), Sold Your Soul. Power 12 Major (8 used; printed 6 Major, 6 used). Approved 10-09: Unique Fuel (Antimatter) is Moderate (only one Major limitation; Sold Your Soul keeps Major); Key Personnel (Oracle) is Minor (at most 2 Moderate limitations).*
 
 - Attack (heavy particle cannon): Energy (Space) 7x ×2 mounts (+40 each extra) — 230
 - Launcher: Space ×6 (book count; builder buys increments of 4 → 8), 2 increments — 120
@@ -652,7 +653,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Maneuver: rank 4 at Major grade — 80
 - Power Supply: Major Antimatter rank 1 — 40
 - Resource: Fuel, Major ×4 — 60
-- Limitation: Major: Unique Fuel (Antimatter) — -50
+- Limitation: Moderate: Unique Fuel (Antimatter) — -20
 - Communication: Moderate Radio — 13
 - Communication: Major Ansible — 30
 - Resource: Tangle, Major ×5 — 50
@@ -669,23 +670,24 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Go to Rapid Fire] 2 — 10
 - Tag: [High Security] 3 — 15
 - Limitation: Moderate: Crew Requirement (20 skeleton, 40 full) — -20
-- Limitation: Moderate: Key Personnel (Oracle) — -20
+- Limitation: Minor: Key Personnel (Oracle) — -10
 - Limitation: Major: Usage Restriction (Sold Your Soul to the Shohan) — -50
 
 ## Covert (5 of 5 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
-| Surveillance Drone | 125 | Tiny | 58 | 3 | 3 | OK |
+| Surveillance Drone | 125 | Tiny | 63 | 3 | 3 | OK |
 | Disguise Kit | 125 | Small | 77 | 1 | 1 | OK |
 | "White Noise" Generator | 126 | Tiny | 39 | 1 | 1 | OK |
 | Entry Tools | 126 | Small | 93 | 1 | 1 | OK |
 | Concealable Plasma Torch | 126 | Tiny | 43 | 1 | 1 | OK |
 
-### Surveillance Drone (p125, Tiny): 58 BP, CR 3; target 3
-*Task: Pilot 4 is likely a typo (Pilot 14?).*
+### Surveillance Drone (p125, Tiny): 63 BP, CR 3; target 3
+*Task: Pilot 4 is likely a typo (Pilot 14?). Approved 10-09: a Minor Coil for its Charge (none printed).*
 
 - Drive: Minor Air — 10
+- Power Supply: Minor Coil rank 1 — 5
 - Resource: Charge, Minor ×1 — 4
 - Computer: Minor rank 1 (TN 14) — 3
 - Tasks: Pilot 4 — 8
@@ -740,7 +742,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 | Grav Grenade | 105 | Tiny | 40 | 1 | 1 | OK |
 | Grav STA Missile | 107 | Small | 125 | 3 | 3 | OK |
 | Phantom Mk. 3 | 114 | Large | 848 | 8 | 8 | OK |
-| Farstrider Refit | 115 | Large | 70 | 1 | — | — |
+| Farstrider Refit | 115 | Large | 82 | 1 | — | — |
 | The Artemis (Hyperspace Mothership) | 119 | Colossal | 3538 | 14 | 14 | OK |
 | The Prometheus (Refitted Old Soldier) | 120 | Huge | 1953 | 12 | — | — |
 | Redemption Aegis Refit (Option 1) | 124 | Huge | 1406 | 10 | 10 | OK |
@@ -794,10 +796,11 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Force Field: Moderate ×3 (track 60) — 60
 - Limitation: Major: Restricted Technology (Property of the Terran Sphere) — -50
 
-### Farstrider Refit (p115, Large): 70 BP, CR 1
-*Refit module: printed 'CR: +1' to the escort it goes on.*
+### Farstrider Refit (p115, Large): 82 BP, CR 1
+*Refit module: printed 'CR: +1' to the escort it goes on. Approved 10-09: 1 Major Charge for its Coil (none printed).*
 
 - Power Supply: Major Coil rank 1 — 40
+- Resource: Charge, Major ×1 — 12
 - Drive: Major Jump — 50
 - Limitation: Minor: Hungry (2 Power Slots) — -10
 - Limitation: Minor: Sustained Action (Power Drain) — -10
@@ -837,6 +840,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Major: Nothing Like Her Before — -50
 
 ### The Prometheus (Refitted Old Soldier) (p120, Huge): 1953 BP, CR 12
+*Approved 10-09: Shohan Artificial Ecology (more efficient: a Major one fits a Huge hull).*
 
 - Attack (spinal flare cannon): Flare (Space) 10x — 400
 - Counter: Armor — 20
@@ -859,7 +863,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Computer: Major rank 4 (TN 20) — 80
 - Manufacture: Moderate — 50
 - Hangar: Major ×2 — 120
-- Life Support: Artificial Ecology, Major — 60
+- Life Support: Shohan Artificial Ecology, Major — 60
 - Modifier: Detection +3 — 30
 - Modifier: Gunnery +2 — 20
 - Tasks: Detection 20, Electronic Warfare 20, Medicine 20, Piloting 20, Tactics 20 — 200
@@ -870,7 +874,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (at least 1 Altered) — -20
 
 ### Redemption Aegis Refit (Option 1) (p124, Huge): 1406 BP, CR 10; target 10
-*Lamellar Matrix Force Field priced as a normal Major FF. 6 Launchers priced as 8.*
+*Lamellar Matrix Force Field (a Terran implementation, normal costs, may be Major). 6 Launchers priced as 8.*
 
 - Attack (heavy plasma cannon): Plasma (Space) 8x ×2 mounts (+40 each extra) — 290
 - Counter: Shields (free) — 0
@@ -878,7 +882,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Anti-Missile: Space 1x ×2 — 40
 - Armor Rating: Space, rank 5 — 180
 - Body Track: 350 (default 200 + 3×50) — 60
-- Force Field: Major ×2 (track 100) — 50
+- Force Field: Major ×2 (track 100), Lamellar Matrix — 50
 - Drive: Moderate Reaction — 25
 - Drive: Major Gravitic — 50
 - Maneuver: rank 3 at Major grade — 60
@@ -911,7 +915,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Anti-Missile: Space 1x ×2 — 40
 - Armor Rating: Space, rank 5 — 180
 - Body Track: 350 (default 200 + 3×50) — 60
-- Force Field: Major ×2 (track 100) — 50
+- Force Field: Major ×2 (track 100), Lamellar Matrix — 50
 - Drive: Moderate Reaction — 25
 - Drive: Major Gravitic — 50
 - Maneuver: rank 3 at Major grade — 60
@@ -967,9 +971,9 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 | Fold Bomb | 129 | Small | 120 | 2 | 2 | OK |
 | Flare Drone (Assault) | 129 | Medium | 527 | 9 | — | — |
 | Flare Drone (Sniper) | 130 | Medium | 527 | 9 | — | — |
-| Sentry Drone | 130 | Medium | 442 | 7 | — | — |
-| Impound Drone | 131 | Medium | 533 | 9 | — | — |
-| Wobbler Drone | 131 | Medium | 492 | 8 | — | — |
+| Sentry Drone | 130 | Medium | 447 | 7 | — | — |
+| Impound Drone | 131 | Medium | 538 | 9 | — | — |
+| Wobbler Drone | 131 | Medium | 497 | 8 | — | — |
 | Gunboat | 132 | Large | 718 | 7 | — | — |
 | Shohan Shieldbearer | 133 | Huge | 1650 | 11 | — | — |
 | Shohan Lancer | 134 | Large | 1054 | 10 | — | — |
@@ -978,10 +982,9 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 
 - Attack: Hyperspace (Firefight) 5x — 70
 - Counter: Armor (free) — 0
-- Area: Small Sudden (free, Hyperspace) — 0
+- Area: Medium (Small free with Hyperspace; +1 size step) — 20
 - Limitation: Minor: Subdual Damage Only — -10
 - Tag: [Seeing Stars] 3 (Free) — 30
-- Area: upgrade free Small to Medium (+1 size step) — 20
 - Limitation: Minor: Slave (attached to a Shohan weapon) — -10
 - Limitation: Minor: Usage Restriction (ineffective against force fields) — -10
 
@@ -1007,7 +1010,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Computer: Minor rank 3 (TN 18) — 9
 - Communication: Minor Radio — 3
 - Life Support: Minor ×1 — 5
-- Link: Moderate Weapon — 15
+- Link: Moderate Weapon (self-powered weapon) — 15
 - Modifier: Athletics +2 — 20
 - Modifier: Detection +2 — 20
 - Modifier: Heavy Weapons +2 — 20
@@ -1027,7 +1030,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Power Supply: Major Hyperspace Tap rank 1 — 40
 - Communication: Major Hypercomms — 25
 - Computer: Minor rank 4 (TN 20) — 12
-- Hyperspace Portal: Major (priced as a Major Hangar, like the Deployment Pod's teleport platform) — 60
+- Hyperspace Portal: Major (priced as a Major Hangar) — 60
 - Tasks: Melee 20, Pilot 18 — 76
 - Tag: [Once More Into the Breach] — 5
 - Limitation: Major: One-Time Use — -50
@@ -1074,21 +1077,25 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Drive: Minor Ground — 10
 - Communication: Major Hypercomms — 25
 
-### Sentry Drone (p130, Medium): 442 BP, CR 7
+### Sentry Drone (p130, Medium): 447 BP, CR 7
+*Approved 10-09: a Minor Hyperspace Tap to run its drives (no power printed).*
 
+- Power Supply: Minor Hyperspace Tap rank 1 — 5
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 30 (default 10 + 4×5) — 20
 - Computer: Moderate rank 5 (TN 22) — 25
 - Tasks: Athletics 18, Detection 22, Pilot 16, Stealth 22, Tactics 18 — 192
-- Hyperspace Portal: Major (priced as a Major Hangar, like the Deployment Pod's teleport platform) — 60
+- Hyperspace Portal: Major (priced as a Major Hangar) — 60
 - Tag: [Surprise Attack!] 2 — 10
 - Drive: Minor Reaction — 10
 - Maneuver: rank 2 at Minor grade — 10
 - Drive: Minor Ground — 10
 - Communication: Major Hypercomms — 25
 
-### Impound Drone (p131, Medium): 533 BP, CR 9
+### Impound Drone (p131, Medium): 538 BP, CR 9
+*Approved 10-09: a Minor Hyperspace Tap to run its drives (no power printed).*
 
+- Power Supply: Minor Hyperspace Tap rank 1 — 5
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 30 (default 10 + 4×5) — 20
 - Force Field: Minor ×6 (track 60) — 90
@@ -1101,8 +1108,10 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Drive: Minor Ground — 10
 - Communication: Major Hypercomms — 25
 
-### Wobbler Drone (p131, Medium): 492 BP, CR 8
+### Wobbler Drone (p131, Medium): 497 BP, CR 8
+*Approved 10-09: a Minor Hyperspace Tap to run its drives (no power printed).*
 
+- Power Supply: Minor Hyperspace Tap rank 1 — 5
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 40 (default 10 + 6×5) — 30
 - Force Field: Minor ×2 (track 20) — 30
@@ -1138,7 +1147,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 
 ### Shohan Shieldbearer (p133, Huge): 1650 BP, CR 11
 
-- Attack: Force Field Restoration Beam (Space) 8x — 250
+- Attack (Force Field Restoration Beam): Energy (Space) 8x — 250
 - Attack: Flare (Space) 7x ×2 mounts (+40 each extra) — 230
 - Armor Rating: Space, rank 4 — 140
 - Body Track: 350 (default 200 + 3×50) — 60
@@ -1154,7 +1163,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Computer: Major rank 4 (TN 20) — 80
 - Hangar: Major — 60
 - Life Support: Major ×2 — 80
-- Link: Major Force Field Link — 50
+- Link: Major Force Field — 50
 - Tasks: Detection 17, Electronic Warfare 18, Gunnery 20, Pilot 19, Tactics 17 — 182
 - Tag: [A Shot In the Arm] 3 — 15
 - Tag: [Safe Harbor] 3 — 15

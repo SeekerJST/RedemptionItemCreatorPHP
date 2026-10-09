@@ -3,6 +3,30 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-10-09: Decisive Action in the catalog and the app; optional-content switch
+
+- **Decisive Action's 61 items are in the catalog** (`equipment_catalog.md`, `db/seed/catalog.json`), each
+  with its errata; every one matches its printed (or errata) CR. Page numbers were checked against the
+  PDF (they had been one page high). The catalog now has 182 costed items, and the app prices every one
+  exactly (catalog parity test).
+- **Optional content:** a "Decisive Action" switch at the top of the Inventory panel, off by default and
+  remembered in the browser. Off, its catalog items are hidden, its attributes and implementations
+  aren't offered in the editor, and an open item that uses them gets a warning in Panel 3.
+- **Rules engine:** Area by size steps (20 BP each; Hyperspace's first step free), Attack (1x), Gravitic
+  (+5, must buy Area) and Pyre (+70, Battlefield only) attacks, Grav Blades, Psi-Resonant Materials,
+  Lamellar Matrix, Anomalous / Arboreal / Force Field Link / Recording / Hyperspace Portal, box launchers,
+  Shohan Artificial Ecology, Regeneration power (Force Field and Mechanical use a slot), Weapon Links
+  carrying self-powered weapons, and a Magazine counting as a big gun's ammunition.
+- **Sold per 10:** items carry a group size ("Sold per 10" in Panel 2); Panel 3 shows the per-10 CR, and
+  such items are their own charge (no Ammunition, Fuel or Charge needed).
+- **Rulings 2026-10-08/09** from the review: the Haven Carrier is the core Lilith plus its refit; the
+  Marauder FF takes the core Marauder errata; Auxiliary Armor and Phantom Mk. 3 follow PJ's build sheets;
+  and fixes to the Entry Tools, Chem Kit, Scout Mech, Flare Rifle, Disguise Kit, White Noise Generator,
+  Plasma Torch, TK-Tac HK, Syren, Farstrider, Prometheus, and the drones. All in the errata files.
+- **`db/migrations/008_decisive_action.sql`:** attributes Attack (1x), Grav Blades, Psi-Resonant Materials;
+  `item.Source` and `item.GroupSize` (applied locally; the catalog re-imported).
+- The smoke test's email lookup no longer depends on file times (two emails in the same second could swap).
+
 ## 2026-10-03 (2): Accounts
 
 - **Sign-up, sign-in, and profiles** (email + password). [Login] in the nav bar opens an account panel:

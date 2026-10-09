@@ -38,6 +38,9 @@ const KEYS_BY_NAME = {
     'Attack (Melee)': 'attackMelee', // a separate attribute, not an implementation of Attack
     'Attack Multiplier': 'attackMultiplier',
     'Anti-Missile': 'antiMissile',
+    'Attack (1x)': 'attack1x', // a separate attribute, like Attack (Melee)
+    'Grav Blades': 'gravBlades',
+    'Psi-Resonant Materials': 'psiResonantMaterials',
 };
 
 const IMPLEMENTATIONS_BY_NAME = {
@@ -97,6 +100,7 @@ export function withRelations(rows) {
 }
 
 export { costRating } from './costRating.js';
+export { SOURCES, itemSourceKey, sourceEnabled } from './sources.js';
 export { powerBudget, rowPower, selfContainedAttacks } from './power.js';
 export { validateItem } from './validate.js';
 

@@ -601,6 +601,29 @@ p.inventory_note {
     opacity: 0.85;
 }
 
+/* The optional-content switches (Decisive Action) above the tree. */
+fieldset.inventory_sources {
+    margin: 0 0 10px;
+    padding: 4px 8px 6px;
+    border: 1px solid var(--rd-hairline);
+    text-align: left;
+}
+
+fieldset.inventory_sources legend {
+    padding: 0 4px;
+    color: var(--rd-steel);
+    font-size: 0.8em;
+}
+
+fieldset.inventory_sources label {
+    display: block;
+    cursor: pointer;
+}
+
+fieldset.inventory_sources input {
+    accent-color: var(--rd-gold);
+}
+
 /* Groups, then subgroups, then items. Only the outermost list scrolls. */
 ul.inventory_tree,
 ul.inventory_list {

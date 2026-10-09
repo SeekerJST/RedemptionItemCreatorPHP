@@ -15,6 +15,29 @@ export const FORCE_FIELD = {
     maxItemSize: { 1: SIZE.MEDIUM, 2: SIZE.LARGE, 3: SIZE.COLOSSAL },
 };
 
+/**
+ * Lamellar Matrix (Decisive Action p84): a Terran field of many small overlapping fields at the
+ * normal costs; unlike other Terran fields it may be Major. At 25% Track or below, aimed shots
+ * bypass it, and it can't take Regeneration (ruling 2026-10-08).
+ */
+export const FORCE_FIELD_IMPLEMENTATIONS = {
+    standard: { name: 'Force Field' },
+    lamellarMatrix: { name: 'Lamellar Matrix', noRegeneration: true, source: 'decisiveAction' },
+};
+
+/** Scale (1-3) as the matching Power Slot grade: Firefight Minor, Battlefield Moderate, Space Major. */
+const SCALE_KEYS = ['attack', 'attackMelee', 'attack1x', 'antiMissile'];
+
+/**
+ * The grade of the Power Slot a Force Field or Mechanical Regeneration uses (ruling 2026-10-05):
+ * the item's Force Field grade; without one, its top Attack scale; without either, its Armor
+ * Rating's scale (2026-10-08). Defaults to Minor for an item with none of them.
+ */
+export function regenerationSlotGrade(all = []) {
+    const top = (keys) => Math.max(0, ...all.filter((row) => keys.includes(row.key)).map((row) => row.grade || 0));
+    return top(['forceField']) || top(SCALE_KEYS) || top(['armorRating']) || GRADE.MINOR;
+}
+
 /** Spec §5.23. Strain (errata) restores Psionic Strain, e.g. the Psi Amp. */
 export const REGENERATION_IMPLEMENTATIONS = {
     general: { name: 'Regeneration' },
@@ -66,6 +89,8 @@ export const protectionRules = {
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.PURCHASES },
+        implementations: FORCE_FIELD_IMPLEMENTATIONS,
+        defaultImplementation: 'standard',
         cost: (row) => priceFor(FORCE_FIELD.cost, row.grade) * row.rank,
         // One slot of the Force Field's grade powers the item's whole track (ruling 2026-09-23).
         power: (row) => ({ uses: [{ grade: row.grade, slots: 1, shareKey: `forceField:${row.grade}` }] }),
@@ -81,6 +106,12 @@ export const protectionRules = {
         implementations: REGENERATION_IMPLEMENTATIONS,
         defaultImplementation: 'general',
         cost: (row) => curveB(priceFor({ 1: 5, 2: 10, 3: 15 }, row.grade), row.rank),
+        // Force Field and Mechanical Regeneration use 1 Power Slot each; Biological uses none
+        // (ruling 2026-10-05). See regenerationSlotGrade() for the slot's grade.
+        power: (row, ctx) =>
+            ['forceField', 'mechanical'].includes(row.implementation)
+                ? { uses: [{ grade: regenerationSlotGrade(ctx.all), slots: 1 }] }
+                : {},
         children: [],
     },
 

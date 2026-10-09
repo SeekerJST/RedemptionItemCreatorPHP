@@ -8,6 +8,12 @@ import { SIZE } from './sizes.js';
 export const SLOTS_PER_SOURCE = 3;
 
 export const LAUNCHERS_PER_INCREMENT = 4;
+
+/** Box launchers hold one missile each and are reloaded by hand: same cost, no Magazine (ruling 2026-10-09). */
+export const LAUNCHER_IMPLEMENTATIONS = {
+    standard: { name: 'Launchers' },
+    box: { name: 'Box (one shot, manual reload)', noMagazine: true },
+};
 const LAUNCHER_PRICE = { 1: 5, 2: 10, 3: 15 }; // per launcher
 
 export const COMMUNICATION_IMPLEMENTATIONS = {
@@ -41,6 +47,7 @@ export const DRIVE_IMPLEMENTATIONS = {
     gravitic: { name: 'Gravitic' }, // only outside a system's grav shore
     biological: { name: 'Biological', noFuel: true }, // legs, wings, fins: a creature's own muscle (ruling 2026-09-30)
     lightSail: { name: 'Light Sail', price: 15, grades: [GRADE.MODERATE], noFuel: true, noManeuver: true },
+    arboreal: { name: 'Arboreal', source: 'decisiveAction' }, // the Resistance mechs (Decisive Action p112); costs as its grade
     jump: { name: 'Jump', grades: [GRADE.MAJOR], noFuel: true },
 };
 const DRIVE_PRICE = { 1: 10, 2: 25, 3: 50 };
@@ -52,6 +59,15 @@ export const LIFE_SUPPORT_IMPLEMENTATIONS = {
         price: { 1: 15, 2: 30, 3: 60 },
         people: { 1: 12, 2: 100, 3: 1000 },
         minItemSize: { 1: SIZE.LARGE, 2: SIZE.HUGE, 3: SIZE.COLOSSAL },
+    },
+    // More efficient than the Terran kind: same cost and capacity, one size smaller (ruling 2026-10-09;
+    // the Prometheus, Decisive Action p120).
+    shohanArtificialEcology: {
+        name: 'Shohan Artificial Ecology',
+        price: { 1: 15, 2: 30, 3: 60 },
+        people: { 1: 12, 2: 100, 3: 1000 },
+        minItemSize: { 1: SIZE.MEDIUM, 2: SIZE.LARGE, 3: SIZE.HUGE },
+        source: 'decisiveAction',
     },
 };
 
@@ -65,6 +81,7 @@ export const RESOURCE_TYPES = {
     tangle: { name: 'Tangle', perRank: { 1: 10, 2: 10, 3: 10 } },
     // Timed effects such as drugs (errata): 1 Minor rank ≈ 10 combat rounds or 1 hour; 1 Moderate ≈ 1 day.
     duration: { name: 'Duration', perRank: { 1: 5, 2: 10, 3: 15 } },
+    personalSupplies: { name: 'Personal Supplies', perRank: { 1: 5, 2: 10, 3: 15 } }, // food, shelter, clothing
 };
 
 /**
@@ -79,6 +96,8 @@ export const POWER_SUPPLY_IMPLEMENTATIONS = {
     coil: { name: 'Coil', feed: 'charge', compactMajor: true, runsDrives: true },
     environmental: { name: 'Environmental', runsDrives: true },
     hyperspaceTap: { name: 'Hyperspace Tap', compactMajor: true, runsDrives: true }, // Shohan
+    // Haven's Shohan-derived supply (Decisive Action p102, Auxiliary Armor); costs as its grade.
+    anomalous: { name: 'Anomalous', feed: 'charge', source: 'decisiveAction' },
 };
 
 /** Smallest item a Power Supply fits in (errata p216): Moderate on Small, Major on Large (Medium if compact). */
@@ -103,7 +122,12 @@ export const LINK_IMPLEMENTATIONS = {
     data: { name: 'Data' },
     psi: { name: 'Psi', drawsPower: true, slotGrade: GRADE.MINOR },
     weapon: { name: 'Weapon', drawsPower: true },
+    // Carries a weapon with its own Power Supply (a Shohan Tse Blade or Flare Pistol): no slot (ruling 2026-10-05).
+    weaponSelfPowered: { name: 'Weapon (self-powered weapon)' },
     refueling: { name: 'Refueling', drawsPower: true },
+    // Holds a separately built armor kit; the kit's Armor Rating applies by default (ruling 2026-10-03).
+    armor: { name: 'Armor' },
+    forceField: { name: 'Force Field', source: 'decisiveAction' }, // the Shohan Shieldbearer (Decisive Action p133)
 };
 
 /**
@@ -120,7 +144,18 @@ export const COUNTER_IMPLEMENTATIONS = {
     detection: { name: 'Detection' },
     strainRaise: { name: 'Strain (raise)' },
     strainLower: { name: 'Strain (lower)' },
+    recording: { name: 'Recording', source: 'decisiveAction' }, // the "White Noise" Generator (Decisive Action p126)
 };
+
+/** Spec §5.15. A Hyperspace Portal (Decisive Action p128) is priced as a Major Hangar (ruling 2026-10-08). */
+export const HANGAR_IMPLEMENTATIONS = {
+    standard: { name: 'Hangar' },
+    hyperspacePortal: { name: 'Hyperspace Portal', grades: [GRADE.MAJOR], source: 'decisiveAction' },
+};
+
+/** Area sizes by size step (ruling 2026-10-04: 20 BP per step; Small = 1). */
+export const AREA_SIZES = { 1: 'Small', 2: 'Medium', 3: 'Large', 4: 'Huge', 5: 'Colossal' };
+export const AREA_PRICE_PER_STEP = 20;
 
 /**
  * True if this row is the one an Attack's implementation makes free (e.g. Plasma's Counter
@@ -142,9 +177,13 @@ export const systemRules = {
         name: 'Area',
         gradeKind: 'none',
         grades: ALL_GRADES,
-        rank: { min: 1, max: 1, meaning: RANK.QUANTITY },
-        // Hyperspace Attacks include Area: Small Sudden free (errata p210).
-        cost: (row, ctx) => (isFreeSubRow(row, ctx, attackFreeEffects(ctx.parent, ctx.siblings).area, () => true) ? 0 : 20),
+        // Rank = size steps: 20 BP each (ruling 2026-10-04). A Hyperspace Attack includes the first
+        // (Area: Small Sudden) free (errata p210), so a larger area under one pays only the extra steps.
+        rank: { min: 1, max: 5, meaning: RANK.AREA_SIZE },
+        cost: (row, ctx) => {
+            const free = isFreeSubRow(row, ctx, attackFreeEffects(ctx.parent, ctx.siblings).area, () => true) ? 1 : 0;
+            return AREA_PRICE_PER_STEP * Math.max(0, row.rank - free);
+        },
         children: [],
     },
 
@@ -247,7 +286,40 @@ export const systemRules = {
         gradeKind: 'grade',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.QUANTITY },
+        implementations: HANGAR_IMPLEMENTATIONS,
+        defaultImplementation: 'standard',
         cost: perUnit({ 1: 15, 2: 30, 3: 60 }),
+        children: [],
+    },
+
+    /**
+     * Grav Blades (Decisive Action p83; ruling 2026-10-08): Major only, 75 BP. They replace the
+     * ship's Gravitic Drive and still work as one (so they provide its Power Slots and take
+     * Maneuver), and attack at 1x, using a Major slot; they may buy Weapon Multipliers.
+     */
+    gravBlades: {
+        name: 'Grav Blades',
+        source: 'decisiveAction',
+        gradeKind: 'grade',
+        grades: [GRADE.MAJOR],
+        rank: { min: 1, max: 1, meaning: RANK.QUANTITY },
+        cost: () => 75,
+        power: () => ({ provides: [{ grade: GRADE.MAJOR, slots: SLOTS_PER_SOURCE }], uses: [{ grade: GRADE.MAJOR, slots: 1 }] }),
+        children: ['attackMultiplier', 'maneuver', 'resource'],
+    },
+
+    /**
+     * Psi-Resonant Materials (Decisive Action p97; spec §5.27): 75 / 150 / 300 BP. The item must
+     * also buy Area and a Major Bleed (validation), and they use 2 Power Slots of their grade.
+     */
+    psiResonantMaterials: {
+        name: 'Psi-Resonant Materials',
+        source: 'decisiveAction',
+        gradeKind: 'grade',
+        grades: ALL_GRADES,
+        rank: { min: 1, max: 1, meaning: RANK.QUANTITY },
+        cost: (row) => priceFor({ 1: 75, 2: 150, 3: 300 }, row.grade),
+        power: (row) => ({ uses: [{ grade: row.grade, slots: 2 }] }),
         children: [],
     },
 
@@ -257,6 +329,8 @@ export const systemRules = {
         gradeKind: 'scale',
         grades: ALL_GRADES,
         rank: { min: 1, meaning: RANK.INCREMENTS },
+        implementations: LAUNCHER_IMPLEMENTATIONS,
+        defaultImplementation: 'standard',
         cost: (row) => LAUNCHERS_PER_INCREMENT * priceFor(LAUNCHER_PRICE, row.grade) * row.rank,
         power: (row) => ({ uses: [{ grade: row.grade, slots: row.rank }] }),
         children: ['resource'], // Magazine

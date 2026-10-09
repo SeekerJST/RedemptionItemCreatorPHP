@@ -30,7 +30,7 @@ final class ItemRepository
     public function listItems(?int $userId): array
     {
         $stmt = $this->db->prepare(
-            'SELECT i.ItemID, i.ItemName, i.Category, s.SizeName, i.CostRating, i.IsPublic
+            'SELECT i.ItemID, i.ItemName, i.Category, i.Source, s.SizeName, i.CostRating, i.IsPublic
                FROM item i
                LEFT JOIN itemsize s ON s.ItemSizeID = i.ItemSize
               WHERE i.IsPublic = 1 OR (? IS NOT NULL AND i.OwnerUserID = ?)
@@ -47,13 +47,14 @@ final class ItemRepository
             'itemSize' => $r['SizeName'],
             'CostRating' => $r['CostRating'],
             'IsPublic' => (bool) $r['IsPublic'],
+            'source' => $r['Source'],
         ], $stmt->fetchAll());
     }
 
     public function find(string $itemId): ?Item
     {
         $stmt = $this->db->prepare(
-            'SELECT i.ItemID, i.ItemName, i.Category, i.Description, s.SizeName, i.CostRating, i.IsPublic, i.OwnerUserID
+            'SELECT i.ItemID, i.ItemName, i.Category, i.Source, i.GroupSize, i.Description, s.SizeName, i.CostRating, i.IsPublic, i.OwnerUserID
                FROM item i
                LEFT JOIN itemsize s ON s.ItemSizeID = i.ItemSize
               WHERE i.ItemID = ?'
@@ -72,6 +73,8 @@ final class ItemRepository
         $item->category = (string) $row['Category'];
         $item->description = (string) $row['Description'];
         $item->isPublic = (bool) $row['IsPublic'];
+        $item->source = $row['Source'] !== null ? (string) $row['Source'] : null;
+        $item->groupSize = $row['GroupSize'] !== null ? (int) $row['GroupSize'] : null;
         $item->ownerUserId = $row['OwnerUserID'] !== null ? (int) $row['OwnerUserID'] : null;
 
         // Rows saved before migration 004 have no SortOrder; they keep their id order.
@@ -128,8 +131,8 @@ final class ItemRepository
         $itemId = self::uuid4();
 
         $this->transaction(function () use ($item, $itemId, $sizeId, $ownerUserId): void {
-            $this->db->prepare('INSERT INTO item (ItemID, ItemName, Category, Description, ItemSize, CostRating, IsPublic, OwnerUserID) VALUES (?, ?, ?, ?, ?, ?, 0, ?)')
-                ->execute([$itemId, $item->itemName, self::nullIfEmpty($item->category), $item->description, $sizeId, $item->costRating, $ownerUserId]);
+            $this->db->prepare('INSERT INTO item (ItemID, ItemName, Category, GroupSize, Description, ItemSize, CostRating, IsPublic, OwnerUserID) VALUES (?, ?, ?, ?, ?, ?, ?, 0, ?)')
+                ->execute([$itemId, $item->itemName, self::nullIfEmpty($item->category), $item->groupSize, $item->description, $sizeId, $item->costRating, $ownerUserId]);
             $this->insertChildren($itemId, $item);
         });
 
@@ -150,8 +153,8 @@ final class ItemRepository
             if (!$this->lockWritable($itemId, $writer)) {
                 return false;
             }
-            $this->db->prepare('UPDATE item SET ItemName = ?, Category = ?, Description = ?, ItemSize = ?, CostRating = ? WHERE ItemID = ?')
-                ->execute([$item->itemName, self::nullIfEmpty($item->category), $item->description, $sizeId, $item->costRating, $itemId]);
+            $this->db->prepare('UPDATE item SET ItemName = ?, Category = ?, GroupSize = ?, Description = ?, ItemSize = ?, CostRating = ? WHERE ItemID = ?')
+                ->execute([$item->itemName, self::nullIfEmpty($item->category), $item->groupSize, $item->description, $sizeId, $item->costRating, $itemId]);
             $this->deleteChildren($itemId);
             $this->insertChildren($itemId, $item);
             return true;
@@ -194,8 +197,8 @@ final class ItemRepository
                 $this->deleteChildren($itemId);
                 $this->db->prepare('DELETE FROM item WHERE ItemID = ?')->execute([$itemId]);
             }
-            $this->db->prepare('INSERT INTO item (ItemID, ItemName, Category, Description, ItemSize, CostRating, IsPublic) VALUES (?, ?, ?, ?, ?, ?, ?)')
-                ->execute([$itemId, $item->itemName, self::nullIfEmpty($item->category), $item->description, $sizeId, $item->costRating, (int) $isPublic]);
+            $this->db->prepare('INSERT INTO item (ItemID, ItemName, Category, Source, GroupSize, Description, ItemSize, CostRating, IsPublic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)')
+                ->execute([$itemId, $item->itemName, self::nullIfEmpty($item->category), $item->source, $item->groupSize, $item->description, $sizeId, $item->costRating, (int) $isPublic]);
             $this->insertChildren($itemId, $item);
             return $replaced;
         });

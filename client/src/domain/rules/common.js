@@ -11,9 +11,12 @@
 //   power(row, ctx)  optional: { provides?: [{grade, slots}], uses?: [{grade, slots, shareKey?}] }
 //   children     keys of the attributes allowed as sub-rows (one level deep)
 //   subRowOnly   optional: true if it can only be a sub-row (e.g. Attack Multiplier)
+//   source       optional: the supplement it comes from (rules/sources.js); none = the core book.
+//                Implementations can carry one too.
 //
 // A rule row is { id, key, grade, rank, implementation, parentId }, and ctx is
-// { size, parent, children } (size: 1 = Tiny ... 6 = Colossal; parent/children: rule rows).
+// { size, parent, children, siblings, all } (size: 1 = Tiny ... 6 = Colossal; the rest are rule
+// rows: `all` is every row of the item, for rules that depend on the whole item).
 
 export const GRADE = { MINOR: 1, MODERATE: 2, MAJOR: 3 };
 export const ALL_GRADES = [GRADE.MINOR, GRADE.MODERATE, GRADE.MAJOR];
@@ -30,6 +33,7 @@ export const RANK = {
     MULTIPLIER_STEPS: 'multiplierSteps', // Attack Multiplier: +1x per rank
     INCREMENTS: 'increments', // Launchers, bought 4 at a time
     TARGET_NUMBER: 'targetNumber', // Tasks
+    AREA_SIZE: 'areaSize', // Area: size steps (1 = Small ... 5 = Colossal)
 };
 
 /** Per-grade price table lookup; an unavailable grade costs 0 (validation reports it). */

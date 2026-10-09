@@ -27,6 +27,7 @@ P213: A Drive needs no Fuel Resource when it can run from its item's own Power S
 P214: Hangar: "multiple items" means 3 items, or 4 if crammed in. For example, a Major Hangar on a Huge ship holds 3 Large craft (4 crammed), and a Moderate Hangar holds 3 items two sizes smaller (4 crammed).
 P214: Launchers are bought in sets of 4 (one set draws 1 Power Slot and costs 4 × the per-launcher price: 20 / 40 / 60 BP). Ships printing launcher counts that are not multiples of 4 are corrected by errata (Standard Assault Shuttle, Dragon, Conventional Frigate, Redemption, Havenite Marauder). A Magazine does not have to match the launcher count.
 P214: Force Field Regeneration and Mechanical Regeneration each use 1 Power Slot, of the same grade as the item's Force Field (or, without one, its Attacks' scale, or its Armor Rating's scale if it has neither). Biological Regeneration uses no Power Slot. (A Force Field itself uses 1 slot, as written on p214.)
+P214: Box launchers hold one missile each and are reloaded by hand. They cost the same as other launchers and need no Magazine. (Decisive Action's Peltast STA Launcher.)
 P215: Add a Link type, Refueling: a docking connection that transfers fuel to a linked craft of up to the Link's maximum size. Each Refueling Link draws 1 Power Slot of its grade while in use. (The Fleet Auxiliary's three Major Refueling Links account for 3 of its 4 used Power Slots.)
 P215: A Weapon Link powers the weapon it carries, so by default each Weapon Link uses 1 Power Slot of its grade. Some weapons need none, such as self-powered Kinetic (rail) weapons.
 P215: Add a Link type, Armor: it holds a separately built armor kit up to the Link's maximum size. The kit's Armor Rating applies by default; an aimed shot can target the host's own Armor Rating instead. An Armor Link uses no Power Slot. (First used by the New Detroit militia's Ranger Armor and its Armor Kit.)
@@ -39,6 +40,7 @@ P217: Shohan Force Field Regeneration is always Major grade (regenerates every r
 P217-218: Key Personnel (the item needs a specific crew member, such as a Navigator) is a Moderate limitation. A Modifier covering several skills is costed per skill (10 BP × rank × number of skills). A Minor Reaction Drive is a jet pack that works on a planet or in microgravity.
 P217-218: The grade of a Modifier is how many skills it covers: Minor for one skill (10 BP per rank), Moderate for two (20 BP per rank), and Major for three or more, or a whole class of skills such as "Weapons" or "Technical Skills" (30 BP per rank). This replaces costing multi-skill Modifiers per skill. The +4 limit per skill still applies; how a class Modifier stacks with others is left to the table.
 P218: A grenade's Hungry limitation means that when it is fired from a launcher or a vehicle's kinetic weapon, it takes 10 rounds (one Resource rank) of that weapon's magazine.
+P225: An item sold in groups of 10 (rounds, charges, grenades, missiles) is its own charge, like a One-Time Use item: its attacks need no Ammunition or Power Slot, and its Power Supply and Drive need no Fuel or Charge. (Decisive Action's STA/S, Grav and Hyper Missiles.)
 Gear
 
 P225: Update the Quick Reference table to match the errata: Standard Light Armor CR 0, CC 0; Psionic Light Armor CR 0, CC 0; Flight Pack CR 0, CC 0; Personal Psi Link CR 1, CC 1; Stealth FTL Recon Drone CR 6, CC 21; Factory Freighter CR 9, CC 45; Tse Blade CR 4, CC 10. Replace the Programs "Min" column (minimum computer rank) with the required computer grade: Minor for all eight programs.
@@ -203,6 +205,7 @@ P104-105: The printed CR and CC for the Agni Variable Yield Rounds, High Impact 
 P105: The Grav Grenade is a Tiny item, not Small.
 P106: The Peltast STA Launcher's Body Track is 25, not 30.
 P106: The Flare Rifle gains Far Ranged (Minor), as the Flare Pistol has. Its Coil runs on 2 ranks of Minor Charge (20 combat rounds), not Fuel. CR 3 is unchanged.
+P106: The Peltast STA Launcher's 8 launchers are one-shot box launchers, reloaded by hand: each holds one STA/S missile (bought separately), so it needs no Magazine.
 P107: The Field Kit's Personal Supplies 3 are a Moderate Resource (rank 3).
 P109: The Resistance Chem Kit's Power Supply is a Moderate Coil (rank 1), not Minor, so it can power its Moderate Manufacture, with 1 Moderate Charge (10 days), not 2. Its Soft Serve limitation is Moderate. Total Power Slots: 3 Moderate (1 used). Cost Rating 1, Character Creation cost 1 (was CR 0, CC 0).
 P110: The TK-Tac T09-HK's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 9 Moderate: its Moderate Coil is rank 1. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 3, not Minor 3, and its Heavy Weapons Modifier is +2, not +1. CR 5 is unchanged.
@@ -211,16 +214,22 @@ P112: Arboreal is a Drive implementation (the Resistance mechs). It costs the sa
 P112: The Resistance Scout Mech's two Weapon Links are Moderate, not Minor, so it can carry Battlefield weapons. Each Link uses a Moderate Power Slot: Total Power Slots 3 Moderate (2 used), 3 Minor (0 used). CR 4 is unchanged.
 P113-114: The Wyvern's and Syren's Bleed is their plasma cannon's free Plasma Bleed: Major 3, not Minor 5.
 P114: The Phantom Mk. 3's Grav Blades keep the Phantom's Hungry limitation (1 Fuel per round for in-system maneuvers), and it carries Restricted Technology (Property of the Terran Sphere) as a Major limitation. It has no Laser Link (the core Phantom's errata p255 doesn't carry over), and its Air Drive is Minor as printed. CR 8 is unchanged.
+P114: The Syren's Force Field is Moderate 2 (Track 40), not 30: a Minor field only covers items up to Medium. CR 6 is unchanged.
+P115: The Farstrider Refit's Major Coil runs on 1 Major Charge (10 jumps or combat rounds).
 P116: The Vigilance-class's Bleed is its plasma cannon's free Plasma Bleed, Major 3, not Minor 3.
 P118: The Vigilance Troop Carrier Module's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 3 Major (2 used): its Fusion Power Supply is Moderate. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 2, not Minor 2.
 P119: The Artemis has 6 Major Fusion power supply ranks (not 4 reactors), Manufacture (Major), and Maneuver 4 (Major) as standard, not optional; its drives are as printed (Major Jump, Major Gravitic, Moderate Reaction). Total Power Slots: 24 Major (5 used: Launchers 3, Anti-Missile 1, Manufacture 1), 3 Moderate (0 used). Cost Rating 14, Character Creation cost 105 (was CR 15, CC 120; the printed CR used the old round-to-nearest rule).
 P120: The Prometheus uses 6 of its 9 Major Power Slots (its Force Field and Mechanical Regeneration each use one).
+P120: The Prometheus's Artificial Ecology is a Shohan one, which is more efficient: a Major Shohan Artificial Ecology (1000 people) fits in a Huge hull.
+P120: Shohan Artificial Ecology is more efficient than the Terran kind: at the same cost and capacity, it fits in an item one size smaller (Minor: Medium, Moderate: Large, Major: Huge).
 P122: The Marauder (Force Field Revision) takes the core Marauder's errata (core p263): Armor Rating 4 (Shrouded), not 5, and no Major Gravitic Drive (it travels in a carrier's hangars). Its Computer is Moderate 3 (TN 18), not Major 3. Its Power Slots are 3 Major (3 used: Anti-Missile, Launchers) and 3 Moderate (2 used: Force Field, Force Field Regeneration). Its Character Creation cost is 28, the cost for its CR 7 (printed 21).
+P122-123: On the Marauder (Force Field Revision) and the Haven Hyperspace Carrier, Unique Fuel (Antimatter) is a Moderate limitation: Sold Your Soul to the Shohan is their one Major limitation. On the Haven Hyperspace Carrier, Key Personnel (Oracle) is a Minor limitation, so it has at most 2 Moderate ones. Their CRs (7 and 11) are unchanged.
 P123: The Haven Hyperspace Carrier is a refit of the Havenite Lilith Carrier (core p263, with its errata) and keeps every system its stat block doesn't list: the 7x heavy particle cannons, Armor Rating 5, Manufacture (Major), 2 Major Cargo, Modifiers (Detection +4, Engineering (Starship) +3, Gunnery +3, Medicine +2) and Tags ([Now You See Me, Now You Don't 2], [Go to Rapid Fire 2], [High Security 3]). Its Power Slots are 12 Major (8 used: 2 cannons, Launchers 2, Anti-Missile, Force Field, Manufacture, Hyperspace Drive). CR 11 and CC 66 are unchanged.
 P124: Option 2 of the Redemption Aegis Refit keeps the Redemption's 6 Major Magazine (60 shots), not 4 (40 shots).
 P125: The Grav Missile is a Medium item with a 7x attack, not 8x, and costs 5 CR per 10 missiles, not 3 (CR 4 each).
 P125: The Hyper Missile's Restricted Technology is a Moderate limitation, not Major. It is a Medium item (CR 4 each; the printed 5 CR per 10 is unchanged).
 P125: The Disguise Kit has a Minor Coil Power Supply (rank 1) with 1 Minor Charge (10 days) to run its hologram projectors, voice modulators and computer. Total Power Slots: 3 Minor (0 used). CR 1 is unchanged.
+P125: The Surveillance Drone's Minor Charge feeds a Minor Coil Power Supply (rank 1; none printed). CR 3 is unchanged.
 P126: Counter: Recording is a Counter implementation (the White Noise Generator) and costs 20 BP, like any Counter.
 P126: The Entry Tools' computer runs only the Engineering (Security) 16 Task (it works mechanical locks on its own); the Computers 12 Task is removed, and the Computers +2 Modifier still helps a skilled user with electronic locks. Presumption of Guilt is a Moderate limitation. CR 1 is unchanged.
 P126: The "White Noise" Generator has a Minor Coil Power Supply (rank 1) with 1 Minor Charge (10 days). Total Power Slots: 3 Minor (0 used). CR 1 is unchanged.
@@ -231,6 +240,7 @@ P128: The Breaching Pod's Power Slots are 3 Major (1 used) and 3 Moderate (2 use
 P128: A Hyperspace Portal (the Breaching Pod) is priced as a Major Hangar, 60 BP, like the Deployment Pod's teleport platform.
 P129-130: The Flare Drones (Assault and Sniper) each have a Moderate Hyperspace Tap Power Supply (none printed) to power their Battlefield gun: 3 Moderate Power Slots (1 used).
 P129: The Fold Bomb's Area is Small, not Moderate. Its lingering armor reduction is free (core errata p185).
+P130-131: The Sentry, Impound and Wobbler Drones each have a Minor Hyperspace Tap Power Supply (none printed) to run their drives.
 P132: The Gunboat has a Moderate Hyperspace Tap Power Supply (none printed). With its drive it has 6 Moderate Power Slots (4 used: its 2 guns, Force Field, Force Field Regeneration).
 P133: The Shohan Shieldbearer's Power Slots are 6 Major (5 used: restoration beam, 2 flare cannons, Force Field, Force Field Regeneration).
 P133: A Force Field Link (the Shohan Shieldbearer) is a Link type, priced by grade like any Link (Major 50 BP).

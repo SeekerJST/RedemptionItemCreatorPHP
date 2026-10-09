@@ -41,6 +41,8 @@ export function createInitialItem() {
         /** "Group: Subgroup" (e.g. "Weapons: Firearms") or one level ("Armor"); '' = Uncategorized. */
         category: '',
         description: '',
+        /** Sold in groups (10 for rounds, grenades, missiles): a group costs +1 CR; null = sold singly. */
+        groupSize: null,
         tags: [newRow.tags(1)],
         attributes: [newRow.attributes(1)],
         limits: [newRow.limits(1)],
@@ -87,6 +89,9 @@ function editItem(item, action) {
 
         case 'setDescription':
             return { ...item, description: action.description };
+
+        case 'setGroupSize':
+            return { ...item, groupSize: action.groupSize > 1 ? action.groupSize : null };
 
         case 'addRow': {
             // action.parentId (attributes only): add the new row as a sub-row of that row.
@@ -207,6 +212,7 @@ export function fromApiItem(apiItem) {
         size: apiItem.itemSize ?? '',
         category: apiItem.category ?? '',
         description: apiItem.description ?? '',
+        groupSize: Number(apiItem.groupSize) > 1 ? Number(apiItem.groupSize) : null,
         tags: (apiItem.tagList ?? []).map((row) =>
             normalizeRow('tags', { id: row.id, TagDesc: row.TagDesc ?? '', TagRank: row.TagRank ?? '1', TagFree: row.TagFree ?? false })
         ),
@@ -246,6 +252,7 @@ export function toApiItem(item, summary) {
         itemSize: item.size,
         category: item.category,
         description: item.description,
+        groupSize: item.groupSize,
         CostRating: summary.costRating,
         modifierList: summary.modifiers.map((row) => ({
             modifierID: `Modifier_${row.id}`,
