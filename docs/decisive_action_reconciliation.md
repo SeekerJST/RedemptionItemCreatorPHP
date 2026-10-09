@@ -495,7 +495,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Manual Reload — -10
 - Limitation: Minor: 1 Shot Per Round — -10
 
-## Haven & Auxiliaries (2 of 7 match)
+## Haven & Auxiliaries (3 of 7 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
@@ -505,7 +505,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 | Flare Rifle | 106 | Small | 113 | 2 | 3 | +12 |
 | Volcano-class | 121 | Huge | 1501 | 10 | 10 | OK |
 | Marauder (Force Field Revision) | 122 | Large | 901 | 9 | 7 | -102 |
-| Haven Hyperspace Carrier (Lilith Refit) | 123 | Huge | 1228 | 9 | 11 | +372 |
+| Haven Hyperspace Carrier (Lilith Refit) | 123 | Huge | 1633 | 11 | 11 | OK |
 
 ### Auxiliary Armor (Stage 1) (p102, Medium): 145 BP, CR 1; target 2
 *Anomalous = Minor power supply, Resource 2 read as Minor Charge.*
@@ -630,14 +630,14 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (5 skeleton, 10 full) — -20
 - Limitation: Major: Sold Your Soul to the Shohan — -50
 
-### Haven Hyperspace Carrier (Lilith Refit) (p123, Huge): 1228 BP, CR 9; target 11
-*No Modifiers or Tags printed. Core Lilith errata (7x cannon, Armor 5) not applied since DA prints its own block.*
+### Haven Hyperspace Carrier (Lilith Refit) (p123, Huge): 1633 BP, CR 11; target 11
+*Approved 10-08: the core Havenite Lilith Carrier (with its errata: 7x cannon, Armor 5, Manufacture, Cargo 2, its Modifiers and Tags) plus the refit's changes: Jump Drive, Major Force Field 2, 6 Launchers and Magazine 6, an Antimatter reactor, Key Personnel (Oracle), Sold Your Soul. Power 12 Major (8 used; printed 6 Major, 6 used).*
 
-- Attack (heavy particle cannon): Energy (Space) 6x ×2 mounts (+40 each extra) — 180
+- Attack (heavy particle cannon): Energy (Space) 7x ×2 mounts (+40 each extra) — 230
 - Launcher: Space ×6 (book count; builder buys increments of 4 → 8), 2 increments — 120
 - Resource: Magazine, Major ×6 — 90
 - Anti-Missile: Space 1x — 20
-- Armor Rating (Shrouded Hull): Space, rank 3 — 150
+- Armor Rating (Shrouded Hull): Space, rank 5 — 220
 - Body Track: 300 (default 200 + 2×50) — 40
 - Force Field: Major ×2 (track 100) — 50
 - Drive: Major Reaction — 50
@@ -652,9 +652,17 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Communication: Major Ansible — 30
 - Resource: Tangle, Major ×5 — 50
 - Computer: Moderate rank 3 (TN 18) — 15
-- Cargo: Major ×1 — 30
+- Manufacture: Major — 100
+- Cargo: Major ×2 — 60
 - Hangar: Major ×3 — 180
 - Life Support: Major ×2 — 80
+- Modifier: Detection +4 — 40
+- Modifier: Engineering (Starship) +3 — 30
+- Modifier: Gunnery +3 — 30
+- Modifier: Medicine +2 — 20
+- Tag: [Now You See Me, Now You Don't] 2 — 10
+- Tag: [Go to Rapid Fire] 2 — 10
+- Tag: [High Security] 3 — 15
 - Limitation: Moderate: Crew Requirement (20 skeleton, 40 full) — -20
 - Limitation: Moderate: Key Personnel (Oracle) — -20
 - Limitation: Major: Usage Restriction (Sold Your Soul to the Shohan) — -50
