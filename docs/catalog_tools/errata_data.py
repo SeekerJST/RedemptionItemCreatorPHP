@@ -402,4 +402,6 @@ e(DA,112,None,'Resistance Scout Mech','stat',D15,"The Resistance Scout Mech's tw
   [('Resistance Scout Mech','Link: Weapon','2 Minor','2 Moderate'),('Resistance Scout Mech','Power Slots','3 Moderate (0 used), 3 Minor (0 used)','3 Moderate (2 used), 3 Minor (0 used)')])
 e(DA,106,None,'Flare Rifle','stat',D15,"The Flare Rifle gains Far Ranged (Minor), as the Flare Pistol has. Its Coil runs on 2 ranks of Minor Charge (20 combat rounds), not Fuel. CR 3 is unchanged.",
   [('Flare Rifle','Far Ranged','none','Minor'),('Flare Rifle','Resource','Fuel 2','Charge: Minor x2')])
+e(DA,125,None,'Disguise Kit','stat',D15,"The Disguise Kit has a Minor Coil Power Supply (rank 1) with 1 Minor Charge (10 days) to run its hologram projectors, voice modulators and computer. Total Power Slots: 3 Minor (0 used). CR 1 is unchanged.",
+  [('Disguise Kit','Power Supply','none','Minor Coil 1'),('Disguise Kit','Resource: Charge','none','Minor x1 (10 days)')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))

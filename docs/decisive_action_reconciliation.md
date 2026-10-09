@@ -672,12 +672,12 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Key Personnel (Oracle) — -20
 - Limitation: Major: Usage Restriction (Sold Your Soul to the Shohan) — -50
 
-## Covert (2 of 5 match)
+## Covert (3 of 5 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
 | Surveillance Drone | 125 | Tiny | 58 | 3 | 3 | OK |
-| Disguise Kit | 125 | Small | 68 | 0 | 1 | +7 |
+| Disguise Kit | 125 | Small | 77 | 1 | 1 | OK |
 | "White Noise" Generator | 126 | Tiny | 30 | 0 | 1 | +5 |
 | Entry Tools | 126 | Small | 93 | 1 | 1 | OK |
 | Concealable Plasma Torch | 126 | Tiny | 18 | 0 | 1 | +17 |
@@ -695,8 +695,11 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Modifier: Stealth +1 — 10
 - Tag: [A Fly on the Wall] — 5
 
-### Disguise Kit (p125, Small): 68 BP, CR 0; target 1
+### Disguise Kit (p125, Small): 77 BP, CR 1; target 1
+*Approved 10-08: adds a Minor Coil with 1 Minor Charge to run its holograms, voice modulator and computer (no power printed).*
 
+- Power Supply: Minor Coil rank 1 — 5
+- Resource: Charge, Minor ×1 — 4
 - Computer: Minor rank 1 (TN 14) — 3
 - Modifier: Persuade +4 — 40
 - Modifier: Stealth +2 — 20

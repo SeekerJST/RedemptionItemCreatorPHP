@@ -219,6 +219,7 @@ P123: The Haven Hyperspace Carrier is a refit of the Havenite Lilith Carrier (co
 P124: Option 2 of the Redemption Aegis Refit keeps the Redemption's 6 Major Magazine (60 shots), not 4 (40 shots).
 P125: The Grav Missile is a Medium item with a 7x attack, not 8x, and costs 5 CR per 10 missiles, not 3 (CR 4 each).
 P125: The Hyper Missile's Restricted Technology is a Moderate limitation, not Major. It is a Medium item (CR 4 each; the printed 5 CR per 10 is unchanged).
+P125: The Disguise Kit has a Minor Coil Power Supply (rank 1) with 1 Minor Charge (10 days) to run its hologram projectors, voice modulators and computer. Total Power Slots: 3 Minor (0 used). CR 1 is unchanged.
 P126: Counter: Recording is a Counter implementation (the White Noise Generator) and costs 20 BP, like any Counter.
 P126: The Entry Tools' computer runs only the Engineering (Security) 16 Task (it works mechanical locks on its own); the Computers 12 Task is removed, and the Computers +2 Modifier still helps a skilled user with electronic locks. Presumption of Guilt is a Moderate limitation. CR 1 is unchanged.
 P127: The Shohan Stun Field's [Seeing Stars 3] is a Free Tag, and its Area is Medium, not Small (its free Hyperspace Area, upgraded one size step).
