@@ -410,14 +410,14 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Like Flying a Brick Wall] 2 (Free) — 20
 - Limitation: Major: One-Time Use (cannot return to orbit) — -50
 
-## Resistance (4 of 5 match)
+## Resistance (5 of 5 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
 | Incendiary Charge | 104 | Small | 95 | 1 | 1 | OK |
 | Resistance Chem Kit | 109 | Small | 91 | 1 | 1 | OK |
 | Hoverbike Conversion | 109 | Medium | 183 | 2 | 2 | OK |
-| Resistance Scout Mech | 112 | Medium | 233 | 3 | 4 | +17 |
+| Resistance Scout Mech | 112 | Medium | 253 | 4 | 4 | OK |
 | Resistance Artillery Mech | 112 | Medium | 324 | 5 | 5 | OK |
 
 ### Incendiary Charge (p104, Small): 95 BP, CR 1; target 1
@@ -455,9 +455,10 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tasks: Pilot 10 — 20
 - Tag: [Speed Kills] 3 — 15
 
-### Resistance Scout Mech (p112, Medium): 233 BP, CR 3; target 4
+### Resistance Scout Mech (p112, Medium): 253 BP, CR 4; target 4
+*Approved 10-08: Moderate Weapon Links (printed Minor), so it can carry Battlefield weapons; power 3 Moderate (2 used: the Links), 3 Minor (0 used).*
 
-- Link: Minor Weapon ×2 — 10
+- Link: Moderate Weapon ×2 — 30
 - Armor Rating: Battlefield, rank 2 — 60
 - Body Track: 40 (default 10 + 6×5) — 30
 - Drive: Minor Arboreal — 10

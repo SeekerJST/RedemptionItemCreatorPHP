@@ -295,7 +295,7 @@ e(DC,39,None,'Flare Pistol','stat',D10,"The Flare Pistol gains Counter: Force Fi
 e(DC,36,None,'Xn Control Rig','clarification',D10,"The Xn Control Rig's power is a Moderate Coil Power Supply (rank 1, which gives its Strain 10) with 2 ranks of Moderate Charge. Its Broad Spectrum Communications Array is a Minor Communication attribute.",
   [('Xn Control Rig','Power Supply','unstated','Moderate Coil, rank 1 (Strain 10), Charge: Moderate x2'),('Xn Control Rig','Communication grade','unstated','Minor')])
 D11='2026-10-05'
-e(IC,214,None,'Regeneration: power','rule',D11,"Force Field Regeneration and Mechanical Regeneration each use 1 Power Slot, of the same grade as the item's Force Field (or its Attacks' scale if it has none). Biological Regeneration uses no Power Slot. (A Force Field itself uses 1 slot, as written on p214.)",
+e(IC,214,None,'Regeneration: power','rule',D11,"Force Field Regeneration and Mechanical Regeneration each use 1 Power Slot, of the same grade as the item's Force Field (or, without one, its Attacks' scale, or its Armor Rating's scale if it has neither). Biological Regeneration uses no Power Slot. (A Force Field itself uses 1 slot, as written on p214.)",
   [(None,'Regeneration power','unstated','Force Field and Mechanical: 1 slot each; Biological: none')])
 e(IC,215,None,'Link: Weapon (self-powered weapons)','clarification',D11,"A Weapon Link carrying a weapon that has its own Power Supply (such as a Shohan Tse Blade or Flare Pistol) uses no Power Slot, the same as a self-powered Kinetic weapon.",
   [(None,'Weapon Link power','1 slot per Link','none when the carried weapon has its own Power Supply')])
@@ -398,4 +398,6 @@ e(DA,126,None,'Entry Tools','stat',D15,"The Entry Tools' computer runs only the 
   [('Entry Tools','Tasks','Engineering (Security) 16, Computers 12','Engineering (Security) 16'),('Entry Tools','Limitation grade: Presumption of Guilt','Minor','Moderate')])
 e(DA,109,None,'Resistance Chem Kit','stat',D15,"The Resistance Chem Kit's Power Supply is a Moderate Coil (rank 1), not Minor, so it can power its Moderate Manufacture, with 1 Moderate Charge (10 days), not 2. Its Soft Serve limitation is Moderate. Total Power Slots: 3 Moderate (1 used). Cost Rating 1, Character Creation cost 1 (was CR 0, CC 0).",
   [('Resistance Chem Kit','Power Supply','Minor Coil 1','Moderate Coil 1'),('Resistance Chem Kit','Resource: Charge','2 (20 days)','1 Moderate (10 days)'),('Resistance Chem Kit','Power Slots','3 (1 used)','3 Moderate (1 used)'),('Resistance Chem Kit','Limitation grade: Soft Serve','Minor','Moderate'),('Resistance Chem Kit','CR','0','1'),('Resistance Chem Kit','CC','0','1')])
+e(DA,112,None,'Resistance Scout Mech','stat',D15,"The Resistance Scout Mech's two Weapon Links are Moderate, not Minor, so it can carry Battlefield weapons. Each Link uses a Moderate Power Slot: Total Power Slots 3 Moderate (2 used), 3 Minor (0 used). CR 4 is unchanged.",
+  [('Resistance Scout Mech','Link: Weapon','2 Minor','2 Moderate'),('Resistance Scout Mech','Power Slots','3 Moderate (0 used), 3 Minor (0 used)','3 Moderate (2 used), 3 Minor (0 used)')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))

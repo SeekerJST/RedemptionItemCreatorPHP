@@ -630,7 +630,7 @@ the lowest higher grade with spare slots.
 | Weapon Link | 1 per Link, grade = the Link's grade (it powers the weapon it carries) **[Ruling 2026-10-02]**. **0** when the carried weapon has its own Power Supply (Shohan Tse Blade, Flare Pistol) or is self-powered Kinetic **[Ruling 2026-10-05]** |
 | Psi Link | 1 while a Psionic casts through it, plus 1 per committed effect (p275). The effect's Scale sets the slot's grade and is picked in play, so the app counts the design's 1 slot as **Minor** (any slot can power it) and leaves committed effects to play. Strain Threshold per rank applies. |
 | Armor Link | 0 (holds passive plating) **[Ruling 2026-10-03]** |
-| Regeneration: Force Field or Mechanical | 1 each, grade = the item's Force Field grade (else its top Attack scale) **[Ruling 2026-10-05]** |
+| Regeneration: Force Field or Mechanical | 1 each, grade = the item's Force Field grade (else its top Attack scale, else its Armor Rating's scale) **[Ruling 2026-10-05; armor fallback 2026-10-08]** |
 | Regeneration: Biological | 0 (living tissue heals itself) **[Ruling 2026-10-05]** |
 
 Higher-grade slots may power lower-grade consumers (ruling above).
@@ -639,7 +639,7 @@ Higher-grade slots may power lower-grade consumers (ruling above).
 
 Repairs a depletable Track (Body, Force Field) automatically.
 
-**Power [Ruling 2026-10-05]:** Force Field and Mechanical Regeneration each use 1 Power Slot (grade = the Force Field's grade); Biological Regeneration uses none. This reproduces every printed Shohan power line (War Drone 5, Deployment Pod 6, Destroyer 7, Drone Destroyer 6).
+**Power [Ruling 2026-10-05]:** Force Field and Mechanical Regeneration each use 1 Power Slot (grade = the Force Field's grade; without one, the top Attack scale, then **[2026-10-08]** the Armor Rating's scale); Biological Regeneration uses none. This reproduces every printed Shohan power line (War Drone 5, Deployment Pod 6, Destroyer 7, Drone Destroyer 6).
 
 | Grade | Frequency | 1 pt | 2 | 3 | 4 | 5 |
 |---|---|---:|---:|---:|---:|---:|
@@ -973,6 +973,7 @@ Listed so the code can make each one a single named constant or function, easy t
 | 10-06 | Space missile chassis | Space missiles assume a Moderate Reaction Drive + Major Coil (no Charge/Fuel); Hyper Missile 285 BP CR 4, Grav Missile (7x) 265 BP CR 4 | §5.16 |
 | 10-05 | Pyre attacks | Decisive Action prints Pyre as a placeholder "Exotic" attack; Pyre is its own implementation at +70 over the Battlefield Attack cost (Pyre Lance 175 BP, CR 5) | §5.3 |
 | 10-05 | Contact charges | Decisive Action's charges print "Melee" but only match at full price; Melee half price is for hand-to-hand weapons. Charges and special rounds are sold per 10 (+1 CR) | §4, §5.3 |
+| 10-08 | Regeneration power: no Force Field or Attack | The slot's grade falls back to the item's Armor Rating scale (Auxiliary Armor Stages 1–2: Battlefield, so Moderate) | §5.22 |
 | 10-05 | Regeneration power | Book's Shohan power lines count Force Field and Mechanical Regeneration; Biological doesn't. Shohan Personal Armor (2 used) and Shohan Drone (2 used) corrected | §5.22, §5.23 |
 | 10-05 | Weapon Link with self-powered weapon | Draws no slot (Shohan weapons carry their own Hyperspace Taps) | §5.22 |
 | 10-04 | Area size | The book prices Area at a flat 20 BP; each size step past Small costs another 20 | §5.1 |

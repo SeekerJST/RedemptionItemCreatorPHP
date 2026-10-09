@@ -24,9 +24,12 @@ def audit(it):
             g=SCG[w[0]]; n=int(re.search(r'(\d+) increment',d).group(1)); use[g]+=n
         elif lab=='Force Field': use[GI[w[0]]]+=1
         elif lab=='Regeneration' and ('Force Field' in d or 'Mechanical' in d):
-            # ruling 2026-10-05: FF and Mechanical Regeneration draw 1 slot at the Force Field's grade (else the item's top attack scale)
+            # ruling 2026-10-05: FF and Mechanical Regeneration draw 1 slot at the Force Field's grade,
+            # else the item's top attack scale, else (2026-10-08) its Armor Rating's scale
             ffg=[GI[r[1].split()[0]] for r in it['rows'] if r[0]=='Force Field']
-            use[ffg[0] if ffg else 2]+=1
+            atg=[SCG[m.group(1)] for r in it['rows'] if r[0].startswith('Attack') for m in [re.search(r'(Firefight|Battlefield|Space)',r[1])] if m]
+            arg=[SCG[r[1].split(',')[0]] for r in it['rows'] if r[0].startswith('Armor Rating') and r[1].split(',')[0] in SCG]
+            use[ffg[0] if ffg else max(atg) if atg else arg[0] if arg else 2]+=1
         elif lab=='Manufacture':
             n=int(re.search(r'×(\d+)',d).group(1)) if '×' in d else 1; use[GI[w[0]]]+=n
         elif lab=='Gravity Control': use[GI[w[0]]]+=1
