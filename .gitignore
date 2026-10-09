@@ -25,3 +25,7 @@ Thumbs.db
 # Font files: licensed separately (Galexica: ePub license only), so they are deployed
 # to the server directly rather than committed. See docs/project_guide.md.
 /Fonts/
+
+# Python bytecode (catalog_tools)
+__pycache__/
+*.pyc

@@ -205,8 +205,8 @@ Melee and Flare + Melee are unusual but legal.
 | **Tse** | none | Melee only. Gains **Counter (Armor)** free. | Shohan only; cannot be manufactured by the Fourth Population |
 | **Hyperspace** | none | Gains **Counter (Armor)** and **Area: Small Sudden** free **[Errata p210]**; both are printed in the stat block as reminders. Only known example: the Dreadnought's Hyper Cannon. | Shohan only |
 | **Pyre** **[Ruling 2026-10-05]** | **+70 BP** over the normal Attack cost | Battlefield scale only. Includes **Counter (Armor)** (20), **Force Field Overload** (20: when a Pyre hit depletes a Force Field, it bursts as a Small Sudden Area around the target at ½ the multiplier, rounded up; the target is unaffected) and **Aggravated Assault** (30: Regeneration can't restore damage it caused, and armor it reduced can't be restored, until a Standard Engineering or Medicine roll succeeds). Every Pyre weapon carries **[Time Heals No Wounds 3]**, bought as a Tag (may be Free). Decisive Action's "Exotic (80/90/110)" is a placeholder, not a cost. | Relics of the War of the Ancients only; cannot be manufactured |
-| **Gravitic** **[Ruling 2026-10-08]** | **+5 BP** over the normal Attack cost | Every hit applies **[Flattened]** (rank = margin of success; freely consequenced against movement and evasion, condemned against attacks, invokable by attackers; lasts a round), priced as a standard Tag. **Must buy Area.** No benefit from Coordinated Fire. (Decisive Action p84: Gravitic Pulsers.) | Terran Sphere (Project Leapfrog) |
-| **Grav Blades** **[Ruling 2026-10-08]** | **75 BP flat**, Major only; then buys multipliers as an Attack | Replaces the ship's Gravitic Drive and still works as one (FTL and in-system maneuvering). Hits push or pull the target; can counter missiles and kinetic rounds (core p194). Attacks are Sustained; no Coordinated Fire or Counter: Armor. (Decisive Action p84.) | Terran Sphere (Project Leapfrog) |
+| **Gravitic** **[Ruling 2026-10-08]** | **+5 BP** over the normal Attack cost | Every hit applies **[Flattened]** (rank = margin of success; freely consequenced against movement and evasion, condemned against attacks, invokable by attackers; lasts a round), priced as a standard Tag. **Must buy Area.** No benefit from Coordinated Fire. (Decisive Action p83: Gravitic Pulsers.) | Terran Sphere (Project Leapfrog) |
+| **Grav Blades** **[Ruling 2026-10-08]** | **75 BP flat**, Major only; then buys multipliers as an Attack | Replaces the ship's Gravitic Drive and still works as one (FTL and in-system maneuvering). Hits push or pull the target; can counter missiles and kinetic rounds (core p194). Attacks are Sustained; no Coordinated Fire or Counter: Armor. (Decisive Action p83.) | Terran Sphere (Project Leapfrog) |
 
 Resulting costs:
 ```
@@ -445,7 +445,7 @@ Body; repeatable.
 |---|---|---|
 | Shohan | Built into the gear and its unique power supply; very hard to salvage/transfer. | Shohan |
 | Terran | **Cannot be Major grade.** **Cannot take Regeneration.** Same BP cost as Shohan. | Terran Sphere |
-| Lamellar Matrix **[Ruling 2026-10-08]** | Terran field made of many small overlapping fields (Decisive Action p85). Same BP cost. **May be Major grade** (covers up to Colossal). Once its Track is at 25% or below, **aimed shots bypass it**. **Cannot take Regeneration.** (Redemption Aegis Refit.) | Terran Sphere (Project Leapfrog) |
+| Lamellar Matrix **[Ruling 2026-10-08]** | Terran field made of many small overlapping fields (Decisive Action p84). Same BP cost. **May be Major grade** (covers up to Colossal). Once its Track is at 25% or below, **aimed shots bypass it**. **Cannot take Regeneration.** (Redemption Aegis Refit.) | Terran Sphere (Project Leapfrog) |
 
 Combat note **[Errata p183]**: Terran psionics using force fields leave a gap while
 using powers; aimed or area attacks can bypass the field during that time.
@@ -872,9 +872,9 @@ Free effects: Plasma → Counter (Shields), Bleed 4 (floor(8/2)).
 | p215 | **[New 2026-10-02]** A Weapon Link uses 1 Power Slot of its grade per Link (it powers the weapon it carries); some weapons need none. | §5.18, §5.22 |
 | p214 | **[New 2026-10-05]** Force Field and Mechanical Regeneration each use 1 Power Slot at the Force Field's grade; Biological Regeneration uses none. | §5.22, §5.23 |
 | p215 | **[New 2026-10-05]** A Weapon Link carrying a weapon with its own Power Supply uses no Power Slot. | §5.18, §5.22 |
-| DA p103–134 | **[New 2026-10-08]** Decisive Action implementations priced as their attribute's grade: Anomalous Power Supply, Arboreal Drive, Force Field Link; Counter: Recording 20 BP; Hyperspace Portal 60 BP (a Major Hangar). | §5.9, §5.10, §5.15, §5.18, §5.22 |
-| DA p85 | **[New 2026-10-08]** Psi-Resonant Materials: 75 / 150 / 300 BP; must buy Area and a Major Bleed; 2 Power Slots. | §5.27 |
-| DA p128 | **[New 2026-10-05]** Pyre is its own Attack implementation: Battlefield Attack cost + 70 (Counter: Armor, Force Field Overload, Aggravated Assault), carries [Time Heals No Wounds 3]. | §5.3 |
+| DA p102–133 | **[New 2026-10-08]** Decisive Action implementations priced as their attribute's grade: Anomalous Power Supply, Arboreal Drive, Force Field Link; Counter: Recording 20 BP; Hyperspace Portal 60 BP (a Major Hangar). | §5.9, §5.10, §5.15, §5.18, §5.22 |
+| DA p97 | **[New 2026-10-08]** Psi-Resonant Materials: 75 / 150 / 300 BP; must buy Area and a Major Bleed; 2 Power Slots. | §5.27 |
+| DA p94 | **[New 2026-10-05]** Pyre is its own Attack implementation: Battlefield Attack cost + 70 (Counter: Armor, Force Field Overload, Aggravated Assault), carries [Time Heals No Wounds 3]. | §5.3 |
 | p215 | **[New 2026-10-03]** New Link type, **Armor**: holds a separately built armor kit; the kit's Armor Rating applies by default, aimed shots can use the host's. No Power Slot. (New Detroit: Ranger Armor and Armor Kit.) | §5.18, §5.22 |
 | p216 | **[New 2026-09-30]** An item with no Power Supply or Drive of its own draws its Power Slots from its host (a Slave limitation still means it needs the right Link). | §5.22 |
 | p216 | **[New 2026-09-25]** Power Supplies may go on an item one size smaller than the table first listed: Moderate on Small (was Medium). Major stays Large, except that a Hyperspace Tap or a Coil stack can fit a Major Power Supply in a Medium item. | §5.22, §9 |

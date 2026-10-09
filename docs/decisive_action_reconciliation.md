@@ -1,6 +1,6 @@
 # Decisive Action: equipment reconciliation (first pass, 2026-10-05)
 
-Source: *Decisive Action*, Chapter 6 (Field Kit, pp101–135); new attributes from Chapter 5 (Arms Race). Built with the same Workbench rules, rulings and errata as the core Armory and the Deployment Companion. **Nothing here is in the catalog or errata yet**; this is the review copy.
+Source: *Decisive Action*, Chapter 6 (Field Kit, pp100–134); new attributes from Chapter 5 (Arms Race). Built with the same Workbench rules, rulings and errata as the core Armory and the Deployment Companion. **Nothing here is in the catalog or errata yet**; this is the review copy.
 
 Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items sold per 10); `+N` = N BP short of the printed CR's band; `-N` = N BP over it. Shohan gear prints CR —, so it has no target.
 
@@ -41,29 +41,29 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
-| Light Battle Armor | 101 | Medium | 177 | 2 | 2 | OK |
-| Srivatsa Powered Armor | 102 | Medium | 348 | 5 | 5 | OK |
-| Agni Variable Yield Rounds | 105 | Small | 45 | 0 | 0 | OK |
-| High Impact Explosive Charge | 105 | Small | 95 | 1 | 1 | OK |
-| Plasma Breaching Charge | 106 | Small | 80 | 1 | 1 | OK |
-| Peltast STA Launcher | 107 | Small | 145 | 3 | 3 | OK |
-| Basic STA/S Missile | 107 | Small | 110 | 2 | 2 | OK |
-| Plasma STA/S Missile | 107 | Small | 140 | 3 | 3 | OK |
-| Scrammer STA/S Missile | 108 | Small | 100 | 2 | 2 | OK |
-| Field Kit | 108 | Small | 82 | 1 | 1 | OK |
-| Force Field Bunker | 109 | Medium | 220 | 3 | 3 | OK |
-| Medipod | 109 | Medium | 205 | 3 | 3 | OK |
-| TK-Tac T09-HK (Hunter Killer) | 111 | Large | 496 | 4 | 5 | +4 |
-| TK-Tac T09-APC | 112 | Large | 506 | 5 | 5 | OK |
-| Wyvern | 114 | Large | 690 | 6 | 6 | OK |
-| Syren | 115 | Large | 615 | 6 | 6 | OK |
-| Aerospace Carrier Vehicle/Escort Carrier | 116 | Huge | 1538 | 10 | 10 | OK |
-| Vigilance-class | 117 | Huge | 1238 | 9 | 9 | OK |
-| Vigilance Range Extension Module | 118 | Large | 310 | 3 | 3 | OK |
-| Vigilance Missile Module | 118 | Large | 340 | 3 | 3 | OK |
-| Vigilance Troop Carrier Module | 119 | Large | 478 | 4 | 4 | OK |
+| Light Battle Armor | 100 | Medium | 177 | 2 | 2 | OK |
+| Srivatsa Powered Armor | 101 | Medium | 348 | 5 | 5 | OK |
+| Agni Variable Yield Rounds | 104 | Small | 45 | 0 | 0 | OK |
+| High Impact Explosive Charge | 104 | Small | 95 | 1 | 1 | OK |
+| Plasma Breaching Charge | 105 | Small | 80 | 1 | 1 | OK |
+| Peltast STA Launcher | 106 | Small | 145 | 3 | 3 | OK |
+| Basic STA/S Missile | 106 | Small | 110 | 2 | 2 | OK |
+| Plasma STA/S Missile | 106 | Small | 140 | 3 | 3 | OK |
+| Scrammer STA/S Missile | 107 | Small | 100 | 2 | 2 | OK |
+| Field Kit | 107 | Small | 82 | 1 | 1 | OK |
+| Force Field Bunker | 108 | Medium | 220 | 3 | 3 | OK |
+| Medipod | 108 | Medium | 205 | 3 | 3 | OK |
+| TK-Tac T09-HK (Hunter Killer) | 110 | Large | 496 | 4 | 5 | +4 |
+| TK-Tac T09-APC | 111 | Large | 506 | 5 | 5 | OK |
+| Wyvern | 113 | Large | 690 | 6 | 6 | OK |
+| Syren | 114 | Large | 615 | 6 | 6 | OK |
+| Aerospace Carrier Vehicle/Escort Carrier | 115 | Huge | 1538 | 10 | 10 | OK |
+| Vigilance-class | 116 | Huge | 1238 | 9 | 9 | OK |
+| Vigilance Range Extension Module | 117 | Large | 310 | 3 | 3 | OK |
+| Vigilance Missile Module | 117 | Large | 340 | 3 | 3 | OK |
+| Vigilance Troop Carrier Module | 118 | Large | 478 | 4 | 4 | OK |
 
-### Light Battle Armor (p101, Medium): 177 BP, CR 2; target 2
+### Light Battle Armor (p100, Medium): 177 BP, CR 2; target 2
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 25 (default 10 + 3×5) — 15
@@ -80,7 +80,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Handle the Heat] 2 — 10
 - Limitation: Minor: Usage Restriction (life support only provides rebreather) — -10
 
-### Srivatsa Powered Armor (p102, Medium): 348 BP, CR 5; target 5
+### Srivatsa Powered Armor (p101, Medium): 348 BP, CR 5; target 5
 *Weapons +2 read as Firearms+Heavy Weapons (Moderate) with a Minor 'mounted only' limitation, like the Kavacha. Approved 10-05: Moderate Coil rank 1 (3 slots, as printed; was Coil 2), [Shohan Killer 2] (was 3).*
 
 - Armor Rating: Battlefield, rank 4 — 110
@@ -107,7 +107,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Usage Restriction (no Stealth attempts) — -10
 - Limitation: Major: Restricted Technology (Property of the TSA) — -50
 
-### Agni Variable Yield Rounds (p105, Small): 45 BP, CR 0; target 0
+### Agni Variable Yield Rounds (p104, Small): 45 BP, CR 0; target 0
 *Add-on for a gauss gun: both modes (Counter: Armor or Area) priced. Sold per 10: printed CR 1 is a batch; one is CR 0.*
 
 - Bleed: Moderate 3 — 25
@@ -117,7 +117,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Far Range (ineffective at Far range) — -10
 - Limitation: Minor: Hungry — -10
 
-### High Impact Explosive Charge (p105, Small): 95 BP, CR 1; target 1
+### High Impact Explosive Charge (p104, Small): 95 BP, CR 1; target 1
 
 - Attack (contact charge): Kinetic (Battlefield) 6x — 110
 - Counter: Armor — 20
@@ -126,7 +126,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Major: One-Time Use — -50
 - Limitation: Minor: Slave (trigger mechanism) — -10
 
-### Plasma Breaching Charge (p106, Small): 80 BP, CR 1; target 1
+### Plasma Breaching Charge (p105, Small): 80 BP, CR 1; target 1
 *Bleed Minor 4 differs from the free Moderate Plasma Bleed, so it's paid in full.*
 
 - Attack (contact charge): Plasma (Battlefield) 5x — 80
@@ -137,7 +137,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Major: One-Time Use — -50
 - Limitation: Minor: Slave (trigger mechanism) — -10
 
-### Peltast STA Launcher (p107, Small): 145 BP, CR 3; target 3
+### Peltast STA Launcher (p106, Small): 145 BP, CR 3; target 3
 
 - Launcher: Battlefield ×8, 2 increments — 80
 - Armor Rating: Battlefield, rank 1 — 50
@@ -146,12 +146,12 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Eye to the Sky] — 5
 - Limitation: Moderate: Slave (powered armor Weapon Link) — -20
 
-### Basic STA/S Missile (p107, Small): 110 BP, CR 2; target 2
+### Basic STA/S Missile (p106, Small): 110 BP, CR 2; target 2
 *Printed CR 3 per 10 = CR 2 for one.*
 
 - Attack: Kinetic (Battlefield) 6x — 110
 
-### Plasma STA/S Missile (p107, Small): 140 BP, CR 3; target 3
+### Plasma STA/S Missile (p106, Small): 140 BP, CR 3; target 3
 *Printed CR 4 per 10 = CR 3 for one.*
 
 - Attack: Plasma (Battlefield) 6x — 120
@@ -159,14 +159,14 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Bleed: Moderate 3 (free, Plasma) — 0
 - Counter: Armor — 20
 
-### Scrammer STA/S Missile (p108, Small): 100 BP, CR 2; target 2
+### Scrammer STA/S Missile (p107, Small): 100 BP, CR 2; target 2
 *Printed CR 3 per 10. Guess: a 1x attack carrying a TN 20 computer.*
 
 - Attack (1x): Battlefield 1x (no damage; delivers its effect) — 10
 - Computer: Minor rank 4 (TN 20) — 12
 - Tasks: Blind 20, Disrupt 19 — 78
 
-### Field Kit (p108, Small): 82 BP, CR 1; target 1
+### Field Kit (p107, Small): 82 BP, CR 1; target 1
 
 - Power Supply: Minor Coil rank 1 — 5
 - Resource: Charge, Minor ×3 — 12
@@ -178,7 +178,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Some Disassembly Required] — 5
 - Limitation: Minor: Restricted Technology (Property of the Terran Sphere) — -10
 
-### Force Field Bunker (p109, Medium): 220 BP, CR 3; target 3
+### Force Field Bunker (p108, Medium): 220 BP, CR 3; target 3
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 50 (default 10 + 8×5) — 40
@@ -193,7 +193,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Hunker Down — -20
 - Limitation: Moderate: Restricted Technology (Property of the TSA) — -20
 
-### Medipod (p109, Medium): 205 BP, CR 3; target 3
+### Medipod (p108, Medium): 205 BP, CR 3; target 3
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 50 (default 10 + 8×5) — 40
@@ -208,7 +208,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Partial Armor — -20
 - Limitation: Moderate: Restricted Technology (Property of the Terran Sphere) — -20
 
-### TK-Tac T09-HK (Hunter Killer) (p111, Large): 496 BP, CR 4; target 5
+### TK-Tac T09-HK (Hunter Killer) (p110, Large): 496 BP, CR 4; target 5
 *Approved 10-08: Bleed is the free Plasma Bleed, Moderate 3 (printed Minor 3); power 3 Minor (0 used), 3 Moderate (3 used) (printed 9 Moderate).*
 
 - Launcher: Battlefield ×4, 1 increment — 40
@@ -233,7 +233,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Restricted Technology (Property of the Terran Sphere) — -20
 - Limitation: Moderate: Crew Requirement (Telekinetic) — -20
 
-### TK-Tac T09-APC (p112, Large): 506 BP, CR 5; target 5
+### TK-Tac T09-APC (p111, Large): 506 BP, CR 5; target 5
 *Troop Deck = 2 Major Hangars (deploys squads); Life Support Moderate x2 for 24 people.*
 
 - Launcher: Battlefield ×4, 1 increment — 40
@@ -256,7 +256,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Restricted Technology (Property of the Terran Sphere) — -20
 - Limitation: Moderate: Crew Requirement (Telekinetic) — -20
 
-### Wyvern (p114, Large): 690 BP, CR 6; target 6
+### Wyvern (p113, Large): 690 BP, CR 6; target 6
 *Bleed is the free Plasma Bleed, Major 3 (printed Minor 5).*
 
 - Attack: Plasma (Space) 6x — 140
@@ -280,7 +280,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Shohan Killer] 2 — 10
 - Tag: [Coordinated Fire] 2 — 10
 
-### Syren (p115, Large): 615 BP, CR 6; target 6
+### Syren (p114, Large): 615 BP, CR 6; target 6
 *'Force Fields: 30' read as Minor 3. Bleed is the free Plasma Bleed, Major 3 (printed Minor 5).*
 
 - Attack: Plasma (Space) 6x — 140
@@ -304,7 +304,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Shohan Killer] 2 — 10
 - Tag: [Coordinated Fire] 2 — 10
 
-### Aerospace Carrier Vehicle/Escort Carrier (p116, Huge): 1538 BP, CR 10; target 10
+### Aerospace Carrier Vehicle/Escort Carrier (p115, Huge): 1538 BP, CR 10; target 10
 
 - Launcher: Space ×4, 1 increment — 60
 - Resource: Magazine, Major ×4 — 60
@@ -331,7 +331,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (20 skeleton, 200 full) — -20
 - Limitation: Moderate: Restricted Technology (Property of the Terran Sphere) — -20
 
-### Vigilance-class (p117, Huge): 1238 BP, CR 9; target 9
+### Vigilance-class (p116, Huge): 1238 BP, CR 9; target 9
 *'Link: Moderate Item' priced as a Moderate Link (15). Approved 10-08: Bleed is the free Plasma Bleed, Major 3 (printed Minor 3).*
 
 - Attack: Plasma (Space) 6x — 140
@@ -368,7 +368,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (20 skeleton, 70 full) — -20
 - Limitation: Major: Restricted Technology (Property of the Terran Sphere) — -50
 
-### Vigilance Range Extension Module (p118, Large): 310 BP, CR 3; target 3
+### Vigilance Range Extension Module (p117, Large): 310 BP, CR 3; target 3
 
 - Armor Rating (Shrouded Hull): Space, rank 2 — 130
 - Body Track: 110 (default 50 + 3×20) — 30
@@ -378,7 +378,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Cargo: Moderate ×1 — 15
 - Limitation: Moderate: Slave (power supply) — -20
 
-### Vigilance Missile Module (p118, Large): 340 BP, CR 3; target 3
+### Vigilance Missile Module (p117, Large): 340 BP, CR 3; target 3
 
 - Launcher: Space ×4, 1 increment — 60
 - Resource: Magazine, Major ×8 — 120
@@ -388,7 +388,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Target Lock] 2 — 10
 - Limitation: Moderate: Slave (power supply) — -20
 
-### Vigilance Troop Carrier Module (p119, Large): 478 BP, CR 4; target 4
+### Vigilance Troop Carrier Module (p118, Large): 478 BP, CR 4; target 4
 *Approved 10-08: Bleed is the free Plasma Bleed, Moderate 2 (printed Minor 2); power 3 Minor (0 used), 3 Moderate (3 used) (printed 3 Major).*
 
 - Attack: Plasma (Battlefield) 5x — 80
@@ -414,13 +414,13 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
-| Incendiary Charge | 105 | Small | 95 | 1 | 1 | OK |
-| Resistance Chem Kit | 110 | Small | 96 | 1 | 0 | -22 |
-| Hoverbike Conversion | 110 | Medium | 183 | 2 | 2 | OK |
-| Resistance Scout Mech | 113 | Medium | 233 | 3 | 4 | +17 |
-| Resistance Artillery Mech | 113 | Medium | 324 | 5 | 5 | OK |
+| Incendiary Charge | 104 | Small | 95 | 1 | 1 | OK |
+| Resistance Chem Kit | 109 | Small | 96 | 1 | 0 | -22 |
+| Hoverbike Conversion | 109 | Medium | 183 | 2 | 2 | OK |
+| Resistance Scout Mech | 112 | Medium | 233 | 3 | 4 | +17 |
+| Resistance Artillery Mech | 112 | Medium | 324 | 5 | 5 | OK |
 
-### Incendiary Charge (p105, Small): 95 BP, CR 1; target 1
+### Incendiary Charge (p104, Small): 95 BP, CR 1; target 1
 
 - Attack (contact charge): Energy (Battlefield) 3x — 30
 - Bleed: Minor 6 — 80
@@ -430,7 +430,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Major: One-Time Use — -50
 - Limitation: Minor: Slave (trigger mechanism) — -10
 
-### Resistance Chem Kit (p110, Small): 96 BP, CR 1; target 0
+### Resistance Chem Kit (p109, Small): 96 BP, CR 1; target 0
 
 - Power Supply: Minor Coil rank 1 — 5
 - Resource: Charge, Minor ×2 — 8
@@ -440,7 +440,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Better Living] — 5
 - Limitation: Minor: Soft Serve — -10
 
-### Hoverbike Conversion (p110, Medium): 183 BP, CR 2; target 2
+### Hoverbike Conversion (p109, Medium): 183 BP, CR 2; target 2
 
 - Link: Minor Weapon ×2 — 10
 - Armor Rating: Battlefield, rank 2 — 60
@@ -454,7 +454,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tasks: Pilot 10 — 20
 - Tag: [Speed Kills] 3 — 15
 
-### Resistance Scout Mech (p113, Medium): 233 BP, CR 3; target 4
+### Resistance Scout Mech (p112, Medium): 233 BP, CR 3; target 4
 
 - Link: Minor Weapon ×2 — 10
 - Armor Rating: Battlefield, rank 2 — 60
@@ -472,7 +472,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Kinetic Feedback Control Rig] (Free) — 10
 - Limitation: Moderate: Cannot use Maneuver Rating on the ground — -20
 
-### Resistance Artillery Mech (p113, Medium): 324 BP, CR 5; target 5
+### Resistance Artillery Mech (p112, Medium): 324 BP, CR 5; target 5
 *Far Ranged on a Battlefield gun = Moderate (to Space); 'Area: Moderate' read as Medium.*
 
 - Attack: Kinetic (Battlefield) 5x — 74
@@ -499,15 +499,15 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
-| Auxiliary Armor (Stage 1) | 103 | Medium | 145 | 1 | 2 | +5 |
-| Auxiliary Armor (Stage 2) | 104 | Medium | 180 | 2 | 3 | +20 |
-| Auxiliary Armor (Stage 3) | 104 | Medium | 270 | 4 | 4 | OK |
-| Flare Rifle | 107 | Small | 113 | 2 | 3 | +12 |
-| Volcano-class | 122 | Huge | 1501 | 10 | 10 | OK |
-| Marauder (Force Field Revision) | 123 | Large | 901 | 9 | 7 | -102 |
+| Auxiliary Armor (Stage 1) | 102 | Medium | 145 | 1 | 2 | +5 |
+| Auxiliary Armor (Stage 2) | 103 | Medium | 180 | 2 | 3 | +20 |
+| Auxiliary Armor (Stage 3) | 103 | Medium | 270 | 4 | 4 | OK |
+| Flare Rifle | 106 | Small | 113 | 2 | 3 | +12 |
+| Volcano-class | 121 | Huge | 1501 | 10 | 10 | OK |
+| Marauder (Force Field Revision) | 122 | Large | 901 | 9 | 7 | -102 |
 | Haven Hyperspace Carrier (Lilith Refit) | 123 | Huge | 1228 | 9 | 11 | +372 |
 
-### Auxiliary Armor (Stage 1) (p103, Medium): 145 BP, CR 1; target 2
+### Auxiliary Armor (Stage 1) (p102, Medium): 145 BP, CR 1; target 2
 *Anomalous = Minor power supply, Resource 2 read as Minor Charge.*
 
 - Armor Rating: Battlefield, rank 3 — 80
@@ -521,7 +521,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Modifier: Athletics +1 — 10
 - Limitation: Moderate: Sold Your Soul to the Shohan — -20
 
-### Auxiliary Armor (Stage 2) (p104, Medium): 180 BP, CR 2; target 3
+### Auxiliary Armor (Stage 2) (p103, Medium): 180 BP, CR 2; target 3
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 35 (default 10 + 5×5) — 25
@@ -538,7 +538,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: You're The Only One For Me — -10
 - Limitation: Moderate: Sold Your Soul to the Shohan — -20
 
-### Auxiliary Armor (Stage 3) (p104, Medium): 270 BP, CR 4; target 4
+### Auxiliary Armor (Stage 3) (p103, Medium): 270 BP, CR 4; target 4
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 40 (default 10 + 6×5) — 30
@@ -556,7 +556,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: You're The Only One For Me — -10
 - Limitation: Moderate: Sold Your Soul to the Shohan — -20
 
-### Flare Rifle (p107, Small): 113 BP, CR 2; target 3
+### Flare Rifle (p106, Small): 113 BP, CR 2; target 3
 *'Fuel 2' with a Coil read as Minor Charge 2.*
 
 - Attack: Flare (Firefight) 5x — 70
@@ -567,7 +567,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Knock the Wings Off a Fly] 2 — 10
 - Limitation: Moderate: Sold Your Soul to the Shohan — -20
 
-### Volcano-class (p122, Huge): 1501 BP, CR 10; target 10
+### Volcano-class (p121, Huge): 1501 BP, CR 10; target 10
 
 - Attack (heavy plasma cannon): Plasma (Space) 8x ×3 mounts (+40 each extra) — 330
 - Counter: Shields (free) — 0
@@ -599,7 +599,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (20 skeleton, 40 full) — -20
 - Limitation: Major: Restricted Technology (Haven Holds Its Own) — -50
 
-### Marauder (Force Field Revision) (p123, Large): 901 BP, CR 9; target 7
+### Marauder (Force Field Revision) (p122, Large): 901 BP, CR 9; target 7
 *6 Launchers priced as 8 (sets of 4). Approved 10-08: CC 28 for CR 7 (printed 21).*
 
 - Anti-Missile: Space 1x — 20
@@ -663,13 +663,13 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
-| Surveillance Drone | 126 | Tiny | 58 | 3 | 3 | OK |
-| Disguise Kit | 126 | Small | 68 | 0 | 1 | +7 |
-| "White Noise" Generator | 127 | Tiny | 30 | 0 | 1 | +5 |
-| Entry Tools | 127 | Small | 127 | 3 | 1 | -28 |
-| Concealable Plasma Torch | 127 | Tiny | 18 | 0 | 1 | +17 |
+| Surveillance Drone | 125 | Tiny | 58 | 3 | 3 | OK |
+| Disguise Kit | 125 | Small | 68 | 0 | 1 | +7 |
+| "White Noise" Generator | 126 | Tiny | 30 | 0 | 1 | +5 |
+| Entry Tools | 126 | Small | 127 | 3 | 1 | -28 |
+| Concealable Plasma Torch | 126 | Tiny | 18 | 0 | 1 | +17 |
 
-### Surveillance Drone (p126, Tiny): 58 BP, CR 3; target 3
+### Surveillance Drone (p125, Tiny): 58 BP, CR 3; target 3
 *Task: Pilot 4 is likely a typo (Pilot 14?).*
 
 - Drive: Minor Air — 10
@@ -682,7 +682,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Modifier: Stealth +1 — 10
 - Tag: [A Fly on the Wall] — 5
 
-### Disguise Kit (p126, Small): 68 BP, CR 0; target 1
+### Disguise Kit (p125, Small): 68 BP, CR 0; target 1
 
 - Computer: Minor rank 1 (TN 14) — 3
 - Modifier: Persuade +4 — 40
@@ -690,12 +690,12 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Judge This Book by the Cover] 3 — 15
 - Limitation: Minor: Mistaken Identity — -10
 
-### "White Noise" Generator (p127, Tiny): 30 BP, CR 0; target 1
+### "White Noise" Generator (p126, Tiny): 30 BP, CR 0; target 1
 
 - Counter: Recording — 20
 - Tag: [An Ordinary Conversation] 2 — 10
 
-### Entry Tools (p127, Small): 127 BP, CR 3; target 1
+### Entry Tools (p126, Small): 127 BP, CR 3; target 1
 
 - Computer: Minor rank 2 (TN 16) — 6
 - Tasks: Engineering (Security) 16, Computers 12 — 56
@@ -704,7 +704,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [The Master's Key] 3 — 15
 - Limitation: Minor: Presumption of Guilt — -10
 
-### Concealable Plasma Torch (p127, Tiny): 18 BP, CR 0; target 1
+### Concealable Plasma Torch (p126, Tiny): 18 BP, CR 0; target 1
 
 - Attack: Plasma/Melee (Firefight) 2x — 5
 - Counter: Shields (free) — 0
@@ -715,31 +715,31 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
-| Grav Grenade | 106 | Tiny | 40 | 1 | 1 | OK |
-| Grav STA Missile | 108 | Small | 125 | 3 | 3 | OK |
-| Phantom Mk. 3 | 115 | Large | 936 | 9 | 8 | -37 |
-| Farstrider Refit | 116 | Large | 70 | 1 | — | — |
-| The Artemis (Hyperspace Mothership) | 120 | Colossal | 3538 | 14 | 14 | OK |
-| The Prometheus (Refitted Old Soldier) | 121 | Huge | 1953 | 12 | — | — |
+| Grav Grenade | 105 | Tiny | 40 | 1 | 1 | OK |
+| Grav STA Missile | 107 | Small | 125 | 3 | 3 | OK |
+| Phantom Mk. 3 | 114 | Large | 936 | 9 | 8 | -37 |
+| Farstrider Refit | 115 | Large | 70 | 1 | — | — |
+| The Artemis (Hyperspace Mothership) | 119 | Colossal | 3538 | 14 | 14 | OK |
+| The Prometheus (Refitted Old Soldier) | 120 | Huge | 1953 | 12 | — | — |
 | Redemption Aegis Refit (Option 1) | 124 | Huge | 1406 | 10 | 10 | OK |
 | Redemption Aegis Refit (Option 2) | 124 | Huge | 1406 | 10 | 10 | OK |
 | Grav Missile | 125 | Medium | 270 | 4 | 4 | OK |
 | Hyper Missile | 125 | Medium | 285 | 4 | 4 | OK |
 
-### Grav Grenade (p106, Tiny): 40 BP, CR 1; target 1
+### Grav Grenade (p105, Tiny): 40 BP, CR 1; target 1
 
 - Attack: Gravitic (Battlefield) 4x (+5 [Flattened]) — 55
 - Area:  — 20
 - Tag: [Impact Crater] 3 — 15
 - Limitation: Major: One-Time Use — -50
 
-### Grav STA Missile (p108, Small): 125 BP, CR 3; target 3
+### Grav STA Missile (p107, Small): 125 BP, CR 3; target 3
 *Printed CR 4 per 10.*
 
 - Attack: Gravitic (Battlefield) 5x (+5 [Flattened]) — 85
 - Area: Medium — 40
 
-### Phantom Mk. 3 (p115, Large): 936 BP, CR 9; target 8
+### Phantom Mk. 3 (p114, Large): 936 BP, CR 9; target 8
 *Core Phantom, Gravitic Drive replaced by Grav Blades (75), + Moderate Force Field 3; Hungry fuel limitation dropped (not printed).*
 
 - Launcher: Space ×4, 1 increment — 60
@@ -771,7 +771,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Grav Blades: Major (replaces the Gravitic Drive), 1x — 75
 - Force Field: Moderate ×3 (track 60) — 60
 
-### Farstrider Refit (p116, Large): 70 BP, CR 1
+### Farstrider Refit (p115, Large): 70 BP, CR 1
 *Refit module: printed 'CR: +1' to the escort it goes on.*
 
 - Power Supply: Major Coil rank 1 — 40
@@ -779,7 +779,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Hungry (2 Power Slots) — -10
 - Limitation: Minor: Sustained Action (Power Drain) — -10
 
-### The Artemis (Hyperspace Mothership) (p120, Colossal): 3538 BP, CR 14; target 14
+### The Artemis (Hyperspace Mothership) (p119, Colossal): 3538 BP, CR 14; target 14
 *4 Major Artificial Ecology (1,000 people each). Approved 10-06 from PJ's build notes: drives as printed (Major Jump, Major Gravitic, Moderate Reaction); adds Manufacture (Major), Power 6 ranks (was 4 reactors) and Maneuver 4 (Major, no longer optional). CR 14, CC 105 (printed 15 came from the old round-to-nearest rule).*
 
 - Launcher: Space ×12, 3 increments — 180
@@ -813,7 +813,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Restricted Technology (Property of the Terran Sphere) — -20
 - Limitation: Major: Nothing Like Her Before — -50
 
-### The Prometheus (Refitted Old Soldier) (p121, Huge): 1953 BP, CR 12
+### The Prometheus (Refitted Old Soldier) (p120, Huge): 1953 BP, CR 12
 
 - Attack (spinal flare cannon): Flare (Space) 10x — 400
 - Counter: Armor — 20
@@ -937,21 +937,21 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
-| Shohan Stun Field | 128 | Small | 90 | 1 | 1 | OK |
-| Pyre Lance | 128 | Small | 175 | 5 | 5 | OK |
-| Shohan Stealth Armor | 129 | Medium | 302 | 5 | 5 | OK |
-| Breaching Pod | 129 | Medium | 393 | 6 | — | — |
-| Fold Bomb | 130 | Small | 120 | 2 | 2 | OK |
-| Flare Drone (Assault) | 130 | Medium | 527 | 9 | — | — |
-| Flare Drone (Sniper) | 131 | Medium | 527 | 9 | — | — |
-| Sentry Drone | 131 | Medium | 442 | 7 | — | — |
-| Impound Drone | 132 | Medium | 533 | 9 | — | — |
-| Wobbler Drone | 132 | Medium | 492 | 8 | — | — |
-| Gunboat | 133 | Large | 718 | 7 | — | — |
-| Shohan Shieldbearer | 134 | Huge | 1650 | 11 | — | — |
-| Shohan Lancer | 135 | Large | 1054 | 10 | — | — |
+| Shohan Stun Field | 127 | Small | 90 | 1 | 1 | OK |
+| Pyre Lance | 127 | Small | 175 | 5 | 5 | OK |
+| Shohan Stealth Armor | 128 | Medium | 302 | 5 | 5 | OK |
+| Breaching Pod | 128 | Medium | 393 | 6 | — | — |
+| Fold Bomb | 129 | Small | 120 | 2 | 2 | OK |
+| Flare Drone (Assault) | 129 | Medium | 527 | 9 | — | — |
+| Flare Drone (Sniper) | 130 | Medium | 527 | 9 | — | — |
+| Sentry Drone | 130 | Medium | 442 | 7 | — | — |
+| Impound Drone | 131 | Medium | 533 | 9 | — | — |
+| Wobbler Drone | 131 | Medium | 492 | 8 | — | — |
+| Gunboat | 132 | Large | 718 | 7 | — | — |
+| Shohan Shieldbearer | 133 | Huge | 1650 | 11 | — | — |
+| Shohan Lancer | 134 | Large | 1054 | 10 | — | — |
 
-### Shohan Stun Field (p128, Small): 90 BP, CR 1; target 1
+### Shohan Stun Field (p127, Small): 90 BP, CR 1; target 1
 
 - Attack: Hyperspace (Firefight) 5x — 70
 - Counter: Armor (free) — 0
@@ -962,7 +962,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Slave (attached to a Shohan weapon) — -10
 - Limitation: Minor: Usage Restriction (ineffective against force fields) — -10
 
-### Pyre Lance (p128, Small): 175 BP, CR 5; target 5
+### Pyre Lance (p127, Small): 175 BP, CR 5; target 5
 *Pyre implementation (ruling 10-05): Battlefield Attack cost + 70 (Counter: Armor 20, Force Field Overload 20, Aggravated Assault 30). 'Combat Regeneration: Ammunition 1' priced as Major Regeneration 1.*
 
 - Attack: Pyre (Battlefield) 5x: 80 + 70 (Counter: Armor, Force Field Overload, Aggravated Assault) — 150
@@ -973,7 +973,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: System Incompatibilities — -20
 - Limitation: Moderate: Malfunction [Long Disdained, Ill Maintained 2] — -20
 
-### Shohan Stealth Armor (p129, Medium): 302 BP, CR 5; target 5
+### Shohan Stealth Armor (p128, Medium): 302 BP, CR 5; target 5
 
 - Armor Rating: Battlefield, rank 2 — 60
 - Body Track: 40 (default 10 + 6×5) — 30
@@ -992,7 +992,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Silent Running] 3 — 15
 - Limitation: Moderate: Side Effect (Emergent Altered) — -20
 
-### Breaching Pod (p129, Medium): 393 BP, CR 6
+### Breaching Pod (p128, Medium): 393 BP, CR 6
 
 - Attack: Tse/Melee (Space) 5x — 50
 - Counter: Armor (free) — 0
@@ -1009,7 +1009,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Once More Into the Breach] — 5
 - Limitation: Major: One-Time Use — -50
 
-### Fold Bomb (p130, Small): 120 BP, CR 2; target 2
+### Fold Bomb (p129, Small): 120 BP, CR 2; target 2
 *'Force Field' attack type priced as Energy. Approved 10-05: Area Small (printed Moderate); the lingering armor reduction is free (core p185 errata).*
 
 - Attack: Energy (Battlefield) 6x — 120
@@ -1019,7 +1019,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Turn Your World Inside-Out] 2 — 10
 - Limitation: Major: One-Time Use — -50
 
-### Flare Drone (Assault) (p130, Medium): 527 BP, CR 9
+### Flare Drone (Assault) (p129, Medium): 527 BP, CR 9
 *Approved 10-05: adds a Moderate Hyperspace Tap (3 Moderate, 1 used) to power its Battlefield gun.*
 
 - Attack: Flare (Battlefield) 5x — 80
@@ -1035,7 +1035,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Drive: Minor Ground — 10
 - Communication: Major Hypercomms — 25
 
-### Flare Drone (Sniper) (p131, Medium): 527 BP, CR 9
+### Flare Drone (Sniper) (p130, Medium): 527 BP, CR 9
 *Approved 10-05: adds a Moderate Hyperspace Tap (3 Moderate, 1 used).*
 
 - Attack: Flare (Battlefield) 5x — 80
@@ -1051,7 +1051,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Drive: Minor Ground — 10
 - Communication: Major Hypercomms — 25
 
-### Sentry Drone (p131, Medium): 442 BP, CR 7
+### Sentry Drone (p130, Medium): 442 BP, CR 7
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 30 (default 10 + 4×5) — 20
@@ -1064,7 +1064,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Drive: Minor Ground — 10
 - Communication: Major Hypercomms — 25
 
-### Impound Drone (p132, Medium): 533 BP, CR 9
+### Impound Drone (p131, Medium): 533 BP, CR 9
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 30 (default 10 + 4×5) — 20
@@ -1078,7 +1078,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Drive: Minor Ground — 10
 - Communication: Major Hypercomms — 25
 
-### Wobbler Drone (p132, Medium): 492 BP, CR 8
+### Wobbler Drone (p131, Medium): 492 BP, CR 8
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 40 (default 10 + 6×5) — 30
@@ -1092,7 +1092,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Communication: Major Hypercomms — 25
 - Tag: [Shaken, Not Stirred] 3 — 15
 
-### Gunboat (p133, Large): 718 BP, CR 7
+### Gunboat (p132, Large): 718 BP, CR 7
 *Approved 10-05: adds a Moderate Hyperspace Tap (6 Moderate with the drive; 4 used: 2 guns, Force Field, Force Field Regeneration).*
 
 - Attack: Flare (Battlefield) 6x ×2 mounts (+20 each extra) — 140
@@ -1113,7 +1113,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Death From Above] 2 — 10
 - Power Supply: Moderate Hyperspace Tap rank 1 — 10
 
-### Shohan Shieldbearer (p134, Huge): 1650 BP, CR 11
+### Shohan Shieldbearer (p133, Huge): 1650 BP, CR 11
 
 - Attack: Force Field Restoration Beam (Space) 8x — 250
 - Attack: Flare (Space) 7x ×2 mounts (+40 each extra) — 230
@@ -1137,7 +1137,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Safe Harbor] 3 — 15
 - Tag: [Sometimes the Best Offense is a Good Defense] 2 — 10
 
-### Shohan Lancer (p135, Large): 1054 BP, CR 10
+### Shohan Lancer (p134, Large): 1054 BP, CR 10
 *Resonance cascade beam priced at its 10x peak. Approved 10-05: Armor 2 is Space; power 6 Major (Tap 3 + Jump Drive 3; 3 used).*
 
 - Attack: Energy (Space) 10x — 400
