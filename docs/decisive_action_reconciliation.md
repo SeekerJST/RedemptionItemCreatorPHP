@@ -496,57 +496,41 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Manual Reload — -10
 - Limitation: Minor: 1 Shot Per Round — -10
 
-## Haven & Auxiliaries (4 of 7 match)
+## Haven & Auxiliaries (6 of 7 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
-| Auxiliary Armor (Stage 1) | 102 | Medium | 145 | 1 | 2 | +5 |
-| Auxiliary Armor (Stage 2) | 103 | Medium | 180 | 2 | 3 | +20 |
-| Auxiliary Armor (Stage 3) | 103 | Medium | 270 | 4 | 4 | OK |
+| Auxiliary Armor (Stage 1) | 102 | Medium | 163 | 2 | 2 | OK |
+| Auxiliary Armor (Stage 2) | 103 | Medium | 208 | 3 | 3 | OK |
+| Auxiliary Armor (Stage 3) | 103 | Medium | 273 | 4 | 4 | OK |
 | Flare Rifle | 106 | Small | 113 | 2 | 3 | +12 |
 | Volcano-class | 121 | Huge | 1501 | 10 | 10 | OK |
 | Marauder (Force Field Revision) | 122 | Large | 766 | 7 | 7 | OK |
 | Haven Hyperspace Carrier (Lilith Refit) | 123 | Huge | 1633 | 11 | 11 | OK |
 
-### Auxiliary Armor (Stage 1) (p102, Medium): 145 BP, CR 1; target 2
-*Anomalous = Minor power supply, Resource 2 read as Minor Charge.*
+### Auxiliary Armor (Stage 1) (p102, Medium): 163 BP, CR 2; target 2
+*Approved 10-08 from PJ's build sheet: Moderate Anomalous Power Supply with 2 Moderate Charge (printed Minor; Resource 2), [Hybrid Vigor] from Stage 1.*
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 25 (default 10 + 3×5) — 15
 - Regeneration: Mechanical 3, Major grade — 30
-- Power Supply: Minor Anomalous rank 1 — 5
-- Resource: Charge, Minor ×2 — 8
+- Power Supply: Moderate Anomalous rank 1 — 10
+- Resource: Charge, Moderate ×2 — 16
 - Computer: Minor rank 3 (TN 18) — 9
 - Communication: Minor Radio — 3
 - Life Support: Minor ×1 — 5
 - Modifier: Athletics +1 — 10
+- Tag: [Hybrid Vigor] — 5
 - Limitation: Moderate: Sold Your Soul to the Shohan — -20
 
-### Auxiliary Armor (Stage 2) (p103, Medium): 180 BP, CR 2; target 3
+### Auxiliary Armor (Stage 2) (p103, Medium): 208 BP, CR 3; target 3
+*Approved 10-08: as Stage 1's power; Detection +2 and Stealth +2 (printed +1), [Hybrid Vigor 2] (printed 1), You're The Only One For Me Moderate. CR 3 as printed.*
 
 - Armor Rating: Battlefield, rank 3 — 80
 - Body Track: 35 (default 10 + 5×5) — 25
 - Regeneration: Mechanical 3, Major grade — 30
-- Power Supply: Minor Anomalous rank 1 — 5
-- Resource: Charge, Minor ×2 — 8
-- Computer: Minor rank 3 (TN 18) — 9
-- Communication: Minor Radio — 3
-- Life Support: Minor ×1 — 5
-- Modifier: Athletics +2 — 20
-- Modifier: Detection +1 — 10
-- Modifier: Stealth +1 — 10
-- Tag: [Hybrid Vigor] — 5
-- Limitation: Minor: You're The Only One For Me — -10
-- Limitation: Moderate: Sold Your Soul to the Shohan — -20
-
-### Auxiliary Armor (Stage 3) (p103, Medium): 270 BP, CR 4; target 4
-
-- Armor Rating: Battlefield, rank 3 — 80
-- Body Track: 40 (default 10 + 6×5) — 30
-- Regeneration: Mechanical 3, Major grade — 30
-- Force Field: Minor ×4 (track 40) — 60
-- Power Supply: Minor Anomalous rank 1 — 5
-- Resource: Charge, Minor ×2 — 8
+- Power Supply: Moderate Anomalous rank 1 — 10
+- Resource: Charge, Moderate ×2 — 16
 - Computer: Minor rank 3 (TN 18) — 9
 - Communication: Minor Radio — 3
 - Life Support: Minor ×1 — 5
@@ -554,7 +538,26 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Modifier: Detection +2 — 20
 - Modifier: Stealth +2 — 20
 - Tag: [Hybrid Vigor] 2 — 10
-- Limitation: Minor: You're The Only One For Me — -10
+- Limitation: Moderate: You're The Only One For Me — -20
+- Limitation: Moderate: Sold Your Soul to the Shohan — -20
+
+### Auxiliary Armor (Stage 3) (p103, Medium): 273 BP, CR 4; target 4
+*Approved 10-08: as Stage 1's power; You're The Only One For Me Moderate.*
+
+- Armor Rating: Battlefield, rank 3 — 80
+- Body Track: 40 (default 10 + 6×5) — 30
+- Regeneration: Mechanical 3, Major grade — 30
+- Force Field: Minor ×4 (track 40) — 60
+- Power Supply: Moderate Anomalous rank 1 — 10
+- Resource: Charge, Moderate ×2 — 16
+- Computer: Minor rank 3 (TN 18) — 9
+- Communication: Minor Radio — 3
+- Life Support: Minor ×1 — 5
+- Modifier: Athletics +2 — 20
+- Modifier: Detection +2 — 20
+- Modifier: Stealth +2 — 20
+- Tag: [Hybrid Vigor] 2 — 10
+- Limitation: Moderate: You're The Only One For Me — -20
 - Limitation: Moderate: Sold Your Soul to the Shohan — -20
 
 ### Flare Rifle (p106, Small): 113 BP, CR 2; target 3
