@@ -733,13 +733,13 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Resource: Charge, Minor ×2 — 8
 - Tag: [A Cutting Spark] 2 (Free) — 20
 
-## Experimental (7 of 8 match)
+## Experimental (8 of 8 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
 | Grav Grenade | 105 | Tiny | 40 | 1 | 1 | OK |
 | Grav STA Missile | 107 | Small | 125 | 3 | 3 | OK |
-| Phantom Mk. 3 | 114 | Large | 936 | 9 | 8 | -37 |
+| Phantom Mk. 3 | 114 | Large | 848 | 8 | 8 | OK |
 | Farstrider Refit | 115 | Large | 70 | 1 | — | — |
 | The Artemis (Hyperspace Mothership) | 119 | Colossal | 3538 | 14 | 14 | OK |
 | The Prometheus (Refitted Old Soldier) | 120 | Huge | 1953 | 12 | — | — |
@@ -761,8 +761,8 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Attack: Gravitic (Battlefield) 5x (+5 [Flattened]) — 85
 - Area: Medium — 40
 
-### Phantom Mk. 3 (p114, Large): 936 BP, CR 9; target 8
-*Core Phantom, Gravitic Drive replaced by Grav Blades (75), + Moderate Force Field 3; Hungry fuel limitation dropped (not printed).*
+### Phantom Mk. 3 (p114, Large): 848 BP, CR 8; target 8
+*Approved 10-09 from PJ's build sheet: the core Phantom with Grav Blades (75) replacing its Gravitic Drive (keeping the Hungry fuel limitation), Moderate Force Field 3, Minor Air Drive (as printed), no Laser Link (not printed), and Property of the Terran Sphere (Major).*
 
 - Launcher: Space ×4, 1 increment — 60
 - Resource: Magazine, Major ×4 — 60
@@ -770,13 +770,13 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Armor Rating (Shrouded Hull): Space, rank 3 — 150
 - Body Track: 110 (default 50 + 3×20) — 30
 - Limitation: Minor: Usage Restriction (hull shroud does not work during atmospheric re-entry) — -10
+- Limitation: Minor: Hungry (1 Fuel/round for in-system maneuvers) — -10
 - Drive: Moderate Reaction — 25
-- Drive: Moderate Air — 25
+- Drive: Minor Air — 10
 - Drive: Minor Sea/Submersible — 10
 - Maneuver: rank 4 at Moderate grade — 40
 - Resource: Fuel, Major ×7 — 105
 - Communication: Moderate Radio — 13
-- Communication: Moderate Laser Link — 13
 - Communication: Major Ansible — 30
 - Resource: Tangle, Major ×5 — 50
 - Computer: Moderate rank 3 (TN 18) — 15
@@ -792,6 +792,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (2 skeleton, 5 full) — -20
 - Grav Blades: Major (replaces the Gravitic Drive), 1x — 75
 - Force Field: Moderate ×3 (track 60) — 60
+- Limitation: Major: Restricted Technology (Property of the Terran Sphere) — -50
 
 ### Farstrider Refit (p115, Large): 70 BP, CR 1
 *Refit module: printed 'CR: +1' to the escort it goes on.*

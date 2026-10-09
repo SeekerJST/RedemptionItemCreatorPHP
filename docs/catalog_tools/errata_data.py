@@ -408,4 +408,7 @@ e(DA,126,None,'"White Noise" Generator','stat',D15,"The \"White Noise\" Generato
   [('"White Noise" Generator','Power Supply','none','Minor Coil 1'),('"White Noise" Generator','Resource: Charge','none','Minor x1 (10 days)')])
 e(DA,126,None,'Concealable Plasma Torch','stat',D15,"The Concealable Plasma Torch's attack is Melee Plasma (Firefight) 3x, not 2x. Its 2 Minor Charge feed a Minor Coil Power Supply (rank 1; none printed). Its Tag is [A Cutting Spark 2], a Free Tag, not [A Cutting Spark 1]. Total Power Slots: 3 Minor (2 used: Plasma). CR 1 is unchanged.",
   [('Concealable Plasma Torch','Attack','Melee Plasma (Firefight) 2x','Melee Plasma (Firefight) 3x'),('Concealable Plasma Torch','Power Supply','none','Minor Coil 1'),('Concealable Plasma Torch','Tag','[A Cutting Spark 1]','[A Cutting Spark 2] (Free)')])
+D16='2026-10-09'
+e(DA,114,None,'Phantom Mk. 3','stat',D16,"The Phantom Mk. 3's Grav Blades keep the Phantom's Hungry limitation (1 Fuel per round for in-system maneuvers), and it carries Restricted Technology (Property of the Terran Sphere) as a Major limitation. It has no Laser Link (the core Phantom's errata p255 doesn't carry over), and its Air Drive is Minor as printed. CR 8 is unchanged.",
+  [('Phantom Mk. 3','Limitation','none','Minor: Hungry (1 Fuel/round for in-system maneuvers)'),('Phantom Mk. 3','Limitation','none','Major: Restricted Technology (Property of the Terran Sphere)')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))
