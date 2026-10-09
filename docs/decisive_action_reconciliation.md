@@ -495,7 +495,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Minor: Manual Reload — -10
 - Limitation: Minor: 1 Shot Per Round — -10
 
-## Haven & Auxiliaries (3 of 7 match)
+## Haven & Auxiliaries (4 of 7 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
@@ -504,7 +504,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 | Auxiliary Armor (Stage 3) | 103 | Medium | 270 | 4 | 4 | OK |
 | Flare Rifle | 106 | Small | 113 | 2 | 3 | +12 |
 | Volcano-class | 121 | Huge | 1501 | 10 | 10 | OK |
-| Marauder (Force Field Revision) | 122 | Large | 901 | 9 | 7 | -102 |
+| Marauder (Force Field Revision) | 122 | Large | 766 | 7 | 7 | OK |
 | Haven Hyperspace Carrier (Lilith Refit) | 123 | Huge | 1633 | 11 | 11 | OK |
 
 ### Auxiliary Armor (Stage 1) (p102, Medium): 145 BP, CR 1; target 2
@@ -599,23 +599,22 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (20 skeleton, 40 full) — -20
 - Limitation: Major: Restricted Technology (Haven Holds Its Own) — -50
 
-### Marauder (Force Field Revision) (p122, Large): 901 BP, CR 9; target 7
-*6 Launchers priced as 8 (sets of 4). Approved 10-08: CC 28 for CR 7 (printed 21).*
+### Marauder (Force Field Revision) (p122, Large): 766 BP, CR 7; target 7
+*6 Launchers priced as 8 (sets of 4). Approved 10-08: the Revision's block with the core Marauder errata applied: Armor 4 (printed 5), no Major Gravitic Drive (it rides in the Lilith's hangars), Moderate Computer 3 (printed Major 3; same TN 18). Power 3 Major (3 used), 3 Moderate (2 used). CC 28 for CR 7 (printed 21).*
 
 - Anti-Missile: Space 1x — 20
 - Launcher: Space ×6 (book count; builder buys increments of 4 → 8), 2 increments — 120
 - Resource: Magazine, Major ×6 — 90
-- Armor Rating (Shrouded Hull): Space, rank 5 — 220
+- Armor Rating (Shrouded Hull): Space, rank 4 — 180
 - Body Track: 130 (default 50 + 4×20) — 40
 - Force Field: Moderate ×3 (track 60) — 60
 - Regeneration: Force Field 4, Major grade — 45
 - Drive: Moderate Reaction — 25
-- Drive: Major Gravitic — 50
 - Maneuver: rank 4 at Moderate grade — 40
 - Power Supply: Major Antimatter rank 1 — 40
 - Resource: Fuel, Major ×3 — 45
 - Limitation: Major: Unique Fuel (Antimatter) — -50
-- Computer: Major rank 3 (TN 18) — 60
+- Computer: Moderate rank 3 (TN 18) — 15
 - Communication: Moderate Radio — 13
 - Communication: Moderate Laser Link — 13
 - Communication: Major Ansible — 30
