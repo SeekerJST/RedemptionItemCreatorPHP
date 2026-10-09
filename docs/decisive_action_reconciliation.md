@@ -410,12 +410,12 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Like Flying a Brick Wall] 2 (Free) — 20
 - Limitation: Major: One-Time Use (cannot return to orbit) — -50
 
-## Resistance (3 of 5 match)
+## Resistance (4 of 5 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
 | Incendiary Charge | 104 | Small | 95 | 1 | 1 | OK |
-| Resistance Chem Kit | 109 | Small | 96 | 1 | 0 | -22 |
+| Resistance Chem Kit | 109 | Small | 91 | 1 | 1 | OK |
 | Hoverbike Conversion | 109 | Medium | 183 | 2 | 2 | OK |
 | Resistance Scout Mech | 112 | Medium | 233 | 3 | 4 | +17 |
 | Resistance Artillery Mech | 112 | Medium | 324 | 5 | 5 | OK |
@@ -430,15 +430,16 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Major: One-Time Use — -50
 - Limitation: Minor: Slave (trigger mechanism) — -10
 
-### Resistance Chem Kit (p109, Small): 96 BP, CR 1; target 0
+### Resistance Chem Kit (p109, Small): 91 BP, CR 1; target 1
+*Approved 10-08: Moderate Coil (powers its Moderate Manufacture; printed Minor), Moderate Charge 1 (printed 2 Minor), Soft Serve Moderate (printed Minor). CR 1, CC 1 (printed CR 0, CC 0).*
 
-- Power Supply: Minor Coil rank 1 — 5
-- Resource: Charge, Minor ×2 — 8
+- Power Supply: Moderate Coil rank 1 — 10
+- Resource: Charge, Moderate ×1 — 8
 - Manufacture: Moderate — 50
 - Computer: Minor rank 2 (TN 16) — 6
 - Tasks: Engineering (Chemical) 16 — 32
 - Tag: [Better Living] — 5
-- Limitation: Minor: Soft Serve — -10
+- Limitation: Moderate: Soft Serve — -20
 
 ### Hoverbike Conversion (p109, Medium): 183 BP, CR 2; target 2
 
