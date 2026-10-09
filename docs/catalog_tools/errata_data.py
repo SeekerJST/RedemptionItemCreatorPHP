@@ -328,13 +328,12 @@ e(DA,124,None,'Redemption Aegis Refit (Option 2)','stat',D13,"Option 2 of the Re
 e(DA,84,None,'Force Field: Lamellar Matrix','rule',D13,"The Lamellar Matrix is a Terran Force Field implementation at the normal Force Field costs. Unlike other Terran fields it may be Major grade (covering up to Colossal). Once its Track is at 25% or below, aimed shots bypass it. It cannot take Regeneration. (Used by the Redemption Aegis Refit.)",
   [(None,'Terran Force Field grade','Minor or Moderate only','Lamellar Matrix may be Major')])
 # Decisive Action fixes approved 2026-10-05 / 10-08, entered when the gear went into the catalog.
-# An empty old value ('') means the printed value wasn't recorded in the reconciliation (NULL in SQL).
 D14='2026-10-05'
 # Regeneration power (core p214 ruling): the book's power lines leave Regeneration out
 e(DA,102,103,'Auxiliary Armor','stat',D14,"Auxiliary Armor's Mechanical Regeneration uses a Power Slot (core errata p214). Stages 1 and 2: 3 Minor Power Slots (1 used: Mechanical Regeneration). Stage 3: 3 Minor (2 used: Force Field, Mechanical Regeneration).",
   [('Auxiliary Armor (Stage 1)','Power Slots','3 (0 used)','3 Minor (1 used)'),('Auxiliary Armor (Stage 2)','Power Slots','3 (0 used)','3 Minor (1 used)'),('Auxiliary Armor (Stage 3)','Power Slots','3 (0 used)','3 Minor (2 used)')])
-e(DA,128,None,'Shohan Stealth Armor','stat',D14,"Shohan Stealth Armor's Weapon Link is Moderate, and its Tag is [Silent Running 3]. Its Power Slots are 3 Moderate (3 used: Force Field, Force Field Regeneration, Mechanical Regeneration); the Weapon Link carries a self-powered Shohan weapon.",
-  [('Shohan Stealth Armor','Link: Weapon','','Moderate'),('Shohan Stealth Armor','Tag','','[Silent Running 3]'),('Shohan Stealth Armor','Power Slots','3 (0 used)','3 Moderate (3 used)')])
+e(DA,128,None,'Shohan Stealth Armor','stat',D14,"Shohan Stealth Armor's Weapon Link is Moderate, not Minor, and its Tag is [Silent Running 3], not [Silent Running]. Its Power Slots are 3 Moderate (3 used: Force Field, Force Field Regeneration, Mechanical Regeneration); the Weapon Link carries a self-powered Shohan weapon.",
+  [('Shohan Stealth Armor','Link: Weapon','Minor','Moderate'),('Shohan Stealth Armor','Tag rank: [Silent Running]','1','3'),('Shohan Stealth Armor','Power Slots','3 (0 used)','3 Moderate (3 used)')])
 e(DA,128,None,'Breaching Pod','stat',D14,"The Breaching Pod's Power Slots are 3 Major (1 used) and 3 Moderate (2 used: Force Field, Force Field Regeneration).",
   [('Breaching Pod','Power Slots','3 Major (1 used), 3 Moderate (1 used)','3 Major (1 used), 3 Moderate (2 used)')])
 e(DA,120,None,'The Prometheus','stat',D14,"The Prometheus uses 6 of its 9 Major Power Slots (its Force Field and Mechanical Regeneration each use one).",
@@ -345,36 +344,36 @@ e(DA,132,None,'Gunboat','stat',D14,"The Gunboat has a Moderate Hyperspace Tap Po
   [('Gunboat','Power Supply','none','Moderate Hyperspace Tap'),('Gunboat','Power Slots','none','6 Moderate (4 used)')])
 e(DA,133,None,'Shohan Shieldbearer','stat',D14,"The Shohan Shieldbearer's Power Slots are 6 Major (5 used: restoration beam, 2 flare cannons, Force Field, Force Field Regeneration).",
   [('Shohan Shieldbearer','Power Slots','6 (3 used)','6 Major (5 used)')])
-e(DA,134,None,'Shohan Lancer','stat',D14,"The Shohan Lancer's Armor Rating 2 is Space scale. Its Power Slots are 6 Major (Hyperspace Tap 3 + Jump Drive 3; 3 used).",
-  [('Shohan Lancer','Armor scale','','Space'),('Shohan Lancer','Power Slots','3 (2 used)','6 Major (3 used)')])
-e(DA,129,130,'Flare Drones','stat',D14,"The Flare Drones (Assault and Sniper) each have a Moderate Hyperspace Tap Power Supply to power their Battlefield gun: 3 Moderate Power Slots (1 used).",
-  [('Flare Drone (Assault)','Power Supply','','Moderate Hyperspace Tap (3 Moderate, 1 used)'),('Flare Drone (Sniper)','Power Supply','','Moderate Hyperspace Tap (3 Moderate, 1 used)')])
+e(DA,134,None,'Shohan Lancer','stat',D14,"The Shohan Lancer's Armor Rating 2 is Space scale (no scale printed). Its Power Slots are 6 Major (Hyperspace Tap 3 + Jump Drive 3; 3 used).",
+  [('Shohan Lancer','Armor scale','unstated','Space'),('Shohan Lancer','Power Slots','3 (2 used)','6 Major (3 used)')])
+e(DA,129,130,'Flare Drones','stat',D14,"The Flare Drones (Assault and Sniper) each have a Moderate Hyperspace Tap Power Supply (none printed) to power their Battlefield gun: 3 Moderate Power Slots (1 used).",
+  [('Flare Drone (Assault)','Power Supply','none','Moderate Hyperspace Tap (3 Moderate, 1 used)'),('Flare Drone (Sniper)','Power Supply','none','Moderate Hyperspace Tap (3 Moderate, 1 used)')])
 # TSA fixes approved 2026-10-05
 e(DA,101,None,'Srivatsa Powered Armor','stat',D14,"The Srivatsa's Power Supply is a Moderate Coil of rank 1 (the 3 Power Slots printed; rank 2 would give 6), and its Tag is [Shohan Killer 2], not 3.",
   [('Srivatsa Powered Armor','Power Supply','Moderate Coil rank 2','Moderate Coil rank 1'),('Srivatsa Powered Armor','Tag rank: [Shohan Killer]','3','2')])
-e(DA,106,None,'Peltast STA Launcher','stat',D14,"The Peltast STA Launcher's Body Track is 25.",
-  [('Peltast STA Launcher','Body Track','','25')])
-e(DA,107,None,'Field Kit','stat',D14,"The Field Kit's Personal Supplies are a Moderate Resource, rank 3.",
-  [('Field Kit','Resource: Personal Supplies','','Moderate x3')])
-e(DA,111,None,'TK-Tac T09-APC','stat',D14,"The TK-Tac T09-APC's troop deck is 2 Major Hangars (it deploys squads), and its Life Support is Moderate, rank 2 (24 people).",
-  [('TK-Tac T09-APC','Troop deck','','2 Major Hangars'),('TK-Tac T09-APC','Life Support','','Moderate x2')])
+e(DA,106,None,'Peltast STA Launcher','stat',D14,"The Peltast STA Launcher's Body Track is 25, not 30.",
+  [('Peltast STA Launcher','Body Track','30','25')])
+e(DA,107,None,'Field Kit','stat',D14,"The Field Kit's Personal Supplies 3 are a Moderate Resource (rank 3).",
+  [('Field Kit','Resource: Personal Supplies','3 (grade unstated)','Moderate x3')])
+e(DA,111,None,'TK-Tac T09-APC','stat',D14,"The TK-Tac T09-APC's troop deck is 2 Major Hangars (it deploys squads), not 2 Major Cargo, and its Life Support for 24 people is Moderate, rank 2.",
+  [('TK-Tac T09-APC','Troop deck','Cargo: 2 Major','2 Major Hangars'),('TK-Tac T09-APC','Life Support','Moderate (24 people)','Moderate x2')])
 e(DA,113,114,'Wyvern and Syren: Bleed','stat',D14,"The Wyvern's and Syren's Bleed is their plasma cannon's free Plasma Bleed: Major 3, not Minor 5.",
   [('Wyvern','Bleed','Minor 5','Major 3 (free Plasma Bleed)'),('Syren','Bleed','Minor 5','Major 3 (free Plasma Bleed)')])
 # Shohan fixes approved 2026-10-05
 e(DA,94,None,'Pyre attacks','rule',D14,"Pyre is an Attack implementation, printed as a placeholder Exotic attack. Battlefield scale only. It costs the normal Battlefield Attack cost +70 BP, which includes Counter: Armor, Force Field Overload (when a Pyre hit depletes a Force Field, the field bursts) and Aggravated Assault. A Pyre weapon must carry the Tag [Time Heals No Wounds 3], bought as a Tag. (Pyre Lance: 175 BP, CR 5.)",
   [(None,'Pyre attack cost','Exotic (Minor 80 / Moderate 90 / Major 110)','Battlefield Attack cost + 70')])
-e(DA,127,None,'Shohan Stun Field','stat',D14,"The Shohan Stun Field's Tag is [Seeing Stars 3], a Free Tag, and its Area is Medium (its free Hyperspace Area: Small upgraded one size step).",
-  [('Shohan Stun Field','Tag','','[Seeing Stars 3] (Free)'),('Shohan Stun Field','Area','','Medium')])
+e(DA,127,None,'Shohan Stun Field','stat',D14,"The Shohan Stun Field's [Seeing Stars 3] is a Free Tag, and its Area is Medium, not Small (its free Hyperspace Area, upgraded one size step).",
+  [('Shohan Stun Field','Tag type: [Seeing Stars 3]','Standard','Free'),('Shohan Stun Field','Area','Small Sudden','Medium Sudden')])
 e(DA,129,None,'Fold Bomb','stat',D14,"The Fold Bomb's Area is Small, not Moderate. Its lingering armor reduction is free (core errata p185).",
   [('Fold Bomb','Area','Moderate','Small')])
 D15='2026-10-08'
 # Power-line typos (approved 2026-10-08): set to what the build gives
 e(DA,110,None,'TK-Tac T09-HK (Hunter Killer)','stat',D15,"The TK-Tac T09-HK's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 9 Moderate: its Moderate Coil is rank 1. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 3, not Minor 3.",
-  [('TK-Tac T09-HK (Hunter Killer)','Power Slots','9 Moderate','3 Minor (0 used), 3 Moderate (3 used)'),('TK-Tac T09-HK (Hunter Killer)','Bleed','Minor 3','Moderate 3 (free Plasma Bleed)')])
+  [('TK-Tac T09-HK (Hunter Killer)','Power Slots','9 Moderate (3 used), 3 Minor (0 used)','3 Minor (0 used), 3 Moderate (3 used)'),('TK-Tac T09-HK (Hunter Killer)','Bleed','Minor 3','Moderate 3 (free Plasma Bleed)')])
 e(DA,116,None,'Vigilance-class: Bleed','stat',D15,"The Vigilance-class's Bleed is its plasma cannon's free Plasma Bleed, Major 3, not Minor 3.",
   [('Vigilance-class','Bleed','Minor 3','Major 3 (free Plasma Bleed)')])
-e(DA,118,None,'Vigilance Troop Carrier Module','stat',D15,"The Vigilance Troop Carrier Module's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 3 Major: its Fusion Power Supply is Moderate. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 2, not Minor 2.",
-  [('Vigilance Troop Carrier Module','Power Slots','3 Major','3 Minor (0 used), 3 Moderate (3 used)'),('Vigilance Troop Carrier Module','Bleed','Minor 2','Moderate 2 (free Plasma Bleed)')])
+e(DA,118,None,'Vigilance Troop Carrier Module','stat',D15,"The Vigilance Troop Carrier Module's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 3 Major (2 used): its Fusion Power Supply is Moderate. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 2, not Minor 2.",
+  [('Vigilance Troop Carrier Module','Power Slots','3 Major (2 used)','3 Minor (0 used), 3 Moderate (3 used)'),('Vigilance Troop Carrier Module','Bleed','Minor 2','Moderate 2 (free Plasma Bleed)')])
 # New attributes and implementations: costs (approved 2026-10-08)
 e(DA,102,None,'Power Supply: Anomalous','rule',D15,"Anomalous is a Power Supply implementation (Auxiliary Armor). It costs the same as any Power Supply of its grade (Minor 5 BP per rank).",
   [(None,'Anomalous Power Supply cost','unstated','as a Power Supply of its grade')])

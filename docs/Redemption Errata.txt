@@ -201,14 +201,14 @@ P102-103: Auxiliary Armor's Mechanical Regeneration uses a Power Slot (core erra
 P102: Anomalous is a Power Supply implementation (Auxiliary Armor). It costs the same as any Power Supply of its grade (Minor 5 BP per rank).
 P104-105: The printed CR and CC for the Agni Variable Yield Rounds, High Impact Explosive Charge, Incendiary Charge, Plasma Breaching Charge and Grav Grenade are for a batch of 10. A single item is 1 CR less (see the core errata for p225, group pricing).
 P105: The Grav Grenade is a Tiny item, not Small.
-P106: The Peltast STA Launcher's Body Track is 25.
-P107: The Field Kit's Personal Supplies are a Moderate Resource, rank 3.
+P106: The Peltast STA Launcher's Body Track is 25, not 30.
+P107: The Field Kit's Personal Supplies 3 are a Moderate Resource (rank 3).
 P110: The TK-Tac T09-HK's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 9 Moderate: its Moderate Coil is rank 1. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 3, not Minor 3.
-P111: The TK-Tac T09-APC's troop deck is 2 Major Hangars (it deploys squads), and its Life Support is Moderate, rank 2 (24 people).
+P111: The TK-Tac T09-APC's troop deck is 2 Major Hangars (it deploys squads), not 2 Major Cargo, and its Life Support for 24 people is Moderate, rank 2.
 P112: Arboreal is a Drive implementation (the Resistance mechs). It costs the same as any Drive of its grade (Minor 10 BP).
 P113-114: The Wyvern's and Syren's Bleed is their plasma cannon's free Plasma Bleed: Major 3, not Minor 5.
 P116: The Vigilance-class's Bleed is its plasma cannon's free Plasma Bleed, Major 3, not Minor 3.
-P118: The Vigilance Troop Carrier Module's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 3 Major: its Fusion Power Supply is Moderate. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 2, not Minor 2.
+P118: The Vigilance Troop Carrier Module's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 3 Major (2 used): its Fusion Power Supply is Moderate. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 2, not Minor 2.
 P119: The Artemis has 6 Major Fusion power supply ranks (not 4 reactors), Manufacture (Major), and Maneuver 4 (Major) as standard, not optional; its drives are as printed (Major Jump, Major Gravitic, Moderate Reaction). Total Power Slots: 24 Major (5 used: Launchers 3, Anti-Missile 1, Manufacture 1), 3 Moderate (0 used). Cost Rating 14, Character Creation cost 105 (was CR 15, CC 120; the printed CR used the old round-to-nearest rule).
 P120: The Prometheus uses 6 of its 9 Major Power Slots (its Force Field and Mechanical Regeneration each use one).
 P122: The Marauder (Force Field Revision) uses 5 of its 6 Major Power Slots (its Force Field Regeneration uses one). Its Character Creation cost is 28, the cost for its CR 7 (printed 21).
@@ -216,13 +216,13 @@ P124: Option 2 of the Redemption Aegis Refit keeps the Redemption's 6 Major Maga
 P125: The Grav Missile is a Medium item with a 7x attack, not 8x, and costs 5 CR per 10 missiles, not 3 (CR 4 each).
 P125: The Hyper Missile's Restricted Technology is a Moderate limitation, not Major. It is a Medium item (CR 4 each; the printed 5 CR per 10 is unchanged).
 P126: Counter: Recording is a Counter implementation (the White Noise Generator) and costs 20 BP, like any Counter.
-P127: The Shohan Stun Field's Tag is [Seeing Stars 3], a Free Tag, and its Area is Medium (its free Hyperspace Area: Small upgraded one size step).
-P128: Shohan Stealth Armor's Weapon Link is Moderate, and its Tag is [Silent Running 3]. Its Power Slots are 3 Moderate (3 used: Force Field, Force Field Regeneration, Mechanical Regeneration); the Weapon Link carries a self-powered Shohan weapon.
+P127: The Shohan Stun Field's [Seeing Stars 3] is a Free Tag, and its Area is Medium, not Small (its free Hyperspace Area, upgraded one size step).
+P128: Shohan Stealth Armor's Weapon Link is Moderate, not Minor, and its Tag is [Silent Running 3], not [Silent Running]. Its Power Slots are 3 Moderate (3 used: Force Field, Force Field Regeneration, Mechanical Regeneration); the Weapon Link carries a self-powered Shohan weapon.
 P128: The Breaching Pod's Power Slots are 3 Major (1 used) and 3 Moderate (2 used: Force Field, Force Field Regeneration).
 P128: A Hyperspace Portal (the Breaching Pod) is priced as a Major Hangar, 60 BP, like the Deployment Pod's teleport platform.
-P129-130: The Flare Drones (Assault and Sniper) each have a Moderate Hyperspace Tap Power Supply to power their Battlefield gun: 3 Moderate Power Slots (1 used).
+P129-130: The Flare Drones (Assault and Sniper) each have a Moderate Hyperspace Tap Power Supply (none printed) to power their Battlefield gun: 3 Moderate Power Slots (1 used).
 P129: The Fold Bomb's Area is Small, not Moderate. Its lingering armor reduction is free (core errata p185).
 P132: The Gunboat has a Moderate Hyperspace Tap Power Supply (none printed). With its drive it has 6 Moderate Power Slots (4 used: its 2 guns, Force Field, Force Field Regeneration).
 P133: The Shohan Shieldbearer's Power Slots are 6 Major (5 used: restoration beam, 2 flare cannons, Force Field, Force Field Regeneration).
 P133: A Force Field Link (the Shohan Shieldbearer) is a Link type, priced by grade like any Link (Major 50 BP).
-P134: The Shohan Lancer's Armor Rating 2 is Space scale. Its Power Slots are 6 Major (Hyperspace Tap 3 + Jump Drive 3; 3 used).
+P134: The Shohan Lancer's Armor Rating 2 is Space scale (no scale printed). Its Power Slots are 6 Major (Hyperspace Tap 3 + Jump Drive 3; 3 used).
