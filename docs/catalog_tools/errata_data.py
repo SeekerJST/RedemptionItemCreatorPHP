@@ -404,4 +404,8 @@ e(DA,106,None,'Flare Rifle','stat',D15,"The Flare Rifle gains Far Ranged (Minor)
   [('Flare Rifle','Far Ranged','none','Minor'),('Flare Rifle','Resource','Fuel 2','Charge: Minor x2')])
 e(DA,125,None,'Disguise Kit','stat',D15,"The Disguise Kit has a Minor Coil Power Supply (rank 1) with 1 Minor Charge (10 days) to run its hologram projectors, voice modulators and computer. Total Power Slots: 3 Minor (0 used). CR 1 is unchanged.",
   [('Disguise Kit','Power Supply','none','Minor Coil 1'),('Disguise Kit','Resource: Charge','none','Minor x1 (10 days)')])
+e(DA,126,None,'"White Noise" Generator','stat',D15,"The \"White Noise\" Generator has a Minor Coil Power Supply (rank 1) with 1 Minor Charge (10 days). Total Power Slots: 3 Minor (0 used). CR 1 is unchanged.",
+  [('"White Noise" Generator','Power Supply','none','Minor Coil 1'),('"White Noise" Generator','Resource: Charge','none','Minor x1 (10 days)')])
+e(DA,126,None,'Concealable Plasma Torch','stat',D15,"The Concealable Plasma Torch's attack is Melee Plasma (Firefight) 3x, not 2x. Its 2 Minor Charge feed a Minor Coil Power Supply (rank 1; none printed). Its Tag is [A Cutting Spark 2], a Free Tag, not [A Cutting Spark 1]. Total Power Slots: 3 Minor (2 used: Plasma). CR 1 is unchanged.",
+  [('Concealable Plasma Torch','Attack','Melee Plasma (Firefight) 2x','Melee Plasma (Firefight) 3x'),('Concealable Plasma Torch','Power Supply','none','Minor Coil 1'),('Concealable Plasma Torch','Tag','[A Cutting Spark 1]','[A Cutting Spark 2] (Free)')])
 E.sort(key=lambda x:(_order[x['section']],x['p1']))

@@ -672,15 +672,15 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Key Personnel (Oracle) — -20
 - Limitation: Major: Usage Restriction (Sold Your Soul to the Shohan) — -50
 
-## Covert (3 of 5 match)
+## Covert (5 of 5 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
 | Surveillance Drone | 125 | Tiny | 58 | 3 | 3 | OK |
 | Disguise Kit | 125 | Small | 77 | 1 | 1 | OK |
-| "White Noise" Generator | 126 | Tiny | 30 | 0 | 1 | +5 |
+| "White Noise" Generator | 126 | Tiny | 39 | 1 | 1 | OK |
 | Entry Tools | 126 | Small | 93 | 1 | 1 | OK |
-| Concealable Plasma Torch | 126 | Tiny | 18 | 0 | 1 | +17 |
+| Concealable Plasma Torch | 126 | Tiny | 43 | 1 | 1 | OK |
 
 ### Surveillance Drone (p125, Tiny): 58 BP, CR 3; target 3
 *Task: Pilot 4 is likely a typo (Pilot 14?).*
@@ -706,9 +706,12 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Judge This Book by the Cover] 3 — 15
 - Limitation: Minor: Mistaken Identity — -10
 
-### "White Noise" Generator (p126, Tiny): 30 BP, CR 0; target 1
+### "White Noise" Generator (p126, Tiny): 39 BP, CR 1; target 1
+*Approved 10-08: adds a Minor Coil with 1 Minor Charge (its 'lengthy battery life'; no power printed).*
 
 - Counter: Recording — 20
+- Power Supply: Minor Coil rank 1 — 5
+- Resource: Charge, Minor ×1 — 4
 - Tag: [An Ordinary Conversation] 2 — 10
 
 ### Entry Tools (p126, Small): 93 BP, CR 1; target 1
@@ -721,12 +724,14 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [The Master's Key] 3 — 15
 - Limitation: Moderate: Presumption of Guilt — -20
 
-### Concealable Plasma Torch (p126, Tiny): 18 BP, CR 0; target 1
+### Concealable Plasma Torch (p126, Tiny): 43 BP, CR 1; target 1
+*Approved 10-08: Plasma 3x (printed 2x), a Minor Coil for its Charge (none printed), [A Cutting Spark 2] Free (printed [A Cutting Spark 1]).*
 
-- Attack: Plasma/Melee (Firefight) 2x — 5
+- Attack: Plasma/Melee (Firefight) 3x — 10
 - Counter: Shields (free) — 0
+- Power Supply: Minor Coil rank 1 — 5
 - Resource: Charge, Minor ×2 — 8
-- Tag: [A Cutting Spark] — 5
+- Tag: [A Cutting Spark] 2 (Free) — 20
 
 ## Experimental (7 of 8 match)
 
