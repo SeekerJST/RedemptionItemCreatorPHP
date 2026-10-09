@@ -194,9 +194,35 @@ Decisive Action
 P84: Gravitic is an Attack implementation costing the normal Attack cost +5 BP: every hit applies [Flattened] (rank = margin of success; freely consequenced against movement and evasion, condemned against attacks, invokable by attackers; lasts a round), priced as a standard Tag. A Gravitic attack must buy Area and does not benefit from Coordinated Fire. (Gravitic Pulsers, Grav Grenade, Grav STA Missile, Grav Missile.)
 P84: Grav Blades are Major only and cost 75 BP. They replace the ship's Gravitic Drive and still work as one (including as an FTL drive and for in-system maneuvering), and may buy Weapon Multipliers like an Attack. Hits can push or pull the target; they can counter missiles and kinetic rounds (core p194); attacks are Sustained and gain no Coordinated Fire or Counter: Armor.
 P85: The Lamellar Matrix is a Terran Force Field implementation at the normal Force Field costs. Unlike other Terran fields it may be Major grade (covering up to Colossal). Once its Track is at 25% or below, aimed shots bypass it. It cannot take Regeneration. (Used by the Redemption Aegis Refit.)
+P85: Psi-Resonant Materials cost 75 / 150 / 300 BP (Minor / Moderate / Major). An item with them must also buy Area and a Major Bleed, and they use 2 Power Slots.
+P102: The Srivatsa's Power Supply is a Moderate Coil of rank 1 (the 3 Power Slots printed; rank 2 would give 6), and its Tag is [Shohan Killer 2], not 3.
+P103-104: Auxiliary Armor's Mechanical Regeneration uses a Power Slot (core errata p214). Stages 1 and 2: 3 Minor Power Slots (1 used: Mechanical Regeneration). Stage 3: 3 Minor (2 used: Force Field, Mechanical Regeneration).
+P103: Anomalous is a Power Supply implementation (Auxiliary Armor). It costs the same as any Power Supply of its grade (Minor 5 BP per rank).
 P105-106: The printed CR and CC for the Agni Variable Yield Rounds, High Impact Explosive Charge, Incendiary Charge, Plasma Breaching Charge and Grav Grenade are for a batch of 10. A single item is 1 CR less (see the core errata for p225, group pricing).
 P106: The Grav Grenade is a Tiny item, not Small.
+P107: The Peltast STA Launcher's Body Track is 25.
+P108: The Field Kit's Personal Supplies are a Moderate Resource, rank 3.
+P111: The TK-Tac T09-HK's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 9 Moderate: its Moderate Coil is rank 1. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 3, not Minor 3.
+P112: The TK-Tac T09-APC's troop deck is 2 Major Hangars (it deploys squads), and its Life Support is Moderate, rank 2 (24 people).
+P113: Arboreal is a Drive implementation (the Resistance mechs). It costs the same as any Drive of its grade (Minor 10 BP).
+P114-115: The Wyvern's and Syren's Bleed is their plasma cannon's free Plasma Bleed: Major 3, not Minor 5.
+P117: The Vigilance-class's Bleed is its plasma cannon's free Plasma Bleed, Major 3, not Minor 3.
+P119: The Vigilance Troop Carrier Module's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 3 Major: its Fusion Power Supply is Moderate. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 2, not Minor 2.
 P120: The Artemis has 6 Major Fusion power supply ranks (not 4 reactors), Manufacture (Major), and Maneuver 4 (Major) as standard, not optional; its drives are as printed (Major Jump, Major Gravitic, Moderate Reaction). Total Power Slots: 24 Major (5 used: Launchers 3, Anti-Missile 1, Manufacture 1), 3 Moderate (0 used). Cost Rating 14, Character Creation cost 105 (was CR 15, CC 120; the printed CR used the old round-to-nearest rule).
+P121: The Prometheus uses 6 of its 9 Major Power Slots (its Force Field and Mechanical Regeneration each use one).
+P123: The Marauder (Force Field Revision) uses 5 of its 6 Major Power Slots (its Force Field Regeneration uses one). Its Character Creation cost is 28, the cost for its CR 7 (printed 21).
 P124: Option 2 of the Redemption Aegis Refit keeps the Redemption's 6 Major Magazine (60 shots), not 4 (40 shots).
 P125: The Grav Missile is a Medium item with a 7x attack, not 8x, and costs 5 CR per 10 missiles, not 3 (CR 4 each).
 P125: The Hyper Missile's Restricted Technology is a Moderate limitation, not Major. It is a Medium item (CR 4 each; the printed 5 CR per 10 is unchanged).
+P127: Counter: Recording is a Counter implementation (the White Noise Generator) and costs 20 BP, like any Counter.
+P128: Pyre is an Attack implementation, printed as a placeholder Exotic attack. Battlefield scale only. It costs the normal Battlefield Attack cost +70 BP, which includes Counter: Armor, Force Field Overload (when a Pyre hit depletes a Force Field, the field bursts) and Aggravated Assault. A Pyre weapon must carry the Tag [Time Heals No Wounds 3], bought as a Tag. (Pyre Lance: 175 BP, CR 5.)
+P128: The Shohan Stun Field's Tag is [Seeing Stars 3], a Free Tag, and its Area is Medium (its free Hyperspace Area: Small upgraded one size step).
+P129: Shohan Stealth Armor's Weapon Link is Moderate, and its Tag is [Silent Running 3]. Its Power Slots are 3 Moderate (3 used: Force Field, Force Field Regeneration, Mechanical Regeneration); the Weapon Link carries a self-powered Shohan weapon.
+P129: The Breaching Pod's Power Slots are 3 Major (1 used) and 3 Moderate (2 used: Force Field, Force Field Regeneration).
+P129: A Hyperspace Portal (the Breaching Pod) is priced as a Major Hangar, 60 BP, like the Deployment Pod's teleport platform.
+P130-131: The Flare Drones (Assault and Sniper) each have a Moderate Hyperspace Tap Power Supply to power their Battlefield gun: 3 Moderate Power Slots (1 used).
+P130: The Fold Bomb's Area is Small, not Moderate. Its lingering armor reduction is free (core errata p185).
+P133: The Gunboat has a Moderate Hyperspace Tap Power Supply (none printed). With its drive it has 6 Moderate Power Slots (4 used: its 2 guns, Force Field, Force Field Regeneration).
+P134: The Shohan Shieldbearer's Power Slots are 6 Major (5 used: restoration beam, 2 flare cannons, Force Field, Force Field Regeneration).
+P134: A Force Field Link (the Shohan Shieldbearer) is a Link type, priced by grade like any Link (Major 50 BP).
+P135: The Shohan Lancer's Armor Rating 2 is Space scale. Its Power Slots are 6 Major (Hyperspace Tap 3 + Jump Drive 3; 3 used).

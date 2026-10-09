@@ -353,6 +353,7 @@ Negates something specific. Repeatable. Common implementations:
 | **Disabling** | On a successful attack or Skill check, negates Target Modifiers on electronic items for one combat round or scene. An appropriate Engineering check by the victim can undo it. |
 | **Strike** | Lowers the difficulty of rolls made to oppose a named class of thing (e.g. a drug that eases curing a specific disease). |
 | **Strain** **[Errata p212]** | Raises or lowers the user's Psionic Strain by 5 per Counter (20 BP each; buy several for more). Used by drugs: Psi Amp +5 (1), Psi Damp −25 (5). |
+| **Recording** **[Ruling 2026-10-08]** | Used by Decisive Action's "White Noise" Generator; effect as printed there. 20 BP like any Counter. |
 
 Free Counters from implementations (Plasma → Shields; Tse, Hyperspace → Armor) cost 0 BP. Hyperspace's free Area: Small Sudden also costs 0 BP.
 
@@ -381,6 +382,7 @@ Lets the item move under its own power. Repeatable (a ship can have several).
 | **Light Sail** | Moderate | Costs **15 BP**. No Fuel needed. The item cannot take **Maneuver**. | All |
 | Gravitic | Major | Unsafe inside deep gravity wells; only works outside a system's grav shore. | Fourth Population's FTL |
 | **Biological** **[Ruling 2026-09-30]** | usually Minor | A creature's legs, wings, or fins. No Fuel. | All |
+| **Arboreal** **[Ruling 2026-10-08]** | usually Minor | Used by Decisive Action's Resistance mechs; movement as printed there. Costs the same as any Drive of its grade. | Resistance (Decisive Action) |
 | **Jump** | Major | Includes a **Hyperspace Tap** Power Supply; no Fuel. Comes with Drawback Tag **[Disoriented]**: can't act for 1 combat round after arriving. | Shohan, Celestines, older Populations only |
 
 ### 5.11 Maneuver — 5 / 10 / 20 BP per rank
@@ -472,6 +474,9 @@ Stores, launches, and recovers auxiliary craft.
 | Moderate | One item 1 size smaller, or several items 2 sizes smaller | 30 |
 | Major | Several items 1+ sizes smaller | 60 |
 
+**[Ruling 2026-10-08] Hyperspace Portal** (Decisive Action's Breaching Pod) is priced as a **Major
+Hangar, 60 BP**, like the Deployment Pod's teleport platform.
+
 **Capacity (errata, p214):** "several" / "multiple" items means **3 items, or 4 if crammed in**. So a Major Hangar on a Huge host holds 3 Large craft (4 crammed); a Moderate Hangar holds 3 items two sizes smaller (4 crammed). The app should store hangar capacity as 3 with a crammed maximum of 4.
 
 ### 5.16 Launcher — 5 / 10 / 15 BP each
@@ -527,6 +532,7 @@ Lets the item host and operate smaller modular items. Repeatable, mixed grades a
 | Psi | Lets a Psionic draw on the item's Power Supply. Uses **1 Power Slot** while the Psionic casts through it, **plus 1 per committed (sustained) effect**; the slot's grade is the effect's Scale (the psionics rules, p275). |
 | Weapon | Modular mount that accepts a separately built Attack. Built-in Attacks (e.g. turrets) don't need one. **Powers the weapon it carries: uses 1 Power Slot of its grade per Link** by default; some weapons (self-powered Kinetic) need none **[Ruling 2026-10-02]**. |
 | **Refueling** **[Errata p215]** | Docking connection that transfers fuel to a linked craft up to the Link's max size. **Draws 1 Power Slot of its grade** while in use. |
+| **Force Field** **[Ruling 2026-10-08]** | Used by Decisive Action's Shohan Shieldbearer; effect as printed there. Priced by grade like any Link (Major 50). |
 | **Armor** **[Ruling 2026-10-03]** | Holds a separately built **armor kit** up to the Link's max size (e.g. the Armor Kit (Ranger) on Ranger Armor). The kit's Armor Rating (and its scale) applies by default; an **aimed shot** can target the host's own Armor Rating instead. The kit is its own item with its own CR. **Uses no Power Slot.** |
 
 ### 5.19 Manufacture — 25 / 50 / 100 BP
@@ -590,6 +596,7 @@ Each rank gives **3 Power Slots** of its grade.
 | Antimatter | Fuel Resource | Can share fuel with a Reaction Drive. Doubles effective fuel rating when running on antimatter. Often hybrid fusion/antimatter. Antimatter fuel costs **+1 CR when bought in Port**: a provisioning cost, not a build cost, so it doesn't change BP or the item's CR. **[Ruling]** | All |
 | Coil | **Charge** Resource | Battery. Recharges from an external powered station. Its 20% discount is the Charge Resource's reduced price (4 / 8 / 12 BP); not an extra discount. **[Ruling]** A Major Coil stack fits in a Medium item (one size below the usual minimum) **[Errata p216]**. | All |
 | Environmental | none | Wind, water, geothermal, solar. Static or slow-moving. | All |
+| **Anomalous** **[Ruling 2026-10-08]** | as printed (Auxiliary Armor is built with Minor Charge) | Used by Decisive Action's Auxiliary Armor; rules as printed there. Costs the same as any Power Supply of its grade (Minor 5 per rank). | Haven |
 | Hyperspace Tap | none | Also bundled into Jump Drives. Compact enough that a Major tap fits in a Medium item (one size below the usual minimum) **[Errata p216]**. | Shohan only |
 
 **Power budget:**
@@ -690,6 +697,19 @@ taskBP = 2 × TN              // halved if the item's Computer is a Brain
 - Needs a Computer whose TN (§5.8) ≥ the Task's TN. **[Ruling 2026-09-23]** the Task's TN
   can't exceed the computer's TN.
 - Each Task counts against the Computer's simultaneous-task limit (Minor 5, Moderate 50, Major ∞).
+
+### 5.27 Psi-Resonant Materials — 75 / 150 / 300 BP **[Ruling 2026-10-08]**
+
+From Decisive Action (Chapter 5). No catalog item uses it yet.
+
+| Grade | BP |
+|---|---:|
+| Minor | 75 |
+| Moderate | 150 |
+| Major | 300 |
+
+- An item with Psi-Resonant Materials **must also buy Area and a Major Bleed**.
+- Uses **2 Power Slots** (of its grade).
 
 ---
 
@@ -852,6 +872,9 @@ Free effects: Plasma → Counter (Shields), Bleed 4 (floor(8/2)).
 | p215 | **[New 2026-10-02]** A Weapon Link uses 1 Power Slot of its grade per Link (it powers the weapon it carries); some weapons need none. | §5.18, §5.22 |
 | p214 | **[New 2026-10-05]** Force Field and Mechanical Regeneration each use 1 Power Slot at the Force Field's grade; Biological Regeneration uses none. | §5.22, §5.23 |
 | p215 | **[New 2026-10-05]** A Weapon Link carrying a weapon with its own Power Supply uses no Power Slot. | §5.18, §5.22 |
+| DA p103–134 | **[New 2026-10-08]** Decisive Action implementations priced as their attribute's grade: Anomalous Power Supply, Arboreal Drive, Force Field Link; Counter: Recording 20 BP; Hyperspace Portal 60 BP (a Major Hangar). | §5.9, §5.10, §5.15, §5.18, §5.22 |
+| DA p85 | **[New 2026-10-08]** Psi-Resonant Materials: 75 / 150 / 300 BP; must buy Area and a Major Bleed; 2 Power Slots. | §5.27 |
+| DA p128 | **[New 2026-10-05]** Pyre is its own Attack implementation: Battlefield Attack cost + 70 (Counter: Armor, Force Field Overload, Aggravated Assault), carries [Time Heals No Wounds 3]. | §5.3 |
 | p215 | **[New 2026-10-03]** New Link type, **Armor**: holds a separately built armor kit; the kit's Armor Rating applies by default, aimed shots can use the host's. No Power Slot. (New Detroit: Ranger Armor and Armor Kit.) | §5.18, §5.22 |
 | p216 | **[New 2026-09-30]** An item with no Power Supply or Drive of its own draws its Power Slots from its host (a Slave limitation still means it needs the right Link). | §5.22 |
 | p216 | **[New 2026-09-25]** Power Supplies may go on an item one size smaller than the table first listed: Moderate on Small (was Medium). Major stays Large, except that a Hyperspace Tap or a Coil stack can fit a Major Power Supply in a Medium item. | §5.22, §9 |
@@ -954,6 +977,9 @@ Listed so the code can make each one a single named constant or function, easy t
 | 10-05 | Weapon Link with self-powered weapon | Draws no slot (Shohan weapons carry their own Hyperspace Taps) | §5.22 |
 | 10-04 | Area size | The book prices Area at a flat 20 BP; each size step past Small costs another 20 | §5.1 |
 | 10-04 | Hungry on grenades | Fired from a launcher or vehicle kinetic weapon, a grenade takes 10 rounds of that magazine | §6 |
+| 10-08 | Decisive Action implementations | Anomalous Power Supply, Arboreal Drive and Force Field Link cost as their grade; Counter: Recording 20; Hyperspace Portal 60 (as a Major Hangar); Psi-Resonant Materials 75 / 150 / 300 | §5.9, §5.10, §5.15, §5.18, §5.22, §5.27 |
+| 10-08 | Plasma Bleeds printed below the free Bleed | Decisive Action's plasma guns that print a smaller Bleed (TK-Tac HK, Wyvern, Syren, Vigilance, Troop Carrier) get the free Plasma Bleed instead: errata, no BP | §5.3 |
+| 10-08 | Decisive Action power lines | Set to what the build gives: TK-Tac HK 3 Minor + 3 Moderate (printed 9 Moderate); Troop Carrier 3 Minor + 3 Moderate (printed 3 Major); Marauder FF CC 28 for CR 7 (printed 21) | §5.22 |
 
 ### Still open
 

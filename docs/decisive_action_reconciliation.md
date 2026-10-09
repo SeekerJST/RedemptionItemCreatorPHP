@@ -26,7 +26,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 9. **Artemis approved 2026-10-06** (from PJ's build notes): drives as printed; + Manufacture (Major), Power 6 ranks, Maneuver 4 (Major). 3538 BP, CR 14 / CC 105 (printed 15 was old rounding). In the errata.
 10. **Missiles approved 2026-10-06:** Space missiles carry a chassis (Moderate Reaction Drive + Major Coil, no Charge/Fuel). Hyper Missile: Medium, Restricted Technology Moderate, 285 BP, CR 4 (5 per 10, as printed). Grav Missile: Medium, 7x, 265 BP, CR 4 (5 per 10; printed 3). In the errata.
 11. **Approved 2026-10-08:** Gravitic attacks = Attack cost + 5 ([Flattened]); Grav Blades rule (Major, 75 BP); Redemption Aegis Option 2 Magazine 6. Phantom Mk. 3 waiting on PJ's build sheet. Lamellar Matrix rule approved (spec §5.13, errata).
-3. **New attributes from Chapter 5** (need a cost rule in the spec):
+3. ~~**New attributes from Chapter 5**~~ **Decided 2026-10-08: keep the prices below;** now in the spec (§5.3, §5.9, §5.10, §5.15, §5.18, §5.22, §5.27) and the errata:
    - **Gravitic attack** (Grav Pulser: 10 / 20 / 40 base by scale; Area required; Slave power). Priced here like an Energy attack.
    - **Grav Blades** (Major only, 75 BP, replaces the Gravitic Drive; can buy multipliers).
    - **Pyre (Exotic) attack** (Minor 80 / Moderate 90 / Major 110; includes Counter: Armor, Aggravated Assault, Force Field Overload, [Time Heals No Wounds 3]). Priced as the flat cost.
@@ -34,10 +34,10 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
    - **Psi-Resonant Materials** (75 / 150 / 300; must buy Area and Major Bleed; 2 Power Slots). No item uses it.
    - **Anomalous** Power Supply (Auxiliary Armor), **Arboreal** Drive (Resistance mechs), **Hyperspace Portal** (priced here as a Major Hangar, like the Deployment Pod's teleport platform), **Force Field Link** (priced as a Major Link), **Counter: Recording**.
 4. **Missiles sold per 10.** Basic, Plasma and Scrammer STA/S work as Small items with group pricing. The Space-scale Grav and Hyper Missiles have no printed size and don't fit any size cleanly.
-5. **Power-line typos to confirm:** Srivatsa (Moderate Coil 2 gives 6 slots; prints 3), TK-Tac HK (prints 9 Moderate; Coil 1 gives 3), Wyvern (prints 2 Major; Fusion 1 gives 3), Troop Carrier Module (prints 3 Major from a Moderate Fusion), Shohan Stealth Armor (prints 0 used with a Force Field), Marauder FF revision (CR 7 but CC 21; CR 7 is CC 28).
-6. **Plasma Bleed at a different magnitude.** TK-Tac HK, Wyvern, Syren, Vigilance and the Troop Carrier print Minor Bleeds on plasma guns whose free Bleed is Moderate or Major. Paid in full here (per the 09-27 ruling); the HK and Syren need it to match, the Wyvern goes over with it (it matches at 690 BP without).
+5. ~~**Power-line typos to confirm:**~~ **Decided 2026-10-08: set to what the build gives** (errata): TK-Tac HK 3 Minor + 3 Moderate, Troop Carrier 3 Minor + 3 Moderate, Marauder CC 28. Srivatsa, Wyvern, Stealth Armor in #7/#8. Was: Srivatsa (Moderate Coil 2 gives 6 slots; prints 3), TK-Tac HK (prints 9 Moderate; Coil 1 gives 3), Wyvern (prints 2 Major; Fusion 1 gives 3), Troop Carrier Module (prints 3 Major from a Moderate Fusion), Shohan Stealth Armor (prints 0 used with a Force Field), Marauder FF revision (CR 7 but CC 21; CR 7 is CC 28).
+6. ~~**Plasma Bleed at a different magnitude.**~~ **Decided 2026-10-08: all of them get the free Plasma Bleed** (errata, no BP). The TK-Tac HK then drops to 496 BP, CR 4 (printed 5): on the list of items to review. Was: TK-Tac HK, Wyvern, Syren, Vigilance and the Troop Carrier print Minor Bleeds on plasma guns whose free Bleed is Moderate or Major. Paid in full here (per the 09-27 ruling); the HK and Syren need it to match, the Wyvern goes over with it (it matches at 690 BP without).
 
-## TSA (21 of 21 match)
+## TSA (20 of 21 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
@@ -53,15 +53,15 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 | Field Kit | 108 | Small | 82 | 1 | 1 | OK |
 | Force Field Bunker | 109 | Medium | 220 | 3 | 3 | OK |
 | Medipod | 109 | Medium | 205 | 3 | 3 | OK |
-| TK-Tac T09-HK (Hunter Killer) | 111 | Large | 516 | 5 | 5 | OK |
+| TK-Tac T09-HK (Hunter Killer) | 111 | Large | 496 | 4 | 5 | +4 |
 | TK-Tac T09-APC | 112 | Large | 506 | 5 | 5 | OK |
 | Wyvern | 114 | Large | 690 | 6 | 6 | OK |
 | Syren | 115 | Large | 615 | 6 | 6 | OK |
 | Aerospace Carrier Vehicle/Escort Carrier | 116 | Huge | 1538 | 10 | 10 | OK |
-| Vigilance-class | 117 | Huge | 1258 | 9 | 9 | OK |
+| Vigilance-class | 117 | Huge | 1238 | 9 | 9 | OK |
 | Vigilance Range Extension Module | 118 | Large | 310 | 3 | 3 | OK |
 | Vigilance Missile Module | 118 | Large | 340 | 3 | 3 | OK |
-| Vigilance Troop Carrier Module | 119 | Large | 488 | 4 | 4 | OK |
+| Vigilance Troop Carrier Module | 119 | Large | 478 | 4 | 4 | OK |
 
 ### Light Battle Armor (p101, Medium): 177 BP, CR 2; target 2
 
@@ -208,14 +208,14 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Partial Armor — -20
 - Limitation: Moderate: Restricted Technology (Property of the Terran Sphere) — -20
 
-### TK-Tac T09-HK (Hunter Killer) (p111, Large): 516 BP, CR 5; target 5
-*Bleed Minor 3 paid in full (free Plasma Bleed is Moderate).*
+### TK-Tac T09-HK (Hunter Killer) (p111, Large): 496 BP, CR 4; target 5
+*Approved 10-08: Bleed is the free Plasma Bleed, Moderate 3 (printed Minor 3); power 3 Minor (0 used), 3 Moderate (3 used) (printed 9 Moderate).*
 
 - Launcher: Battlefield ×4, 1 increment — 40
 - Resource: Magazine, Moderate ×6 — 60
 - Attack: Plasma (Battlefield) 6x — 120
 - Counter: Shields (free) — 0
-- Bleed: Minor 3 — 20
+- Bleed: Moderate 3 (free, Plasma) — 0
 - Life Support: Minor ×2 — 10
 - Armor Rating: Battlefield, rank 4 — 110
 - Body Track: 150 (default 50 + 5×20) — 50
@@ -331,12 +331,12 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Crew Requirement (20 skeleton, 200 full) — -20
 - Limitation: Moderate: Restricted Technology (Property of the Terran Sphere) — -20
 
-### Vigilance-class (p117, Huge): 1258 BP, CR 9; target 9
-*'Link: Moderate Item' priced as a Moderate Link (15).*
+### Vigilance-class (p117, Huge): 1238 BP, CR 9; target 9
+*'Link: Moderate Item' priced as a Moderate Link (15). Approved 10-08: Bleed is the free Plasma Bleed, Major 3 (printed Minor 3).*
 
 - Attack: Plasma (Space) 6x — 140
 - Counter: Shields (free) — 0
-- Bleed: Minor 3 — 20
+- Bleed: Major 3 (free, Plasma) — 0
 - Launcher: Space ×4, 1 increment — 60
 - Resource: Magazine, Major ×8 — 120
 - Limitation: Minor: No Combat Reload — -10
@@ -388,11 +388,12 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Tag: [Target Lock] 2 — 10
 - Limitation: Moderate: Slave (power supply) — -20
 
-### Vigilance Troop Carrier Module (p119, Large): 488 BP, CR 4; target 4
+### Vigilance Troop Carrier Module (p119, Large): 478 BP, CR 4; target 4
+*Approved 10-08: Bleed is the free Plasma Bleed, Moderate 2 (printed Minor 2); power 3 Minor (0 used), 3 Moderate (3 used) (printed 3 Major).*
 
 - Attack: Plasma (Battlefield) 5x — 80
 - Counter: Shields (free) — 0
-- Bleed: Minor 2 — 10
+- Bleed: Moderate 2 (free, Plasma) — 0
 - Limitation: Minor: Usage Restriction (only after landing) — -10
 - Armor Rating (Shrouded Hull): Space, rank 3 — 150
 - Body Track: 110 (default 50 + 3×20) — 30
@@ -599,7 +600,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Major: Restricted Technology (Haven Holds Its Own) — -50
 
 ### Marauder (Force Field Revision) (p123, Large): 901 BP, CR 9; target 7
-*6 Launchers priced as 8 (sets of 4). Printed CC 21 doesn't match CR 7 (28).*
+*6 Launchers priced as 8 (sets of 4). Approved 10-08: CC 28 for CR 7 (printed 21).*
 
 - Anti-Missile: Space 1x — 20
 - Launcher: Space ×6 (book count; builder buys increments of 4 → 8), 2 increments — 120
