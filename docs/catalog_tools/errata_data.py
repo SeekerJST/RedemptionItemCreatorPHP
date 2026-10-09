@@ -373,8 +373,8 @@ e(DA,129,None,'Fold Bomb','stat',D14,"The Fold Bomb's Area is Small, not Moderat
   [('Fold Bomb','Area','Moderate','Small')])
 D15='2026-10-08'
 # Power-line typos (approved 2026-10-08): set to what the build gives
-e(DA,110,None,'TK-Tac T09-HK (Hunter Killer)','stat',D15,"The TK-Tac T09-HK's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 9 Moderate: its Moderate Coil is rank 1. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 3, not Minor 3.",
-  [('TK-Tac T09-HK (Hunter Killer)','Power Slots','9 Moderate (3 used), 3 Minor (0 used)','3 Minor (0 used), 3 Moderate (3 used)'),('TK-Tac T09-HK (Hunter Killer)','Bleed','Minor 3','Moderate 3 (free Plasma Bleed)')])
+e(DA,110,None,'TK-Tac T09-HK (Hunter Killer)','stat',D15,"The TK-Tac T09-HK's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 9 Moderate: its Moderate Coil is rank 1. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 3, not Minor 3, and its Heavy Weapons Modifier is +2, not +1. CR 5 is unchanged.",
+  [('TK-Tac T09-HK (Hunter Killer)','Power Slots','9 Moderate (3 used), 3 Minor (0 used)','3 Minor (0 used), 3 Moderate (3 used)'),('TK-Tac T09-HK (Hunter Killer)','Bleed','Minor 3','Moderate 3 (free Plasma Bleed)'),('TK-Tac T09-HK (Hunter Killer)','Modifier: Heavy Weapons','+1','+2')])
 e(DA,116,None,'Vigilance-class: Bleed','stat',D15,"The Vigilance-class's Bleed is its plasma cannon's free Plasma Bleed, Major 3, not Minor 3.",
   [('Vigilance-class','Bleed','Minor 3','Major 3 (free Plasma Bleed)')])
 e(DA,118,None,'Vigilance Troop Carrier Module','stat',D15,"The Vigilance Troop Carrier Module's Power Slots are 3 Minor (0 used) and 3 Moderate (3 used), not 3 Major (2 used): its Fusion Power Supply is Moderate. Its Bleed is the plasma gun's free Plasma Bleed, Moderate 2, not Minor 2.",

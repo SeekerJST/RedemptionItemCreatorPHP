@@ -37,7 +37,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 5. ~~**Power-line typos to confirm:**~~ **Decided 2026-10-08: set to what the build gives** (errata): TK-Tac HK 3 Minor + 3 Moderate, Troop Carrier 3 Minor + 3 Moderate, Marauder CC 28. Srivatsa, Wyvern, Stealth Armor in #7/#8. Was: Srivatsa (Moderate Coil 2 gives 6 slots; prints 3), TK-Tac HK (prints 9 Moderate; Coil 1 gives 3), Wyvern (prints 2 Major; Fusion 1 gives 3), Troop Carrier Module (prints 3 Major from a Moderate Fusion), Shohan Stealth Armor (prints 0 used with a Force Field), Marauder FF revision (CR 7 but CC 21; CR 7 is CC 28).
 6. ~~**Plasma Bleed at a different magnitude.**~~ **Decided 2026-10-08: all of them get the free Plasma Bleed** (errata, no BP). The TK-Tac HK then drops to 496 BP, CR 4 (printed 5): on the list of items to review. Was: TK-Tac HK, Wyvern, Syren, Vigilance and the Troop Carrier print Minor Bleeds on plasma guns whose free Bleed is Moderate or Major. Paid in full here (per the 09-27 ruling); the HK and Syren need it to match, the Wyvern goes over with it (it matches at 690 BP without).
 
-## TSA (20 of 21 match)
+## TSA (21 of 21 match)
 
 | Item | Page | Size | BP | Formula CR | Target CR (one item) | Gap |
 |---|---:|---|---:|---:|---:|---|
@@ -53,7 +53,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 | Field Kit | 107 | Small | 82 | 1 | 1 | OK |
 | Force Field Bunker | 108 | Medium | 220 | 3 | 3 | OK |
 | Medipod | 108 | Medium | 205 | 3 | 3 | OK |
-| TK-Tac T09-HK (Hunter Killer) | 110 | Large | 496 | 4 | 5 | +4 |
+| TK-Tac T09-HK (Hunter Killer) | 110 | Large | 506 | 5 | 5 | OK |
 | TK-Tac T09-APC | 111 | Large | 506 | 5 | 5 | OK |
 | Wyvern | 113 | Large | 690 | 6 | 6 | OK |
 | Syren | 114 | Large | 615 | 6 | 6 | OK |
@@ -208,8 +208,8 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Limitation: Moderate: Partial Armor — -20
 - Limitation: Moderate: Restricted Technology (Property of the Terran Sphere) — -20
 
-### TK-Tac T09-HK (Hunter Killer) (p110, Large): 496 BP, CR 4; target 5
-*Approved 10-08: Bleed is the free Plasma Bleed, Moderate 3 (printed Minor 3); power 3 Minor (0 used), 3 Moderate (3 used) (printed 9 Moderate).*
+### TK-Tac T09-HK (Hunter Killer) (p110, Large): 506 BP, CR 5; target 5
+*Approved 10-08: Bleed is the free Plasma Bleed, Moderate 3 (printed Minor 3); Heavy Weapons +2 (printed +1); power 3 Minor (0 used), 3 Moderate (3 used) (printed 9 Moderate).*
 
 - Launcher: Battlefield ×4, 1 increment — 40
 - Resource: Magazine, Moderate ×6 — 60
@@ -227,7 +227,7 @@ Gap column: `OK` = matches the target CR (printed CR, or printed − 1 for items
 - Neural Interface: Moderate — 5
 - Communication: Moderate Radio — 13
 - Computer: Minor rank 2 (TN 16) — 6
-- Modifier: Heavy Weapons +1 — 10
+- Modifier: Heavy Weapons +2 — 20
 - Tag: [Drives Like A Dream] 2 (Free) — 20
 - Tag: [Take the Fight to the Enemy] 2 — 10
 - Limitation: Moderate: Restricted Technology (Property of the Terran Sphere) — -20
