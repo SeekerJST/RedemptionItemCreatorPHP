@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace SilentSpirits\ItemCreator\Controller;
 
+use SilentSpirits\ItemCreator\Auth\GoogleSignIn;
 use SilentSpirits\ItemCreator\Auth\Mailer;
 use SilentSpirits\ItemCreator\Auth\Session;
 use SilentSpirits\ItemCreator\Auth\UserRepository;
@@ -32,7 +33,13 @@ final class AuthController
         'resetpassword' => ['POST', 'resetPassword'],
         'updateprofile' => ['POST', 'updateProfile'],
         'changepassword' => ['POST', 'changePassword'],
+        // auth/google/start and auth/google/callback: plain browser navigations (no X-SSGS-Request
+        // header, so GET); the sign-in's state, PKCE verifier and nonce guard them instead.
+        'google' => ['GET', 'google'],
     ];
+
+    /** How long a sign-in at Google may take before its state expires. */
+    private const OAUTH_TTL = 600;
 
     public const MIN_PASSWORD = 10;
     private const DUMMY_HASH = '$2y$10$ZCPPPyOOo8gGcEnsqJQR0OAusqx0TG5zNRERboi2.G6wtEXi2qtz2';
@@ -51,14 +58,75 @@ final class AuthController
         private \Closure $users,
         private Session $session,
         private \Closure $mailer,
-        private string $appUrl
+        private string $appUrl,
+        private ?GoogleSignIn $google = null
     ) {
     }
 
-    /** The signed-in user, or null. */
+    /** The signed-in user (or null), and the other ways to sign in that are set up (['google']). */
     public function me(Request $request): Response
     {
-        return Response::json(['user' => self::public($this->currentUser())]);
+        return Response::json([
+            'user' => self::public($this->currentUser()),
+            'providers' => $this->google?->enabled() ? ['google'] : [],
+        ]);
+    }
+
+    /**
+     * Sign in with Google. auth/google/start sends the browser to Google; Google sends it back to
+     * auth/google/callback, which signs the user in and returns them to the client with
+     * ?signin=google, or ?signin_error=<reason>.
+     *
+     * The account is found by its Google ID; failing that, by email (a Google-verified address
+     * links to the existing account); failing that, it's created, already confirmed, with no
+     * password.
+     */
+    public function google(Request $request, string $step = ''): Response
+    {
+        if (!$this->google?->enabled()) {
+            return Response::redirect($this->link('signin_error=unavailable'));
+        }
+        if ($step === 'start') {
+            ['url' => $url, 'pending' => $pending] = $this->google->authorizationUrl();
+            $this->session->put('google', $pending);
+            return Response::redirect($url);
+        }
+        if ($step !== 'callback') {
+            throw HttpException::notFound("Unknown action 'auth/google/$step'.");
+        }
+
+        $pending = $this->session->take('google');
+        $state = (string) ($request->queryParam('state') ?? '');
+        if (!is_array($pending) || !hash_equals((string) $pending['state'], $state) || time() - (int) $pending['at'] > self::OAUTH_TTL) {
+            return Response::redirect($this->link('signin_error=expired'));
+        }
+        if ($request->queryParam('error') !== null) {
+            return Response::redirect($this->link('signin_error=cancelled')); // e.g. the user said no
+        }
+        try {
+            $identity = $this->google->identity((string) ($request->queryParam('code') ?? ''), $pending);
+        } catch (\RuntimeException $e) {
+            error_log('Google sign-in failed: ' . $e->getMessage());
+            return Response::redirect($this->link('signin_error=google'));
+        }
+        if (!$identity['emailVerified']) {
+            return Response::redirect($this->link('signin_error=unverified'));
+        }
+
+        $users = ($this->users)();
+        $user = $users->findByIdentity('google', $identity['subject']) ?? $users->findByEmail($identity['email']);
+        if ($user === null) {
+            $name = $identity['name'] !== '' ? mb_substr($identity['name'], 0, 100) : strstr($identity['email'], '@', true);
+            $userId = $users->create($identity['email'], (string) $name, null);
+        } else {
+            $userId = $user['id'];
+        }
+        $users->linkIdentity($userId, 'google', $identity['subject'], $identity['email']);
+        $users->markVerified($userId); // Google confirmed the address
+        $users->clearFailedSignIns($identity['email']);
+        $this->session->signIn($userId);
+        $users->touchSignIn($userId);
+        return Response::redirect($this->link('signin=google'));
     }
 
     public function register(Request $request): Response
@@ -188,11 +256,12 @@ final class AuthController
         return Response::json(['user' => self::public($users->findById($user['id']))]);
     }
 
+    /** Changes the password, or sets one on an account made through Google (which has none yet). */
     public function changePassword(Request $request): Response
     {
         $user = $this->requireUser();
         $body = $request->jsonPayload('changePassword');
-        if (!password_verify((string) ($body['currentPassword'] ?? ''), (string) $user['passwordHash'])) {
+        if ($user['passwordHash'] !== null && !password_verify((string) ($body['currentPassword'] ?? ''), $user['passwordHash'])) {
             throw HttpException::badRequest('Your current password isn\'t right.');
         }
         $password = self::password($body, 'newPassword');
@@ -245,6 +314,7 @@ final class AuthController
         if ($user === null) {
             return null;
         }
+        $user['hasPassword'] = $user['passwordHash'] !== null; // false: an account made through Google
         unset($user['passwordHash']);
         return $user;
     }

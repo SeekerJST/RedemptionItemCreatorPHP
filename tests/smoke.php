@@ -45,6 +45,7 @@ function call(string $method, string $url, ?string $body = null, bool $csrfHeade
         'header' => $header,
         'content' => $body ?? '',
         'ignore_errors' => true, // return 4xx/5xx bodies instead of failing
+        'follow_location' => 0, // see redirects (Sign in with Google) rather than following them
     ]]);
     $responseBody = (string) @file_get_contents($url, false, $context);
 
@@ -317,7 +318,18 @@ echo "Accounts\n";
 as_('d');
 $email = 'smoke-d@example.invalid';
 [$status, $body] = call('GET', "$base/auth/me");
-check('auth/me: nobody signed in', $status === 200 && json_decode($body, true) === ['user' => null], $body);
+$me = json_decode($body, true);
+check('auth/me: nobody signed in', $status === 200 && array_key_exists('user', $me ?? []) && $me['user'] === null && is_array($me['providers'] ?? null), $body);
+if (in_array('google', $me['providers'] ?? [], true)) {
+    [$status, , $headers] = call('GET', "$base/auth/google/start");
+    $location = $headers['location'] ?? '';
+    check('auth/google/start sends the browser to Google, with PKCE and a state',
+        $status === 302 && strpos($location, 'https://accounts.google.com/') === 0
+        && strpos($location, 'code_challenge_method=S256') !== false && strpos($location, 'state=') !== false
+        && strpos($location, rawurlencode('/itemcreator/auth/google/callback')) !== false, "HTTP $status $location");
+    [$status, , $headers] = call('GET', "$base/auth/google/callback?state=not-the-state&code=x");
+    check("a Google callback whose state doesn't match is turned away", $status === 302 && strpos($headers['location'] ?? '', 'signin_error=expired') !== false, "HTTP $status");
+}
 [$status, $body] = call('POST', "$base/auth/register", json_encode(['email' => 'not an email', 'password' => 'long enough pass', 'displayName' => 'D']));
 check('register rejects a bad email (400)', $status === 400, "HTTP $status $body");
 [$status, $body] = call('POST', "$base/auth/register", json_encode(['email' => $email, 'password' => 'short', 'displayName' => 'D']));
@@ -340,7 +352,7 @@ check('changepassword needs the current password', $status === 400, "HTTP $statu
 check('changepassword', $status === 200, "HTTP $status");
 [$status, $body] = call('POST', "$base/auth/logout", '{}');
 [, $me] = call('GET', "$base/auth/me");
-check('logout ends the session', $status === 200 && json_decode($me, true) === ['user' => null], $me);
+check('logout ends the session', $status === 200 && array_key_exists('user', json_decode($me, true) ?? []) && json_decode($me, true)['user'] === null, $me);
 [$status] = call('POST', "$base/auth/login", json_encode(['email' => $email, 'password' => 'smoke register pass']));
 check('the old password no longer works (401)', $status === 401, "HTTP $status");
 [$status, $body] = call('POST', "$base/auth/forgotpassword", json_encode(['email' => 'smoke-nobody@example.invalid']));

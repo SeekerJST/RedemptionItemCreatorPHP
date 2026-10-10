@@ -41,6 +41,12 @@ final class Response
         return new self(204, '', []);
     }
 
+    /** 302 Found: send the browser to $url (e.g. Google's sign-in page, or back to the client). */
+    public static function redirect(string $url): self
+    {
+        return new self(302, '', ['Location' => $url, 'Cache-Control' => 'no-store']);
+    }
+
     public static function download(string $content, string $contentType, string $filename): self
     {
         // ASCII fallback plus RFC 5987 filename* so non-ASCII item names survive.

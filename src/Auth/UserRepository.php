@@ -32,8 +32,22 @@ final class UserRepository
         return $this->one('SELECT * FROM users WHERE Email = ?', [self::normalEmail($email)]);
     }
 
-    /** @return int the new UserID */
-    public function create(string $email, string $displayName, string $passwordHash): int
+    /** The user an external account (provider + its account ID) is linked to, if any. */
+    public function findByIdentity(string $provider, string $subject): ?array
+    {
+        return $this->one('SELECT u.* FROM users u JOIN user_identities i ON i.UserID = u.UserID
+             WHERE i.Provider = ? AND i.Subject = ?', [$provider, $subject]);
+    }
+
+    /** Links an external account to a user (a no-op if it's already linked). */
+    public function linkIdentity(int $userId, string $provider, string $subject, string $email): void
+    {
+        $this->db->prepare('INSERT IGNORE INTO user_identities (Provider, Subject, UserID, Email) VALUES (?, ?, ?, ?)')
+            ->execute([$provider, $subject, $userId, self::normalEmail($email)]);
+    }
+
+    /** @return int the new UserID. $passwordHash null: an account made through Google, with no password yet. */
+    public function create(string $email, string $displayName, ?string $passwordHash): int
     {
         $this->db->prepare('INSERT INTO users (Email, DisplayName, PasswordHash) VALUES (?, ?, ?)')
             ->execute([self::normalEmail($email), $displayName, $passwordHash]);

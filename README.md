@@ -94,7 +94,9 @@ Accounts, under `itemcreator/auth/` (JSON bodies; most answer `{ "user": ... }`,
 | POST | `auth/forgotpassword` | `{ email }`: 202, emails a reset link (1 hour) if there's an account |
 | POST | `auth/resetpassword` | `{ token, password }`: sets it and signs in |
 | POST | `auth/updateprofile` | `{ displayName }` |
-| POST | `auth/changepassword` | `{ currentPassword, newPassword }` |
+| POST | `auth/changepassword` | `{ currentPassword, newPassword }` (no current password for an account made through Google) |
+| GET | `auth/google/start` | sends the browser to Google's sign-in (a full-page navigation, not a fetch) |
+| GET | `auth/google/callback` | Google sends the browser back here; signs in and returns to the client with `?signin=google` or `?signin_error=<reason>` |
 
 Passwords need 10+ characters. The session is a PHP session cookie (`SSGS_SESSION`: HttpOnly,
 SameSite=Lax, Secure over HTTPS). **Every request that isn't a GET must send `X-SSGS-Request: 1`**
@@ -133,7 +135,7 @@ work; Google and Microsoft sign-in are planned; there's no admin panel for makin
    next step 2 in `docs/project_guide.md`). They include every migration so far. After that,
    run any newer `db/migrations/*.sql` on it, in order (on an existing DB, that includes
    `007_users_and_ownership.sql`: the accounts tables, and `008_decisive_action.sql`: new attributes,
-   `item.Source` and `item.GroupSize`). Then load the catalog:
+   `item.Source` and `item.GroupSize`, and `009_user_identities.sql`: Google sign-in). Then load the catalog:
    `php db/seed/import_catalog.php` (needs `config/config.php`; see `docs/project_guide.md`).
 2. Run `npm run build` in `client/`.
 3. Upload the contents of `public/` to the web folder (e.g. `~/silentspiritsgames.com/itemcreator/`).
@@ -142,8 +144,11 @@ work; Google and Microsoft sign-in are planned; there's no admin panel for makin
 5. Create `config/config.php` on the server from `config.example.php`: the production DB credentials,
    `debug => false`, `allow_writes => true` (saving needs a confirmed account anyway; false makes the
    site read-only), `app_url` (the Gear Creator's public URL: emailed links point there), and the
-   `mail` block with transport `'smtp'` and the no-reply mailbox's password. That file is the only
-   place the password goes; it's gitignored.
+   `mail` block with transport `'smtp'` and the no-reply mailbox's password, and the `google` block
+   (the OAuth client's ID and secret). That file is the only place the passwords and secret go; it's
+   gitignored. The Google client's redirect URIs must include
+   `https://www.silentspiritsgames.com/itemcreator/itemcreator/auth/google/callback` (the folder,
+   then the API path) and, for local development, `http://localhost:58967/itemcreator/auth/google/callback`.
 6. Choose PHP 8.1+ for the domain in the Dreamhost panel. The code runs on 8.0, but 8.0 is end-of-life.
 
 Subfolder deployment works: the client uses relative URLs, and the app's own `.htaccess` overrides Joomla's rewrite rules in that folder.

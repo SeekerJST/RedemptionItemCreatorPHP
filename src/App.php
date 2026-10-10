@@ -5,6 +5,7 @@ namespace SilentSpirits\ItemCreator;
 
 use PDO;
 use PDOException;
+use SilentSpirits\ItemCreator\Auth\GoogleSignIn;
 use SilentSpirits\ItemCreator\Auth\Mailer;
 use SilentSpirits\ItemCreator\Auth\Session;
 use SilentSpirits\ItemCreator\Auth\UserRepository;
@@ -118,11 +119,14 @@ final class App
     {
         $root = $this->root;
         $mail = (array) ($this->config['mail'] ?? []);
+        $appUrl = (string) ($this->config['app_url'] ?? '/');
         return $this->auth ??= new AuthController(
             fn (): UserRepository => new UserRepository($this->db()),
             $this->session ??= new Session((array) ($this->config['session'] ?? [])),
             static fn (): Mailer => new Mailer($mail, $root),
-            (string) ($this->config['app_url'] ?? '/')
+            $appUrl,
+            // The redirect URI registered with Google: the client's address plus the API path.
+            new GoogleSignIn((array) ($this->config['google'] ?? []), rtrim($appUrl, '/') . '/itemcreator/auth/google/callback')
         );
     }
 

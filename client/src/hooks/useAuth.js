@@ -1,13 +1,23 @@
 import { useCallback, useEffect, useState } from 'react';
 import { fetchMe, verifyEmail } from '../api/authApi.js';
 
+/** Why Sign in with Google came back without signing in (the API's ?signin_error=...). */
+const SIGN_IN_ERRORS = {
+    cancelled: 'Google sign-in was cancelled.',
+    expired: 'That Google sign-in took too long or was already used. Try again.',
+    unverified: "Your Google account's email address isn't verified, so it can't be used to sign in here.",
+    unavailable: "Sign in with Google isn't set up on this site yet.",
+    google: "Google sign-in didn't work. Try again, or sign in with your email and password.",
+};
+
 /**
- * Reads and clears a one-time token the API's emails put in the page address (?verify=... to
- * confirm an account, ?reset=... to choose a new password), so a reload doesn't reuse it.
+ * Reads and clears a one-time value the API put in the page address, so a reload doesn't reuse
+ * it: ?verify=... (confirm an account) or ?reset=... (choose a new password) from its emails, and
+ * ?signin=google or ?signin_error=... on the way back from Google.
  */
 function takeUrlToken() {
     const params = new URLSearchParams(window.location.search);
-    for (const kind of ['verify', 'reset']) {
+    for (const kind of ['verify', 'reset', 'signin', 'signin_error']) {
         const token = params.get(kind);
         if (token) {
             params.delete(kind);
@@ -37,6 +47,7 @@ const verifyOnce = (token) => {
  * @returns {{
  *   user: object | null | undefined,   undefined until the API has answered
  *   setUser: (user: object | null) => void,
+ *   providers: string[],               other ways to sign in that are set up (['google'])
  *   notice: { kind: 'ok' | 'error', text: string } | null,   the result of a confirmation link
  *   resetToken: string | null,         a password-reset link's token, for the account panel
  *   clearLink: () => void,
@@ -44,8 +55,11 @@ const verifyOnce = (token) => {
  */
 export function useAuth() {
     const [user, setUser] = useState(undefined);
+    const [providers, setProviders] = useState([]);
     const [link] = useState(takeUrlToken);
-    const [notice, setNotice] = useState(null);
+    const [notice, setNotice] = useState(
+        link?.kind === 'signin_error' ? { kind: 'error', text: SIGN_IN_ERRORS[link.token] ?? SIGN_IN_ERRORS.google } : null
+    );
     const [resetToken, setResetToken] = useState(link?.kind === 'reset' ? link.token : null);
 
     useEffect(() => {
@@ -54,15 +68,17 @@ export function useAuth() {
             if (link?.kind === 'verify') {
                 try {
                     const { user: verified } = await verifyOnce(link.token);
-                    setUser(verified);
                     setNotice({ kind: 'ok', text: `Welcome, ${verified.displayName}: your email is confirmed.` });
-                    return;
                 } catch (e) {
                     setNotice({ kind: 'error', text: e.message });
                 }
             }
-            const { user: current } = await fetchMe(controller.signal);
+            const { user: current, providers: available = [] } = await fetchMe(controller.signal);
             setUser(current);
+            setProviders(available);
+            if (link?.kind === 'signin' && current) {
+                setNotice({ kind: 'ok', text: `Welcome, ${current.displayName}: you're signed in with Google.` });
+            }
         };
         load().catch((e) => {
             if (e.name !== 'AbortError') {
@@ -77,5 +93,5 @@ export function useAuth() {
         setResetToken(null);
     }, []);
 
-    return { user, setUser, notice, resetToken, clearLink };
+    return { user, setUser, providers, notice, resetToken, clearLink };
 }

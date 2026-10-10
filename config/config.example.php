@@ -31,6 +31,14 @@ return [
         'from_name' => 'SilentSpirits Games',
     ],
 
+    // Sign in with Google (OAuth / OpenID Connect). From Google Cloud > APIs & Services > Credentials,
+    // a "Web application" client whose redirect URI is app_url + 'itemcreator/auth/google/callback'.
+    // Leave client_id empty to hide the button.
+    'google' => [
+        'client_id' => '',
+        'client_secret' => 'the_client_secret',
+    ],
+
     // The sign-in cookie. One name site-wide, so the rest of the SilentSpirits site can share it.
     // secure: null = only over HTTPS when the request is HTTPS (true on the live site).
     'session' => [

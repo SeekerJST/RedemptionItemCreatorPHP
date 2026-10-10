@@ -170,6 +170,25 @@ p.account_note {
     font-size: 0.9em;
 }
 
+/* Sign in with Google, above the email form. */
+div.account_providers button.account_google {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+div.account_providers p.account_note {
+    margin-bottom: 4px;
+    font-size: 0.8em;
+}
+
+p.account_or {
+    margin: 8px 0;
+    text-align: center;
+    color: var(--rd-steel);
+    font-size: 0.85em;
+}
+
 form.account_unverified p {
     margin: 0 0 6px;
     color: var(--rd-ember);

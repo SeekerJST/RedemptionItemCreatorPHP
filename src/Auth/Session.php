@@ -35,6 +35,22 @@ final class Session
         $_SESSION['user_id'] = $userId;
     }
 
+    /** Keeps a value in the session until take() (e.g. a sign-in's state while the user is at Google). */
+    public function put(string $key, mixed $value): void
+    {
+        $this->start();
+        $_SESSION['pending'][$key] = $value;
+    }
+
+    /** Returns and forgets a value put() kept, so it can only be used once. */
+    public function take(string $key): mixed
+    {
+        $this->start();
+        $value = $_SESSION['pending'][$key] ?? null;
+        unset($_SESSION['pending'][$key]);
+        return $value;
+    }
+
     public function signOut(): void
     {
         $this->start();

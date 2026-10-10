@@ -21,7 +21,7 @@ import './App.css';
 
 export default function App() {
     const { lookups, error } = useLookups();
-    const { user, setUser, notice, resetToken, clearLink } = useAuth();
+    const { user, setUser, providers, notice, resetToken, clearLink } = useAuth();
     /** The account panel's form ('signIn', 'register', 'forgot', 'reset', 'profile'), or null when closed. */
     const [account, setAccount] = useState(resetToken ? 'reset' : null);
 
@@ -59,6 +59,7 @@ export default function App() {
                         mode={account}
                         user={user}
                         resetToken={resetToken}
+                        providers={providers}
                         onMode={setAccount}
                         onUserChange={setUser}
                         onClose={closeAccount}

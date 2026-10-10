@@ -6,6 +6,7 @@ import {
     resendVerification,
     resetPassword,
     signIn,
+    signInWithGoogle,
     updateProfile,
 } from '../api/authApi.js';
 
@@ -55,10 +56,26 @@ function Message({ message }) {
     ) : null;
 }
 
+/** "Sign in with Google", when the site has it set up. */
+function ProviderButtons({ providers }) {
+    if (!providers?.includes('google')) {
+        return null;
+    }
+    return (
+        <div className="account_providers">
+            <button type="button" className="rd-button account_google" onClick={signInWithGoogle}>
+                [Sign in with Google]
+            </button>
+            <p className="account_note">Signing in with Google for the first time creates your account; an account with the same email is linked.</p>
+            <p className="account_or" aria-hidden="true">or</p>
+        </div>
+    );
+}
+
 const tooShort = (password) =>
     password.length < MIN_PASSWORD ? `Passwords need at least ${MIN_PASSWORD} characters.` : null;
 
-function SignInForm({ onSignedIn, onMode }) {
+function SignInForm({ onSignedIn, onMode, providers }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { busy, message, submit } = useSubmit();
@@ -70,6 +87,7 @@ function SignInForm({ onSignedIn, onMode }) {
             })}
         >
             <h2 className="rd-heading">Sign in</h2>
+            <ProviderButtons providers={providers} />
             <Field label="Email" type="email" autoComplete="username" required value={email} onChange={(e) => setEmail(e.target.value)} />
             <Field label="Password" type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} />
             <Message message={message} />
@@ -84,7 +102,7 @@ function SignInForm({ onSignedIn, onMode }) {
     );
 }
 
-function RegisterForm({ onMode }) {
+function RegisterForm({ onMode, providers }) {
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -105,6 +123,7 @@ function RegisterForm({ onMode }) {
         >
             <h2 className="rd-heading">Create an account</h2>
             <p className="account_note">Anyone can browse the catalog. An account lets you save your own items; they stay private to you.</p>
+            <ProviderButtons providers={providers} />
             <Field label="Display name" autoComplete="nickname" required maxLength={60} value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
             <Field label="Email" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
             <Field
@@ -224,13 +243,21 @@ function ProfileForms({ user, onUserChange }) {
                     const result = await changePassword(currentPassword, newPassword);
                     setCurrentPassword('');
                     setNewPassword('');
+                    if (!user.hasPassword) {
+                        onUserChange({ ...user, hasPassword: true });
+                    }
                     return result.message;
                 })}
             >
-                <h3 className="rd-heading">Change password</h3>
+                <h3 className="rd-heading">{user.hasPassword ? 'Change password' : 'Set a password'}</h3>
+                {!user.hasPassword && (
+                    <p className="account_note">You sign in with Google. A password lets you sign in with your email too.</p>
+                )}
                 {/* For password managers: which account this is. */}
                 <input type="email" autoComplete="username" value={user.email} readOnly hidden />
-                <Field label="Current password" type="password" autoComplete="current-password" required value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+                {user.hasPassword && (
+                    <Field label="Current password" type="password" autoComplete="current-password" required value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+                )}
                 <Field
                     label={`New password (at least ${MIN_PASSWORD} characters)`}
                     type="password"
@@ -241,7 +268,7 @@ function ProfileForms({ user, onUserChange }) {
                 />
                 <Message message={password.message} />
                 <div className="account_actions">
-                    <button type="submit" className="rd-button" disabled={password.busy}>[Change password]</button>
+                    <button type="submit" className="rd-button" disabled={password.busy}>{user.hasPassword ? '[Change password]' : '[Set password]'}</button>
                 </div>
             </form>
         </>
@@ -255,8 +282,9 @@ function ProfileForms({ user, onUserChange }) {
  * mode: 'signIn' | 'register' | 'forgot' | 'reset' | 'profile'
  * resetToken: the reset email's token, for mode 'reset'
  * onUserChange(user): someone signed in, or their details changed
+ * providers: other ways to sign in that are set up (['google']), from useAuth
  */
-export default function AccountPanel({ mode, user, resetToken, onMode, onUserChange, onClose }) {
+export default function AccountPanel({ mode, user, resetToken, providers = [], onMode, onUserChange, onClose }) {
     const signedIn = (next) => {
         onUserChange(next);
         onClose();
@@ -267,11 +295,11 @@ export default function AccountPanel({ mode, user, resetToken, onMode, onUserCha
     } else if (mode === 'reset' && resetToken) {
         body = <ResetForm token={resetToken} onSignedIn={signedIn} />;
     } else if (mode === 'register') {
-        body = <RegisterForm onMode={onMode} />;
+        body = <RegisterForm onMode={onMode} providers={providers} />;
     } else if (mode === 'forgot') {
         body = <ForgotForm onMode={onMode} />;
     } else {
-        body = <SignInForm onSignedIn={signedIn} onMode={onMode} />;
+        body = <SignInForm onSignedIn={signedIn} onMode={onMode} providers={providers} />;
     }
     return (
         <section className="rd-panel account_panel" aria-label="Account">

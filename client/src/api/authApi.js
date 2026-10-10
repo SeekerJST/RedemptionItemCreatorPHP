@@ -10,8 +10,19 @@ const post = (path, body = {}) =>
         body: JSON.stringify(body),
     }).then((response) => response.json());
 
-/** { user }: who's signed in (null for nobody). user: { id, email, displayName, role, verified }. */
+/**
+ * { user, providers }: who's signed in (null for nobody), and the other ways to sign in that are set
+ * up (['google']). user: { id, email, displayName, role, verified, hasPassword }.
+ */
 export const fetchMe = (signal) => request('auth/me', { signal }).then((response) => response.json());
+
+/**
+ * Starts Sign in with Google: a full-page trip to Google and back. The API returns the browser to
+ * the client with ?signin=google, or ?signin_error=<reason> (see useAuth).
+ */
+export function signInWithGoogle() {
+    window.location.assign('itemcreator/auth/google/start');
+}
 
 export const signIn = (email, password) => post('login', { email, password });
 export const signOut = () => post('logout');

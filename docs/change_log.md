@@ -3,6 +3,16 @@
 Newest changes are at the top. See `docs/project_guide.md` for the project's purpose,
 current state, and the reasoning behind recurring patterns.
 
+## 2026-10-09 (2): Sign in with Google
+
+- **[Sign in with Google]** on the sign-in and create-account panels (shown when config.php has a Google
+  client). The server runs the OAuth code flow with PKCE, a state, and a nonce (`src/Auth/GoogleSignIn.php`;
+  routes `auth/google/start` and `auth/google/callback`). A Google account is matched by its Google ID, then
+  by email (linking an existing account), else a new, already confirmed account with no password is made.
+  Such accounts can set a password in Profile. Cancelled or failed sign-ins come back with a message.
+- **`db/migrations/009_user_identities.sql`:** links external accounts to users (applied locally).
+- `auth/me` also lists the sign-in providers that are set up. Smoke test: Google redirect and state checks.
+
 ## 2026-10-09: Decisive Action in the catalog and the app; optional-content switch
 
 - **Decisive Action's 61 items are in the catalog** (`equipment_catalog.md`, `db/seed/catalog.json`), each

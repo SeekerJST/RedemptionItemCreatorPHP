@@ -42,7 +42,7 @@ core of the new SilentSpirits website. Keep conventions compatible with it.
 | `src/App.php` | Loads config, routes `/itemcreator/{action}/...`, turns exceptions into RFC 7807 JSON problems. Connects to the DB lazily. |
 | `src/Controller/ItemCreatorController.php` | One method per C# action. `ROUTES` maps action → HTTP method → handler. Checks who may see and change each item (through `AuthController`). |
 | `src/Controller/AuthController.php` | Accounts under `itemcreator/auth/{action}`: register, confirm email, sign in/out, forgot/reset password, profile, change password. Also `currentUser()` / `requireVerifiedUser()` for the item routes. |
-| `src/Auth/` | `Session` (the `SSGS_SESSION` cookie, started only when needed), `UserRepository` (`users`, one-time `user_tokens` stored as SHA-256, `login_attempts` for rate limiting), `Mailer` (PHPMailer over SMTP, or `log` transport: writes each email to a file). |
+| `src/Auth/` | `Session` (the `SSGS_SESSION` cookie, started only when needed), `UserRepository` (`users`, one-time `user_tokens` stored as SHA-256, `login_attempts` for rate limiting), `Mailer` (PHPMailer over SMTP, or `log` transport: writes each email to a file), `GoogleSignIn` (Sign in with Google: the OAuth code flow with PKCE, state and nonce; accounts linked in `user_identities`). |
 | `lib/phpmailer/` | PHPMailer 7.1.1, vendored (`src/` only; LGPL-2.1). |
 | `src/Domain/Item.php` | Item model. `fromArray()` accepts any key casing and numeric strings; `toArray()` emits the shape the client builds. |
 | `src/Repository/LookupRepository.php` | Read-only reference tables (`itemsize`, `skills`, `attribute`, `attributescale`). |
@@ -229,7 +229,7 @@ parameter still works.
   Redemption-class Frigate (built as the catalog has it: 1,416 BP, CR 10). Panel 3 lists rule problems and highlights the rows involved.
 
 **Not done yet:**
-- No Google / Microsoft (or Apple) sign-in yet: email + password only.
+- Sign in with Google is built (2026-10-09, migration 009) but not yet confirmed end to end: the Google client's localhost redirect URI was just added. No Microsoft (or Apple) sign-in yet.
 - Nothing in the UI sets `IsPublic` or a user's `Role`: new items are private, and admins are
   made by setting `users.Role = 'admin'` in the DB. The admin panel is still to come.
 - Real email works through Dreamhost's SMTP (2026-10-03: a confirmation email reached Gmail and its link
@@ -298,9 +298,9 @@ Behavior kept from the old code, but worth confirming:
 5. **Attacks summary:** list each attack with its sub-rows (multiplier, ammo) in Panel 3,
    which the old code was working toward.
 6. **Catalog import on Dreamhost**, once the schema and seed files exist (step 1).
-7. **Google and Microsoft sign-in** (OAuth / OpenID Connect): needs app registrations in Google
-   Cloud and Microsoft Entra, then a `users`-linked identities table. Share accounts with
-   SystemGeneratorLive (same `SSGS_SESSION` cookie name).
+7. **Microsoft sign-in** (OAuth / OpenID Connect), like Google's (`GoogleSignIn`, `user_identities`):
+   needs an app registration in Microsoft Entra. Share accounts with SystemGeneratorLive (same
+   `SSGS_SESSION` cookie name).
 8. **Merge planning with SystemGeneratorLive.** Shared layout and styling, a shared DB
    config approach (SystemGeneratorLive uses `db_config.php` variables; this project
    uses `config/config.php` returning an array), and a common site shell.
